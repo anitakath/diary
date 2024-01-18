@@ -24,7 +24,7 @@ const LoggedInMenu = () => {
 
   const logoutHandler = async() =>{
 
-    console.log('HIII')
+   
   const {error} = await supabase.auth.signOut();
 
   if(error){
@@ -47,7 +47,7 @@ const LoggedInMenu = () => {
       <p> Nachtmodus </p>
 
       <button className={styles.logout_btn} onClick={logoutHandler}>
-        abmelden
+        <Link href="/">abmelden</Link>
       </button>
     </div>
   );

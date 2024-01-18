@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import AccountSettings from "@/components/Main/Settings/AccountSettings";
 import ProfileSettings from "@/components/Main/Settings/ProfileSettings";
 import SecuritySettings from "@/components/Main/Settings/SecuritySettings";
-import Header from "@/components/Header/Header";
 
 
 //STYLES
@@ -34,7 +33,7 @@ const SettingPage = () =>{
 
     return (
       <div>
-        <Header />
+      
         <div className={styles.container}>
           <h1 className={styles.settings_title}> Nutzereinstellungen </h1>
           <div className={styles.settings_div}>

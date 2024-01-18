@@ -2,7 +2,6 @@
 import Link from "next/link";
 
 //COMPONENTS
-import Header from "@/components/Header/Header";
 import ProfileSettings from "@/components/Main/Settings/ProfileSettings";
 
 
@@ -23,7 +22,7 @@ const Settings = () =>{
 
     return (
       <div>
-        <Header />
+       
         <div className={styles.container}>
           <h1 className={styles.settings_title}> Nutzereinstellungen </h1>
           <div className={styles.settings_div}>

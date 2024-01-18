@@ -3,7 +3,6 @@ import { useEffect, useState, useContext } from "react";
 
 
 //COMPONENTS
-import Header from '@/components/Header/Header';
 import Main from '@/components/Main/Main';
 
 //CONTEXT
@@ -27,16 +26,15 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 export default function Home() {
 
   const {currentUser} = useContext(RedditContext)
-  console.log(currentUser)
+ 
 
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
 
-  console.log(isLoggedIn)
+ 
   //const user = currentUser.user
 
   if(currentUser){
-      console.log(currentUser.user);
       dispatch(login())
     
   }
@@ -49,7 +47,7 @@ export default function Home() {
   const {data, error} = useSWR('/api/get-post', fetcher, {refreshInterval: 200} )
 
 
-  console.log(myPosts);
+  
 
   useEffect(() => {
     if (error) {
@@ -71,7 +69,7 @@ export default function Home() {
   return (
   
     <div className="App">
-      <Header />
+     
       <Main posts={myPosts} />
     </div>
 
