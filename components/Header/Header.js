@@ -89,7 +89,7 @@ const Header = () => {
               className={styles.searchInput}
             ></input>
 
-            <button className={styles.search_btn}> search ...</button>
+            <button className={styles.search_btn}> 🚀 </button>
           </div>
 
           <div className={styles.login_container}>

@@ -33,8 +33,6 @@ const LoggedInMenu = () => {
     dispatch(logout());
     router.push('/')
 
-
-
   }
 
 
