@@ -36,7 +36,6 @@ const Header = () => {
 
   const {currentUser} = useContext(RedditContext)
 
-  console.log(currentUser)
 
 
   let userName; 
@@ -46,14 +45,12 @@ const Header = () => {
 
   }
   
-  console.log(userName)
+
 
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
 
 
-
-  console.log(isLoggedIn);
  
   const loginHandler = () => {
     dispatch(login());
@@ -74,7 +71,6 @@ const Header = () => {
 
 
 
-  /* */
   return (
     <div className={styles.container}>
       {isLoggedIn && (

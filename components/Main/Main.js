@@ -18,12 +18,12 @@ const Main = (props) => {
 
   const currentFilter = useSelector((state) => state.filter);
 
-  console.log(currentFilter)
+
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
 
 
-  console.log(isLoggedIn)
+
 
 
 

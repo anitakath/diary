@@ -32,8 +32,7 @@ const AccountSettings = () => {
 
   }
 
-  console.log(userName)
-
+ 
 
   return (
     <div className={styles.container}>

@@ -10,7 +10,13 @@ import styles from '../../styles/Main/WebUser.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faRedditAlien } from "@fortawesome/free-brands-svg-icons";
+
+
+
 const WebUser = () => {
+
+
+
   return (
     <div className={styles.container}>
       <Image

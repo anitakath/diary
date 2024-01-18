@@ -30,13 +30,12 @@ const postInteraction = (props) =>{
   const dispatch = useDispatch();
   const router = useRouter();
 
-  console.log(props.postId)
 
   
 
   const deletePostHandler = async (event) =>{
     event.preventDefault();
-    console.log('delete post')
+
     
     try{
       setIsLoading(true);

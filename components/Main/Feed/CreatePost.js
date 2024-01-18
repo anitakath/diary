@@ -30,30 +30,22 @@ const CreatePost = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const { currentUser } = useContext(RedditContext);
-  console.log(currentUser);
 
   // const [showImage, setShowImage] = useState(false);
 
   let avatarUrl;
 
   if (currentUser) {
-    console.log("HI");
+
     //avatarUrl = '"' + (currentUser.user?.user_metadata?.avatar_url || '') + '"';
     avatarUrl = currentUser.user?.user_metadata?.avatar_url; // Zugriff auf das Profilfoto
 
-    console.log(avatarUrl);
+   
   }
 
   const [showImage, setShowImage] = useState(!!avatarUrl);
 
-  console.log(showImage);
-
-  //const avatarUrl = currentUser.user?.user_metadata?.avatar_url; // Zugriff auf das Profilfoto
-  //console.log(avatarUrl);
-
-  /* {showImage && avatarUrl &&  <Image src={avatarUrl} width={200} height={200}></Image>}
-   */
-
+ 
   return (
     <div className={styles.createPost_container}>
       <div className={styles.userImage_container}>

@@ -31,7 +31,9 @@ const LoggedInMenu = () => {
     console.error('Fehler Beim Abmelden:', error.message)
   } else{
     dispatch(logout());
-    router.reload()
+    router.push('/')
+
+
 
   }
 
@@ -47,7 +49,7 @@ const LoggedInMenu = () => {
       <p> Nachtmodus </p>
 
       <button className={styles.logout_btn} onClick={logoutHandler}>
-        <Link href="/">abmelden</Link>
+        abmelden
       </button>
     </div>
   );

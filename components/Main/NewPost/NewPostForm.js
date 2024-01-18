@@ -27,14 +27,14 @@ const NewPostForm = () => {
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
 
-  console.log(isLoggedIn)
+
 
 
   const [author, setAuthor] = useState("");
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
 
-  console.log(author, title, text);
+ 
 
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -43,7 +43,6 @@ const NewPostForm = () => {
 
   const currFilter = useSelector((state) => state.filter)
 
-  console.log(currFilter)
 
 
 

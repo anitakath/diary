@@ -31,7 +31,6 @@ const RegisterComponent = () =>{
 
    const isLoggedIn = useSelector((state) => state.auth);
 
-   console.log(isLoggedIn.isLoggedIn);
 
 
 

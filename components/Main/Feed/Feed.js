@@ -47,7 +47,6 @@ const Feed = (props) => {
    
   }, [props.posts, currentFilter]) 
 
-  console.log(posts)
 
 
 

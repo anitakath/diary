@@ -26,7 +26,7 @@ const Start = () =>{
   const dispatch = useDispatch();
    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-  console.log(isLoggedIn);
+
 
   const signUpWithGoogle = async () => {
   const { user, session, error } = await supabase.auth.signIn({
@@ -45,7 +45,6 @@ const handleSignInWithGoogle = async()=>{
     await signInWithGooogle()
     //dispatch(login())
     setGoogleLogIn(true)
-    console.log(isLoggedIn)
   } catch(error){
     console.error('google sign in error', error)
   }
