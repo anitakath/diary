@@ -1,0 +1,141 @@
+
+
+.container{
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height:10vh;
+    position: relative;
+}
+
+.login_callToAction{
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    background: linear-gradient(#F7567C, rgba(93,87,107, 0.3));
+    color: rgba(255,255,255, 0.8);
+}
+
+.title{
+    margin: 30px;
+    background: transparent;
+    border: none;
+}
+
+.icon{
+    color: #F7567C;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.user{
+    color: #F7567C;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
+
+
+.search_container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+
+.searchInput{
+    width: 300px;
+    height: 30px;
+    padding: 5px;
+    border: none;
+    border-bottom: 2px solid black;
+    transition: 0.2s ease;
+}
+
+.search_btn{
+    position: absolute;
+    right: -29px;
+    transition: 0.4s ease;
+    margin: 30px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+
+
+.searchInput:hover, .searchInput:focus{
+    border-bottom: 2px solid #F7567C;
+    outline: none;
+}
+
+
+.login_container{
+    display: flex;
+    align-items: center;
+}
+
+.loginWrapper{
+    width: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+.menu_backdrop{
+    width: 100%;
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    background: rgba(255,255,255, 0.8);
+    z-index: 100;
+}
+.menu_container{
+    position: fixed;
+    transition: 0.8s ease;
+    background: white;
+    box-shadow: 1px 1px 5px grey;
+    height: 100vh;
+    overflow: scroll;
+    width: 400px;
+    top: 0;
+    left:0px;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.loggedIn_wrapper{
+    position: relative;
+}
+
+.loggedInMenu_btn{
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.loggedInMenu{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    top: 40px;
+    right: 0px;
+    padding: 10px;
+    width: 400px;
+    background: rgba(93,87,107);
+    z-index: 100;
+    height: 87vh;
+}
+
+

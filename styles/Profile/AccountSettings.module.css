@@ -1,0 +1,70 @@
+
+
+.container{
+    display: flex;
+   
+}
+
+.settings_wrapper{
+    width: 60%;
+    margin: 0px 10px;
+    margin-right: 70px;
+}
+
+
+.title{
+    
+    margin: 20px 10px;
+    font-size: 1.5rem;
+}
+
+.subTitle{
+    
+    border-bottom: 2px solid black;
+}
+
+.accountSettings_div{
+    margin-left: 10px;
+}
+
+
+.setting_div{
+    width: 50vw;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 30px 0px;
+}
+
+.setting_title{
+    font-size: 1.1rem;
+}
+
+.settings_paragraph{
+    color: rgba(0,0,0, 0.4);
+}
+
+
+.change_btn, .select_input{
+    position: absolute;
+    right: 30px;
+    top: 10px;
+    width: 100px;
+    height: 30px;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.change_btn:active {
+    transform: scale(0.98)
+}
+
+.select_input{
+    width: 100px;
+}
+
