@@ -7,6 +7,7 @@
     align-items: center;
     height:10vh;
     position: relative;
+     background: linear-gradient(#F7567C, white);
 }
 
 .login_callToAction{
