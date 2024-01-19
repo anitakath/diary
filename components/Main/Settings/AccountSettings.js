@@ -16,7 +16,12 @@ import WebUser from '../WebUser';
 //STYLES
 import styles from '../../../styles/Profile/AccountSettings.module.css'
 
+//REDUX
+import { useDispatch, useSelector } from "react-redux";
+import { gender } from "@/store/authSlice";
+
 const AccountSettings = () => {
+
   const { currentUser } = useContext(RedditContext);
   //console.log(currentUser.user);
 
@@ -28,11 +33,19 @@ const AccountSettings = () => {
     userName = currentUser.user?.identities[0]?.identity_data?.full_name;
   }
 
+  const dispatch = useDispatch(); 
+  const currGender = useSelector((state) => state.auth);
+
+  console.log(currGender)
+
   const [selectedGender, setSelectedGender] = useState(""); // State zum Speichern des ausgewählten Geschlechts
 
    const handleGenderChange = (event) => {
      setSelectedGender(event.target.value); // Aktualisiere den State mit dem ausgewählten Geschlecht
-   };
+   
+
+     dispatch(gender(event.target.value))
+    };
 
    console.log(selectedGender);
 

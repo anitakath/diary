@@ -4,6 +4,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState: {
     isLoggedIn: false,
+    gender: 'female',
   },
   reducers: {
     login(state) {
@@ -14,8 +15,11 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
       console.log(state.isLoggedIn);
     },
+    gender(state, action){
+      state.gender = action.payload;
+    }
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { login, logout, gender } = authSlice.actions;
 export default authSlice.reducer;
