@@ -34,7 +34,7 @@ const AccountSettings = () => {
   }
 
   const dispatch = useDispatch(); 
-  const currGender = useSelector((state) => state.auth);
+  const currGender = useSelector((state) => state.auth.gender);
 
   console.log(currGender)
 
@@ -84,7 +84,7 @@ const AccountSettings = () => {
           <div className={styles.setting_div}>
             <div>
               <h2 className={styles.setting_title}> Geschlecht </h2>
-              <p className={styles.settings_paragraph}> *geschlecht* </p>
+              <p className={styles.settings_paragraph}> {currGender}</p>
             </div>
 
             <select
