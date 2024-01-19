@@ -35,8 +35,8 @@ const LoggedInMenu = () => {
 
   }
 
-
 }
+
 
   return (
     <div className={styles.container}>

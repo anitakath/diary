@@ -29,7 +29,6 @@ const NewPost = () =>{
     return (
       <div>
         <div className="App">
-          <Header />
           
           <NewPostForm />
         </div>

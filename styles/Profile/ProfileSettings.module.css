@@ -8,7 +8,7 @@
 
 
 .settings_title{
-    margin: 5px 20px;
+    margin: 20px;
     font-size: 1.4rem;
 }
 
@@ -18,13 +18,11 @@
     margin-top: 15px;
     border-bottom: 2px solid grey;
     position: relative;
-
 }
 
 .settings_link, .home_button{
     margin: 5px 10px;
     font-size: 1rem;
-   
 }
 
 .home_button{

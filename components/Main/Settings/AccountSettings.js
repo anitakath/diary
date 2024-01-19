@@ -17,22 +17,29 @@ import WebUser from '../WebUser';
 import styles from '../../../styles/Profile/AccountSettings.module.css'
 
 const AccountSettings = () => {
-
   const { currentUser } = useContext(RedditContext);
   //console.log(currentUser.user);
-
-
 
   let userEmail;
   let userName;
 
-  if(currentUser){
-    userEmail = currentUser.user?.email
-    userName = currentUser.user?.identities[0]?.identity_data?.full_name
-
+  if (currentUser) {
+    userEmail = currentUser.user?.email;
+    userName = currentUser.user?.identities[0]?.identity_data?.full_name;
   }
 
- 
+  const [selectedGender, setSelectedGender] = useState(""); // State zum Speichern des ausgewählten Geschlechts
+
+   const handleGenderChange = (event) => {
+     setSelectedGender(event.target.value); // Aktualisiere den State mit dem ausgewählten Geschlecht
+   };
+
+   console.log(selectedGender);
+
+
+
+
+
 
   return (
     <div className={styles.container}>
@@ -67,7 +74,11 @@ const AccountSettings = () => {
               <p className={styles.settings_paragraph}> *geschlecht* </p>
             </div>
 
-            <select className={styles.select_input}>
+            <select
+              value={selectedGender}
+              onChange={handleGenderChange}
+              className={styles.select_input}
+            >
               <option> Frau </option>
               <option> Mann </option>
               <option> Nicht-Binär </option>
