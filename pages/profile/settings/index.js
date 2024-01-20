@@ -24,7 +24,7 @@ const Settings = () =>{
   const nightMode = useSelector((state) => state.toggle)
 
     return (
-      <div className={ styles.container}>
+      <div className={ nightMode ? styles.container_dark : styles.container}>
         <div className={styles.container}>
           <h1 className={styles.settings_title}> Nutzereinstellungen </h1>
           <div className={styles.settings_div}>
