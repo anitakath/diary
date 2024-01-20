@@ -62,14 +62,23 @@
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    background: rgba(0, 0, 0, 0.2);
     color: black;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: rgba(93,87,107, 0.3);
+ 
+  
+    
 }
 
+.container_light{
+  background: white;
+}
+
+.container_dark{
+  background: black;
+  color: beige;
+}
 
 .reddit_container, .google_container{
     width: 80vw;

@@ -22,9 +22,12 @@ import { login } from '@/store/authSlice';
 const Start = () =>{
 
   const [googleLogIn, setGoogleLogIn] = useState(false)
+  const nightMode = useSelector((state) => state.toggle);
+
+  console.log(nightMode)
 
   const dispatch = useDispatch();
-   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
 
 
@@ -71,19 +74,18 @@ useEffect(()=>{
 
 
  
+  console.log(nightMode)
 
  
     return (
-      <div className={styles.container}>
+      <div className={`${styles.container} ${nightMode.isNightMode ? styles.container_dark : styles.container_light}`}>
         <div className={styles.reddit_container}>
           <FontAwesomeIcon icon={faRedditAlien} className={styles.icon} />
           <button onClick={loginHandler} className={styles.reddit_title}>
-            {" "}
-            Login{" "}
+            Login
           </button>
           <h2 className={styles.reddit_title}> or </h2>
           <button onClick={loginHandler} className={styles.reddit_title}>
-            {" "}
             Register
           </button>
         </div>

@@ -42,6 +42,7 @@ const Header = () => {
   
 
 
+
   let userName; 
   if(currentUser){
     userName = currentUser.user.identities[0].identity_data.full_name;
@@ -56,9 +57,7 @@ const Header = () => {
 
 
  
-  const loginHandler = () => {
-    dispatch(login());
-  };
+
 
   const menuHandler = () => {
     if (menuIsOpen === true) {

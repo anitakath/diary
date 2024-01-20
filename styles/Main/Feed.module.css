@@ -216,6 +216,14 @@
     cursor: pointer;
 }
 
+.postArrowDown_dark, .postArrowUp_dark{
+    width:20px;
+    font-size: 1.5rem;
+    color: beige;
+    transition: 0.4s ease;
+    cursor: pointer;
+}
+
 .postArrowUp:hover, .postArrowDown:hover{
       color: rgba(0, 0, 0, 0.8);
        color: #F7567C;
@@ -253,11 +261,19 @@
 }
 
 
-.postItself h1{
+
+.post_title{
     padding: 10px 4px 10px;
     font-size: 1.8rem;
     margin-bottom: 10px;
-    
+}
+
+.post_title_dark{
+    padding: 10px 4px 10px;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: beige;
+
 }
 
 .postItself p{
@@ -278,8 +294,13 @@
 
 .postInfo_at{
     font-size: 0.8rem;
-    color: rgba(255,255,255, 0.3)
+    color: rgba(255,255,255, 0.3);
+   
 
+}
+
+.postInfo_p{
+     color: var(--pink);
 }
 
 

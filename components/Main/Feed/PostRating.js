@@ -21,9 +21,12 @@ const PostRating = (props) => {
 
   const dispatch = useDispatch();
   const currCount = useSelector((state) => state.counter);
+  const nightMode = useSelector((state) => state.toggle)
 
   const votes = props.votes
   const postId = props.postId
+
+  
 
 
 
@@ -51,7 +54,7 @@ const PostRating = (props) => {
       <div>
         <FontAwesomeIcon
           icon={faArrowUp}
-          className={styles.postArrowUp}
+          className={nightMode ? styles.postArrowUp_dark : styles.postArrowUp}
           onClick={handleIncrement}
         />
       </div>
@@ -59,7 +62,7 @@ const PostRating = (props) => {
       <div>
         <FontAwesomeIcon
           icon={faArrowDown}
-          className={styles.postArrowDown}
+          className={nightMode ? styles.postArrowUp_dark : styles.postArrowDown}
           onClick={handleDecrement}
         />
       </div>

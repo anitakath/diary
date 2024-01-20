@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 //REDUX
 import { logout } from "@/store/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-
+import { toggle } from "@/store/toggleSlice";
 
 //STYLE
 import styles from '../../styles/Header/LoggedInMenu.module.css'
@@ -44,8 +44,12 @@ const LoggedInMenu = () => {
     if(error){
       console.error('Fehler Beim Abmelden:', error.message)
     } else{
+      dispatch(toggle())
       dispatch(logout());
+
+      localStorage.setItem("isNightMode", false);
       router.push('/')
+      window.location.reload();
     }
 
   }

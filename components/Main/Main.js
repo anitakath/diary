@@ -6,6 +6,7 @@ import Feed from "./Feed/Feed";
 import WebUser from "./WebUser";
 import Login from "../Start";
 
+
 //STYLES
 import styles from '../../styles/Main/Main.module.css'
 

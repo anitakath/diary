@@ -42,6 +42,7 @@ const NewPostForm = () => {
   const dispatch = useDispatch();
 
   const currFilter = useSelector((state) => state.filter)
+  const nightMode = useSelector((state) => state.toggle)
 
 
 
@@ -85,7 +86,7 @@ const NewPostForm = () => {
 
 
   return (
-    <div className={styles.container}>
+    <div className={nightMode ? styles.container_dark : styles.container}>
       {isLoggedIn && (
         <div className={styles.createPost_Wrapper}>
           <div className={styles.title_container}>

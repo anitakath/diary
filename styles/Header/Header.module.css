@@ -7,7 +7,7 @@
     align-items: center;
     height:10vh;
     position: relative;
-     background: linear-gradient(#F7567C, white);
+    background: linear-gradient(#F7567C, white);
 }
 
 .container_dark{
@@ -28,9 +28,10 @@
     justify-content: center;
     align-items: center;
     font-size: 1.2rem;
-    background: linear-gradient(#F7567C, rgba(93,87,107, 0.3));
-    color: rgba(255,255,255, 0.8);
+    background: linear-gradient(#F7567C, white);
+    color: black;
 }
+
 
 .title{
     margin: 30px;
