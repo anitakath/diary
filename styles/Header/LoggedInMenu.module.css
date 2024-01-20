@@ -9,8 +9,32 @@
     border-radius: 5px;
     padding: 5px;
     width: 100%;
-
+    display: flex;
+    flex-direction: column;
 }
+
+.container_light{
+    background: var(--background_light_opaque);
+}
+
+.container_dark {
+    color: beige;
+    background: var(--background_dark)
+}
+
+
+
+
+.toggle_div{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    position: relative;
+    border-top: 1px solid black;
+    height: 50px;
+}
+
+
 
 .logout_btn{
     border: none;

@@ -17,6 +17,9 @@ const Main = (props) => {
   const [posts, setPosts] = useState([]);
 
   const currentFilter = useSelector((state) => state.filter);
+  const nightMode = useSelector((state) => state.toggle)
+
+
 
 
 
@@ -31,7 +34,7 @@ const Main = (props) => {
  
 
   return (
-    <div className={styles.container}>
+    <div className={nightMode ? styles.container_dark : styles.container}>
       {!isLoggedIn && <Login />}
 
       {isLoggedIn && (

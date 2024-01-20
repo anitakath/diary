@@ -5,6 +5,15 @@
     display: flex;
     justify-content: center;
     position: relative;
+    background: var(--background-end-rgb);
+}
+
+.container_dark{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    background: var(--background_dark);
 }
 
 .webUser_container{

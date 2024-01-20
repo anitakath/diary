@@ -32,7 +32,7 @@ const Profile = () =>{
 
               <h1> Profil </h1>
 
-              <SettingsComponent />
+             
               
             </div>
           </div>

@@ -28,14 +28,18 @@ import { faUser } from "@fortawesome/free-regular-svg-icons";
 
 
 const Header = () => {
+
+  
   const dispatch = useDispatch();
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const currentFilter = useSelector((state) => state.filter);
+  const nightMode = useSelector((state) => state.toggle)
 
 
   const {currentUser} = useContext(RedditContext)
 
+  console.log(nightMode);
 
 
   let userName; 
@@ -74,7 +78,7 @@ const Header = () => {
   return (
     <div className={styles.container}>
       {isLoggedIn && (
-        <div className={styles.container}>
+        <div className={nightMode ? styles.container_dark : styles.container}>
           <h1 className={styles.title}>
             <FontAwesomeIcon
               icon={faRedditAlien}
@@ -109,11 +113,21 @@ const Header = () => {
           </div>
 
           {menuIsOpen && (
-            <div className={styles.menu_backdrop} onClick={menuHandler}></div>
+            <div
+              className={
+                nightMode ? styles.menu_backdrop_dark : styles.menu_backdrop
+              }
+              onClick={menuHandler}
+            ></div>
           )}
 
           {menuIsOpen && (
-            <div className={styles.menu_container} id="menu">
+            <div
+              className={
+                nightMode ? styles.menu_container_dark : styles.menu_container
+              }
+              id="menu"
+            >
               <LoggedInMenu />
             </div>
           )}

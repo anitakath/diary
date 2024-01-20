@@ -52,8 +52,11 @@ const Feed = (props) => {
 
   return (
     <div className={styles.container}>
+      
       <Filter />
+
       <CreatePost />
+      
       {loadingPosts && <p className={styles.loadingPostsParagraph}> loading posts ...</p>}
       {isLoaded && deine &&  posts.map((post, id) => <Post {...post} key={id} />)}
     </div>

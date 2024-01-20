@@ -11,6 +11,8 @@ const Filter = () => {
   const dispatch = useDispatch();
 
   const currentFilter = useSelector((state) => state.filter);
+  const nightMode = useSelector((state) => state.toggle);
+
 
 
 
@@ -70,7 +72,7 @@ const Filter = () => {
 
   return (
     <div className={styles.container_wrapper}>
-      <div className={styles.container}>
+      <div className={` ${styles.container} ${nightMode  ? styles.container_dark : styles.container_light}`}>
         <div>
           <button
             className={styles.filter_btn}
@@ -112,7 +114,7 @@ const Filter = () => {
             className={styles.filter_btn}
             onClick={() => filterHandler("deine")}
           >
-           deine
+            deine
           </button>
         </div>
       </div>

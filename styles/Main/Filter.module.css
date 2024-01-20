@@ -14,7 +14,15 @@
     flex-grow: 1;
     background-color: rgba(255,255,255, 0.3);
     position: absolute;
+   
+}
+
+.container_light{
     border-bottom: 4px solid white;
+}
+
+.container_dark{
+    border-bottom: 4px solid black;;
 }
 
 

@@ -36,18 +36,10 @@ const AccountSettings = () => {
   const dispatch = useDispatch(); 
   const currGender = useSelector((state) => state.auth.gender);
 
-  console.log(currGender)
-
-  const [selectedGender, setSelectedGender] = useState(""); // State zum Speichern des ausgewählten Geschlechts
 
    const handleGenderChange = (event) => {
-     setSelectedGender(event.target.value); // Aktualisiere den State mit dem ausgewählten Geschlecht
-   
-
      dispatch(gender(event.target.value))
     };
-
-   console.log(selectedGender);
 
 
 
@@ -88,14 +80,13 @@ const AccountSettings = () => {
             </div>
 
             <select
-              value={selectedGender}
+              value={currGender}
               onChange={handleGenderChange}
               className={styles.select_input}
             >
               <option> Frau </option>
               <option> Mann </option>
               <option> Nicht-Binär </option>
-              <option> Ich bezeichne mich als ... </option>
               <option> Keine Angabe </option>
             </select>
           </div>

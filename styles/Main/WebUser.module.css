@@ -48,10 +48,11 @@
     padding: 4px;
     display: flex;
     flex-direction: column;
+    
 
 }
 
-.btn_container button{
+.link{
     margin: 10px 0px;
     height: 40px;
     border-radius: 5px;
@@ -60,9 +61,14 @@
     border-bottom: 2px solid silver;
     background-color: rgba(255,255,255, 0.5);
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
 }
 
-.btn_container button:active{
+.link:active{
     transition: 0.4s ease;
     transform: scale(0.99);
 }
+

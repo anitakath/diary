@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 //STYLES
 import styles from '../../styles/Main/WebUser.module.css'
@@ -39,8 +40,8 @@ const WebUser = () => {
         </p>
       </div>
       <div className={styles.btn_container}>
-        <button> beitrag erstellen </button>
-        <button> community erstellen </button>
+        <Link href="/new-post" className={styles.link}> beitrag erstellen </Link> 
+        <Link href="/" className={styles.link}> community erstellen </Link>
       </div>
     </div>
   );

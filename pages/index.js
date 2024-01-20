@@ -32,7 +32,6 @@ export default function Home() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
 
  
-  //const user = currentUser.user
 
   if(currentUser){
       dispatch(login())
