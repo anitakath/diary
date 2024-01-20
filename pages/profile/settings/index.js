@@ -14,15 +14,17 @@ import { faRedditAlien } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
+//REDUX
+import { useSelector } from "react-redux";
 
 
 const Settings = () =>{
 
 
+  const nightMode = useSelector((state) => state.toggle)
 
     return (
-      <div>
-       
+      <div className={ styles.container}>
         <div className={styles.container}>
           <h1 className={styles.settings_title}> Nutzereinstellungen </h1>
           <div className={styles.settings_div}>
@@ -77,7 +79,7 @@ const Settings = () =>{
             >
               Chats & Nachrichten
             </Link>
-            
+
             <Link href="/" className={styles.home_button}>
               <FontAwesomeIcon icon={faRedditAlien}></FontAwesomeIcon>
             </Link>

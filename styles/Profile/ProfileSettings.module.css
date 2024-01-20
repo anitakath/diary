@@ -3,12 +3,18 @@
 
 
 .container{
-    
+
+}
+
+.container_dark{
+    background:var(--background_dark);
+    color: var(--primary_font_color_dark);
 }
 
 
 .settings_title{
-    margin: 20px;
+    padding-top: 20px;
+    margin-bottom: 40px;
     font-size: 1.4rem;
 }
 

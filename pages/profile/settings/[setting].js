@@ -12,6 +12,9 @@ import SecuritySettings from "@/components/Main/Settings/SecuritySettings";
 //STYLES
 import styles from '../../../styles/Profile/ProfileSettings.module.css'
 
+//REDUX
+import { useSelector } from "react-redux";
+
 const SettingPage = () =>{
 
     const router = useRouter();
@@ -31,10 +34,12 @@ const SettingPage = () =>{
         }
     }
 
+      const nightMode = useSelector((state) => state.toggle);
+
     return (
       <div>
       
-        <div className={styles.container}>
+        <div className={nightMode ? styles.container_dark : styles.container}>
           <h1 className={styles.settings_title}> Nutzereinstellungen </h1>
           <div className={styles.settings_div}>
             <Link

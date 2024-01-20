@@ -23,6 +23,7 @@ import { gender } from "@/store/authSlice";
 const AccountSettings = () => {
 
   const { currentUser } = useContext(RedditContext);
+
   //console.log(currentUser.user);
 
   let userEmail;
