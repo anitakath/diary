@@ -21,7 +21,7 @@ const Feed = (props) => {
 
   const loadedPosts = props.posts;
 
-  console.log(loadedPosts)
+  
 
   const [loadingPosts, setLoadingPosts] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)

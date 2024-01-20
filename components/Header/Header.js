@@ -39,7 +39,7 @@ const Header = () => {
 
   const {currentUser} = useContext(RedditContext)
 
-  console.log(nightMode);
+  
 
 
   let userName; 

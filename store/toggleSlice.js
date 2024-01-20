@@ -4,9 +4,16 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const toggleSlice = createSlice({
   name: "toggle",
-  initialState: false,
+  initialState: {
+    isNightMode: false,
+  },
   reducers: {
-    toggle: (state) => !state, // Kürzere und korrekte Art, den Zustand umzuschalten
+    toggle: (state) => {
+
+      console.log(state.isNightMode)
+      return !state; // Kürzere und korrekte Art, den Zustand umzuschalten
+      
+    },
   },
 });
 

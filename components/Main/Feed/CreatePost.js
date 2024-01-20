@@ -52,6 +52,7 @@ const CreatePost = () => {
         <div className={styles.circle}>
           {isLoggedIn ? (
             <Image
+              alt="foto des Users"
               src={avatarUrl}
               width={80}
               height={200}
