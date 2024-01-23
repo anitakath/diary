@@ -39,16 +39,13 @@ const Main = (props) => {
       {!isLoggedIn && <Login />}
 
       {isLoggedIn && (
-        <div>
+        <div className={styles.main_container}>
+          
           <div className={styles.output_field}>
             <Feed posts={props.posts} />
           </div>
-
-          <div className={styles.webUser_container}>
-            <div className={styles.webUser_fixed}>
-              <WebUser />
-            </div>
-          </div>
+          <WebUser />
+        
         </div>
       )}
     </div>

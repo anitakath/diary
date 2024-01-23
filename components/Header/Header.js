@@ -15,6 +15,7 @@ import { login } from "@/store/authSlice";
 
 //COMPONENTS
 import LoggedInMenu from "./LoggedInMenu";
+import MobileUser from "../Main/MobileUser";
 
 //STYLES
 import styles from '../../styles/Header/Header.module.css'
@@ -96,6 +97,7 @@ const Header = () => {
           </div>
 
           <div className={styles.login_container}>
+            <MobileUser />
             <div className={styles.loginWrapper}>
               {isLoggedIn && (
                 <div className={styles.loggedIn_wrapper}>
@@ -120,16 +122,7 @@ const Header = () => {
             ></div>
           )}
 
-          {menuIsOpen && (
-            <div
-              className={
-                nightMode ? styles.menu_container_dark : styles.menu_container
-              }
-              id="menu"
-            >
-              <LoggedInMenu />
-            </div>
-          )}
+          {menuIsOpen && <LoggedInMenu setMenuIsOpen={setMenuIsOpen} />}
         </div>
       )}
 

@@ -94,7 +94,7 @@ const NewPostForm = () => {
               ERSTELLE ENEN NEUEN POST
             </h1>
             <Link href={`/`} className={styles.goBack_link}>
-              <FontAwesomeIcon icon={faHouse}></FontAwesomeIcon>
+              <FontAwesomeIcon icon={faHouse} className={styles.house_icon}></FontAwesomeIcon>
             </Link>
           </div>
           <div className={styles.createPost_div}>

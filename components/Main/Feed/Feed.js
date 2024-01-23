@@ -1,13 +1,16 @@
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
+
 
 //COMPONENTS
 import CreatePost from "./CreatePost";
 import Post from "./Post";
 import Filter from './Filter'
+import WebUser from "../WebUser";
 
 //STYLES
-import styles from '../../../styles/Main/Feed.module.css'
+import styles from '../../../styles/Main/Feed/Feed.module.css'
 
 //REDUX 
 import { useSelector } from "react-redux";
@@ -52,13 +55,21 @@ const Feed = (props) => {
 
   return (
     <div className={styles.container}>
-      
       <Filter />
 
       <CreatePost />
+
       
-      {loadingPosts && <p className={styles.loadingPostsParagraph}> loading posts ...</p>}
-      {isLoaded && deine &&  posts.map((post, id) => <Post {...post} key={id} />)}
+    
+        {loadingPosts && (
+          <p className={styles.loadingPostsParagraph}> loading posts ...</p>
+        )}
+        {isLoaded &&
+          deine &&
+          posts.map((post, id) => <Post {...post} key={id} />)}
+
+        
+      
     </div>
   );
 };

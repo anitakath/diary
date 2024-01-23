@@ -1,5 +1,5 @@
 //STYLES
-import styles from '../../../styles/Main/Feed.module.css'
+import styles from '../../../styles/Main/Feed/Post.module.css'
 
 //COMPONENTS
 import PostRating from "./PostRating";

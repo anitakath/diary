@@ -1,0 +1,188 @@
+.createPost_container{
+    margin: 20px 0px;
+    height: 70px;
+    display: flex;
+    width: 100%;   
+}
+
+
+
+
+.userImage_container{
+    width: 200px;
+    margin: 3px;
+    padding: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+}
+
+
+.users_image{
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    
+}
+
+
+
+.form_container{
+    width: 90%;
+    margin: 3px;
+    display: flex;
+    align-items: center;
+    display: flex;
+  
+}
+
+
+.createPost_linkDiv{
+    display: flex;
+    justify-content: center;
+
+}
+
+.createPost_link{
+    border-bottom: 2px solid rgba(255,255,255, 0.6);
+    padding:  10px;
+    background: #F7567C;
+    color: rgba(255,255,255, 0.8);
+    font-size: 1.3rem;
+    width:300px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #F7567C;
+
+}
+
+.createPost_link:hover{
+    transition: 0.4s ease;
+    background: rgba(255,255,255, 0.6);
+    color: #F7567C;
+    border-bottom: 2px solid #F7567C;
+}
+
+.media_buttons_div{
+    display: flex;
+}
+
+.media_buttons{
+    width: 80px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.photo_btn, .link_btn, .enlarge_btn{
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    
+}
+
+.photo_btn:hover, .link_btn:hover, .enlarge_btn:hover{
+    transition: 0.4s ease;
+    background-color: rgba(255,255,255, 0.3);
+    height: 30px;
+}
+
+
+.createPost_btn{
+    padding: 4px;
+    border: none;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    background-color: black;
+    color: rgba(255,255,255, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.createPost_btn:hover{
+    transition: 0.4s ease;
+    background: #F7567C;
+}
+
+
+
+@media screen and (max-width: 1450px){
+
+    .users_image{
+        transition: 0.4s ease;
+     
+    }
+
+    .form_container{
+        width: 80%;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .media_buttons_div{
+        margin-top: 10px;
+        width: 300px;
+        display: flex;
+        justify-content: center;
+    }
+
+       
+}
+
+
+@media screen and (max-width: 1000px){
+
+    .createPost_link{
+        transition: 0.4s ease;
+        width: 200px;
+        height: 35px;
+        font-size: 0.8rem;
+        border-radius: 5px;
+
+    }
+
+    .form_container{
+        width: 70%;
+
+    }
+
+
+    .users_image{
+        transition: 0.4s ease;
+        width: 80px;
+        height: 80px;
+
+    }
+     .media_buttons_div{
+         width: 200px;
+     }
+
+    
+    .userImage_container{
+        width: 30%;
+    }
+
+
+
+   
+
+    .media_buttons{
+        transition: 0.4s ease;
+
+        width: 50px;
+    }
+}
+
+
+

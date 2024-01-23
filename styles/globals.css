@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 :root {
   --pink: #F7567C;
   --background_light: rgba(255,255,255);

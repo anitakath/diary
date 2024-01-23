@@ -8,6 +8,7 @@
     height:10vh;
     position: relative;
     background: linear-gradient(#F7567C, white);
+    
 }
 
 .container_dark{
@@ -30,6 +31,7 @@
     font-size: 1.2rem;
     background: linear-gradient(#F7567C, white);
     color: black;
+
 }
 
 
@@ -37,6 +39,7 @@
     margin: 30px;
     background: transparent;
     border: none;
+    
 }
 
 .icon{
@@ -63,6 +66,12 @@
     transition: 0.2s ease;
     background: rgba(255,255,255, 0.5);
     border-radius: 5px;
+
+
+
+
+
+
 }
 
 
@@ -72,6 +81,8 @@
     padding: 10px;
     border: none;
     background: transparent;
+
+
     
 }
 
@@ -101,14 +112,17 @@
 .login_container{
     display: flex;
     align-items: center;
+    width: 200px;
+    justify-content: space-between;
 }
+
+
 
 .loginWrapper{
     width: 100px;
     display: flex;
     justify-content: center;
 }
-
 
 
 
@@ -135,7 +149,7 @@
 
 .menu_container{
     position: fixed;
-    transition: 0.8s ease;
+    transition: 0.4s ease;
     background: white;
     box-shadow: 1px 1px 5px grey;
     height: 100vh;
@@ -149,7 +163,7 @@
 
 .menu_container_dark{
     position: fixed;
-    transition: 0.8s ease;
+    transition: 0.4s ease;
     color: beige;
     box-shadow: 1px 1px 5px grey;
     height: 100vh;
@@ -172,6 +186,7 @@
     cursor: pointer;
 }
 
+/*
 .loggedInMenu{
     position: absolute;
     display: flex;
@@ -185,6 +200,62 @@
     background: rgba(93,87,107);
     z-index: 100;
     height: 87vh;
+   
+}
+*/
+
+@media screen and (max-width: 1000px){
+
+
+
+    .search_container{
+        transition: 0.4s ease;
+        width: 150px;
+        height: 35px;
+        
+
+    }
+
+    .searchInput{
+        width: 100%;
+    }
+
+    
+    .icon{
+        transition: 0.4s ease;
+        width: 35px;
+        height: 35px;
+    }
+
+    .loggedInMenu_btn p{
+        display: none;
+    }
+
+    .user{
+        transition: 0.4s ease;
+         width: 1.5rem;
+        height: 1.5rem;
+        
+    }
+
 }
 
 
+@media screen and (max-width: 600px){
+
+
+    .search_container{
+        
+        position: absolute;
+        left: 25px;
+
+    }
+
+    .icon{
+        display: none;
+    }
+
+    .menu_container_dark{
+        width: 100vw;
+    }
+}

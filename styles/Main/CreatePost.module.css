@@ -9,16 +9,19 @@
     min-height: 100vh;
     background: var(--background_dark);
     color:  var(--primary_font_color_dark);
+
 }
 
 .createPost_Wrapper{
     padding: 30px;
+  
 }
 
 
 .title_container{
     display: flex;
     position: relative;
+  
 }
 
 .createPost_title{
@@ -37,6 +40,10 @@
     height: 100%;
     padding: 0px 5px;
     width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
 }
 
 .goBack_link:hover{
@@ -148,5 +155,15 @@
         transition: 0.4s ease;
         width: 90vw;
     }
+
+    .createPost_title, .goBack_link{
+        transition: 0.4s ease;
+        font-size: 1.1rem;
+    }
+
+    .goBack_link{
+        top: -1px;
+    }
+
 }
 

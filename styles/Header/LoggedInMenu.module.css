@@ -3,18 +3,25 @@
 .container{
     transition: 0.4s ease;
     position: relative;
-    height: 98%;
     background: rgba(255,255,255, 0.5);
     z-index: 10000;
     border-radius: 5px;
-    padding: 5px;
-    width: 100%;
+    padding: 20px 10px;
+    width: 25%;
     display: flex;
-    flex-direction: column;
+    flex-direction: column;position: fixed;
+    color: beige;
+    box-shadow: 1px 1px 5px grey;
+    height: 100vh;
+    overflow: scroll;
+    top: 0;
+    left:0px;
+    background: var(--background_dark);
 }
 
 .container_light{
-    background: var(--background_light_opaque);
+    background: var(--background_light);
+    color: black;
 }
 
 .container_dark {
@@ -22,7 +29,15 @@
     background: var(--background_dark)
 }
 
-
+.closeMenu_btn{
+    display: inline-block;
+    position: absolute;
+    right: 15px;
+    font-size: 1.3rem;
+    font-weight: bolder;
+    width: 40px;
+    height: 40px;
+}
 
 
 .toggle_div{
@@ -60,4 +75,42 @@
     background: #F7567C;
     color: white;
     box-shadow: 0px 0px 3px grey;
+}
+
+
+@media screen and (max-width: 1370px){
+
+
+    .container{
+        width: 37%;
+    }
+
+}
+
+@media screen and (max-width: 1000px){
+
+
+    .container{
+        width: 45%;
+    }
+
+}
+
+@media screen and (max-width: 800px){
+
+
+    .container{
+        width: 55%;
+    }
+
+}
+
+
+@media screen and (max-width: 600px){
+
+
+    .container{
+        width: 100%;
+    }
+    
 }

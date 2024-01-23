@@ -1,0 +1,290 @@
+
+
+
+
+/* ----------------------- POSTS -------------------------*/
+
+
+
+
+.post_container{
+   display: flex;
+   margin: 20px;
+   border-bottom: 1px solid grey;
+   border-top: 1px solid grey;
+}
+
+.post_container:hover{
+   background-color: rgba(255,255,255, 0.2)
+   
+}
+
+
+.postRating_container{
+    width: 10%;
+}
+
+
+
+.postField{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+.postInfo, .postItself, .postInteraction{
+  overflow-wrap: break-word;
+  padding: 5px;
+}
+
+
+.postItself{
+    padding: 10px;
+    margin: 0;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    word-spacing: 1px;
+    line-height: 25px;
+}
+
+
+
+.post_title{
+    padding: 10px 4px 10px;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+
+
+.post_title_dark{
+    padding: 10px 4px 10px;
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: beige;
+
+}
+
+
+.postItself p{
+    padding: 15px 20px;
+    background-color: rgba(255,255,255, 0.3);
+    border-bottom: 1px solid white;
+    border-top: 1px solid white;
+    
+}
+
+
+.postInfo, .postInteraction{
+    color: rgba(0,0,0, 0.6);
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.postInfo_at{
+    font-size: 0.8rem;
+    color: rgba(255,255,255, 0.3);
+   
+
+}
+
+.postInfo_p{
+     color: var(--pink);
+}
+
+
+
+
+
+
+
+
+
+
+
+/*--------------------------------------------------- POST RATING ---------------------------------------------*/
+
+.postRating{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    margin-top: 15px;
+}
+
+.postArrowUp, .postArrowDown{
+    width:20px;
+    font-size: 1.5rem;
+    color: rgba(0, 0, 0, 0.8);
+    transition: 0.4s ease;
+    cursor: pointer;
+}
+
+.postArrowDown_dark, .postArrowUp_dark{
+    width:20px;
+    font-size: 1.5rem;
+    color: beige;
+    transition: 0.4s ease;
+    cursor: pointer;
+}
+
+.postArrowUp:hover, .postArrowDown:hover{
+      color: rgba(0, 0, 0, 0.8);
+      color: #F7567C;
+}
+
+
+
+.amountOfRatings{
+    font-size: 1.5rem;
+    margin: 5px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+
+
+
+
+
+/*---------------------------- POST INTERACTION --------------------------------*/
+
+
+.postInteraction_container{
+    display: flex;
+    padding: 3px;
+
+
+
+
+    
+}
+
+.postInteraction_div, .reportInteraction_div,  .deleteInteraction_div{
+    margin: 0px 10px;
+    padding: 3px;
+    width: 100px;
+    display: flex;
+    
+
+}
+
+.save_btn, .share_btn, .comment_btn, .report_btn, .delete_btn{
+    width: 100%;
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+
+
+
+}
+
+.save_btn:hover, .share_btn:hover, .comment_btn:hover, .report_btn:hover, .delete_btn:hover{
+    transition: 0.4s ease;
+     color: #F7567C;
+}
+
+.postInteraction_icon{
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+    /*border: 2px solid yellow; */
+}
+
+.comment_btn{
+    position: relative;
+}
+
+.comments_amount{
+    position: absolute;
+    left: 35px;
+    bottom: 36px;
+    font-size: 0.6rem;
+    color: white;
+}
+
+
+@media screen and (max-width: 1300px){
+
+
+
+    .postInteraction_div, .reportInteraction_div,  .deleteInteraction_div{
+        transition: 0.4s ease;
+        width: 80px;
+    }
+
+
+    .save_btn, .share_btn, .comment_btn, .report_btn, .delete_btn{
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+    .comments_amount{
+        transition: 0.4s ease;
+        top: 9px;
+        left: 23px;
+        
+        
+    }
+}
+
+
+@media screen and (max-width: 1200px){
+    .postInteraction_container{
+       /* border: 2px solid purple;*/
+    }
+
+    .postInteraction_div{
+        transition: 0.4s ease;
+        width: 90px;
+        /*border: 2px solid green;*/
+        
+     
+    }
+    
+
+    .save_btn, .share_btn, .comment_btn, .report_btn, .delete_btn{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .postInteraction_icon{
+        transition: 0.4s ease;
+       
+    }
+
+    .comments_amount{
+        transition: 0.4s ease;
+        top: 8px;
+        left: 31px;
+    }
+
+    .reportInteraction_div{
+        display: none;
+    }
+    .report_btn {
+       display: none;
+    }
+}
+
+
+@media screen and (max-width: 600px){
+    
+    .postInteraction_div, .reportInteraction_div,  .deleteInteraction_div{
+        
+        width: 50px;
+    }
+
+
+    .comments_amount{
+ 
+        top: 7px;
+        left: 9px;
+    }
+}

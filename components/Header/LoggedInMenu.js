@@ -16,7 +16,7 @@ import styles from '../../styles/Header/LoggedInMenu.module.css'
 //UI
 import Slider from "../UI/Slider";
 
-const LoggedInMenu = () => {
+const LoggedInMenu = (props) => {
 
   const router = useRouter();
 
@@ -52,6 +52,15 @@ const LoggedInMenu = () => {
       window.location.reload();
     }
 
+
+  }
+
+  const setMenuIsOpen = props.setMenuIsOpen
+
+  const closeModalHandler = () =>{
+
+
+    setMenuIsOpen(false)
   }
 
 
@@ -63,6 +72,11 @@ const LoggedInMenu = () => {
 
   return (
     <div className={`${styles.container} ${nightMode ? styles.container_dark : styles.container_light}`}>
+      
+      <button className={styles.closeMenu_btn} onClick={closeModalHandler}>  
+        <h1> X </h1>
+      </button>
+      
       <Link href="/" style={router.pathname === "/" ? activeLinkStyle : null}>
         {" "}
         Startseite{" "}

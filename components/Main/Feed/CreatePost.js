@@ -10,7 +10,7 @@ import { RedditContext } from "@/context/RedditContext";
 
 
 //STYLES
-import styles from '../../../styles/Main/Feed.module.css'
+import styles from '../../../styles/Main/Feed/CreatePost.module.css'
 
 //FONT AWESOME
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -71,21 +71,23 @@ const CreatePost = () => {
           </Link>
         </div>
 
-        <div className={styles.media_buttons}>
-          <button className={styles.photo_btn}>
-            <FontAwesomeIcon icon={faImage} className={styles.icon} />
-          </button>
-        </div>
-        <div className={styles.media_buttons}>
-          <button className={styles.link_btn}>
-            <FontAwesomeIcon icon={faLink} className={styles.icon} />
-          </button>
-        </div>
+        <div className={styles.media_buttons_div}>
+          <div className={styles.media_buttons}>
+            <button className={styles.photo_btn}>
+              <FontAwesomeIcon icon={faImage} className={styles.icon} />
+            </button>
+          </div>
+          <div className={styles.media_buttons}>
+            <button className={styles.link_btn}>
+              <FontAwesomeIcon icon={faLink} className={styles.icon} />
+            </button>
+          </div>
 
-        <div className={styles.media_buttons}>
-          <button className={styles.createPost_btn} type="submit">
-            <FontAwesomeIcon icon={faPlus} className={styles.icon} />
-          </button>
+          <div className={styles.media_buttons}>
+            <button className={styles.createPost_btn} type="submit">
+              <FontAwesomeIcon icon={faPlus} className={styles.icon} />
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -16,7 +16,7 @@ import { faBookmark } from "@fortawesome/free-regular-svg-icons";
 import { supabase } from "@/services/supabaseClient";
 
 //STYLES
-import styles from '../../../styles/Main/Feed.module.css'
+import styles from '../../../styles/Main/Feed/Post.module.css'
 
 
 //REDUX

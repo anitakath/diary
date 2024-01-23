@@ -6,6 +6,8 @@
     justify-content: center;
     position: relative;
     background: var(--background-end-rgb);
+   
+    
 }
 
 .container_dark{
@@ -14,12 +16,26 @@
     justify-content: center;
     position: relative;
     background: var(--background_dark);
+    width: 100vw;
+    
+    
+    
 }
 
+.main_container{
+    display: flex;
+    position: relative;
+    padding: 20px 0px;
+
+}
+
+/*
 .webUser_container{
     width: 20vw;
     margin: 20px 0px;
     position: relative;
+    border: 2px solid red;
+    
 }
 
 .webUser_fixed{
@@ -28,17 +44,21 @@
     height: 400px;
     position: fixed;
     background: rgba(93,87,107, 0.5);
+    border: 2px solid red;
+    
     
 }
-
+*/
 .output_field{
     border-radius: 5px;
     background: rgba(93,87,107, 0.5);
     width: 50vw;
     min-height: 500vh;
-    margin: 20px;
+    margin: 5px;
     transition: 0.4s ease;
+
 }
+
 
 @media screen and (max-width: 1200px){
     .output_field{
@@ -49,4 +69,14 @@
         transition: 0.4s ease;
         display: none;
     }
+}
+
+
+
+@media screen and (max-width: 600px){
+    .output_field{
+        width: 96vw;
+    }
+
+  
 }
