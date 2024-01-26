@@ -4,9 +4,15 @@ import { useRouter } from "next/router";
 
 
 //COMPONENTS
+import SettingsNavigation from "@/components/Main/Settings/Navigation/SettingsNavigation";
 import AccountSettings from "@/components/Main/Settings/AccountSettings";
 import ProfileSettings from "@/components/Main/Settings/ProfileSettings";
 import SecuritySettings from "@/components/Main/Settings/SecuritySettings";
+
+//FONT AWESOME
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faRedditAlien } from "@fortawesome/free-brands-svg-icons";
 
 
 //STYLES
@@ -38,62 +44,9 @@ const SettingPage = () =>{
 
     return (
       <div>
-      
         <div className={nightMode ? styles.container_dark : styles.container}>
           <h1 className={styles.settings_title}> Nutzereinstellungen </h1>
-          <div className={styles.settings_div}>
-            <Link
-              href="/profile/settings/account"
-              className={styles.settings_link}
-            >
-              {" "}
-              Konto{" "}
-            </Link>
-            <Link
-              href="/profile/settings/profile"
-              className={styles.settings_link}
-            >
-              {" "}
-              Profil{" "}
-            </Link>
-            <Link
-              href="/profile/settings/security"
-              className={styles.settings_link}
-            >
-              {" "}
-              Sicherheit & Datenschutz{" "}
-            </Link>
-            <Link
-              href="/profile/settings/account"
-              className={styles.settings_link}
-            >
-              Feedeinstellungen
-            </Link>
-            <Link
-              href="/profile/settings/account"
-              className={styles.settings_link}
-            >
-              Benachrichtigungen
-            </Link>
-            <Link
-              href="/profile/settings/account"
-              className={styles.settings_link}
-            >
-              Mails
-            </Link>
-            <Link
-              href="/profile/settings/account"
-              className={styles.settings_link}
-            >
-              Abos
-            </Link>
-            <Link
-              href="/profile/settings/account"
-              className={styles.settings_link}
-            >
-              Chats & Nachrichten
-            </Link>
-          </div>{" "}
+          <SettingsNavigation />
           <div className={styles.settings_output_container}>
             {renderSelectedComponent()}
           </div>

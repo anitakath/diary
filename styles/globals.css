@@ -6,12 +6,14 @@
 
 :root {
   --pink: #F7567C;
+  --pink_opaque: rgba(247,86,124, 0.8);
+  --beige: beige;
   --background_light: rgba(255,255,255);
   --background_light_opaque: rgba(255,255,255, 0.5);
   
 
   --background_dark: #0E0E52;
-  --background_dark_opaque: rgba(0, 0, 0, 0.5);
+  --background_dark_opaque: rgba(255, 255, 255, 0.2);
   --primary_font_color_dark: beige;
  
 }

@@ -91,9 +91,13 @@
 }
 
 .postInfo_p{
-     color: var(--pink);
+     color: var(--pink_opaque);
 }
 
+  .postInfo_p span{
+     font-weight: bolder;  
+     font-size: 1.1rem;    
+  }
 
 
 
@@ -275,12 +279,47 @@
 
 
 @media screen and (max-width: 600px){
+
+    .post_container{
+        margin-top: 40px;
+        transition: 0.4s ease;
+        position: relative;
+        left: -10px;
+        width: 95%;
+        background-color: rgba(255,255,255, 0.1)
+    }
     
     .postInteraction_div, .reportInteraction_div,  .deleteInteraction_div{
-        
+
         width: 50px;
     }
 
+  
+
+    .postInfo_at{
+        position: absolute;
+        right: 60px;
+
+
+    }
+    .postRating_container{
+        transition: 0.4s ease;
+        position: absolute;
+        right: 0;
+        top: 5px;
+
+    }
+
+
+    .postField{
+        width: 100%;
+    
+    }
+
+
+    .postInfo, .postItself, .postInteraction{
+       
+    }
 
     .comments_amount{
  

@@ -36,6 +36,9 @@ const AccountSettings = () => {
 
   const dispatch = useDispatch(); 
   const currGender = useSelector((state) => state.auth.gender);
+  const darkMode = useSelector((state) => state.toggle)
+
+  console.log(darkMode)
 
 
    const handleGenderChange = (event) => {
@@ -59,7 +62,16 @@ const AccountSettings = () => {
             <div>
               <h2 className={styles.setting_title}> Mailadresse </h2>
               {currentUser && (
-                <p className={styles.settings_paragraph}> {userEmail}</p>
+                <p
+                  className={`${
+                    darkMode
+                      ? styles.settings_paragraph_dark
+                      : styles.settings_paragraph
+                  } `}
+                >
+                  {" "}
+                  {userEmail}
+                </p>
               )}
             </div>
             <button className={styles.change_btn}> ändern </button>
@@ -68,7 +80,16 @@ const AccountSettings = () => {
           <div className={styles.setting_div}>
             <div>
               <h2 className={styles.setting_title}> Passwort </h2>
-              <p className={styles.settings_paragraph}> *********** </p>
+              <p
+                className={` ${
+                  darkMode
+                    ? styles.settings_paragraph_dark
+                    : styles.settings_paragraph
+                } `}
+              >
+                {" "}
+                ***********{" "}
+              </p>
             </div>
 
             <button className={styles.change_btn}> ändern </button>
@@ -77,7 +98,15 @@ const AccountSettings = () => {
           <div className={styles.setting_div}>
             <div>
               <h2 className={styles.setting_title}> Geschlecht </h2>
-              <p className={styles.settings_paragraph}> {currGender}</p>
+              <p
+                className={` ${
+                  darkMode
+                    ? styles.settings_paragraph_dark
+                    : styles.settings_paragraph
+                } `}
+              >
+                {currGender}
+              </p>
             </div>
 
             <select
@@ -91,6 +120,8 @@ const AccountSettings = () => {
               <option> Keine Angabe </option>
             </select>
           </div>
+
+          <button type="submit" className={styles.submit_button}> speichern </button>
         </div>
       </div>
       <WebUser />

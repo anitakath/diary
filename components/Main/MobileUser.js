@@ -19,7 +19,7 @@ const MobileUser = () =>{
         <button>
           <FontAwesomeIcon
             icon={faUsers}
-            className={styles.users}
+            className={styles.usxwers}
           ></FontAwesomeIcon>
           <p> + </p>
         </button>

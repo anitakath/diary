@@ -17,6 +17,22 @@ const Post = (props) => {
   
   let totalvote = upvotes - downvotes
 
+   const formatDate = (timestamp) => {
+     const dateObj = new Date(timestamp);
+     const options = { year: "numeric", month: "long", day: "numeric" };
+     const date = dateObj.toLocaleDateString("de-DE", options);
+     const time = dateObj.toLocaleTimeString("de-DE", {
+       hour: "2-digit",
+       minute: "2-digit",
+     });
+     return { date, time };
+   };
+
+    const formattedDateTime = formatDate(created_at);
+
+
+
+  
   
   
   return (
@@ -27,8 +43,10 @@ const Post = (props) => {
 
       <div className={styles.postField}>
         <div className={styles.postInfo}>
-          <p className={styles.postInfo_p}>created by: {author}</p>
-          <p className={styles.postInfo_at}> at: {created_at}</p>
+          <p className={styles.postInfo_p}>
+            <span> {author}</span> - {formattedDateTime.date} -{" "}
+            {formattedDateTime.time}
+          </p>
         </div>
         <div className={styles.postItself}>
           <h1

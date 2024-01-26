@@ -3,16 +3,18 @@ import Link from "next/link";
 
 //COMPONENTS
 import ProfileSettings from "@/components/Main/Settings/ProfileSettings";
-
+import SettingsNavigation from "@/components/Main/Settings/Navigation/SettingsNavigation";
 
 //STYLES
-import styles from '../../../styles/Profile/ProfileSettings.module.css'
+import styles from '../../../styles/Profile/Profile.module.css'
 
 
 //FONT AWESOME
 import { faRedditAlien } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+
 
 //REDUX
 import { useSelector } from "react-redux";
@@ -24,70 +26,14 @@ const Settings = () =>{
   const nightMode = useSelector((state) => state.toggle)
 
     return (
-      <div className={ nightMode ? styles.container_dark : styles.container}>
-        <div className={styles.container}>
+      <div className={nightMode ? styles.profileContainer_dark : styles.profileContainer}>
+      
           <h1 className={styles.settings_title}> Nutzereinstellungen </h1>
-          <div className={styles.settings_div}>
-            <Link
-              href="/profile/settings/account"
-              className={styles.settings_link}
-            >
-              {" "}
-              Konto{" "}
-            </Link>
-            <Link
-              href="/profile/settings/profile"
-              className={styles.settings_link}
-            >
-              {" "}
-              Profil{" "}
-            </Link>
-            <Link
-              href="/profile/settings/security"
-              className={styles.settings_link}
-            >
-              {" "}
-              Sicherheit & Datenschutz{" "}
-            </Link>
-            <Link
-              href="/profile/settings/account"
-              className={styles.settings_link}
-            >
-              Feedeinstellungen
-            </Link>
-            <Link
-              href="/profile/settings/account"
-              className={styles.settings_link}
-            >
-              Benachrichtigungen
-            </Link>
-            <Link
-              href="/profile/settings/account"
-              className={styles.settings_link}
-            >
-              Mails
-            </Link>
-            <Link
-              href="/profile/settings/account"
-              className={styles.settings_link}
-            >
-              Abos
-            </Link>
-            <Link
-              href="/profile/settings/account"
-              className={styles.settings_link}
-            >
-              Chats & Nachrichten
-            </Link>
 
-            <Link href="/" className={styles.home_button}>
-              <FontAwesomeIcon icon={faRedditAlien}></FontAwesomeIcon>
-            </Link>
-          </div>
-
+          <SettingsNavigation/>
+          
           <div className={styles.settings_output_container}>
-            <ProfileSettings />
-          </div>
+           PROFIL
         </div>
       </div>
     );

@@ -1,10 +1,16 @@
 
-
-
-
 .container{
-
+    display: flex;
 }
+
+
+
+.settings_wrapper{
+    width: 60%;
+    margin: 0px 10px;
+    margin-right: 70px;
+}
+
 
 .container_dark{
     background:var(--background_dark);
@@ -26,6 +32,25 @@
     position: relative;
 }
 
+.settings_link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.settings_link_web{
+    margin: 5px 20px;
+    display: flex;
+    align-items: center;
+    display: inline-block;
+}
+
+ .settings_links_mobile{
+     display: none;
+     transition: 0.4s ease;
+ }
+
+
 .settings_link, .home_button{
     margin: 5px 10px;
     font-size: 1rem;
@@ -41,4 +66,26 @@
     min-height: 78vh;
     padding: 20px;
     margin: 20px 0px;
+}
+
+
+@media screen and (max-width: 1200px){
+
+  
+
+    .settings_link{
+        margin: 5px 20px;
+        font-size: 1rem;
+
+    }
+
+    .settings_link_web{
+        display: none;
+    }
+
+    .settings_links_mobile{
+        display: flex;
+        align-items: center;
+        margin: 5px;
+    }
 }
