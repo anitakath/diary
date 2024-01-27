@@ -121,7 +121,156 @@ const AccountSettings = () => {
             </select>
           </div>
 
-          <button type="submit" className={styles.submit_button}> speichern </button>
+          <button type="submit" className={styles.submit_button}>
+            {" "}
+            speichern{" "}
+          </button>
+        </div>
+        <div className={styles.accountSettings_div}>
+          <h3 className={styles.subTitle}> KONTOEINSTELLUNGEN - {userName} </h3>
+
+          <div className={styles.setting_div}>
+            <div>
+              <h2 className={styles.setting_title}> Mailadresse </h2>
+              {currentUser && (
+                <p
+                  className={`${
+                    darkMode
+                      ? styles.settings_paragraph_dark
+                      : styles.settings_paragraph
+                  } `}
+                >
+                  {" "}
+                  {userEmail}
+                </p>
+              )}
+            </div>
+            <button className={styles.change_btn}> ändern </button>
+          </div>
+
+          <div className={styles.setting_div}>
+            <div>
+              <h2 className={styles.setting_title}> Passwort </h2>
+              <p
+                className={` ${
+                  darkMode
+                    ? styles.settings_paragraph_dark
+                    : styles.settings_paragraph
+                } `}
+              >
+                {" "}
+                ***********{" "}
+              </p>
+            </div>
+
+            <button className={styles.change_btn}> ändern </button>
+          </div>
+
+          <div className={styles.setting_div}>
+            <div>
+              <h2 className={styles.setting_title}> Geschlecht </h2>
+              <p
+                className={` ${
+                  darkMode
+                    ? styles.settings_paragraph_dark
+                    : styles.settings_paragraph
+                } `}
+              >
+                {currGender}
+              </p>
+            </div>
+
+            <select
+              value={currGender}
+              onChange={handleGenderChange}
+              className={styles.select_input}
+            >
+              <option> Frau </option>
+              <option> Mann </option>
+              <option> Nicht-Binär </option>
+              <option> Keine Angabe </option>
+            </select>
+          </div>
+
+          <button type="submit" className={styles.submit_button}>
+            {" "}
+            speichern{" "}
+          </button>
+        </div>
+
+
+        
+
+        <div className={styles.accountSettings_div}>
+          <h3 className={styles.subTitle}> KONTOEINSTELLUNGEN - {userName} </h3>
+
+          <div className={styles.setting_div}>
+            <div>
+              <h2 className={styles.setting_title}> Mailadresse </h2>
+              {currentUser && (
+                <p
+                  className={`${
+                    darkMode
+                      ? styles.settings_paragraph_dark
+                      : styles.settings_paragraph
+                  } `}
+                >
+                  {" "}
+                  {userEmail}
+                </p>
+              )}
+            </div>
+            <button className={styles.change_btn}> ändern </button>
+          </div>
+
+          <div className={styles.setting_div}>
+            <div>
+              <h2 className={styles.setting_title}> Passwort </h2>
+              <p
+                className={` ${
+                  darkMode
+                    ? styles.settings_paragraph_dark
+                    : styles.settings_paragraph
+                } `}
+              >
+                {" "}
+                ***********{" "}
+              </p>
+            </div>
+
+            <button className={styles.change_btn}> ändern </button>
+          </div>
+
+          <div className={styles.setting_div}>
+            <div>
+              <h2 className={styles.setting_title}> Geschlecht </h2>
+              <p
+                className={` ${
+                  darkMode
+                    ? styles.settings_paragraph_dark
+                    : styles.settings_paragraph
+                } `}
+              >
+                {currGender}
+              </p>
+            </div>
+
+            <select
+              value={currGender}
+              onChange={handleGenderChange}
+              className={styles.select_input}
+            >
+              <option> Frau </option>
+              <option> Mann </option>
+              <option> Nicht-Binär </option>
+              <option> Keine Angabe </option>
+            </select>
+          </div>
+
+          <button type="submit" className={styles.submit_button}>
+            {" "}
+            speichern{" "}
+          </button>
         </div>
       </div>
       <WebUser />

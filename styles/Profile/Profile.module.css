@@ -5,6 +5,7 @@
 .profileContainer{
     display: flex;
     flex-direction: column;
+    border: 2px solid orange;
 
 
 }
@@ -13,6 +14,7 @@
 .profileContainer_dark{
     background: var(--background_dark);
     color: var(--primary_font_color_dark);
+    min-height: 130vh;
   
 }
 
@@ -26,9 +28,65 @@
     align-items: center;
 }
 
+.settings_output_container{
+    width: 100%;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Zwei Spalten */
+    gap: 10px; /* Abstand zwischen den Elementen */
+    
+}
 
 
 
+.setting_div{
+    margin: 20px;
+    background: var(--background_light_opaque);
+    height: 330px;
+    
+}
+
+
+@media screen and (max-width: 1300px){
+
+
+    .settings_output_container{
+        transition: 0.4s ease;
+        grid-template-columns: repeat(3, 1fr); 
+        
+    }
+
+    .setting_div{
+        height: 330px;
+    }
+
+
+}
+
+
+@media screen and (max-width: 1000px){
+
+    .settings_output_container{
+        grid-template-columns: repeat(2, 1fr); 
+    }
+
+    .setting_div{
+        height: 300px;
+    }
+
+}
+
+@media screen and (max-width: 600px){
+
+    .settings_output_container{
+        grid-template-columns: repeat(1, 1fr); 
+    }
+
+    .setting_div{
+        height: 300px;
+    }
+
+}
 
 
 /*------------ALLE Acc/Prof/.../Settings.js Layouts---------------------------------*/

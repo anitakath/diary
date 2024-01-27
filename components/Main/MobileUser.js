@@ -11,18 +11,28 @@ import styles from "../../styles/Main/WebUser.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faRedditAlien } from "@fortawesome/free-brands-svg-icons";
-import { faUsers } from "@fortawesome/free-solid-svg-icons";
+import { faUsers, faHouse } from "@fortawesome/free-solid-svg-icons";
+
+
+
 
 const MobileUser = () =>{
     return (
       <div className={styles.MobileUser_container}>
-        <button>
+        <button className={styles.users_button}>
           <FontAwesomeIcon
             icon={faUsers}
-            className={styles.usxwers}
+            className={styles.users}
           ></FontAwesomeIcon>
           <p> + </p>
         </button>
+
+        <Link href="/" className={styles.users_button}>
+          <FontAwesomeIcon
+            icon={faHouse}
+            className={styles.home}
+          ></FontAwesomeIcon>
+        </Link>
       </div>
     );
 }

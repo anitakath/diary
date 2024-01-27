@@ -32,11 +32,12 @@ export default function Home() {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
 
  
+  useEffect(()=>{
 
-  if(currentUser){
-      dispatch(login())
-    
-  }
+    if (currentUser) {
+      dispatch(login());
+    }
+  }, [currentUser])
 
 
   

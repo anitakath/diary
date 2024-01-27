@@ -69,12 +69,18 @@
 
 .logout_btn{
     color: #F7567C;
+    height: 40px;
+    padding: 5px 0px;
 }
 
 .logout_btn:hover{
     background: #F7567C;
     color: white;
     box-shadow: 0px 0px 3px grey;
+}
+
+.logout_btn{
+
 }
 
 

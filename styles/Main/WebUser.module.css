@@ -76,9 +76,8 @@
 .MobileUser_container{
     padding: 1px;
     margin: 20px;
+    margin-right: 60px;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
     width: 55px;
     height: 55px;
@@ -86,24 +85,21 @@
     position: relative;
 }
 
+
+.users_button{
+    display: flex;
+    flex-direction: column;
+    margin: 0px 15px;
+}
  
 
 
 .MobileUser_container p{
     display: none;
 }
-/*
 
-.MobileUser_container p:hover{
-    transition: 0.4s ease;
-    z-index: 1000;
-    opacity: 1;
-    font-size: 3.4rem;
-    right: -15px;
-    bottom: -20px;
-} */
 
-.users{
+.users, .home{
     display: none;
     z-index: 10;
     transition: 0.4s ease;
@@ -112,16 +108,14 @@
 }
 
 .MobileUser_container:hover p {
-  z-index: 1000;
-  opacity: 1;
-  font-size: 3.2rem;
-  right: -10px;
-  bottom: -18px;
+   z-index: 1000;
+   opacity: 1;
+   color: black;
+   font-size: 3.2rem;
+  
 }
 
-.MobileUser_container:hover .users {
-  display: block; /* Anzeigen des .users-Elements beim Hover */
-}
+
 
 .users:hover {
   opacity: 0.5;
@@ -135,12 +129,14 @@
        display: none;
     }
 
-    .users{
+    .users, .home{
         display: inline-block;
         color: #F7567C;
         cursor: pointer;
         width: 1.9rem;
         height: 1.9rem;
+        color: var(--pink_opaque);
+      
 
     }
 
@@ -153,6 +149,7 @@
         right: -5px;
         bottom: -12px;
         opacity: 0.6;
+        color: var(--pink);
     }
    
 }

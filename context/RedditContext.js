@@ -24,7 +24,7 @@ export const RedditProvider = ({children}) => {
 
     }, [])
 
-    console.log(currentUser);
+    //console.log(currentUser);
     
 
 

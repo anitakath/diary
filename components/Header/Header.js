@@ -16,6 +16,7 @@ import { login } from "@/store/authSlice";
 //COMPONENTS
 import LoggedInMenu from "./LoggedInMenu";
 import MobileUser from "../Main/MobileUser";
+import SearchBar from "../UI/SearchBar";
 
 //STYLES
 import styles from '../../styles/Header/Header.module.css'
@@ -41,16 +42,19 @@ const Header = () => {
   const {currentUser} = useContext(RedditContext)
 
   
+  
 
 
 
   let userName; 
+
+  /*
   if(currentUser){
     userName = currentUser.user.identities[0].identity_data.full_name;
     dispatch(login())
 
   }
-  
+  */
 
 
   const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -86,15 +90,7 @@ const Header = () => {
               onClick={reloadPage}
             />
           </h1>
-          <div className={styles.search_container}>
-            <input
-              type="search"
-              placeholder="SEARCH"
-              className={styles.searchInput}
-            ></input>
-
-            <button className={styles.search_btn}> 🚀 </button>
-          </div>
+          <SearchBar />
 
           <div className={styles.login_container}>
             <MobileUser />

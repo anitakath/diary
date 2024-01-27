@@ -74,7 +74,7 @@ useEffect(()=>{
 
 
  
-  console.log(nightMode)
+  
 
  
     return (
