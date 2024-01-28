@@ -1,7 +1,6 @@
 
 .container{
     display: flex;
-    flex-direction: column;
 }
 
 
@@ -26,6 +25,24 @@
     font-size: 1.4rem;
 }
 
+
+
+.title{
+    margin: 20px 10px;
+    font-size: 1.5rem;
+}
+
+
+
+.ProfileSettings_div{
+    border-top: 2px solid grey;
+    padding: 10px;
+    width: 100%;
+    min-height: 140vh;
+}
+
+
+/*
 
 .settings_div{
     display: flex;
@@ -67,7 +84,7 @@
     position: absolute;
     right: 10px;
     font-size: 1.3rem;
-}
+}*/
 
 .settings_output_container{
     min-height: 78vh;

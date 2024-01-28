@@ -6,6 +6,15 @@
     flex-direction: column;
     padding: 5px;
     position: relative;
+    
+}
+
+.fixed_div{
+    position: sticky;
+  top: 30px; /* oder den gewünschten Abstand zum oberen Rand festlegen */
+  height: fit-content; /* oder die gewünschte Höhe festlegen */
+  margin-left: auto; /* sorgt dafür, dass der Inhalt rechtsbündig bleibt */
+
 }
 
 .spaceImage{

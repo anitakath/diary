@@ -7,7 +7,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { faRedditAlien } from "@fortawesome/free-brands-svg-icons";
 
 //STYLES
-import styles from "../../../../styles/Profile/ProfileSettings.module.css";
+import styles from "../../../../styles/Profile/Settings/SettingsNavigation.module.css";
 
 
 //COMPONENTS

@@ -2,14 +2,16 @@ import Link from "next/link"
 
 
 //STYLES
-import styles from "../../../../styles/Profile/ProfileSettings.module.css";
+import styles from "../../../../styles/Profile/Settings/SettingsNavigation.module.css";
 
 
 
 const SettingsNavigationMobile = () =>{
 
 
+
     return (
+      
       <div>
         <Link
           href="/profile/settings/account"
