@@ -27,7 +27,7 @@ const MobileUser = () =>{
           <p> + </p>
         </button>
 
-        <Link href="/" className={styles.users_button}>
+        <Link href="/" className={styles.house_button}>
           <FontAwesomeIcon
             icon={faHouse}
             className={styles.home}

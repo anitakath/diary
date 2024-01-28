@@ -159,11 +159,6 @@
 .postInteraction_container{
     display: flex;
     padding: 3px;
-
-
-
-
-    
 }
 
 .postInteraction_div, .reportInteraction_div,  .deleteInteraction_div{
@@ -305,9 +300,14 @@
     .postRating_container{
         transition: 0.4s ease;
         position: absolute;
-        right: 0;
-        top: 5px;
+        right: 5px;
+        top: 3px;
 
+    }
+
+    .postRating{
+
+        height: 80px;
     }
 
 

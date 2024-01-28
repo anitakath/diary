@@ -5,8 +5,6 @@
 .profileContainer{
     display: flex;
     flex-direction: column;
-    border: 2px solid orange;
-
 
 }
 
@@ -19,15 +17,16 @@
 }
 
 
-
+/*
 .profile_container{
     width: 100vw;
     min-height:100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    border: 2px solid orange;
 }
-
+*/
 .settings_output_container{
     width: 100%;
     min-height: 100vh;
@@ -41,9 +40,21 @@
 
 .setting_div{
     margin: 20px;
-    background: var(--background_light_opaque);
+    padding: 10px;
     height: 330px;
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.setting_div_light{
+    background: var(--pink);
+
+
+}
+.setting_div_dark{
+    background: var(--background_light_opaque);
+
 }
 
 
@@ -133,6 +144,7 @@
     padding-top: 20px;
     margin-bottom: 40px;
     font-size: 1.4rem;
+    margin-left: 10px;
 }
 
 

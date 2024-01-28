@@ -36,14 +36,14 @@ const Settings = () =>{
         <SettingsNavigation />
 
         <div className={styles.settings_output_container}>
-          <div className={styles.setting_div}> Einstellung Nr 1 </div>
-          <div className={styles.setting_div}> Einstellung Nr 2 </div>
-          <div className={styles.setting_div}> Einstellung Nr 3 </div>
-          <div className={styles.setting_div}> Einstellung Nr 4 </div>
-          <div className={styles.setting_div}> Einstellung Nr 5 </div>
-          <div className={styles.setting_div}> Einstellung Nr 6 </div>
-          <div className={styles.setting_div}> Einstellung Nr 7 </div>
-          <div className={styles.setting_div}> Einstellung Nr 8 </div>
+          <div className={`${styles.setting_div} ${ nightMode ? styles.setting_div_dark : styles.setting_div_light}`}> Einstellung Nr 1 </div>
+          <div className={`${styles.setting_div} ${ nightMode ? styles.setting_div_dark : styles.setting_div_light}`}> Einstellung Nr 2 </div>
+          <div className={`${styles.setting_div} ${ nightMode ? styles.setting_div_dark : styles.setting_div_light}`}> Einstellung Nr 3 </div>
+          <div className={`${styles.setting_div} ${ nightMode ? styles.setting_div_dark : styles.setting_div_light}`}> Einstellung Nr 4 </div>
+          <div className={`${styles.setting_div} ${ nightMode ? styles.setting_div_dark : styles.setting_div_light}`}> Einstellung Nr 5 </div>
+          <div className={`${styles.setting_div} ${ nightMode ? styles.setting_div_dark : styles.setting_div_light}`}> Einstellung Nr 6 </div>
+          <div className={`${styles.setting_div} ${ nightMode ? styles.setting_div_dark : styles.setting_div_light}`}> Einstellung Nr 7 </div>
+          <div className={`${styles.setting_div} ${ nightMode ? styles.setting_div_dark : styles.setting_div_light}`}> Einstellung Nr 8 </div>
         </div>
       </div>
     );

@@ -57,47 +57,7 @@
 }
 
 
-.search_container{
-    display: flex;
-    width: 300px;
-    align-items: center;
-    position: relative;
-    border-bottom: 2px solid black;
-    transition: 0.2s ease;
 
-}
-
-
-.searchInput{
-    width: 270px;
-    height: 50px;
-    padding: 10px;
-    border: none;
-    background: transparent;
-    
-}
-
-.search_btn{
-    position: absolute;
-    right: -29px;
-    transition: 0.4s ease;
-    height: 100%;
-    width: 50px;
-    cursor: pointer;
-    margin-bottom: 10px;
-    position: absolute;
-    right: 0px;
-    font-size: 1.7rem;
-}
-
-.searchInput:focus{
-    outline: none;
-}
-
-.search_container:hover, .search_container:focus{
-    border-bottom: 2px solid #F7567C;
-    outline: none;
-}
 
 
 .login_container{
@@ -169,12 +129,14 @@
 
 .loggedIn_wrapper{
     position: relative;
+    margin: 0px 10px;
 }
 
 .loggedInMenu_btn{
     border: none;
     background: transparent;
     cursor: pointer;
+    
 }
 
 /*
@@ -195,22 +157,19 @@
 }
 */
 
+@media screen and (min-width: 1000px){
+    .loggedIn_wrapper{
+        right: 20px;
+      
+    }
+}
+
 @media screen and (max-width: 1000px){
 
 
 
-    .search_container{
-        transition: 0.4s ease;
-        width: 250px;
-    }
-
-
     .login_container{
         margin-top: 10px;
-    }
-
-    .searchInput{
-        width: 100%;
     }
 
     
@@ -245,14 +204,6 @@
         height: 18vh;
     }
 
-
-    .search_container{
-       
-        width: 380px;
-        height: 35px;
-        
-
-    }
 
     .icon{
         display: none;

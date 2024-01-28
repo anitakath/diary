@@ -1,6 +1,7 @@
 
 .container{
     display: flex;
+    flex-direction: column;
 }
 
 
@@ -15,6 +16,7 @@
 .container_dark{
     background:var(--background_dark);
     color: var(--primary_font_color_dark);
+    min-height: 200vh;
 }
 
 
@@ -30,6 +32,11 @@
     margin-top: 15px;
     border-bottom: 2px solid grey;
     position: relative;
+}
+
+
+.active{
+    color: var(--pink);
 }
 
 .settings_link{

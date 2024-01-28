@@ -2,7 +2,8 @@
 
 
 //STYLES
-import styles from "../../styles/Header/Header.module.css";
+
+import styles from '../../styles/UI/SearchBar.module.css'
 
 const SearchBar = () =>{
 

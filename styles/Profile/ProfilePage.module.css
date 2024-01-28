@@ -1,0 +1,46 @@
+
+
+.container{
+    display: flex;
+}
+
+.container_dark{
+    background:var(--background_dark);
+    color: var(--primary_font_color_dark);
+}
+
+
+.profile_container{
+    width: 100vw;
+    min-height:100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.title{
+    border-bottom: 2px solid grey;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    color: var(--pink);
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    
+}
+
+.profileSettings_link{
+    position: absolute;
+    right: 45px;
+    top: 30px;
+}
+
+.profile_div{
+    margin: 40px 0px;
+    border: 2px solid grey;
+    width: 100%;
+    min-height: 80vh;
+}

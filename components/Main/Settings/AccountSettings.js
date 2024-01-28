@@ -121,9 +121,13 @@ const AccountSettings = () => {
             </select>
           </div>
 
-          <button type="submit" className={styles.submit_button}>
-            {" "}
-            speichern{" "}
+          <button
+            type="submit"
+            className={`${styles.submit_button} ${
+              darkMode ? styles.submit_button_dark : styles.submit_button_light
+            }`}
+          >
+            speichern
           </button>
         </div>
         <div className={styles.accountSettings_div}>
@@ -192,14 +196,16 @@ const AccountSettings = () => {
             </select>
           </div>
 
-          <button type="submit" className={styles.submit_button}>
+          <button
+            type="submit"
+            className={`${styles.submit_button} ${
+              darkMode ? styles.submit_button_dark : styles.submit_button_light
+            }`}
+          >
             {" "}
             speichern{" "}
           </button>
         </div>
-
-
-        
 
         <div className={styles.accountSettings_div}>
           <h3 className={styles.subTitle}> KONTOEINSTELLUNGEN - {userName} </h3>
@@ -267,7 +273,12 @@ const AccountSettings = () => {
             </select>
           </div>
 
-          <button type="submit" className={styles.submit_button}>
+          <button
+            type="submit"
+            className={`${styles.submit_button} ${
+              darkMode ? styles.submit_button_dark : styles.submit_button_light
+            }`}
+          >
             {" "}
             speichern{" "}
           </button>
