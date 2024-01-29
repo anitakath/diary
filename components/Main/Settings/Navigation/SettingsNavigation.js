@@ -55,7 +55,7 @@ const SettingsNavigation = () => {
 
       <SettingsNavigationMobile />
 
-      <Link href="/" className={styles.home_button}>
+      <Link href="/profile" className={styles.home_button}>
         <FontAwesomeIcon icon={faRedditAlien}></FontAwesomeIcon>
       </Link>
 
