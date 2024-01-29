@@ -10,7 +10,7 @@
 .switch {
   position: relative;
   display: inline-block;
-  width: 120px;
+  width: 80px;
   height: 30px;
   
 }
@@ -47,8 +47,27 @@
   width: 26px;
   left: 4px;
   bottom: 4px;
+}
+
+
+.sun, .moon{
+   width: 20px;
+   height: 20px;
+   position:absolute;
+}
+
+
+.sun{
+  left: 5px;
+  color: rgb(255,242,204);
+}
+
+.moon{
+  right: 5px;
   
 }
+
+
 
 input:checked + .slider {
    background-color: #F7567C;  /* Farbe für den Nachtmodus */

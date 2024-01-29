@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from "react";
-import styles from "./Slider.module.css"; 
+import styles from "../../styles/UI/Slider.module.css"; 
 
 
 
@@ -9,7 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggle } from "@/store/toggleSlice";
 
 
-
+//FONT AWESOME
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSun } from "@fortawesome/free-solid-svg-icons";
+import { faMoon } from "@fortawesome/free-solid-svg-icons";
 
 
 const Slider = () => {
@@ -20,7 +23,8 @@ const Slider = () => {
   const dispatch = useDispatch();
   const toggleMode = useSelector((state) => state.toggle);
 
-  console.log(toggleMode);
+
+  
 
   const toggleHandler = () => {
     setIsNightMode(!isNightMode);
@@ -34,9 +38,10 @@ const Slider = () => {
 
   };
 
-  console.log(toggleMode);
 
 
+
+  
 
 
   return (
@@ -45,8 +50,12 @@ const Slider = () => {
       <label className={styles.switch}>
         <input type="checkbox" onChange={toggleHandler} checked={isNightMode} />
         <span className={`${styles.slider} ${styles.round}`}>
-          {" "}
-          toggle button
+          {!toggleMode && (
+            <FontAwesomeIcon icon={faSun} className={styles.sun} />
+          )}
+          {toggleMode && (
+            <FontAwesomeIcon icon={faMoon} className={styles.moon} />
+          )}
         </span>
       </label>
     </div>
