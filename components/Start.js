@@ -24,7 +24,6 @@ const Start = () =>{
   const [googleLogIn, setGoogleLogIn] = useState(false)
   const nightMode = useSelector((state) => state.toggle);
 
-  console.log(nightMode)
 
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);

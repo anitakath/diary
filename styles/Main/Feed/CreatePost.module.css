@@ -2,7 +2,10 @@
     margin: 20px 0px;
     height: 70px;
     display: flex;
-    width: 100%;   
+    width: 100%;  
+
+    
+    align-items: center;
 }
 
 
@@ -17,12 +20,16 @@
     align-items: center;
     position: relative;
 
+
+
+
+
 }
 
 
 .users_image{
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     
 }
@@ -34,7 +41,8 @@
     margin: 3px;
     display: flex;
     align-items: center;
-    display: flex;
+    justify-content: center;
+
   
 }
 
@@ -119,38 +127,54 @@
 
 @media screen and (max-width: 1450px){
 
+    .userImage_container{
+        position: relative;
+        height: 120px;
+    }
+
     .users_image{
         transition: 0.4s ease;
-     
+        height: 120px;
+        width: 120px;
+        margin-top: 10px;
     }
 
     .form_container{
         width: 80%;
         flex-direction: column;
         align-items: start;
+        margin-top: 10px;
+    }
+
+
+    .createPost_linkDiv{
+        width: 100%;
     }
 
     .media_buttons_div{
-        margin-top: 10px;
-        width: 300px;
+        margin-top: 15px;
+        width: 100%;
         display: flex;
         justify-content: center;
+        padding-top: 10px;
+        
     }
 
+    .media_buttons{
+
+        margin: 0px 5px;
+        
+    }
+
+    .icon{
+        font-size: 1.5rem;
+    }
        
 }
 
 
 @media screen and (max-width: 1000px){
 
-    .createPost_link{
-        transition: 0.4s ease;
-        width: 200px;
-        height: 35px;
-        font-size: 0.8rem;
-        border-radius: 5px;
-
-    }
 
     .form_container{
         width: 70%;
@@ -160,13 +184,11 @@
 
     .users_image{
         transition: 0.4s ease;
-        width: 80px;
-        height: 80px;
+        width: 110px;
+        height: 110px;
 
     }
-     .media_buttons_div{
-         width: 200px;
-     }
+    
 
     
     .userImage_container{
@@ -177,10 +199,30 @@
 
    
 
-    .media_buttons{
-        transition: 0.4s ease;
+}
 
-        width: 50px;
+
+@media screen and (max-width: 600px){
+
+      .users_image{
+        transition: 0.4s ease;
+        width: 80px;
+        height: 80px;
+
+    }
+
+    .form_container{
+        
+    }
+
+    .createPost_link{
+        transition: 0.4s ease;
+        width: 80%;
+    }
+
+    .icon{
+        transition: 0.4s ease;
+        font-size: 1.2rem;
     }
 }
 

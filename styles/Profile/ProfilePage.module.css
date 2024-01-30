@@ -23,17 +23,28 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: end;
     height: 10vh;
     color: var(--pink);
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     letter-spacing: 1px;
+}
+
+
+.icon{
+    font-size: 1.5rem;
 }
 
 .profileSettings_link{
     position: absolute;
-    right: 45px;
-    top: 30px;
+    right: 40px;
+    top: 45px;
+}
+
+.profileSettings_link:hover{
+    transition: 0.4s ease;
+    color: var(--pink);
+
 }
 
 .profile_div{
@@ -42,7 +53,6 @@
     min-height: 80vh;
     position: relative;
     display: flex;
-
 }
 
 
@@ -54,38 +64,34 @@
     justify-content: center;
 }
 
+
+.image_wrapper_light{
+    background: linear-gradient(45deg, #F7567C, white);
+}
+
+.image_wrapper_dark{
+    background: linear-gradient(45deg, #F7567C, var(--background_dark));
+}
+
 .image_wrapper{
     position: relative;
     left: 10px;
     width: 200px;
     height: 200px;
-    background:var(--pink);
     padding: 5px;
     z-index: 1000;
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 
-.image_wrapper:after{
-    content: 'moin';
-    display: flex;
-    justify-content: center;
-    margin: 5px;
-    position: absolute;
-    width: 90%;
-    height: 90%;
-    background: rgba(255,255,255, 0.5);
-    border-radius: 5px;
-}
+
 
 .users_image{
     z-index: 1000;
-    width: 90%;
-    height: 90%;
+    width: 99%;
+    height: 99%;
     border-radius: 5px;
-
 }
 
 
@@ -101,14 +107,22 @@
     right: 10px;
 }
 
+
+.usersData_div h2{
+    margin: 40px;
+    border-bottom: 1px solid grey;
+}
+
 .userData_title{
-    border-bottom: 2px solid var(--pink);
+    border-bottom: 1px solid grey;
+    margin-bottom: 10px;
     height: 10%;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.2rem;
 }
+
 
 @media screen and ( max-width: 1150px){
 
@@ -122,9 +136,6 @@
         height: 100%;
     }
 
-    .users_image{
-        border: 2px solid gold;
-    }
  
 
     .usersData_div{
@@ -135,7 +146,9 @@
         padding: 10px 20px;
     }
 
+
     .usersData_div h2{
+        transition: 0.4s ease;
         border-bottom: 1px solid black;
         margin: 20px;
         padding: 3px;

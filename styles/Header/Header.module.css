@@ -8,7 +8,6 @@
     height:10vh;
     position: relative;
     background: linear-gradient(#F7567C, white);
-
 }
 
 .container_dark{
@@ -19,7 +18,6 @@
     height:10vh;
     position: relative;
     background: linear-gradient(#F7567C, var(--background_dark));
-
 }
 
 .login_callToAction{
@@ -54,6 +52,11 @@
     cursor: pointer;
     width: 20px;
     height: 20px;
+}
+
+.user:hover{
+    transition: 0.4s ease;
+    color: black;
 }
 
 

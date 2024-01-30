@@ -54,7 +54,7 @@ const CreatePost = () => {
             <Image
               alt="foto des Users"
               src={avatarUrl}
-              width={80}
+              width={80}xw
               height={200}
               className={styles.users_image}
             ></Image>

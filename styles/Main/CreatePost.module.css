@@ -1,21 +1,21 @@
 
-
-.container{
-    min-height: 100vh;
-
-}
-
 .container_dark{
     min-height: 100vh;
     background: var(--background_dark);
     color:  var(--primary_font_color_dark);
 
+
 }
 
 .createPost_Wrapper{
     padding: 30px;
+    
   
 }
+
+
+
+
 
 
 .title_container{
@@ -30,7 +30,6 @@
     letter-spacing: 1px;
     word-spacing: 1px;
     width: 100vw;
-    
 }
 
 
