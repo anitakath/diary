@@ -29,29 +29,10 @@
 
 }
 
-/*
-.webUser_container{
-    width: 20vw;
-    margin: 20px 0px;
-    position: relative;
-    border: 2px solid red;
-    
-}
 
-.webUser_fixed{
-    border-radius: 5px;
-    width: 20vw;
-    height: 400px;
-    position: fixed;
-    background: rgba(93,87,107, 0.5);
-    border: 2px solid red;
-    
-    
-}
-*/
 .output_field{
     border-radius: 5px;
-    background: rgba(93,87,107, 0.5);
+    background: rgba(93,87,107, 0.2);
     width: 50vw;
     min-height: 500vh;
     margin: 5px;
