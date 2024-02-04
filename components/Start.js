@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react';
-
+import Link from 'next/link';
 
 //SUPABASE
 import { supabase } from '@/services/supabaseClient';
@@ -54,7 +54,7 @@ const handleSignInWithGoogle = async()=>{
 
 useEffect(()=>{
   if(googleLogIn === true){
-    dispatch(login());
+   // dispatch(login());
   }
 
 }, [])
@@ -77,16 +77,20 @@ useEffect(()=>{
 
  
     return (
-      <div className={`${styles.container} ${nightMode.isNightMode ? styles.container_dark : styles.container_light}`}>
+      <div
+        className={`${styles.container} ${
+          nightMode.isNightMode ? styles.container_dark : styles.container_light
+        }`}
+      >
         <div className={styles.reddit_container}>
           <FontAwesomeIcon icon={faRedditAlien} className={styles.icon} />
-          <button onClick={loginHandler} className={styles.reddit_title}>
+          <Link href="/login" className={styles.reddit_title}>
             Login
-          </button>
+          </Link>
           <h2 className={styles.reddit_title}> or </h2>
-          <button onClick={loginHandler} className={styles.reddit_title}>
+          <Link href="/register"  className={styles.reddit_title}>
             Register
-          </button>
+          </Link>
         </div>
 
         <p> sign in with... </p>

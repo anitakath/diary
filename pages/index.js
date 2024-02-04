@@ -52,6 +52,8 @@ export default function Home() {
   const saveAndUpdateUser = async () =>{
     if (!currentUser) return;
 
+    console.log('!!!!!!!!!!!!')
+
     
     // Überprüfe, ob der Benutzer bereits in der Datenbank existiert
     const { data: existingUserData } = await supabase
@@ -59,9 +61,11 @@ export default function Home() {
       .select("*")
       .eq("email", currentUser.user.identities[0].identity_data.email);
 
-      console.log(existingUserData)
+    console.log(existingUserData)
 
     if (existingUserData.length > 0) {
+
+      console.log(" if => user exists @ supabase users ");
       // Der Benutzer existiert bereits - führe ein Update durch
       await supabase
         .from("users")
@@ -71,6 +75,7 @@ export default function Home() {
         })
         .eq("email", currentUser.user.identities[0].identity_data.email);
     } else {
+      console.log(" else => user did not exist @ supabase users ");
       // Der Benutzer existiert noch nicht - füge ihn hinzu
       await supabase.from("users").upsert({
         email: currentUser.user.identities[0].identity_data.email,
@@ -79,13 +84,7 @@ export default function Home() {
       });
     }
 
-    /*
-
-    await supabase.from("users").upsert({
-      email: currentUser.user.identities[0].identity_data.email,
-      name: currentUser.user.identities[0].identity_data.name,
-      profileImage: currentUser.user.identities[0].identity_data.picture,
-    })*/
+   
 
     const { data } = await supabase
       .from("users") // der erstellte table auf supabase.com...

@@ -1,5 +1,5 @@
 
-/* ------------------------------------------ LOGIN PAGE -------------------------------------------- */
+/* ------------------------------------------LOGIN / REGISTER COMPONENTS-------------------------------------------- */
 
 
 .login_form{
@@ -7,6 +7,16 @@
     flex-direction:column;
     align-items: center;
     width: 50vw;
+    min-height: 50vh;
+}
+
+.title{
+    font-size: 1.5rem;
+    font-weight: bolder;
+    width: 90%;
+    border-bottom: 1px solid grey;
+    padding: 3px;
+    margin-bottom: 80px;
 }
 
 .login_label{
@@ -15,24 +25,29 @@
 
 .login_input{
     width: 100%;
-    margin: 20px;
+    margin: 30px 20px;
     height: 50px;
     border-bottom: 2px solid black;
     background: transparent;
     padding: 5px;
+
 }
 
 .login_input:focus{
     outline: none;
 }
 
+
+
 .login_button{
     border-bottom: 2px solid black;
     width: 200px;
-    margin-top: 20px;
-    padding: 5px 0px;
+    padding: 10px 0px;
+    margin: 30px 20px;
    
 }
+
+
 
 .login_button:hover{
     transition: 0.4s ease;
@@ -43,20 +58,29 @@
 
 }
 
+
+
+
+
+
 .register_container{
-    width: 100vw;
+    width: 90vw;
     display: flex;
     justify-content: end;
     padding-right: 20px;
+    border-top: 1px solid grey;
+    padding-top: 10px;
 }
 
 .register_link{
-    color:rgba(247,86,124, 0.5);
+    color:rgba(247,86,124, 1);
     padding-left: 5px;
+    font-weight: bolder;
+
 }
 
 
-/* ------------------------------------------ LOGIN COMPONENT -------------------------------------------- */
+/* ------------------------------------------ LOGIN / REGISTER PAGE -------------------------------------------- */
 
 .container{
     width: 100vw;
@@ -66,7 +90,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+    padding-top: 60px;
 }
 
 .container_light{
@@ -78,6 +102,25 @@
   color: beige;
 }
 
+
+.notRegisteredMessage{
+    color: var(--pink);
+    font-size: 1rem;
+    letter-spacing: 1px;
+    word-spacing: 1px;
+    height: 40px;
+    margin-bottom: 10px;
+    position: relative;
+    top: -100px;
+}
+
+
+
+
+
+/* ------------------------------------------ HOME PAGE Start.js -------------------------------------------- */
+
+
 .reddit_container, .google_container{
     width: 80vw;
     display: flex;
@@ -85,6 +128,7 @@
     align-items: center;
     height: 30vh;
     margin: 30px;
+   
 }
 
 .icon{
@@ -103,15 +147,14 @@
     align-items: end;
     font-size: 2rem;
     cursor: pointer;
+    
  
 }
 
 .reddit_title:hover{
     transition: 0.4s ease;
     color: #F7567C;
-}
-
-
-.google_button{
     
 }
+
+

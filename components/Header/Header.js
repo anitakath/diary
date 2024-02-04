@@ -122,7 +122,7 @@ const Header = () => {
         </div>
       )}
 
-      {!isLoggedIn && <h1 className={styles.login_callToAction}> LOG IN ! </h1>}
+      {!isLoggedIn && <h1 className={styles.login_callToAction}> </h1>}
     </div>
   );
 };
