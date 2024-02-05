@@ -80,6 +80,11 @@
 }
 
 
+.error_message_registration{
+    color: red;
+}
+
+
 /* ------------------------------------------ LOGIN / REGISTER PAGE -------------------------------------------- */
 
 .container{

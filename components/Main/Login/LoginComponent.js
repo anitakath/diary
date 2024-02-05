@@ -125,7 +125,7 @@ const LoginComponent = () =>{
           router.push("/");
         } else {
           console.log("Benutzer existiert nicht im Array");
-          setNotRegistered('du scheinst nicht registriert zu sein oder ungültige Eingaben gemacht zu haben... Bitte überprüfe deine E-Mail-, und Passworteingabe')
+          setNotRegistered('du scheinst nicht registriert zu sein oder ungültige Eingaben gemacht zu haben... Bitte überprüfe deine E-Mail-, und Passworteingabe, oder registriere dich')
 
 
         }
