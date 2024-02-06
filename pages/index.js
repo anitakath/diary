@@ -25,12 +25,10 @@ import { current } from "@reduxjs/toolkit";
 
 export default function Home() {
 
-  const {currentUser, fetcher} = useContext(RedditContext)
- 
-  
+  const {currentGoogleUser, fetcher} = useContext(RedditContext)
+
 
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
 
 
   const [myPosts, setMyPosts] = useState();
@@ -42,26 +40,24 @@ export default function Home() {
  
   useEffect(()=>{
 
-    if (currentUser) {
+    if (currentGoogleUser) {
       dispatch(login());
     }
-  }, [currentUser])
+  }, [currentGoogleUser])
 
  
 
   const saveAndUpdateUser = async () =>{
-    if (!currentUser) return;
+    if (!currentGoogleUser) return;
 
-    console.log('!!!!!!!!!!!!')
+   
 
     
     // Überprüfe, ob der Benutzer bereits in der Datenbank existiert
     const { data: existingUserData } = await supabase
       .from("users")
       .select("*")
-      .eq("email", currentUser.user.identities[0].identity_data.email);
-
-    console.log(existingUserData)
+      .eq("email", currentGoogleUser.user.identities[0].identity_data.email);
 
     if (existingUserData.length > 0) {
 
@@ -70,17 +66,17 @@ export default function Home() {
       await supabase
         .from("users")
         .update({
-          name: currentUser.user.identities[0].identity_data.name,
-          profileImage: currentUser.user.identities[0].identity_data.picture,
+          name: currentGoogleUser.user.identities[0].identity_data.name,
+          profileImage: currentGoogleUser.user.identities[0].identity_data.picture,
         })
-        .eq("email", currentUser.user.identities[0].identity_data.email);
+        .eq("email", currentGoogleUser.user.identities[0].identity_data.email);
     } else {
       console.log(" else => user did not exist @ supabase users ");
       // Der Benutzer existiert noch nicht - füge ihn hinzu
       await supabase.from("users").upsert({
-        email: currentUser.user.identities[0].identity_data.email,
-        name: currentUser.user.identities[0].identity_data.name,
-        profileImage: currentUser.user.identities[0].identity_data.picture,
+        email: currentGoogleUser.user.identities[0].identity_data.email,
+        name: currentGoogleUser.user.identities[0].identity_data.name,
+        profileImage: currentGoogleUser.user.identities[0].identity_data.picture,
       });
     }
 
@@ -90,7 +86,7 @@ export default function Home() {
       .from("users") // der erstellte table auf supabase.com...
       .select("*");
 
-    console.log(data);
+  
   }
 
   useEffect(() =>{
@@ -100,7 +96,7 @@ export default function Home() {
 
   useEffect(()=>{
     saveAndUpdateUser()
-    console.log('Save user')
+    //console.log('Save user')
   }, [])
   
 

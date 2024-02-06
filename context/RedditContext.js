@@ -2,12 +2,15 @@ import { supabase } from "@/services/supabaseClient";
 
 
 
+// -------- FOR GOOGLE AUTH!!!!!
+
+
 import { createContext, useState, useEffect } from "react";
 
 export const RedditContext = createContext();
 
 export const RedditProvider = ({children}) => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentGoogleUser, setCurrentGoogleUser] = useState(null);
 
   //fetchet hits the endpoint (api/get-posts) and retrieves its result as json. result is named data
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -15,19 +18,19 @@ export const RedditProvider = ({children}) => {
   useEffect(() => {
     const { user } = supabase.auth.getSession() || { user: null };
 
-    setCurrentUser(user);
+    setCurrentGoogleUser(user);
 
     //console.log({user}, 'HIIIII :>')
 
     supabase.auth.onAuthStateChange((_event, authSession) => {
-      setCurrentUser(authSession);
+      setCurrentGoogleUser(authSession);
     });
   }, []);
 
-  //console.log(currentUser);
+  console.log(currentGoogleUser);
 
   return (
-    <RedditContext.Provider value={{ currentUser , fetcher}}>
+    <RedditContext.Provider value={{ currentGoogleUser , fetcher}}>
       {children}
     </RedditContext.Provider>
   );

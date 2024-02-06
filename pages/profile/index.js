@@ -19,44 +19,86 @@ import { faGear } from '@fortawesome/free-solid-svg-icons';
 //REDUX
 import { useSelector } from 'react-redux';
 import { current } from '@reduxjs/toolkit';
+import { filter } from '@/store/filterSlice';
 
 const Profile = () =>{
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
   const nightMode = useSelector((state)=> state.toggle)
+  const currUser = useSelector((state) => state.user)
 
-  const { currentUser } = useContext(RedditContext);
+  console.log(currUser.email);
 
-
-
-  const [fName, setFName] = useState('user')
-  const [lName, setLName] = useState("user");
+  const { currentGoogleUser } = useContext(RedditContext);
 
 
-  let avatarUrl;
 
-  if (currentUser) {
-    //avatarUrl = '"' + (currentUser.user?.user_metadata?.avatar_url || '') + '"';
-    avatarUrl = currentUser.user?.user_metadata?.avatar_url; // Zugriff auf das Profilfoto
-     
+  const [fName_google, setFName] = useState('')
+  const [lName_google, setLName] = useState("");
+  const [email_google, setEmail] = useState("")
 
-      
-  }
+
+
 
   useEffect(() => {
-    if(currentUser){
+    if(currentGoogleUser){
 
-      const fullName = currentUser.user.identities[0].identity_data.full_name;
+      const fullName = currentGoogleUser.user.identities[0].identity_data.full_name;
 
       const firstName = fullName.substring(0, fullName.indexOf(" "));
       const lastName = fullName.substring(fullName.indexOf(" ") + 1);
 
       setFName(firstName);
       setLName(lastName)
+      setEmail(currentGoogleUser.user.identities[0].email);
     }
   
-  }, [currentUser])
-  
+  }, [currentGoogleUser])
+
+
+
+  useEffect(()=>{
+
+    const getUsers = async ()=>{
+      const response = await fetch("/api/get-users");
+
+      
+      const data = await response.json(); // Wandelt die Response in ein JSON-Objekt um
+      console.log(data.data); // Gibt das JSON-Objekt mit den Benutzerdaten in der Konsole aus
+
+      const filterUser = data.data.find(user => user.email === currUser.email)
+
+      if(filterUser){
+        console.log(filterUser)
+        setFilteredUser(filterUser)
+      } else{
+        console.log('kein user gefunden')
+      }
+    }
+
+    getUsers()
+
+
+  }, [])
+
+
+  const [filteredUser, setFilteredUser] = useState({})
+
+
+  console.log(filteredUser);
+
+
+
+  let avatarUrl;
+
+  if (currentGoogleUser) {
+    //avatarUrl = '"' + (currentUser.user?.user_metadata?.avatar_url || '') + '"';
+    avatarUrl = currentGoogleUser.user?.user_metadata?.avatar_url; // Zugriff auf das Profilfoto
+  } else {
+    avatarUrl = filteredUser.profileImage;
+  }
+
+  console.log(avatarUrl)
 
   return (
     <div>
@@ -94,13 +136,29 @@ const Profile = () =>{
               </div>
 
               <div className={styles.usersData_div}>
-                <h1 className={styles.userData_title}> Hey {fName} </h1>
+                <h1 className={styles.userData_title}> Hey {fName_google} </h1>
 
-                <h2> Name: <span> {lName} </span> </h2>
-                <h2> Vorname:  <span> {fName} </span> </h2>
-                <h2> E-Mail </h2>
-                <h2> Telefonnummer </h2>
-                <h2> Passwort </h2>
+                <h2 className={styles.userData_subtitle}>
+                  Name:
+                  <span>
+                    {currUser.name} {filteredUser.name}
+                    {lName_google}
+                  </span>
+                </h2>
+                <h2 className={styles.userData_subtitle}>
+                  Vorname: <span> {currUser.name}  {fName_google} </span>
+                </h2>
+                <h2 className={styles.userData_subtitle}>
+                  E-Mail:
+                  <span>
+                    {currUser.email} {email_google}
+                  </span>
+                </h2>
+                <h2 className={styles.userData_subtitle}> Telefonnummer </h2>
+                <h2 className={styles.userData_subtitle}>
+                  Passwort
+                  <span> ********* </span>
+                </h2>
               </div>
             </div>
           </div>

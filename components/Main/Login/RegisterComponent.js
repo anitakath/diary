@@ -6,7 +6,8 @@ import { useRouter } from "next/router";
 
 //REDUX
 import { useSelector, useDispatch } from "react-redux";
-import { login } from "@/store/authSlice";
+import { login, registration } from "@/store/authSlice";
+import { setUser } from "@/store/userSlice";
 
 import { supabase } from "@/services/supabaseClient";
 
@@ -30,16 +31,12 @@ const RegisterComponent = () =>{
   const [repPassword, setRepPassword] = useState("");
   const [error, setError] = useState("");
   const [ isError, setIsError ] = useState(false)
-  const [ isRegistered, setIsRegistered ] = useState(false)
+  
 
     
 
   const inputChangeHandler = (e) =>{
     const { name, value } = e.target;
-
-
-    console.log(name)
-    console.log(value)
 
     if ( name === "firstName") {
       setFirstName(value);
@@ -55,7 +52,6 @@ const RegisterComponent = () =>{
 
 
 
-  console.log(email)
   
 
    const dispatch = useDispatch();
@@ -66,8 +62,12 @@ const RegisterComponent = () =>{
    };
 
    const isLoggedIn = useSelector((state) => state.auth);
+   const isRegistered = useSelector((state) => state.auth);
+   const currUser = useSelector((state) => state.user)
 
+  
 
+   
 
 
     const submitHandler = async (e) => {
@@ -78,11 +78,7 @@ const RegisterComponent = () =>{
          email: email,
          password: password,
          rep_password: repPassword
-
       };
-
-
-      console.log(formData)
 
        try {
          // Senden des Vornamens an die Backend-API
@@ -95,7 +91,7 @@ const RegisterComponent = () =>{
          });
 
          const data = await response.json();
-         console.log(data); // Erfolgsnachricht von der API
+         //console.log(data); // Erfolgsnachricht von der API
 
          if(data.error){
            setIsError(true)
@@ -103,12 +99,20 @@ const RegisterComponent = () =>{
          } else{
            setIsError(false);
 
+
+           //übermittle formData an Redux:
+           dispatch(setUser(formData));
+
+
+
            //Übermittle formData an die supabase-Datenbank...
 
            await supabase.from("users").insert([formData]);
 
            dispatch(login());
+           dispatch(registration());
            router.push("/");
+
          }
          
        } catch (error) {

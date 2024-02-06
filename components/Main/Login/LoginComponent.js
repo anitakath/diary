@@ -21,6 +21,7 @@ import styles from "../../../styles/Login.module.css";
 //CONTEXT
 import { RedditContext } from "@/context/RedditContext";
 import { current } from "@reduxjs/toolkit";
+import { setUser } from "@/store/userSlice";
 
 
 
@@ -38,8 +39,7 @@ const LoginComponent = () =>{
      refreshInterval: 200,
    });
 
-   console.log(data)
-   console.log(error)
+
 
    const dispatch = useDispatch();
    
@@ -60,7 +60,6 @@ const LoginComponent = () =>{
    }, [data])
 
    
-   console.log(users)
 
    const changeInputHandler = (e) =>{
 
@@ -107,12 +106,12 @@ const LoginComponent = () =>{
        });
 
        const data = await response.json();
-       console.log(data); // Erfolgsnachricht von der API
+
+
+
 
        // Nach erfolgreicher Validierung soll überprüft werden, ob E-Mail und Password in der Datenbank vorhanden sind, 
        // der User also bereits existiert
-
-
       if(users){
         let isUserInArray = users.find(
           (user) =>
@@ -120,25 +119,18 @@ const LoginComponent = () =>{
         );
 
         if (isUserInArray) {
-          console.log("Benutzer existiert bereits im Array");
+          //console.log("Benutzer existiert bereits im Array");
+           dispatch(setUser(formData))
           dispatch(login());
           router.push("/");
         } else {
-          console.log("Benutzer existiert nicht im Array");
+          //console.log("Benutzer existiert nicht im Array");
           setNotRegistered('du scheinst nicht registriert zu sein oder ungültige Eingaben gemacht zu haben... Bitte überprüfe deine E-Mail-, und Passworteingabe, oder registriere dich')
-
 
         }
       }
 
-  
 
-      
-
-
-
-       //dispatch(login());
-       //router.push("/")
      } catch (error) {
        console.error(error); // Fehlermeldung bei einem Fehler in der API
      }

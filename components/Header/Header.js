@@ -30,23 +30,42 @@ import { faUser } from "@fortawesome/free-regular-svg-icons";
 
 
 const Header = () => {
-
-  
   const dispatch = useDispatch();
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const isRegistered = useSelector((state) => state.auth.isRegistered);
+
+  
+
   const currentFilter = useSelector((state) => state.filter);
-  const nightMode = useSelector((state) => state.toggle)
+  const nightMode = useSelector((state) => state.toggle);
+
+  const { currentUser } = useContext(RedditContext);
+
+  // Time-limited info for successful registration
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [loginSuccessMessage, setLoginSuccessmessage] = useState(false)
 
 
-  const {currentUser} = useContext(RedditContext)
+  useEffect(() => {
 
-  
-  
+    if (isRegistered) {
+      setShowSuccessMessage(true);
+      setTimeout(() => {
+        setShowSuccessMessage(false);
+      }, 10000); // 10 Sekunden
+    }
 
 
+    if(isLoggedIn){
+      setLoginSuccessmessage(true);
+      setTimeout(() => {
+        setLoginSuccessmessage(false);
+      }, 10000); // 10 Sekunden
+    }
+  }, [isRegistered, isLoggedIn]);
 
-  let userName; 
+  let userName;
 
   /*
   if(currentUser){
@@ -56,13 +75,7 @@ const Header = () => {
   }
   */
 
-
   const [menuIsOpen, setMenuIsOpen] = useState(false);
-
-
-
- 
-
 
   const menuHandler = () => {
     if (menuIsOpen === true) {
@@ -72,12 +85,9 @@ const Header = () => {
     }
   };
 
-  
   const reloadPage = () => {
     window.location.reload();
   };
-
-
 
   return (
     <div className={styles.container}>
@@ -90,6 +100,21 @@ const Header = () => {
               onClick={reloadPage}
             />
           </h1>
+
+          <div
+            className={styles.registration_info_container}
+            style={{ top: showSuccessMessage ? "2px" : "-50px" }}
+          >
+            <p className={styles.registration_info}> REGISTRIERUNG ✅ </p>
+          </div>
+
+          <div
+            className={styles.registration_info_container}
+            style={{ top: loginSuccessMessage ? "50px" : "-50px" }}
+          >
+            <p className={styles.registration_info}> LOGIN ✅ </p>
+          </div>
+
           <SearchBar />
 
           <div className={styles.login_container}>

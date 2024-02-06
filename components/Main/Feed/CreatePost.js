@@ -29,16 +29,16 @@ import { useSelector } from 'react-redux';
 const CreatePost = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-  const { currentUser } = useContext(RedditContext);
+  const { currentGoogleUser } = useContext(RedditContext);
 
   // const [showImage, setShowImage] = useState(false);
 
   let avatarUrl;
 
-  if (currentUser) {
+  if (currentGoogleUser) {
 
     //avatarUrl = '"' + (currentUser.user?.user_metadata?.avatar_url || '') + '"';
-    avatarUrl = currentUser.user?.user_metadata?.avatar_url; // Zugriff auf das Profilfoto
+    avatarUrl = currentGoogleUser.user?.user_metadata?.avatar_url; // Zugriff auf das Profilfoto
 
    
   }
