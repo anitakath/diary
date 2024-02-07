@@ -11,7 +11,7 @@ export const RedditContext = createContext();
 
 export const RedditProvider = ({children}) => {
   const [currentGoogleUser, setCurrentGoogleUser] = useState(null);
-
+  const [selectedPost, setSelectedPost] = useState(null)
   //fetchet hits the endpoint (api/get-posts) and retrieves its result as json. result is named data
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -30,7 +30,9 @@ export const RedditProvider = ({children}) => {
   console.log(currentGoogleUser);
 
   return (
-    <RedditContext.Provider value={{ currentGoogleUser , fetcher}}>
+    <RedditContext.Provider
+      value={{ currentGoogleUser, fetcher, selectedPost, setSelectedPost }}
+    >
       {children}
     </RedditContext.Provider>
   );

@@ -17,3 +17,9 @@
     height: 100vh;
     background: pink;
 }
+
+
+.post_container{
+    height: 300px;
+    overflow: scroll;
+}

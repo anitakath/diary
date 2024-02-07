@@ -25,8 +25,13 @@ import { current } from "@reduxjs/toolkit";
 
 export default function Home() {
 
-  const {currentGoogleUser, fetcher} = useContext(RedditContext)
 
+  const {currentGoogleUser, fetcher} = useContext(RedditContext)
+ 
+
+  const currUser = useSelector((state) => state.user);
+
+  console.log(currUser);
 
   const dispatch = useDispatch();
 
@@ -48,44 +53,60 @@ export default function Home() {
  
 
   const saveAndUpdateUser = async () =>{
-    if (!currentGoogleUser) return;
 
-   
+    if (Object.keys(currUser).length === 0) {
+      console.log("currUser is empty (login/registration)");
+      return;
+    } else if (Object.keys(currUser).length != 0) {
+      console.log("logic to update...and save ...");
+    } else if (!currentGoogleUser){
+      return
+    } else if(currentGoogleUser){
 
-    
-    // Überprüfe, ob der Benutzer bereits in der Datenbank existiert
-    const { data: existingUserData } = await supabase
-      .from("users")
-      .select("*")
-      .eq("email", currentGoogleUser.user.identities[0].identity_data.email);
 
-    if (existingUserData.length > 0) {
 
-      console.log(" if => user exists @ supabase users ");
-      // Der Benutzer existiert bereits - führe ein Update durch
-      await supabase
+      // Überprüfe, ob der Benutzer bereits in der Datenbank existiert
+
+      const { data: existingUserData } = await supabase
         .from("users")
-        .update({
-          name: currentGoogleUser.user.identities[0].identity_data.name,
-          profileImage: currentGoogleUser.user.identities[0].identity_data.picture,
-        })
+        .select("*")
         .eq("email", currentGoogleUser.user.identities[0].identity_data.email);
-    } else {
-      console.log(" else => user did not exist @ supabase users ");
-      // Der Benutzer existiert noch nicht - füge ihn hinzu
-      await supabase.from("users").upsert({
-        email: currentGoogleUser.user.identities[0].identity_data.email,
-        name: currentGoogleUser.user.identities[0].identity_data.name,
-        profileImage: currentGoogleUser.user.identities[0].identity_data.picture,
-      });
+
+      if (existingUserData.length > 0) {
+        console.log(" if => user exists @ supabase users ");
+        // Der Benutzer existiert bereits - führe ein Update durch
+        await supabase
+          .from("users")
+          .update({
+            name: currentGoogleUser.user.identities[0].identity_data.name,
+            profileImage:
+              currentGoogleUser.user.identities[0].identity_data.picture,
+          })
+          .eq(
+            "email",
+            currentGoogleUser.user.identities[0].identity_data.email
+          );
+      } else {
+        console.log(" else => user did not exist @ supabase users ");
+        // Der Benutzer existiert noch nicht - füge ihn hinzu
+        await supabase.from("users").upsert(
+          {
+            email: currentGoogleUser.user.identities[0].identity_data.email,
+            name: currentGoogleUser.user.identities[0].identity_data.name,
+            profileImage:
+              currentGoogleUser.user.identities[0].identity_data.picture,
+          },
+          {
+            onConflict: "email",
+          }
+        );
+      }
+
+      const { data } = await supabase
+        .from("users") // der erstellte table auf supabase.com...
+        .select("*");
     }
-
-   
-
-    const { data } = await supabase
-      .from("users") // der erstellte table auf supabase.com...
-      .select("*");
-
+  
   
   }
 
@@ -97,7 +118,7 @@ export default function Home() {
   useEffect(()=>{
     saveAndUpdateUser()
     //console.log('Save user')
-  }, [])
+  }, [currentGoogleUser])
   
 
 

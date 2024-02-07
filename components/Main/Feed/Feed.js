@@ -66,7 +66,12 @@ const Feed = (props) => {
         )}
         {isLoaded &&
           deine &&
-          posts.map((post, id) => <Post {...post} key={id} />)}
+          posts.map((post, id) => (
+            <div className={styles.post_container}>
+
+            <Post {...post} key={id} />
+            </div>
+          ))}
 
         
       
