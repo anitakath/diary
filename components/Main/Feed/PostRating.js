@@ -58,7 +58,7 @@ const PostRating = (props) => {
           onClick={handleIncrement}
         />
       </div>
-      <p className={styles.amountOfRatings}> {votes} </p>
+      <p className={styles.amountOfRatings }> {votes} </p>
       <div>
         <FontAwesomeIcon
           icon={faArrowDown}

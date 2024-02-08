@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 
 
@@ -41,6 +41,10 @@ const Post = (props) => {
   const {setSelectedPost} = useContext(RedditContext)
 
 
+  
+
+
+
   const navigateToPost = () =>{
     setSelectedPost({
       id,
@@ -51,12 +55,23 @@ const Post = (props) => {
       upvotes,
       downvotes,
     });
-    router.push(`/post/${id}`)
+
+    // Save selected post data to local storage
+    localStorage.setItem(
+      "selectedPost",
+      JSON.stringify({
+        id,
+        title,
+        description,
+        author,
+        created_at,
+        upvotes,
+        downvotes,
+      })
+    );
+
+    router.push(`/post/${id}`);
   }
-
-
-
-  
 
   return (
     <div className={styles.post_container}>

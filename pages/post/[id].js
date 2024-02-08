@@ -1,7 +1,7 @@
 
 //CNTEXT
 import { RedditContext } from "@/context/RedditContext";
-import { useContext } from "react";
+import { useContext , useEffect, useState} from "react";
 import { useRouter } from "next/router";
 
 //COMPONENTS
@@ -23,7 +23,10 @@ import { faHouse } from "@fortawesome/free-solid-svg-icons";
 const PostDetails = () =>{
 
 
-    const {selectedPost} = useContext(RedditContext)
+  const {selectedPost, setSelectedPost} = useContext(RedditContext)
+
+  console.log(selectedPost)
+
 
    const nightMode = useSelector((state) => state.toggle);
 
@@ -32,6 +35,24 @@ const PostDetails = () =>{
   const handleGoBack = () => {
     router.back();
   };
+
+  /*
+
+   useEffect(() => {
+     // Check if there is a selected post in local storage and set it to the context
+     const selectedPostData = JSON.parse(localStorage.getItem("selectedPost"));
+
+     console.log(selectedPostData)
+     if (selectedPostData) {
+       console.log('!!!!!!!!!!!!!!')
+       console.log(selectedPost)
+       setSelectedPost(selectedPostData);
+     }
+   }, []);
+*/
+   
+
+ 
 
     return (
       <div
@@ -47,7 +68,7 @@ const PostDetails = () =>{
           <Post {...selectedPost} />
         </div>
 
-        <Comments postId={selectedPost.id} />
+        {selectedPost && <Comments postId={selectedPost.id} />}
 
         <button onClick={handleGoBack} className={styles.go_back_btn}>
           Zurück zur vorherigen Seite

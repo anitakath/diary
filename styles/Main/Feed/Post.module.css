@@ -158,8 +158,11 @@
 .amountOfRatings{
     font-size: 1.5rem;
     margin: 5px;
-    color: rgba(0, 0, 0, 0.5);
+    color: grey;
+    
 }
+
+
 
 
 
@@ -218,6 +221,7 @@
     bottom: 36px;
     font-size: 0.6rem;
     color: white;
+  
 }
 
 

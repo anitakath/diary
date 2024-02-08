@@ -27,7 +27,17 @@ export const RedditProvider = ({children}) => {
     });
   }, []);
 
-  console.log(currentGoogleUser);
+  //console.log(currentGoogleUser);
+
+
+   useEffect(() => {
+     // Check if there is a selected post in local storage and set it to the context
+     const selectedPostData = JSON.parse(localStorage.getItem("selectedPost"));
+
+     if (selectedPostData) {
+       setSelectedPost(selectedPostData);
+     }
+   }, []);
 
   return (
     <RedditContext.Provider

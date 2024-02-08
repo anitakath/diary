@@ -5,6 +5,9 @@ import Image from "next/image";
 //CONTEXT
 import { useContext } from "react";
 import { RedditContext } from "@/context/RedditContext";
+//CNTEXT
+
+
 
 
 //REDUX
@@ -44,6 +47,9 @@ const Comments = ({postId}) =>{
     console.log(filteredComments);
 
 
+     const { selectedPost, setSelectedPost } = useContext(RedditContext);
+
+
 
     return (
       <div
@@ -64,7 +70,7 @@ const Comments = ({postId}) =>{
               />
             
             </div>
-            <div>
+            <div className={styles.comment_text_container}>
               <h1
                 className={
                   nightMode

@@ -6,6 +6,7 @@ import authReducer from "./authSlice";
 import counterSlice from "./counterSlice";
 import toggleReducer from "./toggleSlice";
 import userReducer from './userSlice'
+import postReducer from './postSlice'
 
 const store = configureStore({
   reducer: {
@@ -13,7 +14,8 @@ const store = configureStore({
     filter: filterReducer,
     counter: counterSlice,
     toggle: toggleReducer,
-    user: userReducer
+    user: userReducer,
+    post: postReducer,
 
   },
 });
