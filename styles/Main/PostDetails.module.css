@@ -19,14 +19,20 @@
     min-height: 100vh;
     padding-top: 30px;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    
      
     
 }
 
 
 .post_dark {
-    background: var(--background_dark_opaque);
-    width: 80vw;
+ 
+    width: 100vw;
     padding: 10px;
   
 }
@@ -48,10 +54,9 @@
 .comments_container_dark{
     transition: 0.4s ease;
     padding: 20px;
-    width: 80vw;
+    width: 100vw;
     min-height: 50vh;
     margin-bottom: 50px;
-    background: var(--background_dark_opaque);
     margin-top: 10px;
 }
 
@@ -65,6 +70,38 @@
     border-bottom: 1px solid grey;
 }
 
+.go_back_dark{
+    margin: 20px;
+    position: absolute;
+    right: 10px;
+    top: 40px;
+    color: grey;
+    padding: 10px;
+ 
+}
+
+.go_back{
+     margin: 20px;
+    position: absolute;
+    right: 10px;
+    top: 40px;
+    color: grey;
+    padding: 10px;
+
+}
+
+
+
+.go_back_icon{
+    font-size: 2rem;
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+
+.go_back_icon:hover{
+    color: var(--pink)
+
+}
 
 .go_back_btn{
     color: grey;
@@ -72,4 +109,74 @@
     margin: 40px;
     font-size: 1.3rem;
     cursor: pointer;
+}
+
+
+@media screen and (max-width: 1400px){
+
+    .go_back_dark, .go_back{
+        right: 0;
+    }
+}
+
+
+
+@media screen and (max-width: 600px){
+
+    .go_back_dark, .go_back{
+        top: 5px;
+       
+    }
+
+   
+}
+
+
+/*-------------------------comment section -------------------------------*/
+
+
+.comment_container{
+    border-bottom: 1px solid grey;
+    margin: 20px 10px;
+    padding: 5px;
+    display: flex;
+    height: 120px;
+}
+
+.image_container{
+    background: red;
+    width: 100px;
+    height: 100px;
+    margin: 0px 20px;
+}
+
+
+.comment_user_image{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+
+.comment_title_light{
+    font-size: 1.4rem;
+    font-weight: bolder;
+    color: var(--pink);
+}
+
+.comment_title_dark{
+    font-size: 1.4rem;
+    color: var(--pink);
+    font-weight: bolder;
+
+}
+
+.comment_text_light{
+    font-size: 1.2rem;
+}
+
+
+.comment_text_dark{
+    font-size: 1.2rem;
+    color: beige;
 }

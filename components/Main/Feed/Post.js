@@ -54,6 +54,10 @@ const Post = (props) => {
     router.push(`/post/${id}`)
   }
 
+
+
+  
+
   return (
     <div className={styles.post_container}>
       <div className={styles.postRating_container}>

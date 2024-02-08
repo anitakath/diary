@@ -12,6 +12,14 @@
    margin: 20px;
    border-bottom: 1px solid grey;
    border-top: 1px solid grey;
+
+
+
+
+
+
+
+   
 }
 
 .post_container:hover{
@@ -256,6 +264,7 @@
     .save_btn, .share_btn, .comment_btn, .report_btn, .delete_btn{
         flex-direction: column;
         align-items: center;
+        
     }
 
     .postInteraction_icon{
@@ -286,12 +295,18 @@
         position: relative;
         left: -10px;
         width: 95%;
-        background-color: rgba(255,255,255, 0.1)
+        background-color: rgba(255,255,255, 0.1);
+       
+
+
+
+
     }
     
     .postInteraction_div, .reportInteraction_div,  .deleteInteraction_div{
 
         width: 50px;
+        
     }
 
   

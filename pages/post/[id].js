@@ -15,6 +15,11 @@ import styles from '../../styles/Main/PostDetails.module.css'
 //REDUX
 import { useSelector } from "react-redux";
 
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
+
+
 const PostDetails = () =>{
 
 
@@ -30,17 +35,23 @@ const PostDetails = () =>{
 
     return (
       <div
-        className={
-          nightMode ? styles.container_dark : StyleSheet.container_light
-        }
+        className={nightMode ? styles.container_dark : styles.container_light}
       >
+        <button
+          onClick={handleGoBack}
+          className={nightMode ? styles.go_back_dark : styles.go_back}
+        >
+          <FontAwesomeIcon icon={faHouse} className={styles.go_back_icon} />
+        </button>
         <div className={nightMode ? styles.post_dark : styles.post_light}>
           <Post {...selectedPost} />
         </div>
 
         <Comments postId={selectedPost.id} />
 
-        <button onClick={handleGoBack} className={styles.go_back_btn}>Zurück zur vorherigen Seite</button>
+        <button onClick={handleGoBack} className={styles.go_back_btn}>
+          Zurück zur vorherigen Seite
+        </button>
       </div>
     );
 }
