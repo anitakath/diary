@@ -1,87 +1,179 @@
 
 import { supabase } from "@/services/supabaseClient";
+import { useState } from "react";
+
+
+
 
 export async function updatePostVotes(req, res) {
-  const { postId, type } = req;
+  const { postId, type, userId, isUpvoted, isDownvoted, isUpvotedTwice, isDownvotedTwice } = req;
   console.log(postId);
   console.log(type);
 
 
 
-  /*
-    if (!postId || !type) {
-      return res.status(400).json({ error: "postId and type are required" });
-    }
-    */
+  console.log(isUpvoted)
+  console.log(isDownvoted)
 
-  // .update({ upvote: supabase.sql("upvote + 1") })
-  // .update({ downvote: supabase.sql("downvote + 1") })
+
+  console.log(isUpvotedTwice)
+  console.log(isDownvotedTwice)
+  
+
+  if (!postId || !type || !userId) {
+    return res.status(400).json({ error: "postId and type are required" });
+  }
+
+  const { data, error } = await supabase
+          .from("feed_dummy")
+          .select("upvotes, downvotes")
+          .eq("id", postId);
+
+
+
+        const upvotes = data[0].upvotes;
+        const downvotes = data[0].downvotes;
+        const originvotes = upvotes - downvotes;
+        console.log(originvotes);
+
+        
+  let updatedData;
+  let totalVotes;
+
 
   if (type === "upvotes") {
+
+    if(isUpvoted && isUpvotedTwice){
+      console.log('you have already upvoted this post!')
+      return
+    } else if (isUpvoted && isUpvotedTwice === undefined) {
+
+      console.log('upvoting this post....')
+
+    // ziehe den Wert aus der Table und addiere 1 upvote hinzu
+
     const { data, error } = await supabase
       .from("feed_dummy")
-      .select('upvotes') // wähle alle columns aus
-      .eq("id", postId)
+      .select("upvotes") // wähle alle columns aus
 
-      //.update({upvotes: 2})
-      /*.update({ upvote })
-      .eq("id", postId);*/
+      .eq("id", postId);
 
-      console.log(data)
+    if (error) {
+      return res.status(500).json({ error: error.message });
+    }
 
+    //console.log(data[0].upvotes);
+
+
+      if(isUpvoted && isDownvoted){
+         updatedData = data[0].upvotes + 2;
+      } else{
+         updatedData = data[0].upvotes + 1;
+      }
+
+    //console.log(updatedData);
+
+    // übergib Wert + 1  an die supabase table
+
+    const { newData, updateError } = await supabase
+      .from("feed_dummy")
+      .update({ upvotes: updatedData })
+      .eq("id", postId);
+
+      if (updateError) {
+        return res.status(500).json({ error: updateError.message });
+      } else {
+
+
+
+  // berechne den totalVote aus den aktualisierten upvotes - downvotes 
+
+
+      const { data, error } = await supabase
+      .from("feed_dummy")
+      .select("upvotes, downvotes")
+      .eq("id", postId);
+
+      if (error) {
+        return res.status(500).json({ error: error.message });
+      }
+
+    const upvotes = data[0].upvotes;
+    const downvotes = data[0].downvotes;
+    const totalVotes = upvotes - downvotes;
+    //console.log(totalVotes);
+
+    const { newData, updateError } = await supabase
+      .from("feed_dummy")
+      .update({ total_votes: totalVotes })
+      .eq("id", postId);
+    }
+
+
+    }
+
+           
   } else if (type === "downvotes") {
-     const { data, error } = await supabase
-       .from("feed_dummy")
-       .select('downvotes') // wähle alle columns aus
-       .eq("id", postId);
 
-        console.log(data);
+
+    if(isDownvoted && isDownvotedTwice){
+      console.log('you have already downvoted this post!')
+      return;
+ 
+    } else if (isDownvoted && isDownvotedTwice === undefined) {
+
+      console.log('downvoting this post...')
+      const { data, error } = await supabase
+        .from("feed_dummy")
+        .select("downvotes") // wähle alle columns aus
+        .eq("id", postId);
+
+      console.log(data[0].downvotes);
+
+      if(isUpvoted && isDownvoted){
+         updatedData = data[0].downvotes + 2;
+      } else{
+         updatedData = data[0].downvotes + 1;
+      }
+     
+      console.log(updatedData);
+
+      if (error) {
+        return res.status(500).json({ error: error.message });
+      }
+
+      const { newData, updateError } = await supabase
+        .from("feed_dummy")
+        .update({ downvotes: updatedData })
+        .eq("id", postId);
+
+      if (updateError) {
+      return res.status(500).json({ error: updateError.message });
+      } else {
+        const { data, error } = await supabase
+          .from("feed_dummy")
+          .select("upvotes, downvotes")
+          .eq("id", postId);
+
+
+
+        const upvotes = data[0].upvotes;
+        const downvotes = data[0].downvotes;
+        const totalVotes = upvotes - downvotes;
+        console.log(totalVotes);
+
+        const { newData, updateError } = await supabase
+          .from("feed_dummy")
+          .update({ total_votes: totalVotes })
+          .eq("id", postId);
+      }
+    }
+
+
   }
 
-  /*
-  if (updatedData.error) {
-    res.status(500).json({ error: updatedData.error.message });
-  } else {
-    res.status(200).json({ message: "Votes updated successfully" });
-  }*/
 
-  res = "Votes updated successfully";
-  console.log(res);
-  //res.status(200).json({ message: "Votes updated successfully" }); => undefined??
+
+ 
 }
 
-
-
-/*import { supabase } from "@/services/supabaseClient";
-
-const updatePostVotes = async (req, res) => {
-  const { postId, type } = req.body; // Annahme, dass postId und type als Parameter übergeben werden
-
-
-  console.log(req.body);
-
-  let updatedData;
-
-  
-  if (type === "upvote") {
-    updatedData = await supabase
-      .from("feed_dummy")
-      .update({ upvotes: supabase.sql("upvotes + 1") })
-      .eq("id", postId);
-  } else if (type === "downvote") {
-    updatedData = await supabase
-      .from("feed_dummy")
-      .update({ downvotes: supabase.sql("downvotes + 1") })
-      .eq("id", postId);
-  }
-
-  if (updatedData.error) {
-    res.status(500).json({ error: updatedData.error.message });
-  } else {
-    res.status(200).json({ message: "Votes updated successfully" });
-  }
-  
-};
-
-export default updatePostVotes;
-*/

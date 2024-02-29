@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 
 
 //COMPONENTS
@@ -14,14 +14,14 @@ import styles from '../../styles/Main/Main.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 
 
-const Main = (props) => {
-  const [posts, setPosts] = useState([]);
+const Main = memo((props) => {
 
   const currentFilter = useSelector((state) => state.filter);
   const nightMode = useSelector((state) => state.toggle)
 
 
 
+  //console.log(props.posts)
 
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
@@ -29,6 +29,7 @@ const Main = (props) => {
 
 
 
+  console.log(currentFilter)
 
 
 
@@ -40,16 +41,17 @@ const Main = (props) => {
 
       {isLoggedIn && (
         <div className={styles.main_container}>
-          
           <div className={styles.output_field}>
-            <Feed posts={props.posts} />
+            <Feed
+              posts={props.posts}
+              currentGoogleUserId = {props.currentGoogleUserId}
+            />
           </div>
           <WebUser />
-        
         </div>
       )}
     </div>
   );
-};
+});
 
 export default Main; 

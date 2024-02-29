@@ -146,6 +146,7 @@
     color: beige;
     transition: 0.4s ease;
     cursor: pointer;
+   
 }
 
 .postArrowUp:hover, .postArrowDown:hover{
@@ -162,6 +163,14 @@
     
 }
 
+
+.upvoted{
+    color: green;
+}
+
+.downvoted{
+    color: red;
+}
 
 
 

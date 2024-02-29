@@ -27,16 +27,19 @@ export default function Home() {
 
 
   const {currentGoogleUser, fetcher} = useContext(RedditContext)
+
  
 
   const currUser = useSelector((state) => state.user);
 
-  console.log(currUser);
+  
+ 
 
   const dispatch = useDispatch();
 
 
-  const [myPosts, setMyPosts] = useState();
+  const [myPosts, setMyPosts] = useState(null);
+
 
   const { data, error } = useSWR("/api/get-post", fetcher, {
     refreshInterval: 200,
@@ -49,6 +52,12 @@ export default function Home() {
       dispatch(login());
     }
   }, [currentGoogleUser])
+
+   useEffect(() => {
+     if (data && data.data && !myPosts) {
+       setMyPosts(data.data);
+     }
+   }, [data]);
 
  
 
@@ -110,19 +119,23 @@ export default function Home() {
   
   }
 
+
+  /*
   useEffect(() =>{
     if (!data) return
     setMyPosts(data.data)
-  }, [data])
+  }, [data])*/
 
+  /*
   useEffect(()=>{
     saveAndUpdateUser()
     //console.log('Save user')
   }, [currentGoogleUser])
-  
+  */
 
 
   
+  /*
 
   useEffect(() => {
     if (error) {
@@ -137,17 +150,22 @@ export default function Home() {
     if(!data) return
 
     setMyPosts(data.data)
-  }, [data])
+  }, [data])*/
 
+
+
+  let googleUserId;
+
+  if(currentGoogleUser){
+    googleUserId = currentGoogleUser.user.id
+  }
+ 
 
 
   return (
-  
     <div className="App">
-     
-      <Main posts={myPosts} />
+      <Main posts={myPosts} currentGoogleUserId={googleUserId} />
     </div>
-
   );
           
        

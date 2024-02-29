@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, memo } from "react";
 import { useRouter } from "next/router";
 
 
@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 
 import { RedditContext } from "@/context/RedditContext";
 
-const Post = (props) => {
+const Post = memo((props) => {
   const nightMode = useSelector((state) => state.toggle);
 
   const { id, created_at,content,  author, title, description, upvotes, downvotes } =
@@ -40,6 +40,10 @@ const Post = (props) => {
 
   const {setSelectedPost} = useContext(RedditContext)
 
+
+  console.log(props.currentGoogleUserId);
+
+  console.log(totalvote)
 
   
 
@@ -76,7 +80,11 @@ const Post = (props) => {
   return (
     <div className={styles.post_container}>
       <div className={styles.postRating_container}>
-        <PostRating votes={totalvote} postId={id} />
+        <PostRating
+          votes={totalvote}
+          postId={id}
+          currentGoogleUserId={props.currentGoogleUserId}
+        />
       </div>
 
       <div className={styles.postField} onClick={navigateToPost}>
@@ -90,7 +98,7 @@ const Post = (props) => {
           <h1
             className={nightMode ? styles.post_title_dark : styles.post_title}
           >
-            {title} 
+            {title}
           </h1>
           <p>{description} </p>
         </div>
@@ -100,6 +108,9 @@ const Post = (props) => {
       </div>
     </div>
   );
-};
+}, (prevProps, nextProps) =>{
+  //nur neu rendern, wenn sich totalvote ändert
+  return prevProps.totalVote === nextProps.totalvote
+});
 
 export default Post;

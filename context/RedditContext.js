@@ -25,8 +25,11 @@ export const RedditProvider = ({children}) => {
     supabase.auth.onAuthStateChange((_event, authSession) => {
       setCurrentGoogleUser(authSession);
     });
+
+
   }, []);
 
+   //console.log(currentGoogleUser);
   //console.log(currentGoogleUser);
 
 

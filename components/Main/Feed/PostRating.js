@@ -1,6 +1,12 @@
 //STYLES
 import styles from "../../../styles/Main/Feed/Post.module.css";
 
+//CONTEXT
+import { RedditContext } from "@/context/RedditContext";
+
+
+import { useContext, useEffect, useState } from "react";
+
 //FONT AWESOME
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
@@ -14,6 +20,9 @@ import { useDispatch, useSelector } from "react-redux";
 //import { updatePostVotes } from '../api/rate-post'; // Annahme, dass Sie die API-Funktion zum Aktualisieren der Datenbank haben
 import { updatePostVotes } from "../../../pages/api/rate-post";
 
+//SUPABASE
+import { supabase } from "@/services/supabaseClient";
+import { current } from "@reduxjs/toolkit";
 
 
 
@@ -23,49 +32,147 @@ const PostRating = (props) => {
   const currCount = useSelector((state) => state.counter);
   const nightMode = useSelector((state) => state.toggle)
 
-  const votes = props.votes
+  const [votes, setVotes] = useState(props.votes)
+  const [isUpvoted, setIsUpvoted] = useState(false)
+  const [isUpvotedTwice, setIsUpvotedTwice] = useState(false)
+  const [isDownvoted, setIsDownvoted] = useState(false)
+  const [isDownvotedTwice, setIsDownvotedTwice] = useState(false)
+
   const postId = props.postId
-
-  
-
-
-
-
-
-
 
 
   const handleIncrement = async () => {
 
+    if(isDownvoted === true || isUpvoted === false){
+      setIsDownvoted(false)
+      setIsUpvoted(true)
 
-   // dispatch(increment());
-    await updatePostVotes({ postId: props.postId, type: "upvotes" }); // Annahme, dass postId als Parameter übergeben wird
+       // dispatch(increment());
+      await updatePostVotes({
+      postId: props.postId,
+      type: "upvotes",
+      userId: props.currentGoogleUserId,
+      isUpvoted: !isUpvoted,
+      isDownvoted: isDownvoted,
+      }); // Annahme, dass postId als Parameter übergeben wird
+
+      await getActualizedRating();
+    }
+
+    if(isUpvoted === true){
+      setIsUpvoted(true)
+      setIsUpvotedTwice(true)
+
+      await updatePostVotes({
+      postId: props.postId,
+      type: "upvotes",
+      userId: props.currentGoogleUserId,
+      isUpvoted: isUpvoted,
+      isUpvotedTwice: !isUpvotedTwice
+      }); // Annahme, dass postId als Parameter übergeben wird
+
+       await getActualizedRating();
+
+      
+    } 
+
+
+  
   };
+
+/*
+  console.log(':::::::::::')
+  console.log(isUpvoted)
+  console.log(isDownvoted)
+  */
+
+
 
   const handleDecrement = async () => {
-    //dispatch(decrement());
-    await updatePostVotes({ postId: props.postId, type: "downvotes" }); // Annahme, dass postId als Parameter übergeben wird
+
+    if(isUpvoted === true || isDownvoted === false){
+      
+      setIsUpvoted(false)
+      setIsDownvoted(true)
+      //dispatch(decrement());
+      await updatePostVotes({
+        postId: props.postId,
+        type: "downvotes",
+        userId: props.currentGoogleUserId,
+        isUpvoted: isUpvoted,
+        isDownvoted: !isDownvoted,
+      }); // Annahme, dass postId als Parameter übergeben wird
+
+      await getActualizedRating();
+    
+    } 
+
+    if(isDownvoted === true){
+
+      setIsDownvoted(true)
+      setIsDownvotedTwice(true)
+
+      await updatePostVotes({
+      postId: props.postId,
+      type: "upvotes",
+      userId: props.currentGoogleUserId,
+      isUpvoted: isUpvoted,
+      isDownvoted: isDownvoted,
+      isDownvotedTwice: !isDownvotedTwice
+      }); // Annahme, dass postId als Parameter übergeben wird
+
+       await getActualizedRating();
+ 
+    }
+
+
+   
   };
+
+
+  useEffect(() => {
+    setVotes(props.votes); // Aktualisieren Sie den Wert von votes, wenn sich props.votes ändert
+  }, [props.votes]);
+
+
+
+  const getActualizedRating = async()=>{
+      const { data, error } = await supabase
+        .from("feed_dummy")
+        .select("upvotes, downvotes")
+        .eq("id", postId);
+
+      if (error) {
+        return res.status(500).json({ error: error.message });
+      }
+
+      const upvotes = data[0].upvotes;
+      const downvotes = data[0].downvotes;
+      const totalvots = upvotes - downvotes
+      setVotes(totalvots)
+
+  }
+  
 
 
 
   return (
     <div className={styles.postRating}>
-      <div>
+      <button onClick={handleIncrement}>
         <FontAwesomeIcon
           icon={faArrowUp}
-          className={nightMode ? styles.postArrowUp_dark : styles.postArrowUp}
-          onClick={handleIncrement}
+   
+          className={`${nightMode ? styles.postArrowUp_dark : styles.postArrowUp} ${isUpvoted? styles.upvoted : ''}`}
         />
-      </div>
+      </button>
       <p className={styles.amountOfRatings }> {votes} </p>
-      <div>
+      <button onClick={handleDecrement}>
         <FontAwesomeIcon
           icon={faArrowDown}
-          className={nightMode ? styles.postArrowUp_dark : styles.postArrowDown}
-          onClick={handleDecrement}
+          className={`${nightMode ? styles.postArrowUp_dark : styles.postArrowUp} ${isDownvoted ? styles.downvoted : ''}`}
+          
         />
-      </div>
+      </button>
     </div>
   );
 };

@@ -1,4 +1,6 @@
 
+
+import React from 'react';
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
@@ -16,30 +18,37 @@ import styles from '../../../styles/Main/Feed/Feed.module.css'
 import { useSelector } from "react-redux";
 import { current } from "@reduxjs/toolkit";
 
-const Feed = (props) => {
+const Feed = React.memo((props) => {
 
 
   const currentFilter = useSelector((state) => state.filter);
-
-
   const loadedPosts = props.posts;
 
-  
+  //console.log(props.posts)
 
   const [loadingPosts, setLoadingPosts] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
   const [posts, setPosts] = useState([])
-  const [ deine, setDeine ] = useState(false)
+
+
+  const { id, created_at,content,  author, title, description, upvotes, downvotes } = props;
   
+  
+
+  let totalvote = upvotes - downvotes;
+
+  console.log(totalvote)
+
+
+
+  const storedFilter =
+    typeof window !== "undefined"
+      ? localStorage.getItem("selectedFilter") || "beste"
+      : "beste";
 
   useEffect(()=>{
 
-    if(currentFilter === 'deine'){
-      setDeine(true)
-      setLoadingPosts(true)
-    } else if (currentFilter != 'deine'){
-      setDeine(false)
-    }
+  
 
       if (loadedPosts) {
         setIsLoaded(true);
@@ -47,8 +56,20 @@ const Feed = (props) => {
         setLoadingPosts(false)
       }
      
+
+      console.log(currentFilter.selectedFilter);
    
   }, [props.posts, currentFilter]) 
+
+  console.log(currentFilter.selectedFilter)
+
+
+  console.log(storedFilter)
+  console.log(loadedPosts)
+
+
+
+    
 
 
 
@@ -59,24 +80,21 @@ const Feed = (props) => {
 
       <CreatePost />
 
-      
-    
-        {loadingPosts && (
-          <p className={styles.loadingPostsParagraph}> loading posts ...</p>
-        )}
-        {isLoaded &&
-          deine &&
-          posts.map((post, id) => (
-            <div className={styles.post_container}>
-
-            <Post {...post} key={id} />
-            </div>
-          ))}
-
-        
-      
+      {loadingPosts && (
+        <p className={styles.loadingPostsParagraph}> loading posts ...</p>
+      )}
+      {isLoaded && currentFilter.selectedFilter === "deine" &&
+        posts.map((post, id) => (
+          <div className={styles.post_container}>
+            <Post
+              {...post}
+              key={id}
+              currentGoogleUserId={props.currentGoogleUserId}
+            />
+          </div>
+        ))}
     </div>
   );
-};
+});
 
 export default Feed;

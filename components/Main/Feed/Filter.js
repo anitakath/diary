@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 //REDUX
-import { filter } from "@/store/filterSlice";
+import { filter, setActButton} from "@/store/filterSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 
 
 //STYLES
 import styles from "../../../styles/Main/Feed/Filter.module.css";
+import { current } from "@reduxjs/toolkit";
 
 const Filter = () => {
 
@@ -24,9 +25,7 @@ const Filter = () => {
   const currentFilter = useSelector((state) => state.filter);
   const nightMode = useSelector((state) => state.toggle);
 
-
-
-
+  //console.log(currentFilter)
   const [bestIsActive, setBestIsActive] = useState(false);
   const [hotIsActive, setHotIsActive] = useState(false);
   const [newIsActive, setNewIsActive] = useState(false);
@@ -34,55 +33,113 @@ const Filter = () => {
   const [deineIsActive, setDeineIsActive] = useState(false);
   const [activeButton, setActiveButton] = useState(null);
 
+    const storedFilter =
+      typeof window !== "undefined"
+        ? localStorage.getItem("selectedFilter") || "beste"
+        : "beste";
+
+  useEffect(() =>{
+    console.log('filter has changed')
+    console.log(currentFilter)
+    console.log(storedFilter)
+    console.log(activeButton)
+
+    if (currentFilter.bestIsActive) {
+      setBestIsActive(true);
+    } else if (currentFilter.hotIsActive) {
+      setHotIsActive(true);
+      setActiveButton("heiß");
+    } else if (currentFilter.newIsActive) {
+      setNewIsActive(true);
+      setActiveButton("neu");
+    } else if (currentFilter.topIsActive) {
+      setTopIsActive(true);
+      setActiveButton("top");
+    } else if (currentFilter.deineIsActive) {
+      setDeineIsActive(true);
+      setActiveButton("deine");
+    }
+  }, [currentFilter])
+
+
+  //console.log(currentFilter)
+
+
+  console.log(activeButton)
+
+
+  useEffect(()=>{
+
+    if (storedFilter === "beste") {
+      setActiveButton("beste");
+    } else if (storedFilter === "heiß") {
+      setActiveButton("heiß");
+    } else if (storedFilter === "neu") {
+      setActiveButton("neu");
+    } else if (storedFilter === "top") {
+      setActiveButton("top");
+    } else if (storedFilter === "deine") {
+      setActiveButton("deine");
+    }
+  
+    
+  
+
+  }, [])
+
+
+
+  
 
 
   const filterHandler = (title) => {
     if (title === "beste") {
       dispatch(filter("beste"));
+      dispatch(setActButton('beste' ));
+      console.log('title')
+      
+
+
       setActiveButton(title)
 
-      setBestIsActive(true);
-      setHotIsActive(false);
-      setNewIsActive(false);
-      setTopIsActive(false);
-      setDeineIsActive(false);
+     
 
     } else if (title === "heiß") {
       dispatch(filter("heiß"));
+      dispatch(setActButton('heiß' ));
+      //dispatch(setActiveButton(title));
+
+
       setActiveButton(title);
 
-      setBestIsActive(false);
-      setHotIsActive(true);
-      setNewIsActive(false);
-      setTopIsActive(false);
-      setDeineIsActive(false);
+      
+
+
     } else if (title === "neu") {
       dispatch(filter("neu"));
+      //dispatch(setActiveButton(title));
+
+
       setActiveButton(title);
 
-      setBestIsActive(false);
-      setHotIsActive(false);
-      setNewIsActive(true);
-      setTopIsActive(false);
-      setDeineIsActive(false);
+
+
     } else if (title === "top") {
       dispatch(filter("top"));
+      //dispatch(setActiveButton(title));
+
+
       setActiveButton(title);
 
-      setBestIsActive(false);
-      setHotIsActive(false);
-      setNewIsActive(false);
-      setDeineIsActive(false);
-      setTopIsActive(true);
+
+
     } else if (title === "deine") {
       dispatch(filter("deine"));
+      //dispatch(setActiveButton(title));
+
+
       setActiveButton(title);
 
-      setBestIsActive(false);
-      setHotIsActive(false);
-      setNewIsActive(false);
-      setTopIsActive(false);
-      setDeineIsActive(true)
     }
   };
 
