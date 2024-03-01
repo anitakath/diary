@@ -43,88 +43,90 @@ const PostRating = (props) => {
 
   const handleIncrement = async () => {
 
-    if(isDownvoted === true || isUpvoted === false){
-      setIsDownvoted(false)
-      setIsUpvoted(true)
 
-       // dispatch(increment());
+    if(!isUpvoted){
+      console.log('post is not upvoted but going to be upvoted...')
+      if (isDownvoted) {
+        console.log('...even though it was downvoted first.')
+        //setIsDownvoted(false);
+        return;
+      }
+      setIsUpvoted(true);
+
+      // dispatch(increment());
       await updatePostVotes({
-      postId: props.postId,
-      type: "upvotes",
-      userId: props.currentGoogleUserId,
-      isUpvoted: !isUpvoted,
-      isDownvoted: isDownvoted,
+        postId: props.postId,
+        type: "upvotes",
+        userId: props.currentGoogleUserId,
+        isUpvoted: !isUpvoted,
+        isDownvoted: isDownvoted,
       }); // Annahme, dass postId als Parameter übergeben wird
 
       await getActualizedRating();
     }
 
-    if(isUpvoted === true){
-      setIsUpvoted(true)
+    if(isUpvoted){
+      console.log('post is already upvoted')
       setIsUpvotedTwice(true)
+      setIsUpvoted(false)
+
 
       await updatePostVotes({
-      postId: props.postId,
-      type: "upvotes",
-      userId: props.currentGoogleUserId,
-      isUpvoted: isUpvoted,
-      isUpvotedTwice: !isUpvotedTwice
+        postId: props.postId,
+        type: "upvotes",
+        userId: props.currentGoogleUserId,
+        isUpvoted: !isUpvoted,
+        isUpvotedTwice: !isUpvotedTwice,
       }); // Annahme, dass postId als Parameter übergeben wird
 
-       await getActualizedRating();
+      await getActualizedRating();
 
-      
-    } 
-
-
+    }
   
   };
 
-/*
-  console.log(':::::::::::')
-  console.log(isUpvoted)
-  console.log(isDownvoted)
-  */
-
-
-
   const handleDecrement = async () => {
 
-    if(isUpvoted === true || isDownvoted === false){
-      
-      setIsUpvoted(false)
-      setIsDownvoted(true)
-      //dispatch(decrement());
-      await updatePostVotes({
-        postId: props.postId,
-        type: "downvotes",
-        userId: props.currentGoogleUserId,
-        isUpvoted: isUpvoted,
-        isDownvoted: !isDownvoted,
-      }); // Annahme, dass postId als Parameter übergeben wird
 
-      await getActualizedRating();
-    
-    } 
+     if (!isDownvoted) {
+       console.log("post is not downvoted but going to be downvoted...");
+       if (isUpvoted) {
+         console.log("...even though it was upvoted first.");
+         //setIsUpvoted(false);
+         return;
+       }
+       setIsDownvoted(true);
 
-    if(isDownvoted === true){
-
-      setIsDownvoted(true)
-      setIsDownvotedTwice(true)
-
-      await updatePostVotes({
-      postId: props.postId,
-      type: "upvotes",
-      userId: props.currentGoogleUserId,
-      isUpvoted: isUpvoted,
-      isDownvoted: isDownvoted,
-      isDownvotedTwice: !isDownvotedTwice
-      }); // Annahme, dass postId als Parameter übergeben wird
+       // dispatch(increment());
+       await updatePostVotes({
+         postId: props.postId,
+         type: "downvotes",
+         userId: props.currentGoogleUserId,
+         isUpvoted: isUpvoted,
+         isDownvoted: !isDownvoted,
+       }); // Annahme, dass postId als Parameter übergeben wird
 
        await getActualizedRating();
- 
-    }
+     }
 
+
+     if (isDownvoted) {
+       console.log("post is already downvoted");
+       setIsDownvotedTwice(true);
+       setIsDownvoted(false);
+
+       await updatePostVotes({
+         postId: props.postId,
+         type: "downvotes",
+         userId: props.currentGoogleUserId,
+         isUpvoted: isUpvoted,
+         isDownvotedTwice: !isDownvotedTwice,
+         isDownvoted: !isDownvoted,
+       }); // Annahme, dass postId als Parameter übergeben wird
+
+       await getActualizedRating();
+     }
+   
 
    
   };

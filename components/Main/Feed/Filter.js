@@ -82,8 +82,6 @@ const Filter = () => {
       setActiveButton("deine");
     }
   
-    
-  
 
   }, [])
 
