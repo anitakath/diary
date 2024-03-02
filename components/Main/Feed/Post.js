@@ -41,10 +41,6 @@ const Post = memo((props) => {
   const {setSelectedPost} = useContext(RedditContext)
 
 
-  console.log(props.currentGoogleUserId);
-
-  console.log(totalvote)
-
   
 
 

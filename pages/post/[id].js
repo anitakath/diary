@@ -19,37 +19,99 @@ import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
 
+//SUPABASE
+import { supabase } from "@/services/supabaseClient";
 
-const PostDetails = () =>{
 
+const PostDetails = (props) =>{
+
+/*
+  const [votes, setVotes] = useState(props.votes);
+  const [isUpvoted, setIsUpvoted] = useState(false);
+  const [isUpvotedTwice, setIsUpvotedTwice] = useState(false);
+  const [isDownvoted, setIsDownvoted] = useState(false);
+  const [isDownvotedTwice, setIsDownvotedTwice] = useState(false);
+
+*/
 
   const {selectedPost, setSelectedPost} = useContext(RedditContext)
 
+
+  const [postDetails, setPostDetails] = useState()
+
+  const router = useRouter();
+  const {id} = router.query;
+  console.log(id)
+
+
   console.log(selectedPost)
 
+  const postId = id;
 
-   const nightMode = useSelector((state) => state.toggle);
 
-   const router = useRouter();
+  useEffect(()=>{
+    
+    const checkPostId = async()=>{
+       const { data, error } = await supabase
+         .from("feed_dummy")
+         .select("*")
+         .eq("id", postId);
+
+       console.log(data);
+
+       setPostDetails(data[0])
+    }
+
+    checkPostId();
+
+  }, [selectedPost])
+
+
+  console.log(postDetails)
+
+
+  
+
+
+  const nightMode = useSelector((state) => state.toggle);
+
+
 
   const handleGoBack = () => {
     router.back();
   };
 
+
   /*
-
    useEffect(() => {
-     // Check if there is a selected post in local storage and set it to the context
-     const selectedPostData = JSON.parse(localStorage.getItem("selectedPost"));
+     const checkUserAction = async () => {
+       const { data, error } = await supabase
+         .from("feed_dummy")
+         .select("user_action")
+         .eq("id", postId);
 
-     console.log(selectedPostData)
-     if (selectedPostData) {
-       console.log('!!!!!!!!!!!!!!')
-       console.log(selectedPost)
-       setSelectedPost(selectedPostData);
-     }
-   }, []);
-*/
+       if (error) {
+         return res.status(500).json({ error: error.message });
+       }
+       // Filtere die Daten, um nur Einträge mit user_action ungleich null zu erhalten
+       const filteredData = data.filter((entry) => entry.user_action !== null);
+
+       if (filteredData[0] === undefined) {
+       } else if (
+         filteredData[0].user_action ===
+         props.currentGoogleUserId + "_up"
+       ) {
+         setIsUpvoted(true);
+       } else if (
+         filteredData[0].user_action ===
+         props.currentGoogleUserId + "_down"
+       ) {
+         setIsDownvoted(true);
+       }
+     };
+
+     checkUserAction();
+   }, []); */
    
 
  

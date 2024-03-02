@@ -37,7 +37,6 @@ const Feed = React.memo((props) => {
 
   let totalvote = upvotes - downvotes;
 
-  console.log(totalvote)
 
 
 
@@ -57,15 +56,13 @@ const Feed = React.memo((props) => {
       }
      
 
-      console.log(currentFilter.selectedFilter);
    
   }, [props.posts, currentFilter]) 
 
-  console.log(currentFilter.selectedFilter)
 
 
-  console.log(storedFilter)
-  console.log(loadedPosts)
+
+
 
 
 

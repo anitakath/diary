@@ -17,7 +17,6 @@ import { increment, decrement } from "@/store/counterSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 //API
-//import { updatePostVotes } from '../api/rate-post'; // Annahme, dass Sie die API-Funktion zum Aktualisieren der Datenbank haben
 import { updatePostVotes } from "../../../pages/api/rate-post";
 
 //SUPABASE
@@ -41,13 +40,12 @@ const PostRating = (props) => {
   const postId = props.postId
 
 
+
   const handleIncrement = async () => {
 
 
     if(!isUpvoted){
-      console.log('post is not upvoted but going to be upvoted...')
       if (isDownvoted) {
-        console.log('...even though it was downvoted first.')
         //setIsDownvoted(false);
         return;
       }
@@ -89,22 +87,18 @@ const PostRating = (props) => {
 
 
      if (!isDownvoted) {
-       console.log("post is not downvoted but going to be downvoted...");
        if (isUpvoted) {
-         console.log("...even though it was upvoted first.");
-         //setIsUpvoted(false);
          return;
        }
        setIsDownvoted(true);
 
-       // dispatch(increment());
        await updatePostVotes({
          postId: props.postId,
          type: "downvotes",
          userId: props.currentGoogleUserId,
          isUpvoted: isUpvoted,
          isDownvoted: !isDownvoted,
-       }); // Annahme, dass postId als Parameter übergeben wird
+       }); 
 
        await getActualizedRating();
      }
@@ -154,6 +148,39 @@ const PostRating = (props) => {
       setVotes(totalvots)
 
   }
+
+  useEffect(()=>{
+
+   const checkUserAction = async () =>{
+     const { data, error } = await supabase
+       .from("feed_dummy")
+       .select("user_action")
+       .eq("id", postId);
+
+     if (error) {
+       return res.status(500).json({ error: error.message });
+     }
+     // Filtere die Daten, um nur Einträge mit user_action ungleich null zu erhalten
+     const filteredData = data.filter(
+       (entry) => entry.user_action !== null 
+     );
+
+
+     if(filteredData[0] === undefined){
+
+     } else if ( filteredData[0].user_action === props.currentGoogleUserId + "_up"){
+       setIsUpvoted(true)
+     } else if ( filteredData[0].user_action === props.currentGoogleUserId + "_down"){
+       setIsDownvoted(true)
+     }
+     
+   }
+
+
+   checkUserAction();
+
+  }, [])
+
   
 
 

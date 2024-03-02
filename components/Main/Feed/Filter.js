@@ -39,10 +39,7 @@ const Filter = () => {
         : "beste";
 
   useEffect(() =>{
-    console.log('filter has changed')
-    console.log(currentFilter)
-    console.log(storedFilter)
-    console.log(activeButton)
+   
 
     if (currentFilter.bestIsActive) {
       setBestIsActive(true);
@@ -62,10 +59,7 @@ const Filter = () => {
   }, [currentFilter])
 
 
-  //console.log(currentFilter)
-
-
-  console.log(activeButton)
+ 
 
 
   useEffect(()=>{

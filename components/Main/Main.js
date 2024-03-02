@@ -29,10 +29,6 @@ const Main = memo((props) => {
 
 
 
-  console.log(currentFilter)
-
-
-
  
 
   return (
