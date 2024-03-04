@@ -35,6 +35,7 @@ const Header = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const isRegistered = useSelector((state) => state.auth.isRegistered);
 
+  console.log(isLoggedIn)
   
 
   const currentFilter = useSelector((state) => state.filter);
@@ -63,6 +64,9 @@ const Header = () => {
         setLoginSuccessmessage(false);
       }, 10000); // 10 Sekunden
     }
+
+
+    dispatch(login())
   }, [isRegistered, isLoggedIn]);
 
   let userName;

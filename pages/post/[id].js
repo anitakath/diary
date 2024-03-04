@@ -15,7 +15,8 @@ import Comments from "@/components/Main/comments/comments";
 import styles from '../../styles/Main/PostDetails.module.css'
 
 //REDUX
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { login } from "@/store/authSlice";
 
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -36,6 +37,8 @@ const PostDetails = (props) =>{
   const [postDetails, setPostDetails] = useState(null);
   const [isLoaded, setIsLoaded] = useState(null)
 
+
+  console.log(isLoggedIn)
   const router = useRouter();
   const { id } = router.query;
 
@@ -43,8 +46,12 @@ const PostDetails = (props) =>{
 
   const postId = id;
 
+
+
   console.log(postId);
   console.log(currentGoogleUser);
+
+ 
 
   
   
@@ -68,7 +75,6 @@ const PostDetails = (props) =>{
             currentGoogleUserId = currentGoogleUser.user.id
             data[0].currentGoogleUserId = currentGoogleUser.user.id;
           }
-
          
         }
 
