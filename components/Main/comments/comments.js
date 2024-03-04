@@ -36,15 +36,12 @@ const Comments = ({postId}) =>{
     }, [data]);
 
 
-    console.log(postId)
-    console.log(comments)
-
-    console.log(comments.id)
+    
 
     const filteredComments = comments.filter(
       (comment) => comment.postId === postId
     );
-    console.log(filteredComments);
+ 
 
 
      const { selectedPost, setSelectedPost } = useContext(RedditContext);

@@ -38,6 +38,19 @@
 }
 
 
+.loading_post_div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+.loadingSpinner{
+    height: 50px;
+    color: beige;
+    font-size: 3rem;
+}
+
 
 
 
