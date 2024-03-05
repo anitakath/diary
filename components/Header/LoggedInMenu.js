@@ -24,9 +24,9 @@ const LoggedInMenu = (props) => {
   const dispatch = useDispatch();
 
 
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+  const nightMode = useSelector((state) => state.toggle.isNightMode)
 
-  const nightMode = useSelector((state) => state.toggle)
+  console.log(nightMode)
 
   console.log(nightMode)
   

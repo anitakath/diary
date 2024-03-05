@@ -1,5 +1,5 @@
 
-
+import Link from "next/link";
 
 
 import { useState, useEffect, useContext } from "react";
@@ -8,14 +8,13 @@ import { useState, useEffect, useContext } from "react";
 //CONTEXT
 import { RedditContext } from "@/context/RedditContext";
 
-
 //REDUX
 import { useSelector, useDispatch } from "react-redux";
 import { login } from "@/store/authSlice";
 
 //COMPONENTS
 import LoggedInMenu from "./LoggedInMenu";
-import MobileUser from "../Main/MobileUser";
+
 import SearchBar from "../UI/SearchBar";
 
 //STYLES
@@ -25,6 +24,7 @@ import styles from '../../styles/Header/Header.module.css'
 import { faRedditAlien } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { faUsers, faHouse } from "@fortawesome/free-solid-svg-icons";
 
 
 
@@ -34,12 +34,7 @@ const Header = () => {
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const isRegistered = useSelector((state) => state.auth.isRegistered);
-
-  console.log(isLoggedIn)
-  
-
-  const currentFilter = useSelector((state) => state.filter);
-  const nightMode = useSelector((state) => state.toggle);
+  const nightMode = useSelector((state) => state.toggle.isNightMode);
 
   const { currentUser } = useContext(RedditContext);
 
@@ -69,15 +64,7 @@ const Header = () => {
     dispatch(login())
   }, [isRegistered, isLoggedIn]);
 
-  let userName;
 
-  /*
-  if(currentUser){
-    userName = currentUser.user.identities[0].identity_data.full_name;
-    dispatch(login())
-
-  }
-  */
 
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
@@ -92,11 +79,15 @@ const Header = () => {
   const reloadPage = () => {
     window.location.reload();
   };
+  
+  console.log(nightMode)
 
   return (
     <div className={styles.container}>
       {isLoggedIn && (
-        <div className={nightMode ? styles.container_dark : styles.container}>
+        <div
+          className={nightMode ? styles.container_dark : styles.container_light}
+        >
           <h1 className={styles.title}>
             <FontAwesomeIcon
               icon={faRedditAlien}
@@ -105,37 +96,27 @@ const Header = () => {
             />
           </h1>
 
-          <div
-            className={styles.registration_info_container}
-            style={{ top: showSuccessMessage ? "2px" : "-50px" }}
-          >
-            <p className={styles.registration_info}> REGISTRIERUNG ✅ </p>
-          </div>
-
-          <div
-            className={styles.registration_info_container}
-            style={{ top: loginSuccessMessage ? "50px" : "-50px" }}
-          >
-            <p className={styles.registration_info}> LOGIN ✅ </p>
-          </div>
-
           <SearchBar />
 
           <div className={styles.login_container}>
-            <MobileUser />
-            <div className={styles.loginWrapper}>
-              {isLoggedIn && (
-                <div className={styles.loggedIn_wrapper}>
-                  <button
-                    className={styles.loggedInMenu_btn}
-                    onClick={menuHandler}
-                  >
-                    <FontAwesomeIcon icon={faUser} className={styles.user} />
-                    <p> menu </p>
-                  </button>
-                </div>
-              )}
-            </div>
+            {isLoggedIn && (
+              <div className={styles.login_container}>
+                <button className={styles.userMenu_btn} onClick={menuHandler}>
+                  <FontAwesomeIcon icon={faUser} className={styles.user} />
+                  <p className={nightMode ?  styles.dark_p : styles.light_p}> menu </p>
+                </button>
+
+                <button className={styles.userMenu_btn_web}>
+                  <FontAwesomeIcon icon={faUsers} className={styles.user} />
+                  <p className={nightMode ?  styles.dark_p : styles.light_p}> community </p>
+                </button>
+
+                <button className={styles.userMenu_btn_web}>
+                  <FontAwesomeIcon icon={faHouse} className={styles.user} />
+                  <p className={nightMode ?  styles.dark_p : styles.light_p}> beitrag </p>
+                </button>
+              </div>
+            )}
           </div>
 
           {menuIsOpen && (

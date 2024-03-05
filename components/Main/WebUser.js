@@ -5,23 +5,31 @@ import Link from 'next/link';
 import styles from '../../styles/Main/WebUser.module.css'
 
 
-//IMAGES
-//import space from "../images/space.jpg";
-
 //FONT AWESOME
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { faRedditAlien } from "@fortawesome/free-brands-svg-icons";
 
 
+//REDUX
+import { useSelector, useDispatch } from "react-redux";
+
 
 const WebUser = () => {
+
+
+    const nightMode = useSelector((state) => state.toggle.isNightMode);
+
 
 
 
   return (
     <div className={styles.container}>
-      <div className={styles.fixed_div}>
+      <div
+        className={`${styles.fixed_div} ${
+          nightMode ? styles.dark : styles.light
+        }`}
+      >
         <Image
           alt="Beschreibung des Bildes"
           width={100} // Setze hier die gewünschte Breite

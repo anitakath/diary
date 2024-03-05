@@ -23,7 +23,7 @@ import { useSelector } from "react-redux";
 const Settings = () =>{
 
 
-  const nightMode = useSelector((state) => state.toggle)
+  const nightMode = useSelector((state) => state.toggle.isNightMode)
 
     return (
       <div

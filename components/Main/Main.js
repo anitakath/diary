@@ -17,11 +17,9 @@ import { useSelector, useDispatch } from 'react-redux'
 const Main = memo((props) => {
 
   const currentFilter = useSelector((state) => state.filter);
-  const nightMode = useSelector((state) => state.toggle)
+  const nightMode = useSelector((state) => state.toggle.isNightMode)
 
 
-
-  //console.log(props.posts)
 
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
@@ -50,4 +48,4 @@ const Main = memo((props) => {
   );
 });
 
-export default Main; 
+export default Main;  

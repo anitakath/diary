@@ -24,7 +24,7 @@ import { filter } from '@/store/filterSlice';
 const Profile = () =>{
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
-  const nightMode = useSelector((state)=> state.toggle)
+  const nightMode = useSelector((state)=> state.toggle.isNightMode)
   const currUser = useSelector((state) => state.user)
 
   console.log(currUser.email);

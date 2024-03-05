@@ -21,22 +21,34 @@ const Slider = () => {
   const [isNightMode, setIsNightMode] = useState(false); // Setze den initialen Modus basierend auf dem prefers-color-scheme
 
   const dispatch = useDispatch();
-  const toggleMode = useSelector((state) => state.toggle);
+  const toggleMode = useSelector((state) => state.toggle.isNightMode);
 
 
-  
+   useEffect(() => {
+     // Überprüfe den Local Storage beim Laden der Komponente
+     const storedNightMode = localStorage.getItem("isNightMode");
+     if (storedNightMode === "true") {
+       setIsNightMode(true);
+     } else {
+       setIsNightMode(false);
+     }
+   }, []);
+
+  console.log(isNightMode)
 
   const toggleHandler = () => {
-    setIsNightMode(!isNightMode);
+    const newNightMode = !isNightMode;
+    setIsNightMode(newNightMode);
+
+    localStorage.setItem("isNightMode", newNightMode.toString());
     dispatch(toggle());
 
-    if(isNightMode){
-      localStorage.setItem("isNightMode", true);
-    } else{
-      localStorage.setItem("isNightMode", false);
-    }
 
   };
+
+
+  console.log(toggleMode)
+  console.log(isNightMode)
 
 
 

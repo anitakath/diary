@@ -42,7 +42,7 @@ const NewPostForm = () => {
   const dispatch = useDispatch();
 
   const currFilter = useSelector((state) => state.filter)
-  const nightMode = useSelector((state) => state.toggle)
+  const nightMode = useSelector((state) => state.toggle.isNightMode)
 
 
 

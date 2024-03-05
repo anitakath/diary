@@ -1,5 +1,8 @@
+import Link from "next/link";
 
-//CNTEXT
+
+
+//CONTEXT
 import { RedditContext } from "@/context/RedditContext";
 import { useContext , useEffect, useState} from "react";
 import { useRouter } from "next/router";
@@ -9,10 +12,11 @@ import { useRouter } from "next/router";
 //COMPONENTS
 import Post from "@/components/Main/Feed/Post"
 import Comments from "@/components/Main/comments/comments";
-
+import CreateComment from "@/components/Main/comments/createComment";
+import WebUser from "@/components/Main/WebUser";
 
 //STYLES
-import styles from '../../styles/Main/PostDetails.module.css'
+import styles from '../../styles/Main/Feed/PostDetails.module.css'
 
 //REDUX
 import { useSelector, useDispatch } from "react-redux";
@@ -38,18 +42,15 @@ const PostDetails = (props) =>{
   const [isLoaded, setIsLoaded] = useState(null)
 
 
-  console.log(isLoggedIn)
+  
   const router = useRouter();
   const { id } = router.query;
 
-  console.log(selectedPost);
+
 
   const postId = id;
 
 
-
-  console.log(postId);
-  console.log(currentGoogleUser);
 
  
 
@@ -82,8 +83,6 @@ const PostDetails = (props) =>{
         console.log('theres no postId')
       }
       
-      
-       
        
     }
 
@@ -92,46 +91,54 @@ const PostDetails = (props) =>{
   }, [postId])
   
 
-  console.log(isLoaded)
 
-
-  console.log(postDetails);
-
-  const nightMode = useSelector((state) => state.toggle);
+  const nightMode = useSelector((state) => state.toggle.isNightMode);
 
   const handleGoBack = () => {
     router.back();
   };
 
-  //  <Post {...selectedPost} />
 
+  console.log(postDetails)
 
   return (
     <div className={nightMode ? styles.container_dark : styles.container_light}>
-      <button
-        onClick={handleGoBack}
-        className={nightMode ? styles.go_back_dark : styles.go_back}
-      >
-        <FontAwesomeIcon icon={faHouse} className={styles.go_back_icon} />
-      </button>
-      <div className={nightMode ? styles.post_dark : styles.post_light}>
-       
+     
+      <div className={styles.comment_wrapper}>
+        <div className={nightMode ? styles.post_dark : styles.post_light}>
           <div className={styles.loading_post_div}>
-             {!isLoaded && (
+            {!isLoaded && (
               <div>
-                <FontAwesomeIcon icon={faSpinner} spin className={styles.loadingSpinner} />
+                <FontAwesomeIcon
+                  icon={faSpinner}
+                  spin
+                  className={styles.loadingSpinner}
+                />
               </div>
-             )}
+            )}
           </div>
-      
-        {isLoaded && <Post {...postDetails} />}
+
+          <div className={styles.post_div}>
+            {isLoaded && <Post {...postDetails} />}
+          </div>
+        </div>
+
+        <div className={styles.webUser_div}> 
+          <WebUser/>
+        </div>
       </div>
 
-      {postDetails && <Comments postId={selectedPost.id} />}
+      {postDetails && (
+        <CreateComment postDetails={postDetails} postId={postDetails.id} />
+      )}
 
-      <button onClick={handleGoBack} className={styles.go_back_btn}>
+      {postDetails && (
+        <Comments postId={postDetails.id} postDetails={postDetails} />
+      )}
+
+      <Link href="/" onClick={handleGoBack} className={styles.go_back_btn}>
         Zurück zur vorherigen Seite
-      </button>
+      </Link>
     </div>
   );
 }

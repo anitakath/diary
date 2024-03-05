@@ -5,16 +5,32 @@
 
 
 :root {
+
+  /* !nightmode */
+  --background-primary: #FCFAF9;
+  --hover-font-dark: #333333;
+  --hover-font-dark_opaque: rgba(51,51,51, 0.5);
+  
+
+  
   --pink: #F7567C;
   --pink_opaque: rgba(247,86,124, 0.8);
   --beige: beige;
   --background_light: rgba(255,255,255);
   --background_light_opaque: rgba(255,255,255, 0.5);
+ 
+
   
 
-  --background_dark: #0E0E52;
-  --background_dark_opaque: rgba(255, 255, 255, 0.1);
-  --primary_font_color_dark: beige;
+   /* nightmode */
+  --background_dark: #201E1F;
+  --hover-font-light: silver;
+
+
+
+
+  --background_dark_opaque: rgba(0, 0, 0, 0.1);
+  --primary_font_color_dark: silver;
  
 }
 

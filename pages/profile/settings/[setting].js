@@ -40,7 +40,7 @@ const SettingPage = () =>{
         }
     }
 
-      const nightMode = useSelector((state) => state.toggle);
+      const nightMode = useSelector((state) => state.toggle.isNightMode);
 
     return (
       <div>

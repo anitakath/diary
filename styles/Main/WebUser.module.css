@@ -6,19 +6,27 @@
     flex-direction: column;
     padding: 5px;
     position: relative;
-    
 }
 
 .fixed_div{
-    position: sticky;
+  position: sticky;
   top: 30px; /* oder den gewünschten Abstand zum oberen Rand festlegen */
   height: fit-content; /* oder die gewünschte Höhe festlegen */
   margin-left: auto; /* sorgt dafür, dass der Inhalt rechtsbündig bleibt */
+  z-index: 1000;
 
 }
 
+.dark{
+    background: var(--background_dark);
+}
+
+.light{
+    background:white;
+}
+
 .spaceImage{
-    height: 50px;
+    height: 50px; 
     width: 100%;
     object-fit: cover;
 }
@@ -84,59 +92,13 @@
 }
 
 
-.MobileUser_container{
-    padding: 1px;
-    margin: 20px;
-    margin-right: 60px;
-    display: flex;
-    align-items: center;
-    width: 55px;
-    height: 55px;
-    cursor: pointer;
-    position: relative;
-}
-
-
-.users_button, .house_button{
-    display: flex;
-    flex-direction: column;
-    margin: 0px 15px;
-}
- 
-
-.MobileUser_container p{
-    display: none;
-}
-
-
-.users, .home{
-    display: none;
-    z-index: 10;
-    transition: 0.4s ease;
-    cursor: pointer;
-}
-
-.home:hover{
-    transition: 0.4s ease;
-    color: black;
-
-
-}
-
-
-.users_button:hover p {
-   z-index: 1000;
-   opacity: 1;
-   color: black;
-   font-size: 3.2rem;
-  
-}
 
 
 
-.users:hover {
-  opacity: 0.5;
-}
+
+
+
+
 
 
 
@@ -146,17 +108,8 @@
        display: none;
     }
 
-    .users, .home{
-        display: inline-block;
-        color: #F7567C;
-        cursor: pointer;
-        width: 1.9rem;
-        height: 1.9rem;
-        color: var(--pink_opaque);
-      
-
-    }
-
+    
+   
     .MobileUser_container p{
         display: flex;
         transition: 0.4s ease;

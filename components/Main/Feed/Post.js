@@ -16,10 +16,6 @@ import { useSelector } from "react-redux";
 import { RedditContext } from "@/context/RedditContext";
 
 const Post = memo((props) => {
-
-
-
-  console.log(props)
   
   const nightMode = useSelector((state) => state.toggle);
 

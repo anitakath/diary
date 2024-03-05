@@ -1,0 +1,311 @@
+
+
+/*------------------------------------------------ CREATE COMMENTSSSSS*/
+
+
+
+.createComment_div{
+    width: 100%;
+    margin:  20px;
+    display: flex;
+    min-height: 30vh;
+    flex-direction: column;
+}
+
+.textarea_div{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    background: white;
+}
+
+.textarea_div_dark{
+    margin: 20px;
+}
+
+.createComment_div h2{
+    display: flex;
+    width: 97%;
+    align-items: center;
+    margin: 0px 20px;
+    font-size: 1.5rem;
+    border-bottom: 0.2px solid grey;
+    color: silver;
+    
+}
+
+
+.title_dark{
+    color: var(--hover-font-dark);
+}
+
+.title_light{
+    color: var(--hover-font-light);
+}
+
+
+
+.createComment_div textarea{
+    width: 70%;
+    margin: 5px 0px;
+    border: none;
+    padding: 5px 10px;
+    height: 30vh;
+    color: var(--hover-font-dark);
+    font-size: 1.2rem;
+}
+
+.textarea_light{
+    background: none;
+}
+
+.textarea_dark{
+    background: grey;
+}
+
+.createComment_div textarea:focus{
+    outline: none;
+    
+}
+
+.createComment_div button{
+    border: 2px solid var(--hover-font-dark);
+    background: var(--hover-font-dark);
+    margin: 10px 0px 5px 0px;
+    color: beige;
+    width: 70%;
+    height: 8vh;
+    padding: 5px 10px;
+    transition: 0.4s ease;
+    
+}
+
+.createComment_div button:hover{
+    border: 2px solid var(--hover-font-dark_opaque);
+    box-shadow: 1px 1px 1px silver;
+}
+
+
+
+
+
+/*------------------------- comment section -------------------------------*/
+
+.comments_container{
+    transition: 0.4s ease;
+    padding: 20px;
+    width: 100vw;
+    min-height: 50vh;
+    margin-bottom: 50px;
+}
+
+
+
+.comments_container_dark{
+    transition: 0.4s ease;
+    padding: 20px;
+    width: 100vw;
+    min-height: 50vh;
+    margin-bottom: 50px;
+    margin-top: 0px;
+}
+
+
+.comments_title{
+    color: silver;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    padding: 5px;
+    border-bottom: 1px solid grey;
+    margin-top: 90px;
+}
+
+.comment_container{
+    border-bottom: 1px solid grey;
+    margin: 20px 10px;
+    padding: 5px;
+    display: flex;
+    height: 200px;
+    position: relative;
+}
+
+.image_container{
+    background: red;
+    width: 10%;
+    height: 100px;
+    margin: 0px 20px;
+
+}
+
+
+.comment_user_image{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.comment_text_container{
+    width: 95%;
+    overflow: scroll;
+    cursor: pointer;
+}
+
+
+.comment_title_light{
+    font-size: 1.4rem;
+    font-weight: bolder;
+    color: var(--pink);
+}
+
+.comment_title_dark{
+    font-size: 1.4rem;
+    color: var(--pink);
+    font-weight: bolder;
+    
+
+}
+
+.comment_text_light{
+    font-size: 1.2rem;
+    color: var(--hover-font-dark);
+}
+
+
+.comment_text_dark{
+    font-size: 1.2rem;
+     color: beige;
+    
+}
+
+
+.formattedTime{
+    font-size: 1rem;
+    margin: 0px 10px;
+    opacity: 0.6;
+
+}
+
+
+.reaction_div{
+    display: flex;
+    flex-direction: column;
+    width: 5vw;
+    align-items: center;
+}
+
+.like_reaction_icon, .reply_reaction_icon, .report_reaction_icon{
+    transition: 0.4s ease;
+    margin: 15px 0px 15px 5px;
+    width: clamp(20px, 4vw, 40px);
+    font-size: clamp(24px, 2rem, 2.2rem);
+    color: var(--pink_opaque);
+}
+
+
+.like_reaction_icon:hover, .reply_reaction_icon:hover, .report_reaction_icon:hover{
+    cursor: pointer;
+    color: red;
+}
+
+.mobile_reactions_icon{
+    display: none;
+    color: var(--pink_opaque);
+}
+
+
+
+@media screen and (max-width: 1600px){
+
+    .createComment_div textarea{
+        width: 60vw;
+    }
+
+
+    .createComment_div button{
+        width: 60vw;
+    }
+}
+
+
+
+@media screen and (max-width: 1200px){
+
+    .createComment_div textarea{
+        width: 95vw;
+    }
+
+
+    .createComment_div button{
+        width: 95vw;
+    }
+
+      .comments_container_dark, .comments_container{
+        margin-top: -100px;
+
+    }
+}
+
+@media screen and (max-width: 800px){
+
+    
+
+    .image_container{
+        width: 100px;
+    
+
+    }
+
+
+    .comment_user_image{
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+ 
+}
+
+
+
+
+@media screen and (max-width: 600px){
+
+
+  
+    .reaction_div{
+        position: absolute;
+        left: 30px;
+        bottom: 40px;
+
+    }
+
+    .like_reaction_icon, .reply_reaction_icon, .report_reaction_icon{
+        display: none;
+    }
+
+    .mobile_reactions_icon{
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        transition: 0.4s ease;
+        cursor: pointer;
+    }
+
+   
+
+    .image_container{ 
+        width: 100px;
+        height: 80px;
+        margin-left: 5px;
+        margin-right: 10px;
+
+    }
+
+
+    .comment_user_image{
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        margin: 0;
+    }
+}

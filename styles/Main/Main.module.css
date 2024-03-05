@@ -6,7 +6,7 @@
     justify-content: center;
     position: relative;
     background: var(--background-end-rgb);
-   
+    overflow-x: hidden;
     
 }
 
@@ -17,6 +17,8 @@
     position: relative;
     background: var(--background_dark);
     width: 100vw;
+    overflow-x: hidden;
+    
     
     
     
