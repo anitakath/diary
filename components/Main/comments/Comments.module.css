@@ -30,8 +30,7 @@
     margin: 0px 20px;
     font-size: 1.5rem;
     border-bottom: 0.2px solid grey;
-    color: silver;
-    
+    color: silver;   
 }
 
 
@@ -125,16 +124,15 @@
     margin: 20px 10px;
     padding: 5px;
     display: flex;
-    height: 200px;
     position: relative;
+    height: 200px;
 }
 
 .image_container{
     background: red;
     width: 10%;
-    height: 100px;
+    height: 150px;
     margin: 0px 20px;
-
 }
 
 
@@ -161,19 +159,19 @@
     font-size: 1.4rem;
     color: var(--pink);
     font-weight: bolder;
-    
 
 }
 
 .comment_text_light{
     font-size: 1.2rem;
     color: var(--hover-font-dark);
+    color: red;
 }
 
 
 .comment_text_dark{
     font-size: 1.2rem;
-     color: beige;
+    color: beige;
     
 }
 
@@ -196,8 +194,8 @@
 .like_reaction_icon, .reply_reaction_icon, .report_reaction_icon{
     transition: 0.4s ease;
     margin: 15px 0px 15px 5px;
-    width: clamp(20px, 4vw, 40px);
-    font-size: clamp(24px, 2rem, 2.2rem);
+    width: clamp(20px, 4vw, 30px);
+    font-size: clamp(24px, 2rem, 2rem);
     color: var(--pink_opaque);
 }
 
@@ -224,6 +222,8 @@
     .createComment_div button{
         width: 60vw;
     }
+
+  
 }
 
 
@@ -243,16 +243,25 @@
         margin-top: -100px;
 
     }
+
+    .image_container{
+        width: 15%; 
+        transition: 0.4s ease;
+        position: relative;
+        left: -10px;
+    }
+
+     
+
 }
 
 @media screen and (max-width: 800px){
 
     
-
     .image_container{
-        width: 100px;
-    
-
+        height: 120px;  
+        left: -30px;
+        width: 20%;
     }
 
 
@@ -271,10 +280,15 @@
 @media screen and (max-width: 600px){
 
 
+     .image_container{
+        height: 120px;  
+        left: -20px;
+        width: 30%;
+    }
   
     .reaction_div{
         position: absolute;
-        left: 30px;
+        left: 40px;
         bottom: 40px;
 
     }
@@ -293,13 +307,8 @@
 
    
 
-    .image_container{ 
-        width: 100px;
-        height: 80px;
-        margin-left: 5px;
-        margin-right: 10px;
-
-    }
+ 
+    
 
 
     .comment_user_image{

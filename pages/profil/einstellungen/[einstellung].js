@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/router";
-
+import { useState, useEffect } from "react";
 
 //COMPONENTS
 import SettingsNavigation from "@/components/Main/Settings/Navigation/SettingsNavigation";
@@ -24,32 +24,47 @@ import { useSelector } from "react-redux";
 const SettingPage = () =>{
 
     const router = useRouter();
-    const { setting } = router.query;
+    const { einstellung } = router.query;
+
+
+    const nightMode = useSelector((state) => state.toggle.isNightMode);
+    const [style, setStyle] = useState(false);
+
+    useEffect(() => {
+      setStyle(nightMode);
+    }, [nightMode]);
+
+
+    console.log(einstellung)
+
+    console.log(router.pathname);
 
     const renderSelectedComponent = () => {
-        switch(setting) {
-        case 'account':
+        switch (einstellung) {
+          case "account":
             return <AccountSettings />;
-        case 'profile':
+          case "profil":
             return <ProfileSettings />;
-        case 'security':
+          case "sicherheit":
             return <SecuritySettings />;
-        // ... Weitere Fälle für andere Einstellungs-Komponenten
-        default:
+          // ... Weitere Fälle für andere Einstellungs-Komponenten
+          default:
             return null;
         }
     }
 
-      const nightMode = useSelector((state) => state.toggle.isNightMode);
+    
 
     return (
       <div>
-        <div className={nightMode ? styles.container_dark : styles.container}>
+        <div className={style ? styles.container_dark : styles.container}>
           <h1 className={styles.settings_title}> Nutzereinstellungen </h1>
           <SettingsNavigation />
+  
           <div className={styles.settings_output_container}>
             {renderSelectedComponent()}
           </div>
+   
         </div>
       </div>
     );

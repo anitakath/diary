@@ -11,12 +11,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggle } from "@/store/toggleSlice";
 
 //STYLE
-import styles from '../../styles/Header/LoggedInMenu.module.css'
+import styles from '../../styles/Header/Menu.module.css'
 
 //UI
 import Slider from "../UI/Slider";
 
-const LoggedInMenu = (props) => {
+const Menu = (props) => {
 
   const router = useRouter();
 
@@ -83,8 +83,8 @@ const LoggedInMenu = (props) => {
       </Link>
 
       <Link
-        href="/profile/settings"
-        style={router.pathname === "/profile/settings" ? activeLinkStyle : null}
+        href="/profil/einstellungen"
+        style={router.pathname === "/profil/einstellungen" ? activeLinkStyle : null}
       >
         {" "}
         Profileinstellungen{" "}
@@ -110,4 +110,4 @@ const LoggedInMenu = (props) => {
   );
 };
 
-export default LoggedInMenu;
+export default Menu;

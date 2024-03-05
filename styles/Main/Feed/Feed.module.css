@@ -1,5 +1,8 @@
 .container{
     position: relative;
+
+
+
     
 
 }
@@ -21,6 +24,6 @@
 
 
 .post_container{
-    height: 300px;
-    overflow: scroll;
+    background: var(--background-secondary);
+    margin: 20px 0px;
 }

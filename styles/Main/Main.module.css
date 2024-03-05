@@ -5,7 +5,7 @@
     display: flex;
     justify-content: center;
     position: relative;
-    background: var(--background-end-rgb);
+    background: white;
     overflow-x: hidden;
     
 }
@@ -18,11 +18,12 @@
     background: var(--background_dark);
     width: 100vw;
     overflow-x: hidden;
-    
+
     
     
     
 }
+
 
 .main_container{
     display: flex;
@@ -34,7 +35,6 @@
 
 .output_field{
     border-radius: 5px;
-    background: rgba(93,87,107, 0.2);
     width: 50vw;
     min-height: 500vh;
     margin: 5px;

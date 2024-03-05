@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 
 //STYLES
 import styles from '../../styles/Main/WebUser.module.css'
@@ -18,8 +19,12 @@ import { useSelector, useDispatch } from "react-redux";
 const WebUser = () => {
 
 
-    const nightMode = useSelector((state) => state.toggle.isNightMode);
+ const nightMode = useSelector((state) => state.toggle.isNightMode);
+ const [style, setStyle] = useState(false);
 
+ useEffect(() => {
+   setStyle(nightMode);
+ }, [nightMode]);
 
 
 
@@ -27,7 +32,7 @@ const WebUser = () => {
     <div className={styles.container}>
       <div
         className={`${styles.fixed_div} ${
-          nightMode ? styles.dark : styles.light
+          style ? styles.dark : styles.light
         }`}
       >
         <Image

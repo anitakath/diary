@@ -1,6 +1,6 @@
 
 import Link from "next/link";
-
+import { useState, useEffect } from "react";
 //COMPONENTS
 import ProfileSettings from "@/components/Main/Settings/ProfileSettings";
 import SettingsNavigation from "@/components/Main/Settings/Navigation/SettingsNavigation";
@@ -16,19 +16,28 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 
+
 //REDUX
 import { useSelector } from "react-redux";
 
 
 const Settings = () =>{
 
+   const nightMode = useSelector((state) => state.toggle.isNightMode);
+   const [style, setStyle] = useState(false);
 
-  const nightMode = useSelector((state) => state.toggle.isNightMode)
+   useEffect(() => {
+     setStyle(nightMode);
+   }, [nightMode]);
+
+
+
+
 
     return (
       <div
         className={
-          nightMode ? styles.profileContainer_dark : styles.profileContainer
+          style ? styles.profileContainer_dark : styles.profileContainer
         }
       >
         <h1 className={styles.settings_title}> Nutzereinstellungen </h1>

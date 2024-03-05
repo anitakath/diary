@@ -14,23 +14,23 @@ import styles from '../../styles/Main/Main.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 
 
-const Main = memo((props) => {
-
-  const currentFilter = useSelector((state) => state.filter);
-  const nightMode = useSelector((state) => state.toggle.isNightMode)
 
 
+const Main = (props) => {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const nightMode = useSelector((state) => state.toggle.isNightMode);
+  const [style, setStyle] = useState(false)
+
+    useEffect(() => {
+      setStyle(nightMode);
+    }, [nightMode]);
 
 
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
-
-
-
-
- 
-
+    
   return (
-    <div className={nightMode ? styles.container_dark : styles.container}>
+    <div
+      className={style ? styles.container_dark : styles.container}
+    >
       {!isLoggedIn && <Login />}
 
       {isLoggedIn && (
@@ -38,7 +38,7 @@ const Main = memo((props) => {
           <div className={styles.output_field}>
             <Feed
               posts={props.posts}
-              currentGoogleUserId = {props.currentGoogleUserId}
+              currentGoogleUserId={props.currentGoogleUserId}
             />
           </div>
           <WebUser />
@@ -46,6 +46,6 @@ const Main = memo((props) => {
       )}
     </div>
   );
-});
+};
 
 export default Main;  

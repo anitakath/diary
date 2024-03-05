@@ -24,8 +24,17 @@ import { filter } from '@/store/filterSlice';
 const Profile = () =>{
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
-  const nightMode = useSelector((state)=> state.toggle.isNightMode)
+
   const currUser = useSelector((state) => state.user)
+
+   const nightMode = useSelector((state) => state.toggle.isNightMode);
+   const [style, setStyle] = useState(false);
+
+   useEffect(() => {
+     setStyle(nightMode);
+   }, [nightMode]);
+
+
 
   console.log(currUser.email);
 
@@ -120,7 +129,7 @@ const Profile = () =>{
               <div className={styles.image_div}>
                 <div
                   className={`${styles.image_wrapper} ${
-                    nightMode
+                    style
                       ? styles.image_wrapper_dark
                       : styles.image_wrapper_light
                   }`}

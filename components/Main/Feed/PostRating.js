@@ -29,7 +29,7 @@ const PostRating = (props) => {
 
   const dispatch = useDispatch();
   const currCount = useSelector((state) => state.counter);
-  const nightMode = useSelector((state) => state.toggle)
+  const nightMode = useSelector((state) => state.toggle.isNightMode)
 
   const [votes, setVotes] = useState(props.votes)
   const [isUpvoted, setIsUpvoted] = useState(false)

@@ -17,7 +17,7 @@ import { RedditContext } from "@/context/RedditContext";
 
 const Post = memo((props) => {
   
-  const nightMode = useSelector((state) => state.toggle);
+  const nightMode = useSelector((state) => state.toggle.nightMode);
 
   const { id, created_at,content,  author, title, description, upvotes, downvotes } =
     props;

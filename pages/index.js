@@ -159,12 +159,15 @@ export default function Home() {
   if(currentGoogleUser){
     googleUserId = currentGoogleUser.user.id
   }
- 
+
+    const nightMode = useSelector((state) => state.toggle.isNightMode);
+
+
 
 
   return (
     <div className="App">
-      <Main posts={myPosts} currentGoogleUserId={googleUserId} />
+      <Main posts={myPosts} currentGoogleUserId={googleUserId} nightMode={nightMode} />
     </div>
   );
           

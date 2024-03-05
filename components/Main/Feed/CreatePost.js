@@ -31,6 +31,10 @@ const CreatePost = () => {
 
   const { currentGoogleUser } = useContext(RedditContext);
 
+  const nightMode = useSelector((state) => state.toggle.isNightMode);
+
+ 
+
   // const [showImage, setShowImage] = useState(false);
 
   let avatarUrl;

@@ -23,7 +23,7 @@ const Filter = () => {
 
 
   const currentFilter = useSelector((state) => state.filter);
-  const nightMode = useSelector((state) => state.toggle);
+  const nightMode = useSelector((state) => state.toggle.nightMode);
 
   //console.log(currentFilter)
   const [bestIsActive, setBestIsActive] = useState(false);

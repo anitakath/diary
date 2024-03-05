@@ -1,14 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
+let initialState = {
+  isNightMode: false,
+};
 
+
+
+if (typeof window !== "undefined") {
+  const isNightModeInLocalStorage = localStorage.getItem("isNightMode");
+  initialState = {
+    isNightMode: isNightModeInLocalStorage
+      ? JSON.parse(isNightModeInLocalStorage)
+      : false,
+  };
+}
+
+console.log(initialState)
 const toggleSlice = createSlice({
   name: "toggle",
-  initialState: {
-    isNightMode: false,
-  },
+  initialState,
   reducers: {
     toggle: (state) => {
+      
 
       //console.log(state.isNightMode)
       //return !state; // Kürzere und korrekte Art, den Zustand umzuschalten

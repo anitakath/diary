@@ -19,57 +19,46 @@ import { useSelector } from "react-redux";
 import { current } from "@reduxjs/toolkit";
 
 const Feed = React.memo((props) => {
-
-
   const currentFilter = useSelector((state) => state.filter);
   const loadedPosts = props.posts;
 
+
+   const nightMode = useSelector((state) => state.toggle.isNightMode);
+
+   console.log(nightMode)
+  
+
   //console.log(props.posts)
 
-  const [loadingPosts, setLoadingPosts] = useState(false)
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [posts, setPosts] = useState([])
+  const [loadingPosts, setLoadingPosts] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [posts, setPosts] = useState([]);
 
-
-  const { id, created_at,content,  author, title, description, upvotes, downvotes } = props;
-  
-  
+  const {
+    id,
+    created_at,
+    content,
+    author,
+    title,
+    description,
+    upvotes,
+    downvotes,
+  } = props;
 
   let totalvote = upvotes - downvotes;
-
-
-
 
   const storedFilter =
     typeof window !== "undefined"
       ? localStorage.getItem("selectedFilter") || "beste"
       : "beste";
 
-  useEffect(()=>{
-
-  
-
-      if (loadedPosts) {
-        setIsLoaded(true);
-        setPosts(loadedPosts)
-        setLoadingPosts(false)
-      }
-     
-
-   
-  }, [props.posts, currentFilter]) 
-
-
-
-
-
-
-
-
-    
-
-
-
+  useEffect(() => {
+    if (loadedPosts) {
+      setIsLoaded(true);
+      setPosts(loadedPosts);
+      setLoadingPosts(false);
+    }
+  }, [props.posts, currentFilter]);
 
   return (
     <div className={styles.container}>
@@ -80,7 +69,8 @@ const Feed = React.memo((props) => {
       {loadingPosts && (
         <p className={styles.loadingPostsParagraph}> loading posts ...</p>
       )}
-      {isLoaded && currentFilter.selectedFilter === "deine" &&
+      {isLoaded &&
+        currentFilter.selectedFilter === "deine" &&
         posts.map((post, id) => (
           <div className={styles.post_container}>
             <Post

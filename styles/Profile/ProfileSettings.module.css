@@ -43,49 +43,7 @@
 }
 
 
-/*
 
-.settings_div{
-    display: flex;
-    margin-top: 15px;
-    border-bottom: 2px solid grey;
-    position: relative;
-}
-
-
-.active{
-    color: var(--pink);
-}
-
-.settings_link{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.settings_link_web{
-    margin: 5px 20px;
-    display: flex;
-    align-items: center;
-    display: inline-block;
-}
-
- .settings_links_mobile{
-     display: none;
-     transition: 0.4s ease;
- }
-
-
-.settings_link, .home_button{
-    margin: 5px 10px;
-    font-size: 1rem;
-}
-
-.home_button{
-    position: absolute;
-    right: 10px;
-    font-size: 1.3rem;
-}*/
 
 .settings_output_container{
     min-height: 78vh;

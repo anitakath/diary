@@ -13,7 +13,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { login } from "@/store/authSlice";
 
 //COMPONENTS
-import LoggedInMenu from "./LoggedInMenu";
+import Menu from "./Menu";
 
 import SearchBar from "../UI/SearchBar";
 
@@ -128,7 +128,7 @@ const Header = () => {
             ></div>
           )}
 
-          {menuIsOpen && <LoggedInMenu setMenuIsOpen={setMenuIsOpen} />}
+          {menuIsOpen && <Menu setMenuIsOpen={setMenuIsOpen} />}
         </div>
       )}
 

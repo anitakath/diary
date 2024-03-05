@@ -11,7 +11,7 @@ import styles from "../../../../styles/Profile/Settings/SettingsNavigation.modul
 
 
 //COMPONENTS
-import SettingsNavigationMobile from './SettingsNavigationMobile'
+import SettingsNavigationWeb from './SettingsNavigationWeb'
 import { current } from "@reduxjs/toolkit";
 
 
@@ -28,7 +28,7 @@ const SettingsNavigation = () => {
   return (
     <div className={styles.settings_div}>
       <Link
-        href="/profile/settings/account"
+        href="/profil/einstellungen/account"
         className={`${styles.settings_link} ${
           currentPath === "account" ? styles.active : "  "
         }`}
@@ -36,16 +36,15 @@ const SettingsNavigation = () => {
         Konto
       </Link>
       <Link
-        href="/profile/settings/profile"
+        href="/profil/einstellungen/profil"
         className={`${styles.settings_link} ${
-          currentPath === "profile" ? styles.active : ""
+          currentPath === "profil" ? styles.active : ""
         }`}
       >
-     
         Profil
       </Link>
       <Link
-        href="/profile/settings/security"
+        href="/profil/einstellungen/sicherheit"
         className={`${styles.settings_link} ${
           currentPath === "security" ? styles.active : ""
         }`}
@@ -53,7 +52,7 @@ const SettingsNavigation = () => {
         Sicherheit & Datenschutz
       </Link>
 
-      <SettingsNavigationMobile />
+      <SettingsNavigationWeb />
 
       <Link href="/profile" className={styles.home_button}>
         <FontAwesomeIcon icon={faRedditAlien}></FontAwesomeIcon>

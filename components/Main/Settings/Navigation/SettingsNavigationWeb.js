@@ -6,7 +6,7 @@ import styles from "../../../../styles/Profile/Settings/SettingsNavigation.modul
 
 
 
-const SettingsNavigationMobile = () =>{
+const SettingsNavigationWeb = () =>{
 
 
 
@@ -14,31 +14,31 @@ const SettingsNavigationMobile = () =>{
       
       <div>
         <Link
-          href="/profile/settings/account"
+          href="/profil/einstellungen/feed"
           className={styles.settings_link_web}
         >
           Feedeinstellungen
         </Link>
         <Link
-          href="/profile/settings/account"
+          href="/profil/einstellungen/benachrichtigungen"
           className={styles.settings_link_web}
         >
           Benachrichtigungen
         </Link>
         <Link
-          href="/profile/settings/account"
+          href="/profil/einstellungen/mails"
           className={styles.settings_link_web}
         >
           Mails
         </Link>
         <Link
-          href="/profile/settings/account"
+          href="/profil/einstellungen/abos"
           className={styles.settings_link_web}
         >
           Abos
         </Link>
         <Link
-          href="/profile/settings/account"
+          href="/profile/settings/chats"
           className={styles.settings_link_web}
         >
           Chats & Nachrichten
@@ -47,4 +47,4 @@ const SettingsNavigationMobile = () =>{
     );
 }
 
-export default SettingsNavigationMobile
+export default SettingsNavigationWeb

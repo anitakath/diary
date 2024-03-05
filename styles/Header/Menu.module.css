@@ -11,7 +11,6 @@
     display: flex;
     flex-direction: column;position: fixed;
     color: beige;
-    box-shadow: 1px 1px 5px grey;
     height: 100vh;
     overflow: scroll;
     top: 0;

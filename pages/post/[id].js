@@ -91,8 +91,18 @@ const PostDetails = (props) =>{
   }, [postId])
   
 
+   const nightMode = useSelector((state) => state.toggle.isNightMode);
+   const [style, setStyle] = useState(false);
 
-  const nightMode = useSelector((state) => state.toggle.isNightMode);
+   useEffect(() => {
+     setStyle(nightMode);
+   }, [nightMode]);
+
+
+
+
+
+  console.log(nightMode)
 
   const handleGoBack = () => {
     router.back();
@@ -102,7 +112,7 @@ const PostDetails = (props) =>{
   console.log(postDetails)
 
   return (
-    <div className={nightMode ? styles.container_dark : styles.container_light}>
+    <div className={style ? styles.container_dark : styles.container_light}>
      
       <div className={styles.comment_wrapper}>
         <div className={nightMode ? styles.post_dark : styles.post_light}>
