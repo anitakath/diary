@@ -17,16 +17,7 @@
 }
 
 
-/*
-.profile_container{
-    width: 100vw;
-    min-height:100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid orange;
-}
-*/
+
 .settings_output_container{
     width: 100%;
     min-height: 100vh;
@@ -45,17 +36,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background: var(--background-secondary);
 }
 
-.setting_div_light{
-    background: var(--pink);
 
-
-}
-.setting_div_dark{
-    background: var(--background_light_opaque);
-
-}
 
 
 @media screen and (max-width: 1300px){

@@ -25,10 +25,6 @@ const Menu = (props) => {
 
 
   const nightMode = useSelector((state) => state.toggle.isNightMode)
-
-  console.log(nightMode)
-
-  console.log(nightMode)
   
 
    const activeLinkStyle = {
@@ -38,7 +34,6 @@ const Menu = (props) => {
 
 
   const logoutHandler = async () =>{
-
     const {error} = await supabase.auth.signOut();
 
     if(error){
@@ -58,8 +53,6 @@ const Menu = (props) => {
   const setMenuIsOpen = props.setMenuIsOpen
 
   const closeModalHandler = () =>{
-
-
     setMenuIsOpen(false)
   }
 
@@ -91,7 +84,7 @@ const Menu = (props) => {
       </Link>
 
       <Link
-        href="/profile"
+        href="/profil"
         style={router.pathname === "/profile" ? activeLinkStyle : null}
       >
         {" "}

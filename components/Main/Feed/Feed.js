@@ -16,19 +16,12 @@ import styles from '../../../styles/Main/Feed/Feed.module.css'
 
 //REDUX 
 import { useSelector } from "react-redux";
-import { current } from "@reduxjs/toolkit";
+
 
 const Feed = React.memo((props) => {
   const currentFilter = useSelector((state) => state.filter);
   const loadedPosts = props.posts;
 
-
-   const nightMode = useSelector((state) => state.toggle.isNightMode);
-
-   console.log(nightMode)
-  
-
-  //console.log(props.posts)
 
   const [loadingPosts, setLoadingPosts] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -45,7 +38,7 @@ const Feed = React.memo((props) => {
     downvotes,
   } = props;
 
-  let totalvote = upvotes - downvotes;
+
 
   const storedFilter =
     typeof window !== "undefined"
@@ -60,6 +53,8 @@ const Feed = React.memo((props) => {
     }
   }, [props.posts, currentFilter]);
 
+
+
   return (
     <div className={styles.container}>
       <Filter />
@@ -69,17 +64,15 @@ const Feed = React.memo((props) => {
       {loadingPosts && (
         <p className={styles.loadingPostsParagraph}> loading posts ...</p>
       )}
-      {isLoaded &&
-        currentFilter.selectedFilter === "deine" &&
-        posts.map((post, id) => (
-          <div className={styles.post_container}>
-            <Post
-              {...post}
-              key={id}
-              currentGoogleUserId={props.currentGoogleUserId}
-            />
-          </div>
-        ))}
+      <div className={styles.post_div}>
+        {isLoaded &&
+          currentFilter.selectedFilter === "deine" &&
+          posts.map((post, index) => (
+            <div className={styles.post_container} key={index}>
+              <Post {...post} currentGoogleUserId={props.currentGoogleUserId} />
+            </div>
+          ))}
+      </div>
     </div>
   );
 });

@@ -1,11 +1,10 @@
 .container{
     position: relative;
-
-
-
-    
-
 }
+
+
+
+
 
 .loadingPostsParagraph{
     display: flex;
@@ -22,8 +21,11 @@
     background: pink;
 }
 
+.post_div{
+    margin: 50px 0px;
+}
 
 .post_container{
     background: var(--background-secondary);
-    margin: 20px 0px;
+    margin: 50px 0px;
 }

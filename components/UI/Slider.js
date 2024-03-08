@@ -34,7 +34,7 @@ const Slider = () => {
      }
    }, []);
 
-  console.log(isNightMode)
+
 
   const toggleHandler = () => {
     const newNightMode = !isNightMode;
@@ -45,12 +45,6 @@ const Slider = () => {
 
 
   };
-
-
-  console.log(toggleMode)
-  console.log(isNightMode)
-
-
 
 
   

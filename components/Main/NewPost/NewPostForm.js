@@ -2,7 +2,7 @@ import Link from "next/link";
 
 
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/services/supabaseClient";
 
 //STYLES
@@ -27,6 +27,13 @@ const NewPostForm = () => {
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
 
+  const nightMode = useSelector((state) => state.toggle.isNightMode);
+  const [style, setStyle] = useState(false);
+
+  useEffect(() => {
+    setStyle(nightMode);
+  }, [nightMode]);
+
 
 
 
@@ -42,8 +49,6 @@ const NewPostForm = () => {
   const dispatch = useDispatch();
 
   const currFilter = useSelector((state) => state.filter)
-  const nightMode = useSelector((state) => state.toggle.isNightMode)
-
 
 
 
@@ -86,7 +91,7 @@ const NewPostForm = () => {
 
 
   return (
-    <div className={nightMode ? styles.container_dark : styles.container}>
+    <div className={style ? styles.container_dark : styles.container}>
       {isLoggedIn && (
         <div className={styles.createPost_Wrapper}>
           <div className={styles.title_container}>
@@ -134,9 +139,9 @@ const NewPostForm = () => {
             </form>
 
             <div className={styles.webUser_container}>
-              <div className={styles.webUser_fixed}>
-                <WebUser />
-              </div>
+        
+              <WebUser />
+ 
             </div>
           </div>
         </div>

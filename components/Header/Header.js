@@ -80,7 +80,6 @@ const Header = () => {
     window.location.reload();
   };
   
-  console.log(nightMode)
 
   return (
     <div className={styles.container}>

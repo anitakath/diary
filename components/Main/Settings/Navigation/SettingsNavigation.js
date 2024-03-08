@@ -18,11 +18,11 @@ import { current } from "@reduxjs/toolkit";
 const SettingsNavigation = () => {
   const router = useRouter();
 
-  console.log(router.pathname);
+
   //const currentPath = router.pathname.split("/")[3]; // Extrahiert den Wert aus dem Platzhalter
   const currentPath = router.asPath.split("/")[3]; // Extrahiert den Wert aus dem Platzhalter
 
-  console.log(currentPath);
+
 
   
   return (

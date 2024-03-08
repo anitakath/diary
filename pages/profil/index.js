@@ -36,7 +36,7 @@ const Profile = () =>{
 
 
 
-  console.log(currUser.email);
+  
 
   const { currentGoogleUser } = useContext(RedditContext);
 
@@ -73,15 +73,15 @@ const Profile = () =>{
 
       
       const data = await response.json(); // Wandelt die Response in ein JSON-Objekt um
-      console.log(data.data); // Gibt das JSON-Objekt mit den Benutzerdaten in der Konsole aus
+      //console.log(data.data); // Gibt das JSON-Objekt mit den Benutzerdaten in der Konsole aus
 
       const filterUser = data.data.find(user => user.email === currUser.email)
 
       if(filterUser){
-        console.log(filterUser)
+ 
         setFilteredUser(filterUser)
       } else{
-        console.log('kein user gefunden')
+        //console.log('kein user gefunden')
       }
     }
 
@@ -94,8 +94,6 @@ const Profile = () =>{
   const [filteredUser, setFilteredUser] = useState({})
 
 
-  console.log(filteredUser);
-
 
 
   let avatarUrl;
@@ -106,8 +104,7 @@ const Profile = () =>{
   } else {
     avatarUrl = filteredUser.profileImage;
   }
-
-  console.log(avatarUrl)
+ 
 
   return (
     <div>
@@ -136,10 +133,12 @@ const Profile = () =>{
                 >
                   <Image
                     alt="Foto des Users"
-                    src={avatarUrl}
+                    src={avatarUrl || "/placeholder.jpg"}
                     width={80}
                     height={200}
                     className={styles.users_image}
+                    xw="true"
+                    priority
                   ></Image>
                 </div>
               </div>
@@ -155,7 +154,11 @@ const Profile = () =>{
                   </span>
                 </h2>
                 <h2 className={styles.userData_subtitle}>
-                  Vorname: <span> {currUser.name}  {fName_google} </span>
+                  Vorname:{" "}
+                  <span>
+                    {" "}
+                    {currUser.name} {fName_google}{" "}
+                  </span>
                 </h2>
                 <h2 className={styles.userData_subtitle}>
                   E-Mail:

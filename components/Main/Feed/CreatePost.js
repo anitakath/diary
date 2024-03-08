@@ -14,10 +14,8 @@ import styles from '../../../styles/Main/Feed/CreatePost.module.css'
 
 //FONT AWESOME
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faImage } from "@fortawesome/free-regular-svg-icons";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
-//import { faUpRightAndDownLeftFromCenter } from "@fortawesome/free-solid-svg-icons";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faQuestion } from "@fortawesome/free-solid-svg-icons";
 
@@ -35,7 +33,7 @@ const CreatePost = () => {
 
  
 
-  // const [showImage, setShowImage] = useState(false);
+
 
   let avatarUrl;
 
@@ -47,9 +45,7 @@ const CreatePost = () => {
    
   }
 
-  const [showImage, setShowImage] = useState(!!avatarUrl);
 
- 
   return (
     <div className={styles.createPost_container}>
       <div className={styles.userImage_container}>
@@ -57,10 +53,12 @@ const CreatePost = () => {
           {isLoggedIn ? (
             <Image
               alt="foto des Users"
-              src={avatarUrl}
-              width={80}xw
+              src={avatarUrl || "/placeholder.jpg"}
+              width={80}
               height={200}
               className={styles.users_image}
+              xw="true"
+              priority
             ></Image>
           ) : (
             <FontAwesomeIcon icon={faQuestion} className={styles.icon} />

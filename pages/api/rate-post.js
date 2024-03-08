@@ -7,13 +7,6 @@ import { useState } from "react";
 
 export async function updatePostVotes(req, res) {
   const { postId, type, userId, isUpvoted, isDownvoted, isUpvotedTwice, isDownvotedTwice } = req;
-  //console.log(postId);
-  //console.log(type);
-  //console.log(userId)
-  //console.log(isUpvoted)
-  //console.log(isDownvoted)
-  //console.log(isUpvotedTwice)
-  //console.log(isDownvotedTwice)
   
 
   if (!postId || !type || !userId) {
@@ -30,7 +23,7 @@ export async function updatePostVotes(req, res) {
     .eq("id", postId);
 
 
-    console.log(data)
+  
   
 
 
@@ -116,7 +109,6 @@ export async function updatePostVotes(req, res) {
         const upvotes = data[0].upvotes;
         const downvotes = data[0].downvotes;
         const totalVotes = upvotes - downvotes;
-        //console.log(totalVotes);
 
         await supabase
           .from("feed_dummy")
@@ -207,7 +199,7 @@ export async function updatePostVotes(req, res) {
         const upvotes = data[0].upvotes;
         const downvotes = data[0].downvotes;
         const totalVotes = upvotes - downvotes;
-        console.log(totalVotes);
+
 
         await supabase
           .from("feed_dummy")

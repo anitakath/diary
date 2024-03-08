@@ -6,10 +6,8 @@ import { filter, setActButton} from "@/store/filterSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 
-
 //STYLES
 import styles from "../../../styles/Main/Feed/Filter.module.css";
-import { current } from "@reduxjs/toolkit";
 
 const Filter = () => {
 
@@ -89,47 +87,28 @@ const Filter = () => {
       dispatch(filter("beste"));
       dispatch(setActButton('beste' ));
       console.log('title')
-      
-
-
       setActiveButton(title)
-
      
 
     } else if (title === "heiß") {
       dispatch(filter("heiß"));
       dispatch(setActButton('heiß' ));
       //dispatch(setActiveButton(title));
-
-
       setActiveButton(title);
-
-      
 
 
     } else if (title === "neu") {
       dispatch(filter("neu"));
       //dispatch(setActiveButton(title));
-
-
       setActiveButton(title);
-
-
-
     } else if (title === "top") {
       dispatch(filter("top"));
       //dispatch(setActiveButton(title));
-
-
       setActiveButton(title);
-
-
 
     } else if (title === "deine") {
       dispatch(filter("deine"));
       //dispatch(setActiveButton(title));
-
-
       setActiveButton(title);
 
     }

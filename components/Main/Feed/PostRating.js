@@ -1,11 +1,8 @@
 //STYLES
 import styles from "../../../styles/Main/Feed/Post.module.css";
 
-//CONTEXT
-import { RedditContext } from "@/context/RedditContext";
 
-
-import { useContext, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 
 //FONT AWESOME
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -21,14 +18,12 @@ import { updatePostVotes } from "../../../pages/api/rate-post";
 
 //SUPABASE
 import { supabase } from "@/services/supabaseClient";
-import { current } from "@reduxjs/toolkit";
 
 
 
 const PostRating = (props) => {
 
-  const dispatch = useDispatch();
-  const currCount = useSelector((state) => state.counter);
+
   const nightMode = useSelector((state) => state.toggle.isNightMode)
 
   const [votes, setVotes] = useState(props.votes)
@@ -64,7 +59,6 @@ const PostRating = (props) => {
     }
 
     if(isUpvoted){
-      console.log('post is already upvoted')
       setIsUpvotedTwice(true)
       setIsUpvoted(false)
 
@@ -105,8 +99,9 @@ const PostRating = (props) => {
 
 
      if (isDownvoted) {
-       console.log("post is already downvoted");
+
        setIsDownvotedTwice(true);
+       alert('du hast den Beitrag bereits gedownvoted')
        setIsDownvoted(false);
 
        await updatePostVotes({

@@ -46,11 +46,6 @@
     align-items: center;
     width: 10vw;
 
-
-
-
-
-
     /*border: 2px solid blue;*/
 }
 
@@ -76,22 +71,14 @@
 
 
 
-
-
-
-
 .login_container{
     display: flex;
     width: 28vw;
     display: flex;
-
-
-
     justify-content: end;
+    position: relative;
+    top: 2px;
 
-
-
-    /*border: 2px solid blue;*/
 }
 
 
@@ -126,7 +113,7 @@
 
 .user:hover{
     transition: 0.4s ease;
-    color: var(--hover-font-dark);
+    color: silver;
     cursor: pointer;
 }
 

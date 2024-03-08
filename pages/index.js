@@ -96,7 +96,7 @@ export default function Home() {
             currentGoogleUser.user.identities[0].identity_data.email
           );
       } else {
-        console.log(" else => user did not exist @ supabase users ");
+        //console.log(" else => user did not exist @ supabase users ");
         // Der Benutzer existiert noch nicht - füge ihn hinzu
         await supabase.from("users").upsert(
           {
@@ -120,37 +120,8 @@ export default function Home() {
   }
 
 
-  /*
-  useEffect(() =>{
-    if (!data) return
-    setMyPosts(data.data)
-  }, [data])*/
-
-  /*
-  useEffect(()=>{
-    saveAndUpdateUser()
-    //console.log('Save user')
-  }, [currentGoogleUser])
-  */
-
 
   
-  /*
-
-  useEffect(() => {
-    if (error) {
-      console.error("Error fetching data:", error);
-    }
-    if (data && data.data.length > 0) {
-      setMyPosts(data);
-    }
-  }, [data, error]);
-
-  useEffect(()=>{
-    if(!data) return
-
-    setMyPosts(data.data)
-  }, [data])*/
 
 
 
