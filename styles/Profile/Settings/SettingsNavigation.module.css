@@ -5,7 +5,39 @@
     margin-top: 15px;
     border-bottom: 2px solid grey;
     position: relative;
+    height: 60px;
 }
+
+
+.navigation_div{
+    width: 70%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    transition: 0.4s ease;
+
+}
+
+
+.navigation_div li{
+    width: 200px;
+    height: 100%;
+    display: flex;
+
+    /*border: 2px solid red;*/
+
+}
+
+
+.settings_link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    margin: 5px 10px;
+    transition: 0.4s ease;
+}
+
 
 
 
@@ -13,36 +45,182 @@
     color: var(--pink);
 }
 
-.settings_link{
+
+
+
+.webNavigation_btn{
+    width: 150px;
+    height: 85%;
+    cursor: pointer;
+    margin: 0px 50px;
+    background: var(--background_dark_opaque);
+    transition: 0.4s ease;
+}
+
+
+
+
+
+.icon_container{
+    width: 30%;
     display: flex;
+    justify-content: end;
+    transition: 0.4s ease;
+
+
+
+    /*    border: 2px solid blue;  */
+}
+
+.profile_button{
+    position: relative;
+    right: 10px;
+    height: 50px;
+    width: 50px;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    font-size: clamp(1rem, 2rem, 35px);
+
+
+    /*border: 2px solid blue;*/
 }
 
-.settings_link_web{
-    margin: 5px 20px;
-    display: flex;
-    align-items: center;
-    display: inline-block;
-}
-
- .settings_links_mobile{
-     display: none;
-     transition: 0.4s ease;
- }
-
-
- .settings_link, .home_button{
-    margin: 5px 10px;
+.profile_button p{
     font-size: 1rem;
+    color: silver;
 }
 
-.home_button{
+
+
+
+
+
+
+
+
+
+
+
+.navigation_div{
+    width: 80%;
+
+}
+
+
+.icon_container{
+    width: 20%;
+
+
+}
+
+
+
+/*---------------- MOBILE NAV --------------*/
+
+.mobileNavigation_div{
     position: absolute;
-    right: 10px;
-    font-size: 1.3rem;
+    width: 100vw;
+    display: flex;
+    top: 70px;
+
+
+
+    /*border: 2px solid red;*/
+
 }
 
-.settings_link_web{
-    color: rgba(255,255,255, 0.3)
+
+.mobileNavigation_div li{
+    border: 2px solid white;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    margin: 0px 5px;
+    color: silver;
+    transition: 0.4s ease;
+    position: relative;
+    left: 45px;
+}
+
+.mobileNavigation_div li:hover{
+    color: var(--pink);
+}
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 1200px){
+
+
+
+    .navigation_div{
+        width: 90%;
+     
+        height: 50px;
+    }
+
+    .navigation_div li{
+        width: 150px;
+        
+    }
+
+    
+
+
+}
+
+
+@media screen and (max-width: 1000px){
+
+
+    .webNavigation_btn{
+        margin: 0px 20px;
+        margin-left: 0;
+        height: 70%;
+        width: 80px;
+    }
+
+    .mobileNavigation_div li{
+        left: 0;
+    }
+
+
+
+
+
+}
+
+
+@media screen and (max-width: 750px){
+
+    .navigation_div{
+        width: 100%;
+    }
+
+      .navigation_div li{
+          width: 200px;
+      }
+
+    .icon_container{
+        position: absolute;
+        right: 8px;
+        top: -70px;
+    }
+
+
+
+    .mobileNavigation_div{
+        top: 70px;
+    }
+
+     .mobileNavigation_div li{
+        left: 0;
+    }
 }

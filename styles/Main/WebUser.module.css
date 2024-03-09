@@ -6,15 +6,17 @@
     flex-direction: column;
     padding: 5px;
     position: relative;
+    left: 20px;
+    min-height: 50vh;
+
 }
 
 .fixed_div{
   position: sticky;
-  top: 30px; /* oder den gewünschten Abstand zum oberen Rand festlegen */
-  height: fit-content; /* oder die gewünschte Höhe festlegen */
-  margin-left: auto; /* sorgt dafür, dass der Inhalt rechtsbündig bleibt */
+  top: 30px; 
+  height: fit-content; 
+  margin-left: auto;
   z-index: 1000;
-
 
 }
 
@@ -99,7 +101,11 @@
 
 
 
-
+@media screen and ( max-width: 1250px){
+    .container{
+        left: 0;
+    }
+}
 
 
 @media screen and (max-width: 1000px){

@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -11,7 +13,8 @@ import styles from "../../../../styles/Profile/Settings/SettingsNavigation.modul
 
 
 //COMPONENTS
-import SettingsNavigationWeb from './SettingsNavigationWeb'
+
+import MobileNavigation from "./MobileNavigation";
 import { current } from "@reduxjs/toolkit";
 
 
@@ -23,44 +26,56 @@ const SettingsNavigation = () => {
   const currentPath = router.asPath.split("/")[3]; // Extrahiert den Wert aus dem Platzhalter
 
 
+  const [ isMobileNavOpen, setIsMobileNav ] = useState(false)
+
+
+  const mobileNavHandler = () =>{
+    setIsMobileNav(!isMobileNavOpen)
+  }
 
   
   return (
     <div className={styles.settings_div}>
-      <Link
-        href="/profil/einstellungen/account"
-        className={`${styles.settings_link} ${
-          currentPath === "account" ? styles.active : "  "
-        }`}
-      >
-        Konto
-      </Link>
-      <Link
-        href="/profil/einstellungen/profil"
-        className={`${styles.settings_link} ${
-          currentPath === "profil" ? styles.active : ""
-        }`}
-      >
-        Profil
-      </Link>
-      <Link
-        href="/profil/einstellungen/sicherheit"
-        className={`${styles.settings_link} ${
-          currentPath === "security" ? styles.active : ""
-        }`}
-      >
-        Sicherheit & Datenschutz
-      </Link>
+      <ul className={styles.navigation_div}>
+        <li
+          className={`${styles.settings_link} ${
+            currentPath === "account" ? styles.active : ""
+          }`}
+        >
+          <Link href="/profil/einstellungen/account">Konto</Link>
+        </li>
+        <li
+          className={`${styles.settings_link} ${
+            currentPath === "profil" ? styles.active : ""
+          }`}
+        >
+          <Link href="/profil/einstellungen/profil">Profil</Link>
+        </li>
+        <li
+          className={`${styles.settings_link} ${
+            currentPath === "security" ? styles.active : ""
+          }`}
+        >
+          <Link href="/profil/einstellungen/sicherheit">
+            Sicherheit
+          </Link>
+        </li>
 
-      <SettingsNavigationWeb />
+        <button className={styles.webNavigation_btn} onClick={mobileNavHandler}>
+          ...
+        </button>
+      </ul>
 
-      <Link href="/profile" className={styles.home_button}>
-        <FontAwesomeIcon icon={faRedditAlien}></FontAwesomeIcon>
-      </Link>
+      {isMobileNavOpen && <MobileNavigation />}
 
-      <button className={styles.settings_links_mobile}>
-        <FontAwesomeIcon icon={faBars} />
-      </button>
+      <div className={styles.icon_container}>
+        <Link href="/profile" className={styles.profile_button}>
+          <FontAwesomeIcon icon={faRedditAlien}></FontAwesomeIcon>
+          <p> Profil</p>
+        </Link>
+
+       
+      </div>
     </div>
   );
 };

@@ -28,9 +28,7 @@ const Main = (props) => {
 
     
   return (
-    <div
-      className={style ? styles.container_dark : styles.container}
-    >
+    <div className={style ? styles.container_dark : styles.container}>
       {!isLoggedIn && <Login />}
 
       {isLoggedIn && (
@@ -41,7 +39,9 @@ const Main = (props) => {
               currentGoogleUserId={props.currentGoogleUserId}
             />
           </div>
+
           <WebUser />
+
         </div>
       )}
     </div>

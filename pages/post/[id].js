@@ -113,7 +113,6 @@ const PostDetails = (props) =>{
 
   return (
     <div className={style ? styles.container_dark : styles.container_light}>
-     
       <div className={styles.comment_wrapper}>
         <div className={nightMode ? styles.post_dark : styles.post_light}>
           <div className={styles.loading_post_div}>
@@ -133,9 +132,9 @@ const PostDetails = (props) =>{
           </div>
         </div>
 
-        <div className={styles.webUser_div}> 
-          <WebUser/>
-        </div>
+      
+
+        <WebUser />
       </div>
 
       {postDetails && (
