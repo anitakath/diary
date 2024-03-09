@@ -69,12 +69,10 @@ const SettingsNavigation = () => {
       {isMobileNavOpen && <MobileNavigation />}
 
       <div className={styles.icon_container}>
-        <Link href="/profile" className={styles.profile_button}>
+        <Link href="/profil" className={styles.profile_button}>
           <FontAwesomeIcon icon={faRedditAlien}></FontAwesomeIcon>
           <p> Profil</p>
         </Link>
-
-       
       </div>
     </div>
   );

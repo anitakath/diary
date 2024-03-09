@@ -40,7 +40,15 @@ const Settings = () =>{
           style ? styles.profileContainer_dark : styles.profileContainer
         }
       >
-        <h1 className={styles.settings_title}> Nutzereinstellungen </h1>
+        <div className={styles.title_div}>
+          <div className={styles.icon_container}>
+            <Link href="/profil" className={styles.profile_button}>
+              <FontAwesomeIcon icon={faRedditAlien}></FontAwesomeIcon>
+              <p> Profil</p>
+            </Link>
+          </div>
+          <h1 className={styles.settings_title}> Nutzereinstellungen </h1>
+        </div>
 
         <SettingsNavigation />
 

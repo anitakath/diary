@@ -3,7 +3,7 @@ import Link from "next/link";
 
 
 import { useState, useEffect, useContext } from "react";
-
+import { useRouter } from "next/router";
 
 //CONTEXT
 import { RedditContext } from "@/context/RedditContext";
@@ -31,6 +31,7 @@ import { faUsers, faHouse } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const isRegistered = useSelector((state) => state.auth.isRegistered);
@@ -76,9 +77,15 @@ const Header = () => {
     }
   };
 
+
+   const navigateToHome = () => {
+     router.push("/");
+   };
+  
+   /*
   const reloadPage = () => {
     window.location.reload();
-  };
+  };*/
   
 
   return (
@@ -87,13 +94,13 @@ const Header = () => {
         <div
           className={nightMode ? styles.container_dark : styles.container_light}
         >
-          <h1 className={styles.title}>
+          <div className={styles.title}>
             <FontAwesomeIcon
               icon={faRedditAlien}
               className={styles.icon}
-              onClick={reloadPage}
+              onClick={navigateToHome}
             />
-          </h1>
+          </div>
 
           <SearchBar />
 
@@ -102,17 +109,26 @@ const Header = () => {
               <div className={styles.login_container}>
                 <button className={styles.userMenu_btn} onClick={menuHandler}>
                   <FontAwesomeIcon icon={faUser} className={styles.user} />
-                  <p className={nightMode ?  styles.dark_p : styles.light_p}> menu </p>
+                  <p className={nightMode ? styles.dark_p : styles.light_p}>
+                    {" "}
+                    menu{" "}
+                  </p>
                 </button>
 
                 <button className={styles.userMenu_btn_web}>
                   <FontAwesomeIcon icon={faUsers} className={styles.user} />
-                  <p className={nightMode ?  styles.dark_p : styles.light_p}> community </p>
+                  <p className={nightMode ? styles.dark_p : styles.light_p}>
+                    {" "}
+                    community{" "}
+                  </p>
                 </button>
 
                 <button className={styles.userMenu_btn_web}>
                   <FontAwesomeIcon icon={faHouse} className={styles.user} />
-                  <p className={nightMode ?  styles.dark_p : styles.light_p}> beitrag </p>
+                  <p className={nightMode ? styles.dark_p : styles.light_p}>
+                    {" "}
+                    beitrag{" "}
+                  </p>
                 </button>
               </div>
             )}

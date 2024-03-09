@@ -205,13 +205,11 @@
     }
 
       .navigation_div li{
-          width: 200px;
+        width: 200px;
       }
 
     .icon_container{
-        position: absolute;
-        right: 8px;
-        top: -70px;
+       display: none;
     }
 
 

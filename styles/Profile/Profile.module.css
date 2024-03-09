@@ -17,6 +17,17 @@
 }
 
 
+.title_div{
+    display: flex;
+}
+
+
+.icon_container{
+    display: none;
+}
+
+
+
 
 .settings_output_container{
     width: 100%;
@@ -38,6 +49,8 @@
     align-items: center;
     background: var(--background-secondary);
 }
+
+
 
 
 
@@ -67,6 +80,37 @@
 
     .setting_div{
         height: 300px;
+    }
+
+}
+
+
+@media screen and (max-width: 750px){
+    .icon_container{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.4s ease;
+ 
+    }
+
+    .profile_button{
+        position: relative;
+        top: -5px;
+        height: 50px;
+        width: 50px;
+        display: flex;
+        margin: 0px 5px 0px 10px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: clamp(1rem, 2rem, 35px);
+
+    }
+
+    .profile_button p{
+        font-size: 1rem;
+        color: silver;
     }
 
 }

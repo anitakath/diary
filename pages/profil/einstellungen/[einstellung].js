@@ -58,6 +58,7 @@ const SettingPage = () =>{
     return (
       <div>
         <div className={style ? styles.container_dark : styles.container}>
+
           <h1 className={styles.settings_title}> Nutzereinstellungen </h1>
           <SettingsNavigation />
   
