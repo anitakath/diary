@@ -2,6 +2,10 @@
 
 .container{
     display: flex;
+    
+
+
+   /* border: 2px solid gold;*/
 }
 
 .container_dark{
@@ -16,6 +20,9 @@
     flex-direction: column;
     align-items: center;
     position: relative;
+
+
+    /*border: 2px solid orange;*/
 }
 
 .title{
@@ -42,7 +49,6 @@
 }
 
 .profileSettings_link:hover{
-    transition: 0.4s ease;
     color: var(--pink);
 
 }
@@ -53,15 +59,18 @@
     min-height: 80vh;
     position: relative;
     display: flex;
+
+
+    /*border: 2px solid red;*/
 }
 
 
 .image_div{
-    height: 100%;
     width: 20%;
     position: relative;
     display: flex;
     justify-content: center;
+
 }
 
 
@@ -76,8 +85,8 @@
 .image_wrapper{
     position: relative;
     left: 10px;
-    width: 200px;
-    height: 200px;
+    width: 170px;
+    height: 170px;
     padding: 5px;
     z-index: 1000;
     display: flex;
@@ -96,15 +105,13 @@
 
 
 .usersData_div{
-    width: 80%;
-    transition: 0.4s ease;
-    border-left: 1px solid grey;
-    width: 80%;
+    width: 100%;
     height: 100%;
-    position: absolute;
-    padding: 5px;
-    padding-left: 40px;
-    right: 10px;
+    padding: 20px;
+
+
+
+    /*border: 2px solid blue;*/
 }
 
 
@@ -148,7 +155,6 @@
 
 
     .usersData_div h2{
-        transition: 0.4s ease;
         border-bottom: 1px solid black;
         margin: 20px;
         padding: 3px;

@@ -27,6 +27,7 @@ export default function Home() {
 
 
   const {currentGoogleUser, fetcher} = useContext(RedditContext)
+  const selectedFilter = useSelector((state) => state.filter.selectedFilter);
 
  
 
@@ -39,11 +40,26 @@ export default function Home() {
 
 
   const [myPosts, setMyPosts] = useState(null);
+  
+  const addNewPost = (newPost) => {
+    setMyPosts((prevPosts) => [newPost, ...prevPosts]);
+  };
 
 
-  const { data, error } = useSWR("/api/get-post", fetcher, {
-    refreshInterval: 200,
-  });
+  const { data, error } = useSWR(
+    `/api/get-post?filter=${selectedFilter}`,
+    fetcher,
+    {
+      refreshInterval: 200,
+      dedupingInterval: 10000, // Set a deduping interval to prevent refetching on quick filter changes
+      revalidateOnFocus: false, // Disable revalidation on focus to prevent refetching when tab is focused
+    }
+  );
+
+
+
+
+
 
  
   useEffect(()=>{
@@ -53,11 +69,22 @@ export default function Home() {
     }
   }, [currentGoogleUser])
 
-   useEffect(() => {
-     if (data && data.data && !myPosts) {
+
+
+  useEffect(() => {
+     if (data /*&& data.data && !myPosts*/) {
        setMyPosts(data.data);
      }
-   }, [data]);
+   }, [data, myPosts]);
+
+   useEffect(() => {
+
+     if(data){
+       setMyPosts(data.data)
+     }
+   }, [selectedFilter]);
+
+
 
  
 
@@ -138,7 +165,12 @@ export default function Home() {
 
   return (
     <div className="App">
-      <Main posts={myPosts} currentGoogleUserId={googleUserId} nightMode={nightMode} />
+      <Main
+        addNewPost={addNewPost}
+        posts={myPosts}
+        currentGoogleUserId={googleUserId}
+        nightMode={nightMode}
+      />
     </div>
   );
           

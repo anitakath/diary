@@ -18,14 +18,17 @@ import styles from '../../../styles/Main/Feed/Feed.module.css'
 import { useSelector } from "react-redux";
 
 
-const Feed = React.memo((props) => {
+const Feed = (props) => {
   const currentFilter = useSelector((state) => state.filter);
   const loadedPosts = props.posts;
+
 
 
   const [loadingPosts, setLoadingPosts] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [posts, setPosts] = useState([]);
+  const [filteredPosts, setFilteredPosts] = useState([]);
+
 
   const {
     id,
@@ -49,9 +52,29 @@ const Feed = React.memo((props) => {
     if (loadedPosts) {
       setIsLoaded(true);
       setPosts(loadedPosts);
+      setFilteredPosts(loadedPosts);
       setLoadingPosts(false);
     }
-  }, [props.posts, currentFilter]);
+  }, [loadedPosts]);
+
+
+
+
+
+
+      useEffect(() => {
+        if (isLoaded) {
+          // Filter the posts based on the selected filter
+          const newFilteredPosts = loadedPosts.filter((post) => {
+            // Implement your filter logic here based on currentFilter
+            return true; // Placeholder logic for now
+          });
+          setFilteredPosts(newFilteredPosts);
+        }
+      }, [currentFilter]);
+
+
+
 
 
 
@@ -66,15 +89,31 @@ const Feed = React.memo((props) => {
       )}
       <div className={styles.post_div}>
         {isLoaded &&
-          currentFilter.selectedFilter === "deine" &&
-          posts.map((post, index) => (
+          loadedPosts.map((post, index) => (
             <div className={styles.post_container} key={index}>
-              <Post {...post} currentGoogleUserId={props.currentGoogleUserId} />
+         
+              <Post
+           
+                post={post}
+                id={post.id}
+                author={props.author}
+                created_at={post.created_at}
+
+                description={post.description}
+                downvotes={post.downvotes}
+                title={post.title}
+  
+                upvotes={post.upvotes}
+  
+                currentGoogleUserId={props.currentGoogleUserId}
+              />
             </div>
           ))}
+
+        {isLoaded && loadedPosts.map((post) => <p>{post.description}</p>)}
       </div>
     </div>
   );
-});
+};
 
 export default Feed;

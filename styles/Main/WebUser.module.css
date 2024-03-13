@@ -6,16 +6,13 @@
     flex-direction: column;
     padding: 5px;
     position: relative;
-    left: 20px;
-    min-height: 50vh;
-
+    min-height: 60vh;
 }
 
 .fixed_div{
   position: sticky;
   top: 30px; 
   height: fit-content; 
-  margin-left: auto;
   z-index: 1000;
 
 }
@@ -69,7 +66,6 @@
     padding: 4px;
     display: flex;
     flex-direction: column;
-    
 
 }
 
@@ -89,7 +85,6 @@
 }
 
 .link:active{
-    transition: 0.4s ease;
     transform: scale(0.99);
 }
 
@@ -110,7 +105,6 @@
 
 @media screen and (max-width: 1000px){
     .container{
-       transition: 0.4s ease;
        display: none;
     }
 
@@ -118,7 +112,6 @@
    
     .MobileUser_container p{
         display: flex;
-        transition: 0.4s ease;
         position: absolute;
         font-size: 3rem;
         font-weight: bolder;

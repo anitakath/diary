@@ -4,8 +4,6 @@
     width: 600px;
     align-items: center;
     position: relative;
-    transition: 0.2s ease;
-
     width: 60vw;
 
 
@@ -29,7 +27,6 @@
 }
 
 .search_btn{
-    transition: 0.4s ease;
     height: 50px;
     width: 50px;
     cursor: pointer;
@@ -55,10 +52,7 @@
 
 @media screen and (max-width: 1300px){
 
-    .search_container{
-        transition: 0.4s ease;
-        /*border: 2px solid red;*/
-    }
+ 
 
     .searchInput{
         width: 100%;
@@ -76,7 +70,6 @@
 @media screen and (max-width: 1000px){
 
     .search_container{
-        transition: 0.4s ease;
         width: 70vw;
         left: 40px;
     }
@@ -92,7 +85,6 @@
  
 
     .search_btn:hover{
-        transition: 0.4s ease;
         border: 2px solid var(--hover-font-dark);
      }
 
@@ -103,7 +95,6 @@
 
 
      .search_container{
-        transition: 0.4s ease;
         width: 60vw;
         left: 20px;
     }

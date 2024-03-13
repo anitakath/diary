@@ -9,7 +9,6 @@ import styles from "../../../../styles/Profile/Settings/SettingsNavigation.modul
 const MobileNavigation = () =>{
 
 
-
     return (
       <ul className={styles.mobileNavigation_div}>
         <li className={styles.settings_link_mobile}>

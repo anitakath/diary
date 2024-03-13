@@ -59,7 +59,6 @@
 
 
     .settings_output_container{
-        transition: 0.4s ease;
         grid-template-columns: repeat(3, 1fr); 
         
     }
@@ -86,11 +85,11 @@
 
 
 @media screen and (max-width: 750px){
+
     .icon_container{
         display: flex;
         justify-content: center;
         align-items: center;
-        transition: 0.4s ease;
  
     }
 
@@ -104,12 +103,11 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        font-size: clamp(1rem, 2rem, 35px);
-
+        font-size: clamp(1rem, 1.5rem, 2rem);
     }
 
     .profile_button p{
-        font-size: 1rem;
+        font-size: 0.8rem;
         color: silver;
     }
 

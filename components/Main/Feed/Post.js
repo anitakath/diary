@@ -15,12 +15,35 @@ import { useSelector } from "react-redux";
 
 import { RedditContext } from "@/context/RedditContext";
 
-const Post = memo((props) => {
+const Post = (props) => {
   
+
+
+
+ const post = props.post
+
+
+
+  const id = props.id;
+  const created_at = props.created_at
+
+  const description = props.description;
+  const downvotes = props.downvotes
+  const title = props.title
+
+  const upvotes = props.upvotes;
+
+  const author = props.author;
+
+
   const nightMode = useSelector((state) => state.toggle.nightMode);
 
-  const { id, created_at,content,  author, title, description, upvotes, downvotes } =
-    props;
+  /*
+  const { id, created_at,content,  author, title, upvotes, downvotes } =
+    props;*/
+
+
+
 
   let totalvote = upvotes - downvotes;
 
@@ -79,7 +102,7 @@ const Post = memo((props) => {
       <div className={styles.postRating_container}>
         <PostRating
           votes={totalvote}
-          postId={id}
+          postId={post.id}
           currentGoogleUserId={props.currentGoogleUserId}
         />
       </div>
@@ -87,7 +110,7 @@ const Post = memo((props) => {
       <div className={styles.postField} onClick={navigateToPost}>
         <div className={styles.postInfo}>
           <p className={styles.postInfo_p}>
-            <span> {author}</span> - {formattedDateTime.date} -{" "}
+            <span> {post.author}</span> - {formattedDateTime.date} -{" "}
             {formattedDateTime.time}
           </p>
         </div>
@@ -95,19 +118,16 @@ const Post = memo((props) => {
           <h1
             className={nightMode ? styles.post_title_dark : styles.post_title}
           >
-            {title}
+            {post.title}
           </h1>
-          <p>{description} </p>
+          <p>{post.description} </p>
         </div>
         <div className={styles.postInteraction}>
-          <PostInteraction postId={id} />
+          <PostInteraction postId={post.id} />
         </div>
       </div>
     </div>
   );
-}, (prevProps, nextProps) =>{
-  //nur neu rendern, wenn sich totalvote ändert
-  return prevProps.totalVote === nextProps.totalvote
-});
+}
 
 export default Post;

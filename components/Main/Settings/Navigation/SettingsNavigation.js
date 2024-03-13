@@ -33,6 +33,7 @@ const SettingsNavigation = () => {
     setIsMobileNav(!isMobileNavOpen)
   }
 
+
   
   return (
     <div className={styles.settings_div}>
@@ -53,12 +54,33 @@ const SettingsNavigation = () => {
         </li>
         <li
           className={`${styles.settings_link} ${
-            currentPath === "security" ? styles.active : ""
+            currentPath === "sicherheit" ? styles.active : ""
           }`}
         >
-          <Link href="/profil/einstellungen/sicherheit">
-            Sicherheit
+          <Link href="/profil/einstellungen/sicherheit">Sicherheit</Link>
+        </li>
+
+        <li  className={`${styles.settings_link_web} ${
+            currentPath === "feed" ? styles.active : ""
+          }`}>
+          <Link href="/profil/einstellungen/feed">Feedeinstellungen</Link>
+        </li>
+        <li  className={`${styles.settings_link_web} ${
+            currentPath === "benachrichtigungen" ? styles.active : ""
+          }`}>
+          <Link href="/profil/einstellungen/benachrichtigungen">
+            Benachrichtigungen
           </Link>
+        </li>
+        <li  className={`${styles.settings_link_web} ${
+            currentPath === "mails" ? styles.active : ""
+          }`}>
+          <Link href="/profil/einstellungen/mails">Mails</Link>
+        </li>
+        <li  className={`${styles.settings_link_web} ${
+            currentPath === "abos" ? styles.active : ""
+          }`}>
+          <Link href="/profil/einstellungen/abos">Abos</Link>
         </li>
 
         <button className={styles.webNavigation_btn} onClick={mobileNavHandler}>

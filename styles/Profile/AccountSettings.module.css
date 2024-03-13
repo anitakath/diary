@@ -2,7 +2,6 @@
 
 .container{
     display: flex;
-    
 }
 
 
@@ -10,9 +9,7 @@
 
 .settings_wrapper{
     width: 60%;
-    margin: 0px 10px;
     margin-right: 70px;
-    
 }
 
 
@@ -77,11 +74,9 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    transition: 0.4s ease;
 }
 
 .change_btn:hover, .select_input:hover{
-    transition: 0.4s ease;
     box-shadow: 0px 0px 2px grey;
    
 }
@@ -99,7 +94,6 @@
 
 
 .submit_button{
-   
     position: absolute;
     right: 60px;
     width: 200px;
@@ -124,13 +118,11 @@
 
 @media screen and (max-width: 1000px){
     .accountSettings_div{
-        transition: 0.4s ease;
         width: 90vw;
     }
 
 
     .change_btn, .select_input{
-
         right: -300px;
     }
 }

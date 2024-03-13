@@ -63,18 +63,17 @@ const NewPostForm = () => {
         return
       }
 
-      await supabase.from("feed_dummy").insert([
+      await supabase.from("users_feed").insert([
         {
           author: author,
           title: title,
           description: text,
           creator: 'anitakath',
-          upvotes: Math.floor(Math.random() * 200),
-          downvotes: Math.floor(Math.random() * 100),
+          upvotes: 0,
+          downvotes: 0,
         },
       ]);
 
-      dispatch(filter('deine'))
 
       setLoading(false);
       router.push("/");

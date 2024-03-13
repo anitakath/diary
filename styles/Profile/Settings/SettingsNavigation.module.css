@@ -14,29 +14,28 @@
     height: 100%;
     display: flex;
     align-items: center;
-    transition: 0.4s ease;
 
 }
 
 
-.navigation_div li{
+
+.settings_link, .settings_link_web{
     width: 200px;
     height: 100%;
     display: flex;
-
-    /*border: 2px solid red;*/
-
-}
-
-
-.settings_link{
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1rem;
     margin: 5px 10px;
-    transition: 0.4s ease;
+
 }
+
+.settings_link_web{
+    color: silver;
+}
+
+
 
 
 
@@ -49,12 +48,7 @@
 
 
 .webNavigation_btn{
-    width: 150px;
-    height: 85%;
-    cursor: pointer;
-    margin: 0px 50px;
-    background: var(--background_dark_opaque);
-    transition: 0.4s ease;
+    display: none;
 }
 
 
@@ -65,9 +59,6 @@
     width: 30%;
     display: flex;
     justify-content: end;
-    transition: 0.4s ease;
-
-
 
     /*    border: 2px solid blue;  */
 }
@@ -111,8 +102,6 @@
 
 .icon_container{
     width: 20%;
-
-
 }
 
 
@@ -139,7 +128,6 @@
     justify-content: center;
     margin: 0px 5px;
     color: silver;
-    transition: 0.4s ease;
     position: relative;
     left: 45px;
 }
@@ -152,50 +140,51 @@
 
 
 
+@media screen and (max-width: 1300px){
+    
+    .settings_link_web{
+        display: none;
+    }
 
 
-
-
-@media screen and (max-width: 1200px){
-
-
+    .webNavigation_btn{
+        display: inline;
+        width: 150px;
+        height: 85%;
+        cursor: pointer;
+        margin: 0px 20px;
+        background: var(--background_dark_opaque);
+    }
 
     .navigation_div{
         width: 90%;
-     
-        height: 50px;
     }
 
-    .navigation_div li{
-        width: 150px;
-        
+    .icon_container{
+        width: 10%;
     }
-
-    
 
 
 }
 
 
+
+
 @media screen and (max-width: 1000px){
 
-
-    .webNavigation_btn{
-        margin: 0px 20px;
-        margin-left: 0;
-        height: 70%;
-        width: 80px;
+    .navigation_div{
+        width: 90%;
     }
+
+
 
     .mobileNavigation_div li{
         left: 0;
     }
 
-
-
-
-
 }
+
+
 
 
 @media screen and (max-width: 750px){
@@ -204,12 +193,16 @@
         width: 100%;
     }
 
-      .navigation_div li{
+    .settings_link{
         width: 200px;
-      }
+    }
 
     .icon_container{
        display: none;
+    }
+
+    .webNavigation_btn{
+       width: 200px;
     }
 
 

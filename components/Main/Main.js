@@ -21,6 +21,8 @@ const Main = (props) => {
   const nightMode = useSelector((state) => state.toggle.isNightMode);
   const [style, setStyle] = useState(false)
 
+  const  addNewPost = props.addNewPost
+
     useEffect(() => {
       setStyle(nightMode);
     }, [nightMode]);
@@ -35,13 +37,13 @@ const Main = (props) => {
         <div className={styles.main_container}>
           <div className={styles.output_field}>
             <Feed
+              addNewPost={addNewPost}
               posts={props.posts}
               currentGoogleUserId={props.currentGoogleUserId}
             />
           </div>
 
           <WebUser />
-
         </div>
       )}
     </div>

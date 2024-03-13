@@ -36,7 +36,6 @@
     width: 50vw;
     min-height: 500vh;
     margin: 5px;
-    transition: 0.4s ease;
 
 }
 
@@ -49,7 +48,6 @@
     }
 
     .webUser_container{
-        transition: 0.4s ease;
         display: none;
     }
 }

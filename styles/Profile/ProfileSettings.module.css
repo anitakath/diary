@@ -5,12 +5,18 @@
 }
 
 
+.profile_wrapper{
+    display: flex;
+    width: 100%;
+}
+
 
 .settings_wrapper{
     width: 60%;
-    margin: 0px 10px;
     margin-right: 70px;
+
 }
+
 
 
 .container_dark{
@@ -36,10 +42,26 @@
 
 
 .ProfileSettings_div{
-    border-top: 2px solid grey;
+    margin: 50px 0px;
     padding: 10px;
     width: 100%;
-    min-height: 140vh;
+    min-height: 10vh;
+    background: var(--background_dark_opaque);
+    box-shadow: 2px 2px 2px grey;
+
+}
+
+.setting_title{
+    border-bottom: 2px solid grey;
+    font-size: 1.3rem;
+    margin: 5px;
+    padding: 2px;
+}
+
+
+.setting_paragraph{
+    margin: 5px;
+    padding: 2px;
 }
 
 
@@ -54,12 +76,14 @@
 
 @media screen and (max-width: 1200px){
 
-  
+  .webUser_div{
+      border: 5px solid orange;
+  }
 
     .settings_link{
         margin: 5px 20px;
         font-size: 1rem;
-
+        border: 2px solid orange;
     }
 
     .settings_link_web{

@@ -114,36 +114,39 @@ const Profile = () =>{
         <div className={nightMode ? styles.container_dark : styles.container}>
           <div className={styles.profile_container}>
             <Link
-              href="/profile/settings"
+              href="/profil/einstellungen"
               className={styles.profileSettings_link}
             >
               <FontAwesomeIcon icon={faGear} className={styles.icon} />
             </Link>
 
             <h1 className={styles.title}> Profil </h1>
+            
 
             <div className={styles.profile_div}>
-              <div className={styles.image_div}>
-                <div
-                  className={`${styles.image_wrapper} ${
-                    style
-                      ? styles.image_wrapper_dark
-                      : styles.image_wrapper_light
-                  }`}
-                >
-                  <Image
-                    alt="Foto des Users"
-                    src={avatarUrl || "/placeholder.jpg"}
-                    width={80}
-                    height={200}
-                    className={styles.users_image}
-                    xw="true"
-                    priority
-                  ></Image>
-                </div>
-              </div>
-
               <div className={styles.usersData_div}>
+
+
+                
+                <div className={styles.image_div}>
+                  <div
+                    className={`${styles.image_wrapper} ${
+                      style
+                        ? styles.image_wrapper_dark
+                        : styles.image_wrapper_light
+                    }`}
+                  >
+                    <Image
+                      alt="Foto des Users"
+                      src={avatarUrl || "/placeholder.jpg"}
+                      width={80}
+                      height={200}
+                      className={styles.users_image}
+                      xw="true"
+                      priority
+                    ></Image>
+                  </div>
+                </div>
                 <h1 className={styles.userData_title}> Hey {fName_google} </h1>
 
                 <h2 className={styles.userData_subtitle}>

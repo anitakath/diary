@@ -39,7 +39,6 @@
 }
 
 .goBack_link:hover{
-    transition: 0.4s ease;
     color: #F7567C;
 }
 
@@ -102,7 +101,6 @@
 }
 
 .createPost_button:hover{
-    transition: 0.4s ease;
     background: rgba(255,255,255, 0.7);
     letter-spacing: 1px;
     color:#F7567C;
@@ -110,7 +108,6 @@
 }
 
 .createPost_button:active{
-    transition: 0.4s ease;
     transform: scale(0.98);
 }
 
@@ -142,12 +139,10 @@
     }
 
     .webUser_container{
-        transition: 0.4s ease;
         display: none;
     }
 
     .createPost_form{
-        transition: 0.4s ease;
         width: 80vw;
     }
 
@@ -162,7 +157,6 @@
     }
 
     .createPost_title, .goBack_link{
-        transition: 0.4s ease;
         font-size: 1.1rem;
     }
 

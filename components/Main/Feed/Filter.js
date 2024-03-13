@@ -86,7 +86,7 @@ const Filter = () => {
     if (title === "beste") {
       dispatch(filter("beste"));
       dispatch(setActButton('beste' ));
-      console.log('title')
+   
       setActiveButton(title)
      
 

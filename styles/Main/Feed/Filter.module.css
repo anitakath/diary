@@ -39,7 +39,7 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
-    transition: 0.4s ease;
+   ;
     font-size: 1.1rem;
 }
 
@@ -47,17 +47,3 @@
     color: #F7567C;
 }
 
-@media screen and (max-width: 1200px){
-
-    .container{
-        transition: 0.4s ease;
-    
-    }
-}
-
-
-
-@media screen and (max-width: 600px){
- 
-  
-}
