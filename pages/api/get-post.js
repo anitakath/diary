@@ -9,7 +9,8 @@ export default async (req, res) =>{
     .order('id', {ascending: false}) // this will show us the most recent post first
 
     res.status(200).json({data: data})
-} */
+} 
+*/
 
 
 

@@ -27,12 +27,13 @@ const PostRating = (props) => {
   const nightMode = useSelector((state) => state.toggle.isNightMode)
 
   const [votes, setVotes] = useState(props.votes)
-  const [isUpvoted, setIsUpvoted] = useState(false)
+  const [isUpvoted, setIsUpvoted] = useState(null)
   const [isUpvotedTwice, setIsUpvotedTwice] = useState(false)
-  const [isDownvoted, setIsDownvoted] = useState(false)
+  const [isDownvoted, setIsDownvoted] = useState(null)
   const [isDownvotedTwice, setIsDownvotedTwice] = useState(false)
 
   const postId = props.postId
+  const table = props.table; //Name der ausgewählten supabase table :-*
 
 
 
@@ -127,9 +128,9 @@ const PostRating = (props) => {
 
 
 
-  const getActualizedRating = async()=>{
+  const getActualizedRating = async() => {
       const { data, error } = await supabase
-        .from("feed_dummy")
+        .from(table)
         .select("upvotes, downvotes")
         .eq("id", postId);
 
@@ -146,9 +147,9 @@ const PostRating = (props) => {
 
   useEffect(()=>{
 
-   const checkUserAction = async () =>{
+   const checkUserAction = async () => {
      const { data, error } = await supabase
-       .from("feed_dummy")
+       .from(table)
        .select("user_action")
        .eq("id", postId);
 
@@ -161,12 +162,18 @@ const PostRating = (props) => {
      );
 
 
+
+
      if(filteredData[0] === undefined){
+       setIsDownvoted(false)
+       setIsUpvoted(false)
 
      } else if ( filteredData[0].user_action === props.currentGoogleUserId + "_up"){
        setIsUpvoted(true)
+       setIsDownvoted(false);
      } else if ( filteredData[0].user_action === props.currentGoogleUserId + "_down"){
        setIsDownvoted(true)
+       setIsUpvoted(false);
      }
      
    }
@@ -174,7 +181,7 @@ const PostRating = (props) => {
 
    checkUserAction();
 
-  }, [])
+  }, [table])
 
   
 

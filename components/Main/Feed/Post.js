@@ -34,6 +34,9 @@ const Post = (props) => {
   const upvotes = props.upvotes;
 
   const author = props.author;
+  const table = props.table;
+
+  console.log(table)
 
 
   const nightMode = useSelector((state) => state.toggle.nightMode);
@@ -101,6 +104,7 @@ const Post = (props) => {
     <div className={styles.post_container}>
       <div className={styles.postRating_container}>
         <PostRating
+          table={table}
           votes={totalvote}
           postId={post.id}
           currentGoogleUserId={props.currentGoogleUserId}

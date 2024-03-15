@@ -75,6 +75,7 @@ const Feed = (props) => {
 
 
 
+      console.log(loadedPosts)
 
 
 
@@ -98,11 +99,10 @@ const Feed = (props) => {
                 id={post.id}
                 author={props.author}
                 created_at={post.created_at}
-
+                table={post.table}
                 description={post.description}
                 downvotes={post.downvotes}
                 title={post.title}
-  
                 upvotes={post.upvotes}
   
                 currentGoogleUserId={props.currentGoogleUserId}
@@ -110,7 +110,6 @@ const Feed = (props) => {
             </div>
           ))}
 
-        {isLoaded && loadedPosts.map((post) => <p>{post.description}</p>)}
       </div>
     </div>
   );
