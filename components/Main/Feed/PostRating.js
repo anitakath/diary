@@ -54,6 +54,7 @@ const PostRating = (props) => {
         userId: props.currentGoogleUserId,
         isUpvoted: !isUpvoted,
         isDownvoted: isDownvoted,
+        table: table,
       }); // Annahme, dass postId als Parameter übergeben wird
 
       await getActualizedRating();
@@ -70,6 +71,7 @@ const PostRating = (props) => {
         userId: props.currentGoogleUserId,
         isUpvoted: !isUpvoted,
         isUpvotedTwice: !isUpvotedTwice,
+        table: table,
       }); // Annahme, dass postId als Parameter übergeben wird
 
       await getActualizedRating();
@@ -77,6 +79,9 @@ const PostRating = (props) => {
     }
   
   };
+
+
+
 
   const handleDecrement = async () => {
 
@@ -93,6 +98,7 @@ const PostRating = (props) => {
          userId: props.currentGoogleUserId,
          isUpvoted: isUpvoted,
          isDownvoted: !isDownvoted,
+         table: table,
        }); 
 
        await getActualizedRating();
@@ -112,6 +118,7 @@ const PostRating = (props) => {
          isUpvoted: isUpvoted,
          isDownvotedTwice: !isDownvotedTwice,
          isDownvoted: !isDownvoted,
+         table: table,
        }); // Annahme, dass postId als Parameter übergeben wird
 
        await getActualizedRating();
@@ -128,6 +135,10 @@ const PostRating = (props) => {
 
 
 
+
+
+
+
   const getActualizedRating = async() => {
       const { data, error } = await supabase
         .from(table)
@@ -138,12 +149,18 @@ const PostRating = (props) => {
         return res.status(500).json({ error: error.message });
       }
 
+      console.log(data)
+
       const upvotes = data[0].upvotes;
       const downvotes = data[0].downvotes;
       const totalvots = upvotes - downvotes
       setVotes(totalvots)
 
   }
+
+
+
+
 
   useEffect(()=>{
 
@@ -192,7 +209,6 @@ const PostRating = (props) => {
       <button onClick={handleIncrement}>
         <FontAwesomeIcon
           icon={faArrowUp}
-   
           className={`${nightMode ? styles.postArrowUp_dark : styles.postArrowUp} ${isUpvoted? styles.upvoted : ''}`}
         />
       </button>

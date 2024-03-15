@@ -6,7 +6,7 @@ import { supabase } from "@/services/supabaseClient";
 
 
 export async function updatePostVotes(req, res) {
-  const { postId, type, userId, isUpvoted, isDownvoted, isUpvotedTwice, isDownvotedTwice } = req;
+  const { postId, type, userId, isUpvoted, isDownvoted, isUpvotedTwice, isDownvotedTwice, table } = req;
   
 
   if (!postId || !type || !userId) {
@@ -18,7 +18,7 @@ export async function updatePostVotes(req, res) {
   let existingUserAction;
 
   const { data, error } = await supabase
-    .from("feed_dummy")
+    .from(table)
     .select("upvotes, downvotes, user_action")
     .eq("id", postId);
 
@@ -46,7 +46,7 @@ export async function updatePostVotes(req, res) {
 
       
       const { data, error } = await supabase
-        .from("feed_dummy")
+        .from(table)
         .select("upvotes, user_action")
         .eq("id", postId);
 
@@ -58,7 +58,7 @@ export async function updatePostVotes(req, res) {
       updatedData = data[0].upvotes - 1;
 
       const { newData, updateError } = await supabase
-        .from("feed_dummy")
+        .from(table)
         .update({
           upvotes: updatedData,
           user_action: null,
@@ -70,7 +70,7 @@ export async function updatePostVotes(req, res) {
       //if the user has not yet given an upvote, but would like to give one...
 
       const { data, error } = await supabase
-        .from("feed_dummy")
+        .from(table)
         .select("upvotes, user_action")
         .eq("id", postId);
 
@@ -85,7 +85,7 @@ export async function updatePostVotes(req, res) {
       updatedData = data[0].upvotes + 1;
 
       const { newData, updateError } = await supabase
-        .from("feed_dummy")
+        .from(table)
         .update({
           upvotes: updatedData,
           user_action: userId + "_up",
@@ -98,7 +98,7 @@ export async function updatePostVotes(req, res) {
         // berechne den totalVote aus den aktualisierten upvotes - downvotes
 
         const { data, error } = await supabase
-          .from("feed_dummy")
+          .from(table)
           .select("upvotes, downvotes")
           .eq("id", postId);
 
@@ -111,7 +111,7 @@ export async function updatePostVotes(req, res) {
         const totalVotes = upvotes - downvotes;
 
         await supabase
-          .from("feed_dummy")
+          .from(table)
           .update({ total_votes: totalVotes })
           .eq("id", postId);
       }
@@ -136,8 +136,7 @@ export async function updatePostVotes(req, res) {
 
       const { data, error } = await supabase
 
-      
-        .from("feed_dummy")
+        .from(table)
         .select("downvotes, user_action") // wähle alle columns aus
         .eq("id", postId);
 
@@ -150,11 +149,11 @@ export async function updatePostVotes(req, res) {
       updatedData = data[0].downvotes - 1;
 
       const { newData, updateError } = await supabase
-        .from("feed_dummy")
-        .update({ 
+        .from(table)
+        .update({
           downvotes: updatedData,
-          user_action: null
-      })
+          user_action: null,
+        })
         .eq("id", postId);
      }
 
@@ -165,7 +164,7 @@ export async function updatePostVotes(req, res) {
 
       
        const { data, error } = await supabase
-         .from("feed_dummy")
+         .from(table)
          .select("downvotes, user_action") // wähle alle columns aus
          .eq("id", postId);
 
@@ -176,7 +175,7 @@ export async function updatePostVotes(req, res) {
        updatedData = data[0].downvotes + 1;
 
        const { newData, updateError } = await supabase
-         .from("feed_dummy")
+         .from(table)
          .update({
            downvotes: updatedData,
            user_action: userId + "_down",
@@ -190,9 +189,9 @@ export async function updatePostVotes(req, res) {
 
 
           const { data, error } = await supabase
-          .from("feed_dummy")
-          .select("upvotes, downvotes")
-          .eq("id", postId);
+            .from(table)
+            .select("upvotes, downvotes")
+            .eq("id", postId);
 
 
 
@@ -202,11 +201,11 @@ export async function updatePostVotes(req, res) {
 
 
         await supabase
-          .from("feed_dummy")
+          .from(table)
           .update({ total_votes: totalVotes })
           .eq("id", postId);
 
-     }
+      }
 
 
   }

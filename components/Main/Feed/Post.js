@@ -37,8 +37,6 @@ const Post = (props) => {
   const table = props.table;
 
 
-
-
   const nightMode = useSelector((state) => state.toggle.nightMode);
 
   /*
