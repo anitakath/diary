@@ -39,3 +39,15 @@
     font-size: 1.1rem;
 }
 
+
+
+.noLoadedPosts_div{
+    display: flex;
+    height: 20vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.noLoadedPosts_div p{
+    color: silver;
+}

@@ -90,11 +90,11 @@ const Feed = (props) => {
       )}
       <div className={styles.post_div}>
         {isLoaded &&
+          loadedPosts &&
+          loadedPosts.length > 0 &&
           loadedPosts.map((post, index) => (
             <div className={styles.post_container} key={index}>
-         
               <Post
-           
                 post={post}
                 id={post.id}
                 author={props.author}
@@ -104,12 +104,16 @@ const Feed = (props) => {
                 downvotes={post.downvotes}
                 title={post.title}
                 upvotes={post.upvotes}
-  
                 currentGoogleUserId={props.currentGoogleUserId}
               />
             </div>
           ))}
 
+        {loadedPosts === null &&  (
+          <div className={styles.noLoadedPosts_div}>
+           <p>  hier gibt es noch keine Posts 🥲 </p>
+          </div>
+        )}
       </div>
     </div>
   );

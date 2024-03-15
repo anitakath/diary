@@ -167,7 +167,7 @@ const Filter = () => {
             onClick={() => filterHandler("deine")}
             style={activeButton === "deine" ? { ...activeLinkStyle } : null}
           >
-            deine
+            anne
           </button>
         </div>
       </div>
