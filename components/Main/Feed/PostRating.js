@@ -31,14 +31,58 @@ const PostRating = (props) => {
   const [isUpvotedTwice, setIsUpvotedTwice] = useState(false)
   const [isDownvoted, setIsDownvoted] = useState(null)
   const [isDownvotedTwice, setIsDownvotedTwice] = useState(false)
+  const [wobblingEvent, setWobblingEvent] = useState(false)
+
+
+   const [upvoteWobblingEvent, setUpvoteWobblingEvent] = useState(false);
+   const [downvoteWobblingEvent, setDownvoteWobblingEvent] = useState(false);
+ 
 
   const postId = props.postId
   const table = props.table; //Name der ausgewählten supabase table :-*
 
 
+  console.log(isUpvoted)
+  console.log(isDownvoted)
+
+  console.log(wobblingEvent)
+
+  useEffect(() => {
+    if (wobblingEvent) {
+      setTimeout(() => {
+        setWobblingEvent(false);
+      }, 3000);
+    }
+  }, [wobblingEvent]);
+
+
+
+  useEffect(() => {
+    if (upvoteWobblingEvent) {
+      setTimeout(() => {
+        setUpvoteWobblingEvent(false);
+      }, 3000);
+    }
+    if (downvoteWobblingEvent) {
+      setTimeout(() => {
+        setDownvoteWobblingEvent(false);
+      }, 3000);
+    }
+  }, [upvoteWobblingEvent, downvoteWobblingEvent]);
+
+
+
+
+
 
   const handleIncrement = async () => {
 
+
+     if (isDownvoted) {
+       setUpvoteWobblingEvent(true);
+     }
+
+  
 
     if(!isUpvoted){
       if (isDownvoted) {
@@ -84,6 +128,11 @@ const PostRating = (props) => {
 
 
   const handleDecrement = async () => {
+
+
+    if (isUpvoted) {
+      setDownvoteWobblingEvent(true);
+    }
 
 
      if (!isDownvoted) {
@@ -209,17 +258,33 @@ const PostRating = (props) => {
       <button onClick={handleIncrement}>
         <FontAwesomeIcon
           icon={faArrowUp}
-          className={`${nightMode ? styles.postArrowUp_dark : styles.postArrowUp} ${isUpvoted? styles.upvoted : ''}`}
+          className={`${
+            nightMode ? styles.postArrowUp_dark : styles.postArrowUp
+          } ${isUpvoted ? styles.upvoted : ""} ${
+            upvoteWobblingEvent ? styles.wobble : ""
+          }`}
         />
       </button>
-      <p className={styles.amountOfRatings }> {votes} </p>
+      <p className={styles.amountOfRatings}> {votes} </p>
       <button onClick={handleDecrement}>
         <FontAwesomeIcon
           icon={faArrowDown}
-          className={`${nightMode ? styles.postArrowUp_dark : styles.postArrowUp} ${isDownvoted ? styles.downvoted : ''}`}
-          
+          className={`${
+            nightMode ? styles.postArrowUp_dark : styles.postArrowUp
+          } ${isDownvoted ? styles.downvoted : ""} ${
+            downvoteWobblingEvent ? styles.wobble : ""
+          }`}
         />
       </button>
+      <div className={styles.info_div}>
+        {wobblingEvent && (
+          <p className={styles.info_p}>
+            {" "}
+            du hast bereits gevoted. klicke nochmals auf dein vote, um diesen zu
+            entfernen{" "}
+          </p>
+        )}
+      </div>
     </div>
   );
 };

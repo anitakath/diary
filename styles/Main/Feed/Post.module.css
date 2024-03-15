@@ -120,9 +120,28 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100px;
+    height:100%;
     margin-top: 15px;
+    width: 100px;
+    position: relative;
+    top: -15px;
+    left: -20px;
 }
+
+.info_div{
+    width: 100%;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info_p{
+    font-size: 0.7rem;
+    color: silver;
+    text-align: center;
+}
+
 
 .postArrowUp, .postArrowDown{
     width:20px;
@@ -162,6 +181,19 @@
 
 .downvoted{
     color: red;
+}
+
+@keyframes wobble {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+  75% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.wobble {
+  animation: wobble 0.5s ease-in-out infinite;
+  color: beige;
 }
 
 
