@@ -40,6 +40,8 @@ export default function Home() {
 
 
   const [myPosts, setMyPosts] = useState(null);
+
+  console.log(myPosts);
   
   const addNewPost = (newPost) => {
     setMyPosts((prevPosts) => [newPost, ...prevPosts]);
@@ -159,9 +161,38 @@ export default function Home() {
     googleUserId = currentGoogleUser.user.id
   }
 
-    const nightMode = useSelector((state) => state.toggle.isNightMode);
+  const nightMode = useSelector((state) => state.toggle.isNightMode);
 
 
+  /*
+
+  function generateCustomID() {
+    const getRandomNumber = () => Math.floor(Math.random() * 10); // Zufällige Zahl von 0 bis 9
+    const getRandomLowercaseLetter = () =>
+      String.fromCharCode(97 + Math.floor(Math.random() * 26)); // Zufälliger kleiner Buchstabe (ASCII-Wert von 'a' bis 'z')
+    const getRandomUppercaseLetter = () =>
+      String.fromCharCode(65 + Math.floor(Math.random() * 26)); // Zufälliger großer Buchstabe (ASCII-Wert von 'A' bis 'Z')
+    const getRandomSpecialCharacter = () => {
+      const specialCharacters = "!@#$%^&*"; // Liste der Sonderzeichen
+      return specialCharacters[
+        Math.floor(Math.random() * specialCharacters.length)
+      ]; // Zufälliges Sonderzeichen auswählen
+    };
+
+    let customID = "";
+
+    // Generiere jeweils eine zufällige Zahl, ein kleiner Buchstabe, ein großer Buchstabe und ein Sonderzeichen und füge sie der ID hinzu
+    for (let i = 0; i < 4; i++) {
+      customID += `${getRandomNumber()}${getRandomLowercaseLetter()}${getRandomUppercaseLetter()}${getRandomSpecialCharacter()}`;
+    }
+
+    return customID;
+  }
+
+  // Beispielaufruf der Funktion
+  const generatedID = generateCustomID();
+  console.log(generatedID);
+  */
 
 
   return (

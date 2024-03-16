@@ -59,7 +59,7 @@ useEffect(()=>{
   const router = useRouter();
   const { id } = router.query;
 
-  //console.log(id)
+  console.log(id)
 
   const postId = id;
 
@@ -80,7 +80,6 @@ useEffect(()=>{
   };
 
 
-  //console.log(postDetails)
 
 
 

@@ -18,7 +18,7 @@ import { RedditContext } from "@/context/RedditContext";
 const Post = (props) => {
   const post = props.post;
 
-
+  const pathId = post.pathId;
   
   const id = post.id;
 
@@ -74,7 +74,7 @@ const Post = (props) => {
     setSelectedPost(post)
 
 
-    router.push(`/post/${id}`);
+    router.push(`/post/${pathId}`);
 
   
   }

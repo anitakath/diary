@@ -23,6 +23,9 @@ const Feed = (props) => {
   const loadedPosts = props.posts;
 
 
+  //console.log(loadedPosts)
+
+
 
   const [loadingPosts, setLoadingPosts] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -75,7 +78,7 @@ const Feed = (props) => {
 
 
 
-      console.log(loadedPosts)
+    //console.log(loadedPosts)
 
 
 
@@ -105,6 +108,7 @@ const Feed = (props) => {
                 title={post.title}
                 upvotes={post.upvotes}
                 currentGoogleUserId={props.currentGoogleUserId}
+                pathId={post.pathId}
               />
             </div>
           ))}

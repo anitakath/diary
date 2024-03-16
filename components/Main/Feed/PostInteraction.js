@@ -32,13 +32,13 @@ const postInteraction = (props) =>{
 
   const post = props.post
 
-  console.log(post)
+  //console.log(post)
 
   const table = props.post.table
 
-  console.log(table)
+  //console.log(table)
 
-  console.log(props.postId)
+  //console.log(props.postId)
 
   
 
