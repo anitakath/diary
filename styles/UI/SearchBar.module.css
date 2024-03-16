@@ -7,15 +7,13 @@
     width: 60vw;
 
 
-
-
     /*border: 2px solid blue;*/
 }
 
 
 .searchInput{
     width: 97.5%;
-    height: 50px;
+    height: 40px;
     padding: 10px;
     padding-left: 20px;
     border: none;
@@ -27,8 +25,8 @@
 }
 
 .search_btn{
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     cursor: pointer;
     position: absolute;
     right: 3px;

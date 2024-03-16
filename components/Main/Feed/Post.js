@@ -16,33 +16,27 @@ import { useSelector } from "react-redux";
 import { RedditContext } from "@/context/RedditContext";
 
 const Post = (props) => {
+  const post = props.post;
+
+
+  
+  const id = post.id;
+
+
+  const created_at = post.created_at;
+
+  const description = post.description;
+  const downvotes = post.downvotes;
+  const title = post.title;
+
+  const upvotes = post.upvotes;
+
+  const author = post.author;
+
+  const table = post.table;
   
 
-
-
- const post = props.post
-
-
-
-  const id = props.id;
-  const created_at = props.created_at
-
-  const description = props.description;
-  const downvotes = props.downvotes
-  const title = props.title
-
-  const upvotes = props.upvotes;
-
-  const author = props.author;
-  const table = props.table;
-
-
   const nightMode = useSelector((state) => state.toggle.nightMode);
-
-  /*
-  const { id, created_at,content,  author, title, upvotes, downvotes } =
-    props;*/
-
 
 
 
@@ -61,42 +55,30 @@ const Post = (props) => {
 
   const formattedDateTime = formatDate(created_at);
 
-  const router = useRouter()
+  const router = useRouter();
 
-  const {setSelectedPost} = useContext(RedditContext)
-
-
-  
+  const { setSelectedPost } = useContext(RedditContext);
 
 
 
-  const navigateToPost = () =>{
-    setSelectedPost({
-      id,
-      title,
-      description,
-      author,
-      created_at,
-      upvotes,
-      downvotes,
-    });
+  const navigateToPostDetails = () =>{
 
-    // Save selected post data to local storage
+    console.log('MOIIIIN')
+
+
     localStorage.setItem(
       "selectedPost",
-      JSON.stringify({
-        id,
-        title,
-        description,
-        author,
-        created_at,
-        upvotes,
-        downvotes,
-      })
+      JSON.stringify(post)
     );
 
+    setSelectedPost(post)
+
+
     router.push(`/post/${id}`);
+
+  
   }
+    
 
   return (
     <div className={styles.post_container}>
@@ -104,15 +86,15 @@ const Post = (props) => {
         <PostRating
           table={table}
           votes={totalvote}
-          postId={post.id}
+          postId={id}
           currentGoogleUserId={props.currentGoogleUserId}
         />
       </div>
 
-      <div className={styles.postField} onClick={navigateToPost}>
+      <div className={styles.postField} onClick={navigateToPostDetails}>
         <div className={styles.postInfo}>
           <p className={styles.postInfo_p}>
-            <span> {post.author}</span> - {formattedDateTime.date} -{" "}
+            <span> {author}</span> - {formattedDateTime.date} -{" "}
             {formattedDateTime.time}
           </p>
         </div>
@@ -120,12 +102,12 @@ const Post = (props) => {
           <h1
             className={nightMode ? styles.post_title_dark : styles.post_title}
           >
-            {post.title}
+            {title}
           </h1>
-          <p>{post.description} </p>
+          <p>{description} </p>
         </div>
         <div className={styles.postInteraction}>
-          <PostInteraction postId={post.id} />
+          <PostInteraction postId={id} post={post} />
         </div>
       </div>
     </div>

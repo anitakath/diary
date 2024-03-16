@@ -42,10 +42,6 @@ const PostRating = (props) => {
   const table = props.table; //Name der ausgewählten supabase table :-*
 
 
-  console.log(isUpvoted)
-  console.log(isDownvoted)
-
-  console.log(wobblingEvent)
 
   useEffect(() => {
     if (wobblingEvent) {
@@ -219,9 +215,10 @@ const PostRating = (props) => {
        .select("user_action")
        .eq("id", postId);
 
-     if (error) {
-       return res.status(500).json({ error: error.message });
-     }
+
+      if (error) {
+        return { error: error.message };
+      }
      // Filtere die Daten, um nur Einträge mit user_action ungleich null zu erhalten
      const filteredData = data.filter(
        (entry) => entry.user_action !== null 

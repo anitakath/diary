@@ -35,62 +35,37 @@ import { current } from "@reduxjs/toolkit";
 
 
 const PostDetails = (props) =>{
-  const { selectedPost, setSelectedPost, currentGoogleUser } =
-    useContext(RedditContext);
+  const { selectedPost, setSelectedPost } = useContext(RedditContext);
+
+
 
   const [postDetails, setPostDetails] = useState(null);
   const [isLoaded, setIsLoaded] = useState(null)
 
 
+
+//console.log(selectedPost)
+//console.log(postDetails);
+
+useEffect(()=>{
+
+  if(selectedPost){
+    setIsLoaded(true)
+    setPostDetails(selectedPost)
+  }
+
+}, [])
   
   const router = useRouter();
   const { id } = router.query;
 
-
+  //console.log(id)
 
   const postId = id;
 
-
-
- 
-
-  
-  
-  useEffect(()=>{
-    
-    const checkPostId = async()=>{
-      if(postId){
-        console.log('there is a postId')
-         const { data, error } = await supabase
-           .from("feed_dummy")
-           .select("*")
-           .eq("id", postId);
-
-         if (data) {
-          setPostDetails(data[0]);
-          setIsLoaded(true);
-
-          let currentGoogleUserId;
-
-          if(currentGoogleUser){
-            currentGoogleUserId = currentGoogleUser.user.id
-            data[0].currentGoogleUserId = currentGoogleUser.user.id;
-          }
          
-        }
-
-      }else{
-        console.log('theres no postId')
-      }
-      
-       
-    }
-
-    checkPostId();
-
-  }, [postId])
   
-
+  
    const nightMode = useSelector((state) => state.toggle.isNightMode);
    const [style, setStyle] = useState(false);
 
@@ -100,16 +75,14 @@ const PostDetails = (props) =>{
 
 
 
-
-
-  console.log(nightMode)
-
   const handleGoBack = () => {
     router.back();
   };
 
 
-  console.log(postDetails)
+  //console.log(postDetails)
+
+
 
   return (
     <div className={style ? styles.container_dark : styles.container_light}>
@@ -127,12 +100,12 @@ const PostDetails = (props) =>{
             )}
           </div>
 
+    
+
           <div className={styles.post_div}>
-            {isLoaded && <Post {...postDetails} />}
+            {isLoaded && postDetails && <Post post={postDetails} />}
           </div>
         </div>
-
-      
 
         <WebUser />
       </div>
@@ -141,7 +114,7 @@ const PostDetails = (props) =>{
         <CreateComment postDetails={postDetails} postId={postDetails.id} />
       )}
 
-      {postDetails && (
+      {isLoaded && postDetails && (
         <Comments postId={postDetails.id} postDetails={postDetails} />
       )}
 

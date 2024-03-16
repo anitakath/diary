@@ -30,6 +30,15 @@ const postInteraction = (props) =>{
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const post = props.post
+
+  console.log(post)
+
+  const table = props.post.table
+
+  console.log(table)
+
+  console.log(props.postId)
 
   
 
@@ -54,12 +63,12 @@ const postInteraction = (props) =>{
 
     } catch(error){
       console.error(error)
-    } finally{
+    } /*finally{
       setIsLoading(false);
       dispatch(filter("deine"));
       // router.reload();
       router.push("/");
-    }
+    }*/
   }
 
 

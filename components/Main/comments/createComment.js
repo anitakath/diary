@@ -26,7 +26,7 @@ const CreateComment = (props) => {
   //const currentGoogleUser = props.postDetails.id
   const { selectedPost, setSelectedPost, currentGoogleUser } =
     useContext(RedditContext);
-
+/*
   console.log(currentGoogleUser);
 
   //annowagno@gmail.com
@@ -40,6 +40,7 @@ const CreateComment = (props) => {
 
   console.log(props);
 
+  */
   const handleCommentSubmit = async () => {
     if (commentText.trim() === "") {
       alert(

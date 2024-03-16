@@ -9,6 +9,7 @@
     position: relative;
     background: var(background-primary);
 
+
 }
 
 .container_light{
@@ -30,7 +31,7 @@
     height:10vh;
     position: relative;
     background: var(--background_dark);
-   
+
 }
 
 
@@ -107,7 +108,7 @@
 .user{
     color: #F7567C;
     cursor: pointer;
-    font-size: 1.7rem;
+    font-size: 1.2rem;
 }
 
 

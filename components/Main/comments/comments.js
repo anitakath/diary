@@ -53,10 +53,11 @@ const Comments = (props) =>{
   );
 
 
+  /*
   console.log(comments)
   console.log(filteredComments)
 
-
+*/
 
   return (
     <div
