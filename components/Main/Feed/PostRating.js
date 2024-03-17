@@ -153,7 +153,6 @@ const PostRating = (props) => {
      if (isDownvoted) {
 
        setIsDownvotedTwice(true);
-       alert('du hast den Beitrag bereits gedownvoted')
        setIsDownvoted(false);
 
        await updatePostVotes({
@@ -194,7 +193,6 @@ const PostRating = (props) => {
         return res.status(500).json({ error: error.message });
       }
 
-      console.log(data)
 
       const upvotes = data[0].upvotes;
       const downvotes = data[0].downvotes;
@@ -274,11 +272,11 @@ const PostRating = (props) => {
         />
       </button>
       <div className={styles.info_div}>
-        {wobblingEvent && (
+        {upvoteWobblingEvent || downvoteWobblingEvent && (
           <p className={styles.info_p}>
-            {" "}
+            
             du hast bereits gevoted. klicke nochmals auf dein vote, um diesen zu
-            entfernen{" "}
+            entfernen
           </p>
         )}
       </div>

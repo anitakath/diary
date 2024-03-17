@@ -18,6 +18,8 @@ import { RedditContext } from "@/context/RedditContext";
 const Post = (props) => {
   const post = props.post;
 
+
+
   const pathId = post.pathId;
   
   const id = post.id;
@@ -62,9 +64,6 @@ const Post = (props) => {
 
 
   const navigateToPostDetails = () =>{
-
-    console.log('MOIIIIN')
-
 
     localStorage.setItem(
       "selectedPost",

@@ -36,7 +36,6 @@ const NewPost = () =>{
     return (
       <div>
         <div className="App">
-          
           <NewPostForm />
         </div>
       </div>

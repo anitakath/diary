@@ -58,34 +58,34 @@ const NewPostForm = () => {
     try {
       setLoading(true);
 
-      if(author === '' && title === '' && text === ''){
-        console.log('insert!')
-        return
+      if (author === "" && title === "" && text === "") {
+        console.log("insert!");
+        return;
       }
+
+      const formattedAuthor = author.replace(/\s+/g, "-"); // Ersetze Leerzeichen durch Bindestriche
+      const formattedTitle = title.replace(/\s+/g, "-"); // Ersetze Leerzeichen durch Bindestriche
 
       await supabase.from("users_feed").insert([
         {
           author: author,
           title: title,
           description: text,
-          creator: 'anitakath',
+          creator: author,
           upvotes: 0,
           downvotes: 0,
+          table: "users_feed",
+          total_votes: 0,
+          pathId: `${formattedAuthor}-${formattedTitle}`,
         },
       ]);
 
-
       setLoading(false);
       router.push("/");
-       
     } catch (error) {
       setLoading(false);
       console.error(error);
-    } finally {
-      setLoading(false);
-
-      router.push("/");
-    }
+    } 
   };
 
 

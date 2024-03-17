@@ -48,6 +48,7 @@ const Comments = (props) =>{
     }
   );
 
+
   useEffect(() => {
     if (!data) return;
     setComments(data.data);

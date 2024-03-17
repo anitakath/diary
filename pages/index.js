@@ -41,7 +41,7 @@ export default function Home() {
 
   const [myPosts, setMyPosts] = useState(null);
 
-  console.log(myPosts);
+
   
   const addNewPost = (newPost) => {
     setMyPosts((prevPosts) => [newPost, ...prevPosts]);

@@ -32,53 +32,61 @@ import { supabase } from "@/services/supabaseClient";
 import { current } from "@reduxjs/toolkit";
 
 
+export async function getServerSideProps(context) {
+  const postId = context.params.id; // Extrahiere die Post-ID aus dem Pfadparameter
+
+  // Rufe Daten aus beiden Tabellen ab und filtere nach der Post-ID
+  const { data: postFromTable1 } = await supabase
+    .from("feed_dummy")
+    .select("*")
+    .eq("pathId", postId)
+    .single();
+  const { data: postFromTable2 } = await supabase
+    .from("users_feed")
+    .select("*")
+    .eq("pathId", postId)
+    .single();
+
+  // Überprüfe, ob der Post in einer der Tabellen gefunden wurde
+  const post = postFromTable1 || postFromTable2;
 
 
-const PostDetails = (props) =>{
-  const { selectedPost, setSelectedPost } = useContext(RedditContext);
+  return {
+    props: {
+      post,
+    },
+  };
+}
 
 
+
+const PostDetails = ({post}) =>{
+
+  const router = useRouter();
+  const nightMode = useSelector((state) => state.toggle.isNightMode);
+  const [style, setStyle] = useState(false);
 
   const [postDetails, setPostDetails] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(null)
+  const [isLoaded, setIsLoaded] = useState(null);
 
 
 
-//console.log(selectedPost)
-//console.log(postDetails);
-
-useEffect(()=>{
-
-  if(selectedPost){
-    setIsLoaded(true)
-    setPostDetails(selectedPost)
-  }
-
-}, [])
   
-  const router = useRouter();
-  const { id } = router.query;
-
-  console.log(id)
-
-  const postId = id;
-
-         
-  
-  
-   const nightMode = useSelector((state) => state.toggle.isNightMode);
-   const [style, setStyle] = useState(false);
-
-   useEffect(() => {
-     setStyle(nightMode);
-   }, [nightMode]);
+  useEffect(() => {
+    if (post) {
+      setIsLoaded(true)
+      setPostDetails(post)
+    }
+  }, []);
 
 
+  useEffect(() => {
+    setStyle(nightMode);
+  }, [nightMode]);
 
   const handleGoBack = () => {
     router.back();
   };
-
 
 
 
@@ -99,10 +107,8 @@ useEffect(()=>{
             )}
           </div>
 
-    
-
           <div className={styles.post_div}>
-            {isLoaded && postDetails && <Post post={postDetails} />}
+            {isLoaded  && <Post post={post} />}
           </div>
         </div>
 
