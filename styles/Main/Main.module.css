@@ -1,17 +1,14 @@
 
 
 .container{
-    min-height: 100vh;
     display: flex;
     justify-content: center;
     position: relative;
     background: white;
     overflow-x: hidden;
-    
 }
 
 .container_dark{
-    min-height: 100vh;
     display: flex;
     justify-content: center;
     position: relative;
@@ -34,7 +31,7 @@
 .output_field{
     border-radius: 5px;
     width: 50vw;
-    min-height: 500vh;
+
     margin: 5px;
 
 }

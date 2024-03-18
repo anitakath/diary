@@ -194,9 +194,9 @@
 .like_reaction_icon, .reply_reaction_icon, .report_reaction_icon{
     transition: 0.4s ease;
     margin: 15px 0px 15px 5px;
-    width: clamp(20px, 4vw, 30px);
-    font-size: clamp(24px, 2rem, 2rem);
+    width: 20px;
     color: var(--pink_opaque);
+
 }
 
 

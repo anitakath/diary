@@ -41,6 +41,12 @@ const CreateComment = (props) => {
   console.log(props);
 
   */
+
+  console.log(props.postDetails);
+
+  const postDetails = props.postDetails
+
+
   const handleCommentSubmit = async () => {
     if (commentText.trim() === "") {
       alert(
@@ -53,13 +59,20 @@ const CreateComment = (props) => {
       const currentDate = new Date().toISOString(); 
       const { data, error } = await supabase.from("comments").insert([
         {
-          postId: postId,
-          created_at: currentDate,
           author: currentGoogleUser.user.identities[0].identity_data.full_name,
-          user_email: currentGoogleUser.user.email,
-          profileImage: currentGoogleUser.user.user_metadata.avatar_url,
-          user_id: currentGoogleUser,
+          created_at: currentDate,
+          //creator: currentGoogleUser.user.identities[0].identity_data.full_name,
           text: commentText,
+          //downvotes: 0,
+          postId: postDetails.id,
+          pathId: postDetails.pathId,
+          profileImage: currentGoogleUser.user.user_metadata.avatar_url,
+          //total_votes: 0,
+          //upvotes: 0,
+          user_email: currentGoogleUser.user.email,
+          user_id: currentGoogleUser,
+          table: postDetails.table,
+
         },
       ]);
 
@@ -89,7 +102,7 @@ const CreateComment = (props) => {
           className={nightMode ? styles.textarea_dark : styles.textarea_light}
           value={commentText}
           onChange={(e) => setCommentText(e.target.value)}
-          placeholder="Geben Sie hier Ihren Kommentar ein..."
+          placeholder="Gebe deinen Kommentar hier ein..."
         ></textarea>
         <button onClick={handleCommentSubmit}>Kommentar absenden</button>
       </div>

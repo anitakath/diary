@@ -23,12 +23,22 @@
 
 .post_div{
     margin: 50px 0px;
+    padding: 0;
 }
 
 .post_container{
     background: var(--background-secondary);
     margin: 50px 0px;
+    border-bottom: 1px solid grey;
+    border-top: 1px solid grey;
+    transition: 0.2s ease;
 }
+
+.post_container:hover{
+    background-color: rgba(0,0,0, 0.2);
+    background: silver;
+}
+
 
 .noPostsMessage_div{
     height: 30vh;

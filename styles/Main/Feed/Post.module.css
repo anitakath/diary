@@ -9,15 +9,11 @@
 
 .post_container{
    display: flex;
-   margin: 20px;
-   border-bottom: 1px solid grey;
-   border-top: 1px solid grey;
+   margin-left: 20px;
    
 }
 
-.post_container:hover{
-    background-color: rgba(255,255,255, 0.2);
-}
+
 
 
 .postRating_container{
@@ -347,6 +343,9 @@
 
     .postRating{
         height: 80px;
+        top: -2px;
+        left: -30px;
+  
     }
 
 
