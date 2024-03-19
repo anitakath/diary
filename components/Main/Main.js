@@ -43,7 +43,9 @@ const Main = (props) => {
             />
           </div>
 
-          <WebUser />
+          <div className={styles.webUser_div}>
+            <WebUser />
+          </div>
         </div>
       )}
     </div>

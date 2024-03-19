@@ -108,11 +108,13 @@ const PostDetails = ({post}) =>{
           </div>
 
           <div className={styles.post_div}>
-            {isLoaded  && <Post post={post} />}
+            {isLoaded && <Post post={post} />}
           </div>
         </div>
 
-        <WebUser />
+        <div className={styles.webUser_div}>
+          <WebUser />
+        </div>
       </div>
 
       {postDetails && (

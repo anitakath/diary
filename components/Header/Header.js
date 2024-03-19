@@ -110,24 +110,21 @@ const Header = () => {
                 <button className={styles.userMenu_btn} onClick={menuHandler}>
                   <FontAwesomeIcon icon={faUser} className={styles.user} />
                   <p className={nightMode ? styles.dark_p : styles.light_p}>
-                    {" "}
-                    menu{" "}
+                    menu
                   </p>
                 </button>
 
                 <button className={styles.userMenu_btn_web}>
                   <FontAwesomeIcon icon={faUsers} className={styles.user} />
                   <p className={nightMode ? styles.dark_p : styles.light_p}>
-                    {" "}
-                    community{" "}
+                    community
                   </p>
                 </button>
 
                 <button className={styles.userMenu_btn_web}>
                   <FontAwesomeIcon icon={faHouse} className={styles.user} />
                   <p className={nightMode ? styles.dark_p : styles.light_p}>
-                    {" "}
-                    beitrag{" "}
+                    beitrag
                   </p>
                 </button>
               </div>

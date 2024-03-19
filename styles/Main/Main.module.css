@@ -5,7 +5,6 @@
     justify-content: center;
     position: relative;
     background: white;
-    overflow-x: hidden;
 }
 
 .container_dark{
@@ -14,26 +13,24 @@
     position: relative;
     background: var(--background_dark);
     width: 100vw;
-    overflow-x: hidden;
-
-    
 }
 
+.webUser_div{
+    position: relative;
+    left: 20px;
+}
 
 .main_container{
     display: flex;
     position: relative;
     padding: 20px 0px;
-
 }
 
 
 .output_field{
     border-radius: 5px;
     width: 50vw;
-
     margin: 5px;
-
 }
 
 
@@ -47,6 +44,10 @@
     .webUser_container{
         display: none;
     }
+
+    .webUser_div{
+        left: 0;
+    }
 }
 
 
@@ -55,6 +56,4 @@
     .output_field{
         width: 96vw;
     }
-
-  
 }
