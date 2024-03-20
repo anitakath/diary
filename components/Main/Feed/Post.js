@@ -15,34 +15,31 @@ import { useSelector } from "react-redux";
 
 import { RedditContext } from "@/context/RedditContext";
 
-const Post = (props) => {
-  const post = props.post;
+const Post = ({post}) => {
 
-
-
-  const pathId = post.pathId;
-  
-  const id = post.id;
-
-
-  const created_at = post.created_at;
-
-  const description = post.description;
-  const downvotes = post.downvotes;
-  const title = post.title;
-
-  const upvotes = post.upvotes;
-
-  const author = post.author;
-
-  const table = post.table;
-  
+   const {
+     pathId,
+     id,
+     created_at,
+     description,
+     downvotes,
+     title,
+     upvotes,
+     author,
+     table,
+   } = post;
 
   const nightMode = useSelector((state) => state.toggle.nightMode);
-
-
-
   let totalvote = upvotes - downvotes;
+  const router = useRouter();
+  const { setSelectedPost, currentGoogleUser } = useContext(RedditContext);
+
+
+  const navigateToPostDetails = () => {
+    localStorage.setItem("selectedPost", JSON.stringify(post));
+    setSelectedPost(post);
+    router.push(`/post/${pathId}`);
+  };
 
   const formatDate = (timestamp) => {
     const dateObj = new Date(timestamp);
@@ -57,26 +54,6 @@ const Post = (props) => {
 
   const formattedDateTime = formatDate(created_at);
 
-  const router = useRouter();
-
-  const { setSelectedPost } = useContext(RedditContext);
-
-
-
-  const navigateToPostDetails = () =>{
-
-    localStorage.setItem(
-      "selectedPost",
-      JSON.stringify(post)
-    );
-
-    setSelectedPost(post)
-
-
-    router.push(`/post/${pathId}`);
-
-  
-  }
     
 
   return (
@@ -86,7 +63,7 @@ const Post = (props) => {
           table={table}
           votes={totalvote}
           postId={id}
-          currentGoogleUserId={props.currentGoogleUserId}
+          currentGoogleUserId={currentGoogleUser}
         />
       </div>
 

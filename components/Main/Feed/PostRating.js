@@ -23,7 +23,6 @@ import { supabase } from "@/services/supabaseClient";
 
 const PostRating = (props) => {
 
-
   const nightMode = useSelector((state) => state.toggle.isNightMode)
 
   const [votes, setVotes] = useState(props.votes)
@@ -31,25 +30,14 @@ const PostRating = (props) => {
   const [isUpvotedTwice, setIsUpvotedTwice] = useState(false)
   const [isDownvoted, setIsDownvoted] = useState(null)
   const [isDownvotedTwice, setIsDownvotedTwice] = useState(false)
-  const [wobblingEvent, setWobblingEvent] = useState(false)
 
 
-   const [upvoteWobblingEvent, setUpvoteWobblingEvent] = useState(false);
-   const [downvoteWobblingEvent, setDownvoteWobblingEvent] = useState(false);
+  const [upvoteWobblingEvent, setUpvoteWobblingEvent] = useState(false);
+  const [downvoteWobblingEvent, setDownvoteWobblingEvent] = useState(false);
  
 
   const postId = props.postId
   const table = props.table; //Name der ausgewählten supabase table :-*
-
-
-
-  useEffect(() => {
-    if (wobblingEvent) {
-      setTimeout(() => {
-        setWobblingEvent(false);
-      }, 3000);
-    }
-  }, [wobblingEvent]);
 
 
 
@@ -77,7 +65,6 @@ const PostRating = (props) => {
      if (isDownvoted) {
        setUpvoteWobblingEvent(true);
      }
-
   
 
     if(!isUpvoted){
@@ -102,7 +89,10 @@ const PostRating = (props) => {
 
     if(isUpvoted){
       setIsUpvotedTwice(true)
+      //console.log('already upvoted...removing upvote...')
       setIsUpvoted(false)
+
+
 
 
       await updatePostVotes({
@@ -129,6 +119,7 @@ const PostRating = (props) => {
     if (isUpvoted) {
       setDownvoteWobblingEvent(true);
     }
+
 
 
      if (!isDownvoted) {
@@ -180,9 +171,6 @@ const PostRating = (props) => {
 
 
 
-
-
-
   const getActualizedRating = async() => {
       const { data, error } = await supabase
         .from(table)
@@ -200,8 +188,6 @@ const PostRating = (props) => {
       setVotes(totalvots)
 
   }
-
-
 
 
 
@@ -272,13 +258,18 @@ const PostRating = (props) => {
         />
       </button>
       <div className={styles.info_div}>
-        {upvoteWobblingEvent || downvoteWobblingEvent && (
+        {upvoteWobblingEvent && (
           <p className={styles.info_p}>
-            
-            du hast bereits gevoted. klicke nochmals auf dein vote, um diesen zu
+            du hast bereits ein downvote abgegeben. klicke nochmals auf dein vote, um diesen zu
             entfernen
           </p>
         )}
+        {downvoteWobblingEvent && (
+            <p className={styles.info_p}>
+              du hast bereits ein upvote abgegeben. klicke nochmals auf dein vote, um diesen
+              zu entfernen
+            </p>
+          )}
       </div>
     </div>
   );

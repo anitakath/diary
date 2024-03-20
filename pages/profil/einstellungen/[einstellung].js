@@ -35,9 +35,6 @@ const SettingPage = () =>{
     }, [nightMode]);
 
 
-    console.log(einstellung)
-
-    console.log(router.pathname);
 
     const renderSelectedComponent = () => {
         switch (einstellung) {

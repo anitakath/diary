@@ -1,0 +1,123 @@
+
+
+.container{
+    width: 97%;
+    height: 95vh;
+    background: var(--background-primary);
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    box-shadow: 0px 0px 10px grey;
+    border-radius: 2px;
+    z-index: 10000;
+
+    border: 2px solid red;
+}
+
+
+.title{
+    font-size: 1.1rem;
+    margin: 5px 0px;
+    padding: 5px;
+}
+
+.form_div{
+    height: 80%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.dropzone{
+    background: lightgrey;
+    width: 100%;
+    margin: 5px 0px;
+    padding: 5px;
+    height: 50%;
+}
+
+
+.description{
+    border: 2px solid lightgrey;
+    height: 20%;
+    padding: 5px;
+    margin: 5px 0px;
+    cursor: pointer;
+    border: none;
+}
+
+
+.description:focus{
+    outline: none;
+}
+
+
+.buttons_div{
+    display: flex;
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+}
+
+.close_btn, .submit_btn{
+    margin: 5px;
+    width: 100px;
+    padding: 4px;
+}
+
+.close_btn{
+    background: var(--background_dark_opaque);
+    color: var(--hover-font-dark);
+    border-radius: 2px;
+}
+
+
+.submit_btn{
+    color: white;
+    background:var(--pink);
+}
+
+.submit_btn:hover{
+    
+}
+
+
+
+
+@media screen and (max-width: 1200px){
+    .container{
+        border: 2px solid orange;
+        left: 10px;
+    }
+}
+
+@media screen and (max-width: 1100px){
+
+    .container{
+        border: 2px solid green;
+        left: 15px;
+    }
+}
+
+
+
+@media screen and (max-width: 1000px){
+
+    .container{
+        border: 2px solid blue;
+        left: 10px;
+   
+    }
+}
+
+
+
+@media screen and (max-width: 600px){
+
+    .container{
+        border: 2px solid maroon;
+        left: 6px;
+        height: 98vh;
+     
+    }
+}

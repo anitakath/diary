@@ -66,7 +66,7 @@ const Feed = (props) => {
 
 
       useEffect(() => {
-        if (isLoaded) {
+        if (isLoaded && loadedPosts) {
           // Filter the posts based on the selected filter
           const newFilteredPosts = loadedPosts.filter((post) => {
             // Implement your filter logic here based on currentFilter

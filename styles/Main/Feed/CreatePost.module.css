@@ -4,6 +4,7 @@
     display: flex;
     width: 100%;  
     align-items: center;
+    position: relative;
 }
 
 
@@ -42,8 +43,6 @@
 .createPost_linkDiv{
     display: flex;
     width: 90%;
-
-
 }
 
 .createPost_link{
@@ -58,17 +57,12 @@
     justify-content: center;
     align-items: center;
     background: #F7567C;
-
-
-
 }
 
 .createPost_link:hover{
-    transition: 0.4s ease;
-    background: rgba(255,255,255, 0.6);
-    color: #F7567C;
-    border-bottom: 2px solid #F7567C;
-    
+    transition: 0.2s ease;
+    color: var(--hover-font-dark);
+
 }
 
 .media_buttons_div{
@@ -81,10 +75,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-
-
-
 }
 
 .photo_btn, .link_btn, .createPost_btn{
@@ -112,7 +102,6 @@
     font-size: clamp(1.3rem, 1rem, 1.5rem);
 
 }
-
 
 
 
@@ -196,7 +185,6 @@
       .users_image{
         width: 100px;
         height: 100px;
-
     }
 
   

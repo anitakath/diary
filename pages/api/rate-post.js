@@ -9,7 +9,7 @@ export async function updatePostVotes(req, res) {
   const { postId, type, userId, isUpvoted, isDownvoted, isUpvotedTwice, isDownvotedTwice, table } = req;
   
 
-  if (!postId || !type || !userId) {
+  if (!postId || !type /*|| !userId*/) {
     return res.status(400).json({ error: "postId and type are required" });
   }
 
@@ -24,13 +24,10 @@ export async function updatePostVotes(req, res) {
 
 
   
-  
-
-
   if (type === "upvotes") {
 
      if (isDownvoted) {
-      // console.log("you have already downvoted this post! please undo your downvote before upvoting");
+       //console.log("you have already downvoted this post! please undo your downvote before upvoting");
        return;
      }
 
@@ -64,10 +61,14 @@ export async function updatePostVotes(req, res) {
           user_action: null,
         })
         .eq("id", postId);
+
+     
     }
      
     if (isUpvoted && isUpvotedTwice === undefined) {
       //if the user has not yet given an upvote, but would like to give one...
+
+     
 
       const { data, error } = await supabase
         .from(table)
@@ -78,9 +79,12 @@ export async function updatePostVotes(req, res) {
         return res.status(500).json({ error: error.message });
       }
 
-      //.. then add 1 upvote to the votes cast so far and update the supabase table.
+      // Überprüfen, ob user_action existiert und gleich userId + "_up" ist
+      if (data[0].user_action && data[0].user_action === userId + "_up") {
+        // Wenn user_action existiert und gleich userId + "_up" ist, dann wurde bereits ein Upvote abgegeben
+        //console.log("User hat bereits einen Upvote abgegeben");
+      } else{
 
-      // At the same time, add the userId to the table to ensure that each user (userId) can only cast one vote
 
       updatedData = data[0].upvotes + 1;
 
@@ -92,28 +96,35 @@ export async function updatePostVotes(req, res) {
         })
         .eq("id", postId);
 
-      if (updateError) {
-        return res.status(500).json({ error: updateError.message });
-      } else {
+
+        if (updateError) {
+          return res.status(500).json({ error: updateError.message });
+        } else {
         // berechne den totalVote aus den aktualisierten upvotes - downvotes
 
-        const { data, error } = await supabase
-          .from(table)
-          .select("upvotes, downvotes")
-          .eq("id", postId);
+          const { data, error } = await supabase
+            .from(table)
+            .select("upvotes, downvotes")
+            .eq("id", postId);
 
-        if (error) {
-          return res.status(500).json({ error: error.message });
+          if (error) {
+              return res.status(500).json({ error: error.message });
+          }
+
+          const upvotes = data[0].upvotes;
+          const downvotes = data[0].downvotes;
+          const totalVotes = upvotes - downvotes;
+
+          await supabase
+            .from(table)
+              .update({ total_votes: totalVotes })
+              .eq("id", postId);
         }
 
-        const upvotes = data[0].upvotes;
-        const downvotes = data[0].downvotes;
-        const totalVotes = upvotes - downvotes;
 
-        await supabase
-          .from(table)
-          .update({ total_votes: totalVotes })
-          .eq("id", postId);
+     
+
+      
       }
     }
 
@@ -162,48 +173,53 @@ export async function updatePostVotes(req, res) {
 
 
 
-      
-       const { data, error } = await supabase
-         .from(table)
-         .select("downvotes, user_action") // wähle alle columns aus
-         .eq("id", postId);
+      if (data[0].user_action && data[0].user_action === userId + "_down") {
+        // Wenn user_action existiert und gleich userId + "_up" ist, dann wurde bereits ein Upvote abgegeben
+        //console.log("User hat bereits einen Downvote abgegeben");
+      } else{
 
-       if (error) {
-         return res.status(500).json({ error: error.message });
-       }
+           const { data, error } = await supabase
+             .from(table)
+             .select("downvotes, user_action") // wähle alle columns aus
+             .eq("id", postId);
 
-       updatedData = data[0].downvotes + 1;
+           if (error) {
+             return res.status(500).json({ error: error.message });
+           }
 
-       const { newData, updateError } = await supabase
-         .from(table)
-         .update({
-           downvotes: updatedData,
-           user_action: userId + "_down",
-         })
-         .eq("id", postId);
+           updatedData = data[0].downvotes + 1;
 
+           const { newData, updateError } = await supabase
+             .from(table)
+             .update({
+               downvotes: updatedData,
+               user_action: userId + "_down",
+             })
+             .eq("id", postId);
 
            if (updateError) {
-        return res.status(500).json({ error: updateError.message });
-        } else {
+             return res.status(500).json({ error: updateError.message });
+           } else {
+             const { data, error } = await supabase
+               .from(table)
+               .select("upvotes, downvotes")
+               .eq("id", postId);
+
+             const upvotes = data[0].upvotes;
+             const downvotes = data[0].downvotes;
+             const totalVotes = upvotes - downvotes;
 
 
-          const { data, error } = await supabase
-            .from(table)
-            .select("upvotes, downvotes")
-            .eq("id", postId);
+
+            await supabase
+              .from(table)
+              .update({ total_votes: totalVotes })
+              .eq("id", postId);
+           }
+      
+    
 
 
-
-        const upvotes = data[0].upvotes;
-        const downvotes = data[0].downvotes;
-        const totalVotes = upvotes - downvotes;
-
-
-        await supabase
-          .from(table)
-          .update({ total_votes: totalVotes })
-          .eq("id", postId);
 
       }
 

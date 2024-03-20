@@ -41,9 +41,9 @@ const AccountSettings = () => {
   console.log(darkMode)
 
 
-   const handleGenderChange = (event) => {
-     dispatch(gender(event.target.value))
-    };
+  const handleGenderChange = (event) => {
+    dispatch(gender(event.target.value))
+  };
 
 
 

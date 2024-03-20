@@ -5,6 +5,9 @@ import Image from 'next/image';
 import { useContext, useState } from 'react';
 
 
+//COMPONENTS
+import PhotoUploadModal from './Modals/PhotoUploadModal';
+
 //CONTEXT
 import { RedditContext } from "@/context/RedditContext";
 
@@ -31,9 +34,12 @@ const CreatePost = () => {
 
   const nightMode = useSelector((state) => state.toggle.isNightMode);
 
- 
+ const [isModalOpen, setIsModalOpen] = useState(false);
 
 
+ const openModal = () => {
+   setIsModalOpen(true);
+ };
 
   let avatarUrl;
 
@@ -47,6 +53,7 @@ const CreatePost = () => {
 
 
   return (
+    
     <div className={styles.createPost_container}>
       <div className={styles.userImage_container}>
         <div className={styles.circle}>
@@ -76,7 +83,11 @@ const CreatePost = () => {
         <div className={styles.media_buttons_div}>
           <div className={styles.media_buttons}>
             <button className={styles.photo_btn}>
-              <FontAwesomeIcon icon={faImage} className={styles.icon} />
+              <FontAwesomeIcon
+                icon={faImage}
+                onClick={openModal}
+                className={styles.icon}
+              />
             </button>
           </div>
           <div className={styles.media_buttons}>
@@ -92,6 +103,12 @@ const CreatePost = () => {
           </div>
         </div>
       </div>
+
+      {isModalOpen && (
+        <div className={styles.modal_div}>
+          <PhotoUploadModal closeModal={() => setIsModalOpen(false)} />
+        </div>
+      )}
     </div>
   );
 };
