@@ -24,7 +24,8 @@
     "react-dropzone": "^14.2.3",
     "react-redux": "^9.0.4",
     "swr": "^2.2.4",
-    "timeago.js": "^4.0.2"
+    "timeago.js": "^4.0.2",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.0.1",

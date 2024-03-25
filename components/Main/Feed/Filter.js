@@ -127,8 +127,7 @@ const Filter = () => {
             onClick={() => filterHandler("beste")}
             style={activeButton === "beste" ? { ...activeLinkStyle } : null}
           >
-            {" "}
-            beste{" "}
+            deine Posts
           </button>
         </div>
         <div>
@@ -137,8 +136,7 @@ const Filter = () => {
             onClick={() => filterHandler("heiß")}
             style={activeButton === "heiß" ? { ...activeLinkStyle } : null}
           >
-            {" "}
-            heiß{" "}
+            deine Fotogalerie 
           </button>
         </div>
         <div>

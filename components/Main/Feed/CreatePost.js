@@ -53,7 +53,6 @@ const CreatePost = () => {
 
 
   return (
-    
     <div className={styles.createPost_container}>
       <div className={styles.userImage_container}>
         <div className={styles.circle}>
@@ -106,7 +105,9 @@ const CreatePost = () => {
 
       {isModalOpen && (
         <div className={styles.modal_div}>
-          <PhotoUploadModal closeModal={() => setIsModalOpen(false)} />
+          <PhotoUploadModal
+            currentGoogleUser={ currentGoogleUser} closeModal={() => setIsModalOpen(false)}
+          />
         </div>
       )}
     </div>

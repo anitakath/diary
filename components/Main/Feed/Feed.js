@@ -16,6 +16,7 @@ import styles from '../../../styles/Main/Feed/Feed.module.css'
 
 //REDUX 
 import { useSelector } from "react-redux";
+import { supabase } from '@/services/supabaseClient';
 
 
 const Feed = (props) => {
@@ -23,15 +24,22 @@ const Feed = (props) => {
   const loadedPosts = props.posts;
 
 
-  //console.log(loadedPosts)
 
+  const userId = props.currentGoogleUserId;
+
+
+
+  const CDN_URL = process.env.CDN_URL;
+
+  const CDN_URL_USERID = `${CDN_URL}${userId}`;
 
 
   const [loadingPosts, setLoadingPosts] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
-
+  const [images, setImages] = useState([]);
+  const [loadedImages, setLoadedImages] = useState(false)
 
   const {
     id,
@@ -44,6 +52,7 @@ const Feed = (props) => {
     downvotes,
   } = props;
 
+  const supabaseImages = useSelector((state) => state.images.images);
 
 
   const storedFilter =
@@ -61,25 +70,50 @@ const Feed = (props) => {
   }, [loadedPosts]);
 
 
+  useEffect(() => {
+    if (isLoaded && loadedPosts) {
+      // Filter the posts based on the selected filter
+      const newFilteredPosts = loadedPosts.filter((post) => {
+        // Implement your filter logic here based on currentFilter
+        return true; // Placeholder logic for now
+      });
+      setFilteredPosts(newFilteredPosts);
+    }
+  }, [currentFilter]);
 
 
 
-
-      useEffect(() => {
-        if (isLoaded && loadedPosts) {
-          // Filter the posts based on the selected filter
-          const newFilteredPosts = loadedPosts.filter((post) => {
-            // Implement your filter logic here based on currentFilter
-            return true; // Placeholder logic for now
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        // Fetchen der Bilder aus dem Supabase Storage
+        const { data, error } = await supabase.storage
+          .from("images")
+          .list(userId + "/", {
+            limit: 100,
+            offset: 0,
+            sortBy: { column: "name", order: "asc" },
           });
-          setFilteredPosts(newFilteredPosts);
+
+        if (data) {
+          setImages(data);
+          console.log(data);
+          setLoadedImages(true)
+        } else {
+          console.log(error);
         }
-      }, [currentFilter]);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchImages();
+  }, [userId]);
 
 
-
-    //console.log(loadedPosts)
-
+  console.log(loadedImages)
+  console.log(currentFilter.selectedFilter);
+  
 
 
   return (
@@ -113,11 +147,29 @@ const Feed = (props) => {
             </div>
           ))}
 
-        {loadedPosts === null &&  (
+        {loadedPosts === null && !loadedImages && (
           <div className={styles.noLoadedPosts_div}>
-           <p>  hier gibt es noch keine Posts 🥲 </p>
+            <p> hier gibt es noch keine Posts 🥲 </p>
           </div>
         )}
+
+        {loadedImages &&
+          currentFilter.selectedFilter === "heiß" && (
+            <div className={styles.imageGallery}>
+              {images.map((image) => (
+                <div className={styles.image_div}>
+                  <img
+                    key={image.id}
+                    src={CDN_URL_USERID + "/" + image.name}
+                    alt="gallery-image"
+                    className={styles.img}
+                  />
+
+                  <p className={styles.img_info}> *Fotobeschreibung*</p>
+                </div>
+              ))}
+            </div>
+          )}
       </div>
     </div>
   );
