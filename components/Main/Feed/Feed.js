@@ -3,7 +3,7 @@
 import React from 'react';
 import { useState, useEffect } from "react";
 import Image from "next/image";
-
+import Link from 'next/link';
 
 //COMPONENTS
 import CreatePost from "./CreatePost";
@@ -15,50 +15,37 @@ import WebUser from "../WebUser";
 import styles from '../../../styles/Main/Feed/Feed.module.css'
 
 //REDUX 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { supabase } from '@/services/supabaseClient';
-
+import { setSupebaseImages } from '@/store/supabaseImagesSlice';
 
 const Feed = (props) => {
   const currentFilter = useSelector((state) => state.filter);
   const loadedPosts = props.posts;
-
-
-
   const userId = props.currentGoogleUserId;
-
-
-
   const CDN_URL = process.env.CDN_URL;
-
   const CDN_URL_USERID = `${CDN_URL}${userId}`;
-
 
   const [loadingPosts, setLoadingPosts] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [posts, setPosts] = useState([]);
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [images, setImages] = useState([]);
-  const [loadedImages, setLoadedImages] = useState(false)
+  const [loadedImages, setLoadedImages] = useState(false);
+ 
 
-  const {
-    id,
-    created_at,
-    content,
-    author,
-    title,
-    description,
-    upvotes,
-    downvotes,
-  } = props;
 
   const supabaseImages = useSelector((state) => state.images.images);
 
+  //console.log(supabaseImages)
 
   const storedFilter =
     typeof window !== "undefined"
       ? localStorage.getItem("selectedFilter") || "beste"
       : "beste";
+
+
+
 
   useEffect(() => {
     if (loadedPosts) {
@@ -68,6 +55,7 @@ const Feed = (props) => {
       setLoadingPosts(false);
     }
   }, [loadedPosts]);
+
 
 
   useEffect(() => {
@@ -83,38 +71,50 @@ const Feed = (props) => {
 
 
 
-  useEffect(() => {
-    const fetchImages = async () => {
-      try {
-        // Fetchen der Bilder aus dem Supabase Storage
-        const { data, error } = await supabase.storage
-          .from("images")
-          .list(userId + "/", {
-            limit: 100,
-            offset: 0,
-            sortBy: { column: "name", order: "asc" },
-          });
 
-        if (data) {
-          setImages(data);
-          console.log(data);
-          setLoadedImages(true)
-        } else {
-          console.log(error);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchImages();
-  }, [userId]);
+  const dispatch = useDispatch()
 
 
-  console.log(loadedImages)
-  console.log(currentFilter.selectedFilter);
-  
+  const fetchImages = async () => {
+    const { data, error } = await supabase.storage
+      .from("images")
+      .list(userId + "/", {
+        limit: 100,
+        offset: 0,
+        sortBy: { column: "name", order: "asc" },
+      });
 
+    if (data !== null) {
+      const filteredImages = data.filter(
+        (image) => !image.name.startsWith(".")
+      ); // Filtert Dateien, die nicht mit "." beginnen
+      setImages(filteredImages);
+      dispatch(setSupebaseImages(filteredImages));
+     if(filteredImages.length > 0){
+        setLoadedImages(true);
+     }
+    } else {
+      console.log(error);
+    }
+  };
+
+
+
+
+  useEffect(()=>{
+    if(userId){
+      fetchImages()
+    }
+  }, [userId])
+
+
+
+
+
+  //console.log(loadedImages);
+  //console.log(currentFilter.selectedFilter);
+  //console.log(CDN_URL_USERID);
+  //console.log(images)
 
   return (
     <div className={styles.container}>
@@ -147,17 +147,19 @@ const Feed = (props) => {
             </div>
           ))}
 
-        {loadedPosts === null && !loadedImages && (
+        {loadedPosts === null && !loadedImages && images.length <= 0 &&  (
           <div className={styles.noLoadedPosts_div}>
             <p> hier gibt es noch keine Posts 🥲 </p>
           </div>
         )}
 
-        {loadedImages &&
-          currentFilter.selectedFilter === "heiß" && (
-            <div className={styles.imageGallery}>
-              {images.map((image) => (
-                <div className={styles.image_div}>
+        {images.length > 0 && (
+          <div className={styles.imageGallery}>
+
+            
+            {images.map((image) => (
+              <div className={styles.image_div} key={image.id}>
+                <Link href={`/image/${image.name}`}>
                   <img
                     key={image.id}
                     src={CDN_URL_USERID + "/" + image.name}
@@ -165,11 +167,12 @@ const Feed = (props) => {
                     className={styles.img}
                   />
 
-                  <p className={styles.img_info}> *Fotobeschreibung*</p>
-                </div>
-              ))}
-            </div>
-          )}
+
+                </Link>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

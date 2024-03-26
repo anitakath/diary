@@ -29,7 +29,7 @@ export default function Home() {
   const {currentGoogleUser, fetcher} = useContext(RedditContext)
   const selectedFilter = useSelector((state) => state.filter.selectedFilter);
 
- 
+ console.log(selectedFilter);
 
   const currUser = useSelector((state) => state.user);
 
@@ -57,6 +57,10 @@ export default function Home() {
       revalidateOnFocus: false, // Disable revalidation on focus to prevent refetching when tab is focused
     }
   );
+
+
+
+
 
 
 

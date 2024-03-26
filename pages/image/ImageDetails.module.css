@@ -1,0 +1,41 @@
+
+
+.container{
+    background: white;
+    min-height: 100vh;
+}
+
+
+.container_dark{
+    background: var(--background_dark);
+    min-height: 100vh;
+}
+
+
+
+.image_wrapper{
+    display: flex;
+}
+
+.image_div{
+    width: 50%;
+    height: 100vh;
+}
+
+.image{
+    height: 100vh;
+    width: 100%;
+    object-fit: cover;
+    padding: 20px;
+}
+
+.info_div{
+    width: 50%;
+    overflow: scroll;
+}
+
+.info{
+    color: silver;
+    font-size: 1.7rem;
+    padding: 20px;
+}

@@ -37,6 +37,7 @@ const CreatePost = () => {
  const [isModalOpen, setIsModalOpen] = useState(false);
 
 
+
  const openModal = () => {
    setIsModalOpen(true);
  };
@@ -106,6 +107,7 @@ const CreatePost = () => {
       {isModalOpen && (
         <div className={styles.modal_div}>
           <PhotoUploadModal
+            nightMode={nightMode}
             currentGoogleUser={ currentGoogleUser} closeModal={() => setIsModalOpen(false)}
           />
         </div>

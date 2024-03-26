@@ -12,6 +12,17 @@
     z-index: 10000;
 }
 
+.container_dark {
+    width: 97%;
+    height: 95vh;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    box-shadow: 0px 0px 10px black;
+    border-radius: 2px;
+    z-index: 10000;
+    background: var(--background_dark);
+}
 
 .title{
     font-size: 1.1rem;
@@ -36,11 +47,13 @@
 
 .description{
     border: 2px solid lightgrey;
-    height: 20%;
+    height: 30%;
     padding: 5px;
     margin: 5px 10px;
     cursor: pointer;
     border: none;
+    background: transparent;
+    border: 1px solid silver;
 
 }
 
@@ -80,6 +93,7 @@
     background: var(--background_dark_opaque);
     color: var(--hover-font-dark);
     border-radius: 2px;
+    border: 1px solid silver;
 }
 
 

@@ -16,18 +16,29 @@ import styles from './PhotoUploadModal.module.css'
 import { useDispatch, useSelector } from "react-redux";
 import { setImages } from "@/store/supabaseImagesSlice";
 
+
+
 const PhotoUploadModal = (props) =>{
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [description, setDescription] = useState("");
   const [images, setImages] = useState([])
   const [isLoading, setIsLoading] = useState(false)
-  
+  const [loadedImages, setLoadedImages] = useState(false);
+  const [imageId, setImageId] = useState("")
+  const nightMode = props.nightMode
+
+  console.log(nightMode)
+
   const handleFileUpload = (event) => {
       setSelectedFile(event.target.files[0]);
+      setImageId(event.target.files[0].name);
   };
 
   console.log(selectedFile)
+  console.log(imageId)
+  console.log(images)
+
 
 
   const userId = props.currentGoogleUser.user.id
@@ -35,32 +46,67 @@ const PhotoUploadModal = (props) =>{
 
 
 
+  const uploadDescription = async () =>{
 
-  const getImages = async () => {
+    console.log(userId)
+    console.log(images.name)
+    console.log(description)
+    console.log(imageId)
     try {
-      // Fetchen der Bilder aus dem Supabase Storage
-      const { data, error } = await supabase.storage
-        .from("images")
-        .list(userId + "/", {
-          limit: 100,
-          offset: 0,
-          sortBy: { column: "name", order: "asc" },
-        });
-
+      const { data, error } = await supabase
+        .from("image_informations")
+        .insert([
+          { 
+            description: description,
+          }
+        ])
+     
 
       if (data) {
-        // Speichern der Bilder im Redux Store
-        console.log(data)
-        setImages(data);
-        dispatch(setImages(data));
-
+        console.log("Description uploaded successfully");
       } else {
         console.log(error);
       }
+    
     } catch (error) {
       console.error(error);
     }
-  };
+    
+
+  }
+
+
+   const fetchImages = async () => {
+     try {
+       // Fetchen der Bilder aus dem Supabase Storage
+       const { data, error } = await supabase.storage
+         .from("images")
+         .list(userId + "/", {
+           limit: 100,
+           offset: 0,
+           sortBy: { column: "name", order: "asc" },
+         });
+
+       if (data) {
+         setImages(data);
+         console.log(data);
+         console.log(images);
+
+         if (images) {
+           console.log("there are images");
+           setLoadedImages(true);
+         }
+
+        //await uploadDescription();
+       } else {
+         console.log(error);
+       }
+     } catch (error) {
+       console.error(error);
+       setLoadedImages(false);
+     }
+   };
+
 
 
 
@@ -72,9 +118,12 @@ const PhotoUploadModal = (props) =>{
   console.log(supabaseImages);
 
 
+
+
+
+
   const uploadImageHandler = async (event) => {
     event.preventDefault();
-
     console.log(selectedFile)
     setIsLoading(true)
 
@@ -84,15 +133,33 @@ const PhotoUploadModal = (props) =>{
         // userId/nameOfImg.jpg
         // Upload des ausgewählten Bildes an Supabase Storage
 
-        const { data, error } = await supabase.storage
+        const { data, error } = await supabase
+          .storage
           .from("images")
           .upload(userId + "/" + uuidv4(), selectedFile); //uuidv4() => string with bunch of chars
 
         if (data) {
           console.log(data);
-          setIsLoading(false)
+          setIsLoading(false);
           props.closeModal();
-         //getImages();
+          //getImages();
+          fetchImages();
+          console.log(data.path)
+          const path = data.path;
+          const parts = path.split("/") //teilt den String an dem "/"
+          const lastPart = parts[parts.length -1]
+
+          console.log(lastPart)
+
+          // Upload der Beschreibung zusammen mit dem Bild in die Tabelle "image_informations"
+          const { descriptionData, descriptionError } = await supabase
+            .from("image_informations")
+            .insert([
+              {
+                description: description,
+                imageId: lastPart, // Key des hochgeladenen Bildes als Referenz
+              },
+            ]);
         } else {
          console.log(error);
         }
@@ -106,15 +173,20 @@ const PhotoUploadModal = (props) =>{
      };
 
      console.log(isLoading)
+     console.log(description);
 
      
 
     return (
-      <div className={styles.container}>
+      <div className={nightMode ? styles.container_dark : styles.container}>
         <h1 className={styles.title}> lade ein Foto hoch</h1>
 
         <form className={styles.form_div}>
-          <input type="file" onChange={handleFileUpload} className={styles.file_input}/>
+          <input
+            type="file"
+            onChange={handleFileUpload}
+            className={styles.file_input}
+          />
 
           <textarea
             className={styles.description}

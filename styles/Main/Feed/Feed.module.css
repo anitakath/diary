@@ -76,10 +76,16 @@
     height: 700px;
     width: 700px;
     object-fit: cover;
+    margin: 20px 0px;
 }
 
-.img_info{
-    margin: 10px;
-    min-height: 70px;
-    font-size: 1.2rem;
+.img:hover{
+    transition: 0.2s ease;
+    cursor: pointer;
+    transform: scale(0.97);
+    opacity: 0.5;
 }
+
+
+
+
