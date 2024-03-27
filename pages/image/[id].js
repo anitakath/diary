@@ -64,40 +64,8 @@ const ImageDetails = () => {
   //console.log(description)
 
  
-
-  /*
-    const fetchImages = async () => {
-      const { data, error } = await supabase.storage
-        .from("images")
-        .list(userId + "/", {
-          limit: 100,
-          offset: 0,
-          sortBy: { column: "name", order: "asc" },
-        });
-
-      if (data) {
-        setImages(data);
-        console.log(data);
-        console.log("DATTAAA");
-        // Finde das Bild mit der entsprechenden ID
-
-        const image = data.find((image) => image.id === userId);
-        console.log(image);
-        setSelectedImage(image);
-        setImageLoaded(true);
-      } else {
-        console.log(error);
-      }
-    };
-  */
-
-
-    const fetchDescription = () =>{
-
-    }
-
   
-useEffect(() => {
+  useEffect(() => {
 
     if(currentGoogleUser){
         setUserId(currentGoogleUser.user.id)
@@ -105,7 +73,7 @@ useEffect(() => {
         filterImage()
     }
 
-}, [userId]);
+  }, [userId]);
 
 //console.log(selectedImage);
 //console.log(userId)
@@ -117,7 +85,6 @@ useEffect(() => {
 
   return (
     <div className={style ? styles.container_dark : styles.container}>
-      <h1> image details</h1>
 
       <div className={styles.image_wrapper}>
         <div className={styles.image_div}>
@@ -126,7 +93,8 @@ useEffect(() => {
           )}
         </div>
         <div className={styles.info_div}>
-          <p className={styles.info}>{description}</p>
+          <h1 className={styles.title}> 20. Januar, 2024 </h1>
+          <p className={style ? styles.info : styles.info_light}>{description}</p>
         </div>
       </div>
     </div>

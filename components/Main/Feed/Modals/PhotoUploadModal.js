@@ -29,6 +29,7 @@ const PhotoUploadModal = (props) =>{
   const nightMode = props.nightMode
 
   console.log(nightMode)
+ 
 
   const handleFileUpload = (event) => {
       setSelectedFile(event.target.files[0]);
@@ -141,7 +142,7 @@ const PhotoUploadModal = (props) =>{
         if (data) {
           console.log(data);
           setIsLoading(false);
-          props.closeModal();
+          //props.closeModal();
           //getImages();
           fetchImages();
           console.log(data.path)

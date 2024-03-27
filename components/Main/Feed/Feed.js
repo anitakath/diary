@@ -33,6 +33,7 @@ const Feed = (props) => {
   const [images, setImages] = useState([]);
   const [loadedImages, setLoadedImages] = useState(false);
  
+  console.log(props)
 
 
   const supabaseImages = useSelector((state) => state.images.images);
@@ -88,7 +89,12 @@ const Feed = (props) => {
       const filteredImages = data.filter(
         (image) => !image.name.startsWith(".")
       ); // Filtert Dateien, die nicht mit "." beginnen
-      setImages(filteredImages);
+
+
+      const sortedImages = filteredImages.sort((a,b) => new Date(b.created_at) - new Date(a.created_at))
+
+
+      setImages(sortedImages);
       dispatch(setSupebaseImages(filteredImages));
      if(filteredImages.length > 0){
         setLoadedImages(true);
@@ -111,10 +117,10 @@ const Feed = (props) => {
 
 
 
-  //console.log(loadedImages);
-  //console.log(currentFilter.selectedFilter);
+  console.log(loadedImages);
+  console.log(currentFilter.selectedFilter);
   //console.log(CDN_URL_USERID);
-  //console.log(images)
+  console.log(images)
 
   return (
     <div className={styles.container}>
@@ -147,32 +153,29 @@ const Feed = (props) => {
             </div>
           ))}
 
-        {loadedPosts === null && !loadedImages && images.length <= 0 &&  (
+        {loadedPosts === null && !loadedImages && images.length <= 0 && (
           <div className={styles.noLoadedPosts_div}>
             <p> hier gibt es noch keine Posts 🥲 </p>
           </div>
         )}
 
-        {images.length > 0 && (
-          <div className={styles.imageGallery}>
-
-            
-            {images.map((image) => (
-              <div className={styles.image_div} key={image.id}>
-                <Link href={`/image/${image.name}`}>
-                  <img
-                    key={image.id}
-                    src={CDN_URL_USERID + "/" + image.name}
-                    alt="gallery-image"
-                    className={styles.img}
-                  />
-
-
-                </Link>
-              </div>
-            ))}
-          </div>
-        )}
+        {images.length > 0 &&
+          currentFilter.selectedFilter === "heiß" && (
+            <div className={styles.imageGallery}>
+              {images.map((image) => (
+                <div className={styles.image_div} key={image.id}>
+                  <Link href={`/image/${image.name}`}>
+                    <img
+                      key={image.id}
+                      src={CDN_URL_USERID + "/" + image.name}
+                      alt="gallery-image"
+                      className={styles.img}
+                    />
+                  </Link>
+                </div>
+              ))}
+            </div>
+          )}
       </div>
     </div>
   );

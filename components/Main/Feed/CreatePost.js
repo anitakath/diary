@@ -28,13 +28,11 @@ import { useSelector } from 'react-redux';
 
 
 const CreatePost = () => {
+
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-
   const { currentGoogleUser } = useContext(RedditContext);
-
   const nightMode = useSelector((state) => state.toggle.isNightMode);
-
- const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
 
 
@@ -107,11 +105,14 @@ const CreatePost = () => {
       {isModalOpen && (
         <div className={styles.modal_div}>
           <PhotoUploadModal
+      
             nightMode={nightMode}
             currentGoogleUser={ currentGoogleUser} closeModal={() => setIsModalOpen(false)}
           />
         </div>
       )}
+
+
     </div>
   );
 };

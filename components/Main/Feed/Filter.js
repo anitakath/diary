@@ -136,7 +136,7 @@ const Filter = () => {
             onClick={() => filterHandler("heiß")}
             style={activeButton === "heiß" ? { ...activeLinkStyle } : null}
           >
-            TAGEBUCH 
+            BILDERTAGEBUCH 
           </button>
         </div>
         <div>
