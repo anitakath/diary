@@ -16,7 +16,7 @@ if (typeof window !== "undefined") {
   };
 }
 
-console.log(initialState)
+
 const toggleSlice = createSlice({
   name: "toggle",
   initialState,

@@ -19,6 +19,15 @@
     background: pink;
 }
 
+.date{
+   color: silver;
+   cursor: pointer;
+}
+.date:hover{
+    transition: 0.2s ease;
+    color: var(--pink);
+}
+
 .post_div{
     margin: 50px 0px;
     padding: 0;
@@ -69,15 +78,13 @@
     align-items: center;
     justify-content: center;
     overflow: scroll;
-
-
 }
 
 .img{
-    height: 700px;
-    width: 700px;
+    height: 900px;
+    width: 900px;
     object-fit: cover;
-    margin: 20px 0px;
+    margin: 10px 0px 40px 0px;
     box-shadow: 0px 0px 5px black;
 }
 
@@ -86,6 +93,29 @@
     cursor: pointer;
     transform: scale(0.97);
     opacity: 0.5;
+}
+
+.loadingImage{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0px;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #333;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 0px 12px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 

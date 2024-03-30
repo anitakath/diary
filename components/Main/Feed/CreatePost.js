@@ -34,6 +34,9 @@ const CreatePost = () => {
   const nightMode = useSelector((state) => state.toggle.isNightMode);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const currentFilter = useSelector((state) => state.filter.selectedFilter);
+
+
 
 
  const openModal = () => {
@@ -73,13 +76,24 @@ const CreatePost = () => {
 
       <div className={styles.form_container}>
         <div className={styles.createPost_linkDiv}>
-          <Link href={`/new-post`} className={styles.createPost_link}>
-            create a new post
-          </Link>
-        </div>
+          {currentFilter === "beste" && (
+            <Link href={`/new-post`} className={styles.createPost_link}>
+              erstelle einen neuen Beitrag
+            </Link>
+          )}
 
-        <div className={styles.media_buttons_div}>
-          <div className={styles.media_buttons}>
+          {currentFilter === "heiß" && (
+            <button className={styles.photo_btn}>
+              <FontAwesomeIcon
+                icon={faImage}
+                onClick={openModal}
+                className={styles.icon}
+              />
+              <span> erstelle einen neuen Tagebucheintrag </span>
+            </button>
+          )}
+
+          {currentFilter === "neu" && (
             <button className={styles.photo_btn}>
               <FontAwesomeIcon
                 icon={faImage}
@@ -87,32 +101,19 @@ const CreatePost = () => {
                 className={styles.icon}
               />
             </button>
-          </div>
-          <div className={styles.media_buttons}>
-            <button className={styles.link_btn}>
-              <FontAwesomeIcon icon={faLink} className={styles.icon} />
-            </button>
-          </div>
-
-          <div className={styles.media_buttons}>
-            <button className={styles.createPost_btn} type="submit">
-              <FontAwesomeIcon icon={faPlus} className={styles.icon} />
-            </button>
-          </div>
+          )}
         </div>
       </div>
 
       {isModalOpen && (
         <div className={styles.modal_div}>
           <PhotoUploadModal
-      
             nightMode={nightMode}
-            currentGoogleUser={ currentGoogleUser} closeModal={() => setIsModalOpen(false)}
+            currentGoogleUser={currentGoogleUser}
+            closeModal={() => setIsModalOpen(false)}
           />
         </div>
       )}
-
-
     </div>
   );
 };

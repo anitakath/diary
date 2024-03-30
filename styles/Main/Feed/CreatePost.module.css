@@ -43,9 +43,10 @@
 .createPost_linkDiv{
     display: flex;
     width: 90%;
+    justify-content: center;
 }
 
-.createPost_link{
+.createPost_link, .photo_btn{
     border-bottom: 2px solid rgba(255,255,255, 0.6);
     padding:  10px;
     background: #F7567C;
@@ -77,7 +78,7 @@
     align-items: center;
 }
 
-.photo_btn, .link_btn, .createPost_btn{
+ .link_btn, .createPost_btn{
     width: 32px;
     height: 32px;
     background-color: transparent;
@@ -90,7 +91,7 @@
     
 }
 
-.photo_btn:hover, .link_btn:hover, .createPost_btn:hover{
+ .link_btn:hover, .createPost_btn:hover{
     background: silver;
     border-radius: 50%;
     padding: 3px;
@@ -99,8 +100,11 @@
 
 
 .icon{
-    font-size: clamp(1.3rem, 1rem, 1.5rem);
+    font-size: 1.5rem;
+}
 
+.photo_btn span{
+    margin: 0px 10px;
 }
 
 
@@ -148,9 +152,7 @@
         margin: 0px 5px;
     }
 
-    .icon{
-        font-size: 1.5rem;
-    }
+
        
 }
 
@@ -193,10 +195,7 @@
         width: 100%;
     }
 
-    .icon{
-        transition: 0.4s ease;
-        top: -5px;
-    }
+  
 }
 
 

@@ -32,9 +32,7 @@ const Feed = (props) => {
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [images, setImages] = useState([]);
   const [loadedImages, setLoadedImages] = useState(false);
- 
-  console.log(props)
-
+  const [selectedDateFormat, setSelectedDateFormat] = useState("format1"); // Zustand für ausgewähltes Datumsformat
 
   const supabaseImages = useSelector((state) => state.images.images);
 
@@ -45,9 +43,6 @@ const Feed = (props) => {
       ? localStorage.getItem("selectedFilter") || "beste"
       : "beste";
 
-
-
-
   useEffect(() => {
     if (loadedPosts) {
       setIsLoaded(true);
@@ -56,8 +51,6 @@ const Feed = (props) => {
       setLoadingPosts(false);
     }
   }, [loadedPosts]);
-
-
 
   useEffect(() => {
     if (isLoaded && loadedPosts) {
@@ -70,11 +63,7 @@ const Feed = (props) => {
     }
   }, [currentFilter]);
 
-
-
-
-  const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
 
   const fetchImages = async () => {
     const { data, error } = await supabase.storage
@@ -90,37 +79,83 @@ const Feed = (props) => {
         (image) => !image.name.startsWith(".")
       ); // Filtert Dateien, die nicht mit "." beginnen
 
-
-      const sortedImages = filteredImages.sort((a,b) => new Date(b.created_at) - new Date(a.created_at))
-
+      const sortedImages = filteredImages
+        .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+        .map((image) => ({ ...image, loaded: false }));
 
       setImages(sortedImages);
       dispatch(setSupebaseImages(filteredImages));
-     if(filteredImages.length > 0){
+      if (filteredImages.length > 0) {
         setLoadedImages(true);
-     }
+      }
     } else {
       console.log(error);
     }
   };
 
-
-
-
-  useEffect(()=>{
-    if(userId){
-      fetchImages()
+  useEffect(() => {
+    if (userId) {
+      fetchImages();
     }
-  }, [userId])
+  }, [userId]);
+
+  const handleImageLoad = (id) => {
+    setImages((prevImages) =>
+      prevImages.map((image) =>
+        image.id === id ? { ...image, loaded: true } : image
+      )
+    );
+  };
+
+
+  const formatDate1 = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    return `${day < 10 ? "0" + day : day}.${
+      month < 10 ? "0" + month : month
+    }.${year}`;
+  };
+
+  const formatDate2 = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+
+    return `${month < 10 ? "0" + month : month}.${
+      day < 10 ? "0" + day : day
+    }.${year}`;
+  };
+
+  const formatDate3 = (dateString) => {
+  const months = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
+
+  const date = new Date(dateString);
+  const day = date.getDate();
+  const monthIndex = date.getMonth();
+  const year = date.getFullYear();
+
+  return `${day}. ${months[monthIndex]}, ${year}`;
+};
+
+   const handleDateClick = () => {
+     if (selectedDateFormat === "format1") {
+       setSelectedDateFormat("format2");
+     } else if (selectedDateFormat === "format2") {
+       setSelectedDateFormat("format3");
+     } else {
+       setSelectedDateFormat("format1");
+     }
+   };
 
 
 
-
-
-  console.log(loadedImages);
-  console.log(currentFilter.selectedFilter);
+  //console.log(loadedImages);
+  // console.log(currentFilter.selectedFilter);
   //console.log(CDN_URL_USERID);
-  console.log(images)
 
   return (
     <div className={styles.container}>
@@ -159,23 +194,40 @@ const Feed = (props) => {
           </div>
         )}
 
-        {images.length > 0 &&
-          currentFilter.selectedFilter === "heiß" && (
-            <div className={styles.imageGallery}>
-              {images.map((image) => (
-                <div className={styles.image_div} key={image.id}>
-                  <Link href={`/image/${image.name}`}>
-                    <img
-                      key={image.id}
-                      src={CDN_URL_USERID + "/" + image.name}
-                      alt="gallery-image"
-                      className={styles.img}
-                    />
-                  </Link>
-                </div>
-              ))}
-            </div>
-          )}
+        {images.length > 0 && currentFilter.selectedFilter === "heiß" && (
+          <div className={styles.imageGallery}>
+            {images.map((image) => (
+              <div className={styles.image_div} key={image.id}>
+                <button className={styles.date} onClick={handleDateClick}>
+                  {selectedDateFormat === "format1" &&
+                    formatDate1(image.created_at)}
+                  {selectedDateFormat === "format2" &&
+                    formatDate2(image.created_at)}
+                  {selectedDateFormat === "format3" &&
+                    formatDate3(image.created_at)}
+                </button>
+
+                {!image.loaded && (
+                  <div className={styles.loadingImage}>
+                    <div className={styles.spinner}></div>{" "}
+                    {/* Hier wird der Spinner eingefügt */}
+                    <p> Lädt... </p>
+                  </div>
+                )}
+
+                <Link href={`/image/${image.name}`}>
+                  <img
+                    key={image.id}
+                    src={CDN_URL_USERID + "/" + image.name}
+                    alt="gallery-image"
+                    className={styles.img}
+                    onLoad={() => handleImageLoad(image.id)}
+                  />
+                </Link>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

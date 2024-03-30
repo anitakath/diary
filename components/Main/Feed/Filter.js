@@ -77,6 +77,8 @@ const Filter = () => {
 
   }, [])
 
+  console.log(currentFilter)
+
 
 
   

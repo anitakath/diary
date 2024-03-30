@@ -18,6 +18,7 @@ import { useSelector } from "react-redux";
 
 const CreateComment = (props) => {
   const [commentText, setCommentText] = useState("");
+  const [isSending, setIsSending] = useState(false);
 
   const nightMode = useSelector((state) => state.toggle.isNightMode);
 
@@ -55,6 +56,8 @@ const CreateComment = (props) => {
       return;
     }
 
+    setIsSending(true)
+
     try {
       const currentDate = new Date().toISOString(); 
       const { data, error } = await supabase.from("comments").insert([
@@ -84,6 +87,7 @@ const CreateComment = (props) => {
       }
 
       console.log("Kommentar erfolgreich gespeichert:", data);
+      setIsSending(false);
 
       // Optional: Setze das Kommentarfeld zurück
       setCommentText("");
@@ -104,7 +108,7 @@ const CreateComment = (props) => {
           onChange={(e) => setCommentText(e.target.value)}
           placeholder="Gebe deinen Kommentar hier ein..."
         ></textarea>
-        <button onClick={handleCommentSubmit}>Kommentar absenden</button>
+        <button onClick={handleCommentSubmit}>{isSending ? 'senden...' : 'Kommentar absenden'}</button>
       </div>
     </div>
   );

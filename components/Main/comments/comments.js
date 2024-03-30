@@ -26,17 +26,9 @@ import { faEllipsis, faSpinner } from "@fortawesome/free-solid-svg-icons";
 const Comments = (props) =>{
   const postId = props.postDetails.id;
   const table = props.postDetails.table;
-
-  const postDateValue = props.postDetails.created_at;
-  const postDateObject = new Date(postDateValue);
-  const formattedPostDate = postDateObject.toISOString().split("T")[0];
-  const formattedTime = timeAgoFormat(new Date(formattedPostDate));
-
   const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true); // Zustandsvariable für Ladezustand
-
   const nightMode = useSelector((state) => state.toggle.isNightMode);
-
   const { fetcher } = useContext(RedditContext);
 
   const { data } = useSWR(
@@ -56,7 +48,37 @@ const Comments = (props) =>{
 
   const filteredComments = comments.filter(
     (comment) => comment.postId === postId
-  );
+  ).reverse();
+
+
+  console.log(comments)
+
+ const timeAgoFormat = (date) => {
+   const currentDate = new Date();
+   const diffTime = Math.abs(currentDate - date);
+   const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+
+   if (diffDays < 1) {
+     const diffHours = Math.floor(diffTime / (1000 * 60 * 60));
+     if (diffHours < 1) {
+       return "just now";
+     } else if (diffHours === 1) {
+        return "1 hour ago";
+     } else {
+       return `${diffHours} hours ago`;
+     }
+   } else if (diffDays === 1) {
+     return "1 day ago";
+   } else {
+     return `${diffDays} days ago`;
+   }
+ };
+
+  const postDateValue = props.postDetails.created_at;
+  const postDateObject = new Date(postDateValue);
+  const formattedPostDate = postDateObject.toISOString().split("T")[0];
+  const formattedTime = timeAgoFormat(new Date(formattedPostDate));
 
 
 
@@ -90,7 +112,7 @@ const Comments = (props) =>{
               <div className={styles.comment_text_container}>
                 <h1 className={ nightMode ? styles.comment_title_dark : styles.comment_title_light}>
                   {comment.author}
-                  <span className={styles.formattedTime}> {formattedTime}</span>
+                  <span className={styles.formattedTime}> {timeAgoFormat(new Date(comment.created_at))} </span>
                 </h1>
 
               <h2
