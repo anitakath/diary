@@ -1,4 +1,4 @@
-import { useContext, useEffect, memo } from "react";
+import { useState, useContext, useEffect, memo } from "react";
 import { useRouter } from "next/router";
 
 
@@ -17,7 +17,9 @@ import { RedditContext } from "@/context/RedditContext";
 
 const Post = ({post}) => {
 
-   const {
+ 
+
+  const {
      pathId,
      id,
      created_at,
@@ -28,6 +30,8 @@ const Post = ({post}) => {
      author,
      table,
    } = post;
+
+  //console.log(post)
 
   const nightMode = useSelector((state) => state.toggle.nightMode);
   let totalvote = upvotes - downvotes;
@@ -54,6 +58,8 @@ const Post = ({post}) => {
 
   const formattedDateTime = formatDate(created_at);
 
+
+  
     
 
   return (
@@ -83,7 +89,7 @@ const Post = ({post}) => {
           <p>{description} </p>
         </div>
         <div className={styles.postInteraction}>
-          <PostInteraction postId={id} post={post} />
+          <PostInteraction postId={id} post={post} table={post.table}  />
         </div>
       </div>
     </div>

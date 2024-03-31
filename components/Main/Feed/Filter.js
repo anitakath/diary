@@ -77,8 +77,6 @@ const Filter = () => {
 
   }, [])
 
-  console.log(currentFilter)
-
 
 
   
@@ -129,7 +127,7 @@ const Filter = () => {
             onClick={() => filterHandler("beste")}
             style={activeButton === "beste" ? { ...activeLinkStyle } : null}
           >
-            deine Posts
+            DEINE POSTS
           </button>
         </div>
         <div>
@@ -138,10 +136,10 @@ const Filter = () => {
             onClick={() => filterHandler("heiß")}
             style={activeButton === "heiß" ? { ...activeLinkStyle } : null}
           >
-            BILDERTAGEBUCH 
+            ANNES BILDERTAGEBUCH
           </button>
         </div>
-        <div>
+        {/*<div>
           <button
             className={styles.filter_btn}
             onClick={() => filterHandler("neu")}
@@ -152,7 +150,7 @@ const Filter = () => {
           </button>
         </div>
         <div>
-          <button
+        <button
             className={styles.filter_btn}
             onClick={() => filterHandler("top")}
             style={activeButton === "top" ? { ...activeLinkStyle } : null}
@@ -160,14 +158,14 @@ const Filter = () => {
             {" "}
             top{" "}
           </button>
-        </div>
+        </div> */}
         <div>
           <button
             className={styles.filter_btn}
             onClick={() => filterHandler("deine")}
             style={activeButton === "deine" ? { ...activeLinkStyle } : null}
           >
-            anne
+            ANNE
           </button>
         </div>
       </div>

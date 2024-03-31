@@ -56,12 +56,10 @@ const WebUser = () => {
         </div>
         <div className={styles.btn_container}>
           <Link href="/new-post" className={styles.link}>
-            {" "}
-            beitrag erstellen{" "}
+            POST ERSTELLEN 
           </Link>
           <Link href="/" className={styles.link}>
-            {" "}
-            community erstellen{" "}
+            community erstellen
           </Link>
         </div>
       </div>

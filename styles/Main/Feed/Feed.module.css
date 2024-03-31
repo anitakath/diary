@@ -22,10 +22,11 @@
 .date{
    color: silver;
    cursor: pointer;
+   font-size: 1.5rem;
 }
 .date:hover{
     transition: 0.2s ease;
-    color: var(--pink);
+    color: var(--hover-font-dark);
 }
 
 .post_div{

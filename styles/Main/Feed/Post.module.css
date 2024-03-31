@@ -217,9 +217,11 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
-
 }
+
+
+
+
 
 .save_btn:hover, .share_btn:hover, .comment_btn:hover, .report_btn:hover, .delete_btn:hover{
     transition: 0.4s ease;

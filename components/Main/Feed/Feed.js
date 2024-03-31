@@ -38,6 +38,8 @@ const Feed = (props) => {
 
   //console.log(supabaseImages)
 
+
+
   const storedFilter =
     typeof window !== "undefined"
       ? localStorage.getItem("selectedFilter") || "beste"
@@ -99,13 +101,11 @@ const Feed = (props) => {
     }
   }, [userId]);
 
-  const handleImageLoad = (id) => {
-    setImages((prevImages) =>
-      prevImages.map((image) =>
-        image.id === id ? { ...image, loaded: true } : image
-      )
-    );
-  };
+
+
+
+
+
 
 
   const formatDate1 = (dateString) => {
@@ -152,11 +152,6 @@ const Feed = (props) => {
    };
 
 
-
-  //console.log(loadedImages);
-  // console.log(currentFilter.selectedFilter);
-  //console.log(CDN_URL_USERID);
-
   return (
     <div className={styles.container}>
       <Filter />
@@ -188,16 +183,24 @@ const Feed = (props) => {
             </div>
           ))}
 
+
+
         {loadedPosts === null && !loadedImages && images.length <= 0 && (
           <div className={styles.noLoadedPosts_div}>
             <p> hier gibt es noch keine Posts 🥲 </p>
           </div>
         )}
 
+
+
+
+
         {images.length > 0 && currentFilter.selectedFilter === "heiß" && (
           <div className={styles.imageGallery}>
             {images.map((image) => (
               <div className={styles.image_div} key={image.id}>
+
+                
                 <button className={styles.date} onClick={handleDateClick}>
                   {selectedDateFormat === "format1" &&
                     formatDate1(image.created_at)}
@@ -207,7 +210,9 @@ const Feed = (props) => {
                     formatDate3(image.created_at)}
                 </button>
 
-                {!image.loaded && (
+            
+
+                {!loadedImages && (
                   <div className={styles.loadingImage}>
                     <div className={styles.spinner}></div>{" "}
                     {/* Hier wird der Spinner eingefügt */}
@@ -221,7 +226,7 @@ const Feed = (props) => {
                     src={CDN_URL_USERID + "/" + image.name}
                     alt="gallery-image"
                     className={styles.img}
-                    onLoad={() => handleImageLoad(image.id)}
+                  
                   />
                 </Link>
               </div>

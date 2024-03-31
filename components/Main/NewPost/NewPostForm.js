@@ -51,7 +51,7 @@ const NewPostForm = () => {
   const currFilter = useSelector((state) => state.filter)
 
 
-
+  console.log(currFilter);
   const createPost = async (event) => {
     event.preventDefault();
 
@@ -81,6 +81,7 @@ const NewPostForm = () => {
       ]);
 
       setLoading(false);
+      dispatch(filter("beste"))
       router.push("/");
     } catch (error) {
       setLoading(false);

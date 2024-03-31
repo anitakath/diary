@@ -29,46 +29,44 @@ const postInteraction = (props) =>{
   const [isLoading, setIsLoading] = useState(false)
   const dispatch = useDispatch();
   const router = useRouter();
+ 
 
-  const post = props.post
 
-  //console.log(post)
+  const table= props.table
 
-  const table = props.post.table
-
-  //console.log(table)
-
-  //console.log(props.postId)
 
   
 
   const deletePostHandler = async (event) =>{
     event.preventDefault();
 
+ 
     
     try{
       setIsLoading(true);
 
-      const {errors} = await supabase
-      .from("feed_dummy")
+      const {data, error} = await supabase
+      .from(table)
       .delete()
       .eq('id', props.postId)
+
+      console.log(error)
+
+      console.log(data)
 
      
       setIsLoading(false);
       //router.reload();
+ 
+
+
       router.push("/");
       
        
 
     } catch(error){
       console.error(error)
-    } /*finally{
-      setIsLoading(false);
-      dispatch(filter("deine"));
-      // router.reload();
-      router.push("/");
-    }*/
+    } 
   }
 
 
@@ -129,14 +127,21 @@ const postInteraction = (props) =>{
         </div>
 
         <div className={styles.deleteInteraction_div}>
+           
           <button className={styles.delete_btn}>
-            <FontAwesomeIcon
-              icon={faTrash}
-              className={styles.postInteraction_icon}
-              onClick={deletePostHandler}
-            />
+            
+              <FontAwesomeIcon
+                icon={faTrash}
+                className={styles.postInteraction_icon}
+                onClick={deletePostHandler}
+              />
+            
             <p> löschen </p>
           </button>
+
+         
+         
+        
         </div>
       </div>
     );
