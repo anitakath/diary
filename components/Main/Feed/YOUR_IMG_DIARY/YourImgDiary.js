@@ -87,7 +87,13 @@ const YourImgDiary = () =>{
           images.map((image) => (
             <div className={styles.diarypost_div}>
               <img src={image.url} key={image.id} className={styles.img}></img>
-              <Link className={style ? styles.link_darkmode : styles.link} href={`/dein-bildertagebuch/${image.name}`}> Eintrag einsehen </Link>
+              <Link
+                className={style ? styles.link_darkmode : styles.link}
+                href={`/dein-bildertagebuch/${image.name.replace(/\s+/g, "-")}`}
+              >
+                {" "}
+                Eintrag einsehen{" "}
+              </Link>
             </div>
           ))}
       </div>

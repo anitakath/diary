@@ -1,0 +1,64 @@
+
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.diarypost_div{
+    display: flex;
+    flex-direction: column;
+}
+
+.info_div{
+    display: flex;
+    width: 100vw;
+    justify-content: center;
+}
+
+.img{
+    width: 50%;
+    height: 800px;
+    object-fit: cover;
+    margin-right:  5px;
+}
+
+.text_div{
+    width: 50%;
+    margin-left: 5px;
+    padding: 20px;
+  
+}
+
+.title{
+    font-size: 1.3rem;
+    border-bottom: 1px solid silver;
+    padding: 3px;
+
+}
+
+.description{
+    margin-top: 10px;
+    padding: 3px;
+}
+
+
+
+.fourOfour_div{
+
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.notFound_p{
+    font-size: 1.3rem;
+}
+.goBack_link{
+    font-size: 1.1rem;
+    color: var(--pink_opaque);
+}
+
+.goBack_link:hover{
+    color: var(--pink);
+}
