@@ -53,6 +53,8 @@ const CreatePost = () => {
    
   }
 
+  console.log(isModalOpen)
+
 
   return (
     <div className={styles.createPost_container}>
@@ -83,14 +85,14 @@ const CreatePost = () => {
           )}
 
           {currentFilter === "heiß" && (
-            <button className={styles.photo_btn}>
+            <Link href={`/new-image`} className={styles.photo_btn}>
               <FontAwesomeIcon
                 icon={faImage}
                 onClick={openModal}
                 className={styles.icon}
               />
               <span> erstelle einen neuen Tagebucheintrag </span>
-            </button>
+            </Link>
           )}
 
           {currentFilter === "neu" && (

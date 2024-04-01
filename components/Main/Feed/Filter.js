@@ -133,22 +133,23 @@ const Filter = () => {
         <div>
           <button
             className={styles.filter_btn}
+            onClick={() => filterHandler("neu")}
+            style={activeButton === "neu" ? { ...activeLinkStyle } : null}
+          >
+            DEIN BILDERTAGEBUCH
+          </button>
+        </div>
+        <div>
+          <button
+            className={styles.filter_btn}
             onClick={() => filterHandler("heiß")}
             style={activeButton === "heiß" ? { ...activeLinkStyle } : null}
           >
             ANNES BILDERTAGEBUCH
           </button>
         </div>
-        {/*<div>
-          <button
-            className={styles.filter_btn}
-            onClick={() => filterHandler("neu")}
-            style={activeButton === "neu" ? { ...activeLinkStyle } : null}
-          >
-            {" "}
-            neu{" "}
-          </button>
-        </div>
+
+        {/*
         <div>
         <button
             className={styles.filter_btn}

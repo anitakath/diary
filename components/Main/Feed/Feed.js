@@ -10,6 +10,7 @@ import CreatePost from "./CreatePost";
 import Post from "./Post";
 import Filter from './Filter'
 import WebUser from "../WebUser";
+import YourImgDiary from './YOUR_IMG_DIARY/YourImgDiary';
 
 //STYLES
 import styles from '../../../styles/Main/Feed/Feed.module.css'
@@ -18,6 +19,7 @@ import styles from '../../../styles/Main/Feed/Feed.module.css'
 import { useSelector, useDispatch } from "react-redux";
 import { supabase } from '@/services/supabaseClient';
 import { setSupebaseImages } from '@/store/supabaseImagesSlice';
+import { current } from '@reduxjs/toolkit';
 
 const Feed = (props) => {
   const currentFilter = useSelector((state) => state.filter);
@@ -38,6 +40,9 @@ const Feed = (props) => {
 
   //console.log(supabaseImages)
 
+
+  console.log(currentFilter);
+ 
 
 
   const storedFilter =
@@ -158,6 +163,21 @@ const Feed = (props) => {
 
       <CreatePost />
 
+      {currentFilter.selectedFilter === "beste" && (
+        <p> beste</p>
+      
+      
+      )}
+
+      {currentFilter.selectedFilter === "deine" && (
+      <p> deine </p>
+      
+      )}
+
+
+
+
+
       {loadingPosts && (
         <p className={styles.loadingPostsParagraph}> loading posts ...</p>
       )}
@@ -183,24 +203,18 @@ const Feed = (props) => {
             </div>
           ))}
 
-
-
         {loadedPosts === null && !loadedImages && images.length <= 0 && (
           <div className={styles.noLoadedPosts_div}>
             <p> hier gibt es noch keine Posts 🥲 </p>
           </div>
         )}
 
-
-
-
+        {currentFilter.selectedFilter === "neu"  && <YourImgDiary />}
 
         {images.length > 0 && currentFilter.selectedFilter === "heiß" && (
           <div className={styles.imageGallery}>
             {images.map((image) => (
               <div className={styles.image_div} key={image.id}>
-
-                
                 <button className={styles.date} onClick={handleDateClick}>
                   {selectedDateFormat === "format1" &&
                     formatDate1(image.created_at)}
@@ -209,8 +223,6 @@ const Feed = (props) => {
                   {selectedDateFormat === "format3" &&
                     formatDate3(image.created_at)}
                 </button>
-
-            
 
                 {!loadedImages && (
                   <div className={styles.loadingImage}>
@@ -226,7 +238,6 @@ const Feed = (props) => {
                     src={CDN_URL_USERID + "/" + image.name}
                     alt="gallery-image"
                     className={styles.img}
-                  
                   />
                 </Link>
               </div>

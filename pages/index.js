@@ -22,9 +22,12 @@ import { current } from "@reduxjs/toolkit";
   //fetchet hits the endpoint (api/get-posts) and retrieves its result as json. result is named data
 //const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
+import { useRouter } from "next/router";
+
 
 export default function Home() {
 
+ 
 
   const {currentGoogleUser, fetcher} = useContext(RedditContext)
   const selectedFilter = useSelector((state) => state.filter.selectedFilter);
@@ -161,6 +164,7 @@ export default function Home() {
 
   return (
     <div className="App">
+     
       <Main
         addNewPost={addNewPost}
         posts={myPosts}

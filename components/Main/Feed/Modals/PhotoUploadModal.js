@@ -1,6 +1,6 @@
 
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "@/services/supabaseClient";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
@@ -32,6 +32,7 @@ const PhotoUploadModal = (props) =>{
  
 
   const handleFileUpload = (event) => {
+    console.log(event.target.files[0])
       setSelectedFile(event.target.files[0]);
       setImageId(event.target.files[0].name);
   };
@@ -43,6 +44,8 @@ const PhotoUploadModal = (props) =>{
 
 
   const userId = props.currentGoogleUser.user.id
+  const CDN_URL = process.env.CDN_URL;
+  const CDN_URL_USERID = `${CDN_URL}${userId}`;
   const dispatch = useDispatch()
 
 
@@ -116,8 +119,6 @@ const PhotoUploadModal = (props) =>{
 
   const supabaseImages = useSelector((state) => state.images.images);
 
-  console.log(supabaseImages);
-
 
 
 
@@ -176,6 +177,41 @@ const PhotoUploadModal = (props) =>{
      console.log(isLoading)
      console.log(description);
 
+
+     const [alternativeImages, setAlternativeImages] = useState([])
+
+
+
+
+     useEffect(()=>{
+       const uploadAlternativeImages = async (event) => {
+    
+        try {
+          const { data, error } = await supabase.storage
+            .from("images")
+            .list("4d47a2af-f29f-4530-bec6-0f08c7dd347c/alternatives");
+
+          if (error) {
+            console.error("Error listing files:", error.message);
+            return;
+          } else{
+            setAlternativeImages(data)
+          }
+
+          console.log(data); // Array mit den Informationen zu den Dateien im Ordner "alternatives"
+        } catch (error) {
+          console.error("An error occurred:", error.message);
+        }
+       };
+
+       uploadAlternativeImages()
+     }, [userId])
+
+
+     const chooseAlternativeImage = (e) =>{
+
+      console.log(e)
+     }
      
 
     return (
@@ -191,7 +227,7 @@ const PhotoUploadModal = (props) =>{
 
           <textarea
             className={styles.description}
-            placeholder="beschreibe deinen Text hier "
+            placeholder="beschreibe dein Foto hier "
             value={description}
             onChange={(event) => setDescription(event.currentTarget.value)}
           ></textarea>
@@ -207,6 +243,23 @@ const PhotoUploadModal = (props) =>{
             <button className={styles.close_btn} onClick={props.closeModal}>
               close
             </button>
+          </div>
+        </form>
+
+        <h1 className={styles.title}>oder wähle ein von mir gestelltes Foto</h1>
+
+        <form className={styles.form_div}>
+          <div className={styles.alternative_div}>
+            {alternativeImages.map((image) => (
+              <button onClick={chooseAlternativeImage(image)}>
+                <img
+                  key={image.id}
+                  src={CDN_URL_USERID + "/alternatives/" + image.name}
+                  alt="gallery-image"
+                  className={styles.alternativeImg}
+                />
+              </button>
+            ))}
           </div>
         </form>
       </div>
