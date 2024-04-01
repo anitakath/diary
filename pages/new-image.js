@@ -202,6 +202,15 @@ const NewImage = () =>{
 
   const [alternativeImages, setAlternativeImages] = useState([]);
   const [chosenAlternativeImage, setChosenAlternativeImage] = useState([])
+  const [alternativeDescription, setAlternativeDescription] = useState('')
+  const [title, setTitle] = useState('')
+
+  console.log(title)
+  console.log(alternativeDescription)
+
+  const titleChangeHandler = (e) =>{
+    setTitle(e.target.value)
+  }
 
   useEffect(() => {
     const uploadAlternativeImages = async (event) => {
@@ -241,7 +250,7 @@ const NewImage = () =>{
  };
 
  const [showAltImg,setShowAltImg] = useState(false)
- const [generatedUrl, setGeneratedUrl] = useState("");
+ 
 
 
   const uploadAlternativeImage = async (e) =>{
@@ -252,13 +261,15 @@ const NewImage = () =>{
      setShowAltImg(true);
      const url =
        CDN_URL_USERID + "/alternatives" + "/" + chosenAlternativeImage.name;
-     setGeneratedUrl(url);
+    
 
      console.log(url);
 
      const data = {
        created_at: chosenAlternativeImage.created_at,
        url: url,
+       name: title,
+       description: alternativeDescription
      };
 
      // Senden des Objekts an die Supabase-Tabelle "users_images"
@@ -279,7 +290,8 @@ const NewImage = () =>{
   };
 
 
-  console.log(selectedFile)
+
+
   return (
     <div className={style ? styles.container_dark : styles.container}>
       <h1 className={styles.title}> lade ein Foto hoch</h1>
@@ -291,12 +303,14 @@ const NewImage = () =>{
           className={styles.file_input}
         />
 
-        <textarea
-          className={styles.description}
-          placeholder="beschreibe dein Foto hier "
-          value={description}
-          onChange={(event) => setDescription(event.currentTarget.value)}
-        ></textarea>
+        {/* 
+          <textarea
+                  className={styles.description}
+                  placeholder="beschreibe dein Foto hier "
+                  value={description}
+                  onChange={(event) => setDescription(event.currentTarget.value)}
+                ></textarea>
+        */}
 
         <div className={styles.isLoadingInfo_div}>
           {isLoading && <h1> lädt Foto hoch ....</h1>}
@@ -335,16 +349,22 @@ const NewImage = () =>{
           ))}
         </div>
 
-        <button type="submit"> senden </button>
-      </form>
+        <input
+          type="text"
+          placeholder="Titel"
+          className={styles.alternativeTitle}
+          onChange={titleChangeHandler}
+          value={title}
+        ></input>
 
-      {showAltImg && (
-        <img
-          src={
-            CDN_URL_USERID + "/alternatives" + "/" + chosenAlternativeImage.name
-          } 
-        ></img>
-      )}
+        <textarea
+          className={styles.alternativeDescription}
+          placeholder="beschreibe dein Foto hier "
+          onChange={(event) => setAlternativeDescription(event.currentTarget.value)}
+        ></textarea>
+
+        <button type="submit" className={styles.submitAlternativePost}> senden </button>
+      </form>
     </div>
   );
 }

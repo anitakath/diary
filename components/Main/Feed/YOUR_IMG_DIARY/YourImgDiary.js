@@ -10,6 +10,13 @@ import { setUser } from '@/store/userSlice';
 //REDUX
 import { useDispatch, useSelector } from "react-redux";
 
+import Link from 'next/link';
+
+
+
+
+
+
 
 const YourImgDiary = () =>{
 
@@ -73,10 +80,16 @@ const YourImgDiary = () =>{
 
     return (
       <div className={styles.container}>
-        <h1 className={style ? styles.title_darkmode : styles.title}> DEIN BILDERTAGEBUCH </h1>
+        <h1 className={style ? styles.title_darkmode : styles.title}>
+          DEIN BILDERTAGEBUCH
+        </h1>
         {imagesLoaded &&
-          images.map((image) => <img src={image.url} key={image.id} className={styles.img}></img> 
-        )}
+          images.map((image) => (
+            <div className={styles.diarypost_div}>
+              <img src={image.url} key={image.id} className={styles.img}></img>
+              <Link className={style ? styles.link_darkmode : styles.link} href={`/dein-bildertagebuch/${image.name}`}> Eintrag einsehen </Link>
+            </div>
+          ))}
       </div>
     );
 }

@@ -84,7 +84,7 @@ const CreatePost = () => {
             </Link>
           )}
 
-          {currentFilter === "heiß" && (
+          {currentFilter === "neu" && (
             <Link href={`/new-image`} className={styles.photo_btn}>
               <FontAwesomeIcon
                 icon={faImage}
@@ -95,7 +95,7 @@ const CreatePost = () => {
             </Link>
           )}
 
-          {currentFilter === "neu" && (
+          {currentFilter === "heiß" && (
             <button className={styles.photo_btn}>
               <FontAwesomeIcon
                 icon={faImage}
