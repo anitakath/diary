@@ -46,7 +46,7 @@ export async function getServerSideProps(context) {
 const YourImgDiary = ({post}) =>{
 
 
-  console.log(post)
+  
   const formatDate = useFormatDate();
   const router = useRouter();
   const { id } = router.query;
@@ -58,7 +58,7 @@ const YourImgDiary = ({post}) =>{
     const nightMode = useSelector((state) => state.toggle.isNightMode);
     const [style, setStyle] = useState(false);
 
-    console.log(currentPost);
+    
 
      useEffect(() => {
        setStyle(nightMode);

@@ -5,6 +5,9 @@
     justify-content: center;
     position: relative;
     background: white;
+    margin: 0;
+    width: 100vw;
+
 }
 
 .container_dark{
@@ -25,6 +28,8 @@
     display: flex;
     position: relative;
     padding: 20px 0px;
+
+
 }
 
 
@@ -40,6 +45,7 @@
 @media screen and (max-width: 1200px){
     .output_field{
         width: 80vw;
+        
     }
 
     .webUser_container{
@@ -56,5 +62,32 @@
 @media screen and (max-width: 600px){
     .output_field{
         width: 96vw;
+    }
+}
+
+@media screen and (max-width: 400px){
+
+    .container{
+        padding: 0;
+        margin: 20px 0px;
+        position: relative;
+        left: 20px;
+ 
+        /*border: 2px solid purple;*/
+    }
+
+    .main_container{
+        /*border: 2px solid red;*/
+
+        padding: 0;
+    }
+
+    .output_field{
+        width: 100vw;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        width: 110vw;
+        
     }
 }

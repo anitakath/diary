@@ -85,8 +85,8 @@ const YourImgDiary = () =>{
            if (error) {
              console.error(error);
            } else {
-             console.log("Post deleted successfully");
-             // Hier können Sie die Liste der Bilder aktualisieren, um das gelöschte Bild zu entfernen
+            // console.log("Post deleted successfully");
+
              setImages(images.filter((image) => image.id !== postId));
            }
          } catch (error) {

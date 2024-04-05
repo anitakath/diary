@@ -48,3 +48,27 @@
     color: #F7567C;
 }
 
+
+@media screen and (max-width: 400px){
+
+    .container_wrapper{
+
+        height: 140px;
+        top: -20px;
+    }
+
+    .container{
+        margin: 0;
+        flex-direction: column;
+        height: 140px;
+    }
+
+    .container div{
+        margin: 0;
+        margin: 8px 0px;
+    }
+    
+    .filter_btn{
+        font-size: 0.8rem;
+    }
+}

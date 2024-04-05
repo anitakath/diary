@@ -36,7 +36,6 @@
     object-fit: cover;
     position: relative;
     z-index: 1;
-
 }
 
 .link, .link_first{
@@ -89,3 +88,14 @@
     color: var(--pink_opaque);
 }
 
+@media screen and (max-width: 400px){
+
+
+    .link_darkmode_first, .link_first{
+        margin: 50px 0px 20px 0px;
+    }
+
+    .img{
+        height: 500px;
+    }
+}

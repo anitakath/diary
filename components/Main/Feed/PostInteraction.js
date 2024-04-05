@@ -116,16 +116,7 @@ const postInteraction = (props) =>{
             <p> kommentieren </p>
           </button>
         </div>
-        <div className={styles.reportInteraction_div}>
-          <button className={styles.report_btn}>
-            <FontAwesomeIcon
-              icon={faFlag}
-              className={styles.postInteraction_icon}
-            />
-            <p> melden </p>
-          </button>
-        </div>
-
+        
         <div className={styles.deleteInteraction_div}>
            
           <button className={styles.delete_btn}>

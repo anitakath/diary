@@ -10,7 +10,7 @@
 .post_container{
    display: flex;
    margin-left: 20px;
-   
+
 }
 
 
@@ -361,4 +361,85 @@
         top: 7px;
         left: 9px;
     }
+}
+
+@media screen and (max-width: 400px){
+
+
+    .post_container{
+        margin: 20px
+    }
+
+
+
+  
+
+
+
+    .postArrowUp, .postArrowUp_dark{
+        font-size: 1.2rem;
+        margin: 0;
+        padding: 0;
+    }
+
+    .amountOfRatings{
+        margin: 0;
+        font-size: 1.1rem;
+    }
+
+    .postItself{
+        margin: 0;
+        padding: 5px;
+    }
+
+    .post_title_dark, .post_title{
+        margin: 0;
+        font-size: 1.2rem;
+    }
+
+    .postItself p{
+        font-size: 1rem;
+        margin: 0;
+        padding: 5px;
+        text-align: justify;
+        margin: 0px -10px;
+   
+    }
+
+
+    .postInteraction_container{
+        margin: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .postInteraction_div{
+        margin: 0px 15px;
+        width: 100px;
+        position: relative;
+        left: -10px;
+    }
+
+    .deleteInteraction_div{
+        position: relative;
+        left: -10px;
+    }
+
+
+    .postInteraction_icon{
+        font-size: 0.5rem;
+
+    }
+
+    .save_btn, .share_btn, .comment_btn, .delete_btn{
+        font-size: 0.9rem;
+        margin-top: 10px;
+    }
+
+    
+    .delete_btn{
+        font-size: 0.8rem;
+    }
+
 }

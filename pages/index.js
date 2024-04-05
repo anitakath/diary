@@ -24,6 +24,7 @@ import { current } from "@reduxjs/toolkit";
 
 import { useRouter } from "next/router";
 
+import styles from '../styles/Index.module.css'
 
 export default function Home() {
 
@@ -150,8 +151,8 @@ export default function Home() {
 
 
   return (
-    <div className="App">
-     
+    <div className={styles.main_container}>
+
       <Main
         addNewPost={addNewPost}
         posts={myPosts}

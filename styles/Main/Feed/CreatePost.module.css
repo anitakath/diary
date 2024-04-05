@@ -105,6 +105,7 @@
 
 .photo_btn span{
     margin: 0px 10px;
+ 
 }
 
 
@@ -130,6 +131,7 @@
 
     .form_container{
         margin-top: 10px;
+       
     }
 
     .createPost_link{
@@ -198,5 +200,40 @@
   
 }
 
+@media screen and (max-width: 400px){
+
+
+     .form_container{
+        width: 70%;
+        margin: 0;
+        padding: 0;
+     }
+
+     .createPost_linkDiv{
+        margin: 0;
+        padding: 0;
+        height: 100%;
+     }
+
+    .createPost_link{
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        
+    }
+
+    .createPost_linkDiv{
+        width: 100%;
+    }
+
+
+
+    .photo_btn{
+        font-size: 1rem;
+        height: 60px;
+        padding: 5px;
+     
+    }
+}
 
 

@@ -77,7 +77,7 @@ const CreatePost = () => {
         <div className={styles.createPost_linkDiv}>
           {currentFilter === "deine_posts" && (
             <Link href={`/new-post`} className={styles.createPost_link}>
-              erstelle einen neuen Beitrag
+               neuen Beitrag
             </Link>
           )}
 
@@ -88,7 +88,7 @@ const CreatePost = () => {
                 onClick={openModal}
                 className={styles.icon}
               />
-              <span> erstelle einen neuen Tagebucheintrag </span>
+              <span> neuen Tagebucheintrag </span>
             </Link>
           )}
 
