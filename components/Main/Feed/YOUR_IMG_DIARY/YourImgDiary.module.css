@@ -17,44 +17,75 @@
 .diarypost_div{
     border: 2px solid transparent;
     position: relative;
+
 }
 
 
+.options_div{
+    height: 5vh;
+    display: flex;
+    position: relative;
+
+}
 
 .img{
-    margin: 40px 0px;
+    margin-bottom: 40px;
     box-shadow: 0px 0px 3px grey;
     height: 800px;
     width: 100%;
     object-fit: cover;
     position: relative;
-    z-index: 1
+    z-index: 1;
+
 }
 
-.link{
-    position: absolute;
-    top: 0;
-    height: 30px;
+.link, .link_first{
     display: flex;
     align-items: center;
     font-size: 1.3rem;
     padding: 3px;
-    margin: 4px;
+    width: 200px;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+
 }
 
-.link_darkmode{
-    position: absolute;
-    top: 0;
-    height: 30px;
+.link_darkmode, .link_darkmode_first{
     display: flex;
     align-items: center;
     font-size: 1.3rem;
     padding: 3px;
-    margin: 4px;
+    width: 200px;
     color: silver;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+}
+
+.link_darkmode_first, .link_first{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 
-.link:hover, .link_darkmode:hover{
+.delete_btn{
+    font-size: 1.3rem;
+    cursor: pointer;
+    position: absolute;
+    height: 5vh;
+    right: 0px;
+    top: 0;
+    padding: 3px;
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+
+}
+
+.link:hover, .delete_btn:hover, .link_darkmode:hover, .link_darkmode_first:hover, .link_first:hover{
     color: var(--pink_opaque);
 }
+

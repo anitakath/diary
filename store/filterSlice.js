@@ -1,35 +1,11 @@
 
 
-/*
-import { createSlice } from "@reduxjs/toolkit";
-
-const filterSlice = createSlice({
-  name: "filter",
-  initialState: {
-    selectedFilter: "beste",
-    // andere Zustände hier...
-  },
-  reducers: {
-    setActButton: (state, action) => {
-      state.selectedFilter = action.payload;
-      localStorage.setItem("selectedFilter", action.payload);
-      return state;
-    },
-    // andere Reducer hier...
-  },
-});
-
-export default filterSlice.reducer;
-export const { setActButton } = filterSlice.actions;
-*/
-
-
 
 
 import { createSlice } from "@reduxjs/toolkit";
 
 
-const initialFilterState = typeof window !== 'undefined' ? localStorage.getItem("selectedFilter") || "beste" : "beste";
+const initialFilterState = typeof window !== 'undefined' ? localStorage.getItem("selectedFilter") || "deine_posts" : "deine_posts";
 
 
 
@@ -37,12 +13,10 @@ const filterSlice = createSlice({
   name: "filter",
   initialState: {
     selectedFilter: initialFilterState,
-    bestIsActive: true,
-    hotIsActive: false,
-    newIsActive: false,
-    topIsActive: false,
-    deineIsActive: false
-
+    deinePostsIsActive: true,
+    annesImagesIsActive: false,
+    deineImagesIsActive: false,
+    annesPostsIsActive: false
   },
   reducers: {
     filter: (state, action) => {
@@ -57,58 +31,47 @@ const filterSlice = createSlice({
         
         return {
           ...state,
-          bestIsActive: true,
-          hotIsActive: false,
-          newIsActive: false,
-          topIsActive: false,
-          deineIsActive: false,
+          deinePostsIsActive: true,
+          annesImagesIsActive: false,
+          deineImagesIsActive: false,
+          annesPostsIsActive: false,
         };
       }else if (action.payload === "heiß"){
         return {
           ...state,
-          bestIsActive: false,
-          hotIsActive: true,
-          newIsActive: false,
-          topIsActive: false,
-          deineIsActive: false,
+          deinePostsIsActive: false,
+          annesImagesIsActive: true,
+          deineImagesIsActive: false,
+          annesPostsIsActive: false,
         };
       } else if (action.payload === "neu"){
         return {
           ...state,
-          bestIsActive: false,
-          hotIsActive: false,
-          newIsActive: true,
-          topIsActive: false,
-          deineIsActive: false,
+          deinePostsIsActive: false,
+          annesImagesIsActive: false,
+          deineImagesIsActive: true,
+          annesPostsIsActive: false,
         };
       } else if (action.payload === "top"){
         return {
           ...state,
-          bestIsActive: false,
-          hotIsActive: false,
-          newIsActive: false,
-          topIsActive: true,
-          deineIsActive: false,
+          deinePostsIsActive: false,
+          annesImagesIsActive: false,
+          deineImagesIsActive: false,
+          annesPostsIsActive: false,
         };
         } else if (action.payload === "deine"){
         return {
           ...state,
-          bestIsActive: false,
-          hotIsActive: false,
-          newIsActive: false,
-          topIsActive: false,
-          deineIsActive: true,
+          deinePostsIsActive: false,
+          annesImagesIsActive: false,
+          deineImagesIsActive: false,
+          annesPostsIsActive: true,
         };
      }
 
-
-     console.log(state)
      return state;
    }
-    
-
-    
-
     
 
       

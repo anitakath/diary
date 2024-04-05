@@ -1,28 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router"
 
 import { supabase } from "@/services/supabaseClient";
-import { useEffect } from "react";
+
 import { current } from "@reduxjs/toolkit";
 
 import Link from "next/link";
 
 import styles from './Id.module.css'
+import { useSelector } from "react-redux";
+
+
+//CUSTOM HOOKS
+import useFormatDate from "@/components/custom_hooks/useFormatDate";
 
 export async function getServerSideProps(context) {
   const postId = context.params.id; // Extrahiere die Post-ID aus dem Pfadparameter
 
-
-  
-
-  // Rufe Daten aus beiden Tabellen ab und filtere nach der Post-ID
-  /*const { data } = await supabase
-    .from("users_images")
-    .select("*")
-    //.eq("pathId", postId)
-    .single();
-  
-    console.log(data)*/
 
      const { data, error } = await supabase
        .from("users_images")
@@ -52,16 +46,24 @@ export async function getServerSideProps(context) {
 const YourImgDiary = ({post}) =>{
 
 
-    const router = useRouter();
-    const { id } = router.query;
+  console.log(post)
+  const formatDate = useFormatDate();
+  const router = useRouter();
+  const { id } = router.query;
 
     const [currentPost, setCurrentPost] = useState([])
     const [postLoaded, setPostLoaded] = useState(false)
     const [notFound, setNotFound] = useState(false);
 
-    console.log(id);
+    const nightMode = useSelector((state) => state.toggle.isNightMode);
+    const [style, setStyle] = useState(false);
 
-    console.log(post)
+    console.log(currentPost);
+
+     useEffect(() => {
+       setStyle(nightMode);
+     }, [nightMode]);
+
 
     useEffect(()=>{
       const filteredObject = post.find((p) => p.name === id)
@@ -79,32 +81,27 @@ const YourImgDiary = ({post}) =>{
          setCurrentPost(filteredObject);
        }
 
-      console.log(filteredObject)
-      console.log(secondFilteredObject)
 
-
-        console.log(filteredObject)
         //setCurrentPost(filteredObject)
         setPostLoaded(true);
 
     }, [post])
 
-    console.log(currentPost)
-    console.log(id)
-    console.log(postLoaded)
-    console.log(notFound)
+  
 
    return (
-     <div className={styles.container}>
+     <div className={style ? styles.container_dark : styles.container}>
        {notFound && (
          <div className={styles.fourOfour_div}>
            <p className={styles.notFound_p}> Eintrag nicht gefunden </p>
-           <Link href="/" className={styles.goBack_link}> gehe zurück</Link>
+           <Link href="/" className={styles.goBack_link}>
+             gehe zurück
+           </Link>
          </div>
        )}
+
        {!notFound && postLoaded && currentPost && (
          <div className={styles.diarypost_div}>
-           <h1> Eintrag: </h1>
            <div className={styles.info_div}>
              <img
                src={currentPost.url}
@@ -112,8 +109,23 @@ const YourImgDiary = ({post}) =>{
                className={styles.img}
              ></img>
              <div className={styles.text_div}>
-               <h1 className={styles.title}> {currentPost.name}</h1>
-               <p className={styles.description}> {currentPost.description}</p>
+               <Link href="/dein-bildertagebuch" className={styles.backToOverview}> zurück zur Übersicht </Link>
+               <div className={styles.title_div}>
+                 <h1 className={style ? styles.title_dark : styles.title}>
+                   {currentPost.name}
+                 </h1>
+                 <p className={styles.data}>
+                   {formatDate(currentPost.created_at)}
+                 </p>
+               </div>
+
+               <p
+                 className={
+                   style ? styles.description_dark : styles.description
+                 }
+               >
+                 {currentPost.description}
+               </p>
              </div>
            </div>
          </div>

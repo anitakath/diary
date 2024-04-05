@@ -35,12 +35,7 @@ export default function Home() {
 
 
   const currUser = useSelector((state) => state.user);
-  
- 
-
   const dispatch = useDispatch();
-
-
   const [myPosts, setMyPosts] = useState(null);
 
 
@@ -86,7 +81,6 @@ export default function Home() {
 
 
 
- 
 
   const saveAndUpdateUser = async () =>{
 
@@ -98,8 +92,6 @@ export default function Home() {
     } else if (!currentGoogleUser){
       return
     } else if(currentGoogleUser){
-
-
 
       // Überprüfe, ob der Benutzer bereits in der Datenbank existiert
 
@@ -146,9 +138,6 @@ export default function Home() {
   
   }
 
-  
-
-
 
   let googleUserId;
 
@@ -157,8 +146,6 @@ export default function Home() {
   }
 
   const nightMode = useSelector((state) => state.toggle.isNightMode);
-
-
 
 
 

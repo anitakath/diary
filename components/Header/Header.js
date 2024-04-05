@@ -94,15 +94,8 @@ const Header = () => {
         <div
           className={nightMode ? styles.container_dark : styles.container_light}
         >
-          <div className={styles.title}>
-            <FontAwesomeIcon
-              icon={faRedditAlien}
-              className={styles.icon}
-              onClick={navigateToHome}
-            />
-          </div>
-
           <SearchBar />
+          <div className={styles.title}></div>
 
           <div className={styles.login_container}>
             {isLoggedIn && (
@@ -121,12 +114,12 @@ const Header = () => {
                   </p>
                 </button>
 
-                <button className={styles.userMenu_btn_web}>
+                <Link href="/" className={styles.userMenu_btn_web}>
                   <FontAwesomeIcon icon={faHouse} className={styles.user} />
                   <p className={nightMode ? styles.dark_p : styles.light_p}>
-                    beitrag
+                    Startseite
                   </p>
-                </button>
+                </Link>
               </div>
             )}
           </div>

@@ -1,5 +1,5 @@
 
-
+import Link from "next/link";
 
 import { useEffect, useState, useContext } from "react";
 import { supabase } from "@/services/supabaseClient";
@@ -25,84 +25,57 @@ import { current } from "@reduxjs/toolkit";
 import { useRouter } from "next/router";
 
 const NewImage = () =>{
-
-  const router = useRouter()
+  const router = useRouter();
   const { currentGoogleUser } = useContext(RedditContext);
 
   const [selectedFile, setSelectedFile] = useState(null);
   const [description, setDescription] = useState("");
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [successMessage, showSuccessMessage] = useState(null)
   const [loadedImages, setLoadedImages] = useState(false);
-  const [userId, setUserId] = useState(false)
+  const [userId, setUserId] = useState(false);
   const [imageId, setImageId] = useState("");
-  //const nightMode = props.nightMode;
-
-
-    const nightMode = useSelector((state) => state.toggle.isNightMode);
-
+  const nightMode = useSelector((state) => state.toggle.isNightMode);
   const [style, setStyle] = useState(false);
+  const [alternativeImages, setAlternativeImages] = useState([]);
+  const [title, setTitle] = useState("");
+  const CDN_URL = process.env.CDN_URL;
+  const CDN_URL_USERID = `${CDN_URL}${userId}`;
 
-  
-   useEffect(() => {
+  // ------------------  NIGHT / DAY MODE TOGGLE ----------------------
+
+  useEffect(() => {
     setStyle(nightMode);
   }, [nightMode]);
 
-  console.log(nightMode)
+  // ------------------  CREATE USER ID ----------------------
 
-  
-  //console.log(nightMode);
+  useEffect(() => {
+    if (currentGoogleUser) {
+      setUserId(currentGoogleUser.user.id);
+    }
+  }, [currentGoogleUser]);
 
-  const handleFileUpload = (event) => {
-    console.log(event.target.files[0]);
-    setSelectedFile(event.target.files[0]);
-    setImageId(event.target.files[0].name);
-  };
+  // ------------------ INPUT ONCHANGE HANDLER ----------------------
 
-  console.log(selectedFile);
-  console.log(imageId);
-  console.log(images);
+  const handleFileUpload = (e) => {
+    if (e.target.type === "file") {
 
+      // Handle file input change
+      const file = e.target.files[0];
+      file.function_type = "normal";
+      setSelectedFile(file);
+      setImageId(e.target.files[0].name);
+    } else if (e.target.type === "radio") {
 
- 
+      // Handle radio input change
+      const foundObj = alternativeImages.find(
+        (obj) => obj.name === e.target.value
+      );
+      foundObj.function_type = "alternative";
 
-
-    useEffect(() => {
-
-        if(currentGoogleUser){
-            setUserId(currentGoogleUser.user.id)
-        }
-
-    }, [currentGoogleUser]);
-
-
-    console.log(userId)
-  
-
-  
-  const CDN_URL = process.env.CDN_URL;
-  const CDN_URL_USERID = `${CDN_URL}${userId}`;
-  const dispatch = useDispatch();
-
-  const uploadDescription = async () => {
-    console.log(userId);
-    console.log(images.name);
-    console.log(description);
-    console.log(imageId);
-    try {
-      const { data, error } = await supabase.from("image_informations").insert([
-        {
-          description: description,
-        },
-      ]);
-
-      if (data) {
-        console.log("Description uploaded successfully");
-      } else {
-        console.log(error);
-      }
-    } catch (error) {
-      console.error(error);
+      setSelectedFile(foundObj);
     }
   };
 
@@ -119,11 +92,10 @@ const NewImage = () =>{
 
       if (data) {
         setImages(data);
-        console.log(data);
-        console.log(images);
+
+    
 
         if (images) {
-          console.log("there are images");
           setLoadedImages(true);
         }
 
@@ -137,80 +109,131 @@ const NewImage = () =>{
     }
   };
 
-  console.log(images);
+ 
+ 
 
-
-
-  const supabaseImages = useSelector((state) => state.images.images);
+  // ------------------  UPLOAD IMAGE POST  ----------------------
 
   const uploadImageHandler = async (event) => {
     event.preventDefault();
-    console.log(selectedFile);
-    setIsLoading(true);
 
-    try {
+
+
+    // 1. check whether the object file comes from the user or is one I have provided
+    // 2. check whether there is already a folder in the supabase storage bucket "images" that is ==== userId
+
+    if (selectedFile.function_type === "normal") {
+      try {
+        if (selectedFile) {
+          setIsLoading(true)
+
+  
+
+          const id = uuidv4();
+
+          const { data, error } = await supabase.storage
+            .from("images")
+            .upload(userId + "/users/" + id, selectedFile); //uuidv4() => string with bunch of chars
+
+          const url = CDN_URL_USERID + "/users" + "/" + id;
+
+
+          const data_obj = {
+            //created_at: selectedFile.created_at,
+            url: url,
+            name: title,
+            description: description,
+            type: "users",
+          };
+
+             // Senden des Objekts an die Supabase-Tabelle "users_images"
+             const { data: newImage, error: newError } = await supabase
+               .from("users_images")
+               .insert([data_obj]);
+
+             if (newError) {
+               console.error(
+                 "Fehler beim Einfügen des Bildes in die Datenbank:",
+                 newError.message
+               );
+             } else {
+               /*console.log(
+                 "Bild erfolgreich in die Datenbank eingefügt:",
+                 newImage
+               );*/
+             }
+
+
+             if(newImage){
+               console.log(newImage)
+             } else if (newError){
+               console.log(newError)
+             }
+
+
+
+
+          if (data) {
+            console.log(data);
+            setIsLoading(false);
+            showSuccessMessage(true)
+            //props.closeModal();
+            //getImages();
+            fetchImages();
+  
+            const path = data.path;
+            const parts = path.split("/"); //teilt den String an dem "/"
+            const lastPart = parts[parts.length - 1];
+
+            console.log(lastPart);
+
+            // Upload der Beschreibung zusammen mit dem Bild in die Tabelle "image_informations"
+      
+          } else {
+            console.log(error);
+            showSuccessMessage(false)
+            setIsLoading(false)
+          }
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    } else if (selectedFile.function_type === "alternative") {
+
+
+
       if (selectedFile) {
-        // userId/nameOfImg.jpg
-        // Upload des ausgewählten Bildes an Supabase Storage
 
-        const { data, error } = await supabase.storage
-          .from("images")
-          .upload(userId + "/" + uuidv4(), selectedFile); //uuidv4() => string with bunch of chars
+        setIsLoading(true);
+        const url = CDN_URL_USERID + "/alternatives" + "/" + selectedFile.name;
+        console.log(url);
 
-        if (data) {
-          console.log(data);
-          setIsLoading(false);
-          //props.closeModal();
-          //getImages();
-          fetchImages();
-          console.log(data.path);
-          const path = data.path;
-          const parts = path.split("/"); //teilt den String an dem "/"
-          const lastPart = parts[parts.length - 1];
+        const data = {
+          created_at: selectedFile.created_at,
+          url: url,
+          name: title,
+          description: description,
+          type: "alternatives"
+        };
 
-          console.log(lastPart);
+        // Senden des Objekts an die Supabase-Tabelle "users_images"
+        const { data: newImage, error } = await supabase
+          .from("users_images")
+          .insert([data]);
 
-          // Upload der Beschreibung zusammen mit dem Bild in die Tabelle "image_informations"
-          const { descriptionData, descriptionError } = await supabase
-            .from("image_informations")
-            .insert([
-              {
-                description: description,
-                imageId: lastPart, // Key des hochgeladenen Bildes als Referenz
-              },
-            ]);
+        if (error) {
+          console.error(
+            "Fehler beim Einfügen des Bildes in die Datenbank:",
+            error.message
+          );
         } else {
-          console.log(error);
+          //console.log("Bild erfolgreich in die Datenbank eingefügt:", newImage);
+          setIsLoading(false);
+          showSuccessMessage(true);
         }
       }
-    } catch (error) {
-      console.error(error);
     }
   };
-
-  console.log(isLoading);
-  console.log(description);
-
-
-
-
-
-
-
-
-
-
-  const [alternativeImages, setAlternativeImages] = useState([]);
-  const [chosenAlternativeImage, setChosenAlternativeImage] = useState([])
-  const [alternativeDescription, setAlternativeDescription] = useState('')
-  const [title, setTitle] = useState('')
-
-  console.log(title)
-  console.log(alternativeDescription)
-
-  const titleChangeHandler = (e) =>{
-    setTitle(e.target.value)
-  }
 
   useEffect(() => {
     const uploadAlternativeImages = async (event) => {
@@ -226,7 +249,7 @@ const NewImage = () =>{
           setAlternativeImages(data);
         }
 
-        console.log(data); // Array mit den Informationen zu den Dateien im Ordner "alternatives"
+
       } catch (error) {
         console.error("An error occurred:", error.message);
       }
@@ -235,99 +258,18 @@ const NewImage = () =>{
     uploadAlternativeImages();
   }, []);
 
-  
-
-  console.log(alternativeImages);
-
-
- const chooseAlternativeImage = (e) => {
-   console.log(e.target.value);
-   const foundObj = alternativeImages.find((obj) => obj.name === e.target.value)
-
-   console.log(foundObj)
-   setChosenAlternativeImage(foundObj)
-
- };
-
- const [showAltImg,setShowAltImg] = useState(false)
- 
-
-
-  const uploadAlternativeImage = async (e) =>{
-    e.preventDefault()
-    console.log('MOINCITO')
-    console.log(chosenAlternativeImage)
-   if(chosenAlternativeImage){
-     setShowAltImg(true);
-     const url =
-       CDN_URL_USERID + "/alternatives" + "/" + chosenAlternativeImage.name;
-    
-
-     console.log(url);
-
-     const data = {
-       created_at: chosenAlternativeImage.created_at,
-       url: url,
-       name: title,
-       description: alternativeDescription
-     };
-
-     // Senden des Objekts an die Supabase-Tabelle "users_images"
-     const { data: newImage, error } = await supabase
-       .from("users_images")
-       .insert([data]);
-
-     if (error) {
-       console.error(
-         "Fehler beim Einfügen des Bildes in die Datenbank:",
-         error.message
-       );
-     } else {
-       console.log("Bild erfolgreich in die Datenbank eingefügt:", newImage);
-     }
-   }
-    
-  };
-
-
 
 
   return (
     <div className={style ? styles.container_dark : styles.container}>
-      <h1 className={styles.title}> lade ein Foto hoch</h1>
-
-      <form className={styles.form_div}>
+      <form className={styles.form_div} onSubmit={uploadImageHandler}>
+        <h1 className={styles.title}> lade ein Foto hoch</h1>
         <input
           type="file"
           onChange={handleFileUpload}
           className={styles.file_input}
         />
-
-        {/* 
-          <textarea
-                  className={styles.description}
-                  placeholder="beschreibe dein Foto hier "
-                  value={description}
-                  onChange={(event) => setDescription(event.currentTarget.value)}
-                ></textarea>
-        */}
-
-        <div className={styles.isLoadingInfo_div}>
-          {isLoading && <h1> lädt Foto hoch ....</h1>}
-        </div>
-
-        <div className={styles.buttons_div}>
-          <button className={styles.submit_btn} onClick={uploadImageHandler}>
-            hochladen
-          </button>
-          {/*  <button className={styles.close_btn} onClick={props.closeModal}> */}
-          close
-        </div>
-      </form>
-
-      <h1 className={styles.title}>oder wähle ein von mir gestelltes Foto</h1>
-
-      <form className={styles.form_div} onSubmit={uploadAlternativeImage}>
+        <h1 className={styles.title}>oder wähle ein von mir gestelltes Foto</h1>
         <div className={styles.alternative_div}>
           {alternativeImages.map((image) => (
             <div className={styles.alternative_wrapper}>
@@ -336,9 +278,10 @@ const NewImage = () =>{
                 id={image.name}
                 name="alternativeImages"
                 value={image.name}
-                onChange={chooseAlternativeImage}
+                onChange={handleFileUpload}
                 className={styles.alternativeImage_input}
               />
+            
               <img
                 key={image.id}
                 src={CDN_URL_USERID + "/alternatives/" + image.name}
@@ -352,18 +295,34 @@ const NewImage = () =>{
         <input
           type="text"
           placeholder="Titel"
-          className={styles.alternativeTitle}
-          onChange={titleChangeHandler}
+          className={styles.form_title}
+          onChange={(event) => setTitle(event.target.value)}
           value={title}
         ></input>
 
         <textarea
-          className={styles.alternativeDescription}
+          className={styles.description}
           placeholder="beschreibe dein Foto hier "
-          onChange={(event) => setAlternativeDescription(event.currentTarget.value)}
+          onChange={(event) => setDescription(event.currentTarget.value)}
         ></textarea>
 
-        <button type="submit" className={styles.submitAlternativePost}> senden </button>
+        <button type="submit" className={styles.submit_btn}>
+          {isLoading ? "lädt..." : "hochladen"}
+        </button>
+
+        {!successMessage && successMessage != null && (
+          <p className={styles.successMessage}>
+            wähle erst ein Foto aus und beschreibe es, bevor du es hochlädst
+          </p>
+        )}
+        {successMessage && (
+          <div className={styles.success_div}>
+            <p className={styles.successMessage_suc}>
+              dein Foto-Eintrag wurde erfolgreich gespeichert! Danke 🫶🏼
+            </p>
+            <Link href="/" className={styles.goBack_link}> zurück </Link>
+          </div>
+        )}
       </form>
     </div>
   );

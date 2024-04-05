@@ -6,8 +6,6 @@
     border-radius: 2px;
     z-index: 10000;
     padding: 20px;
-
-    border: 2px solid red;
 }
 
 .container_dark {
@@ -17,22 +15,37 @@
     z-index: 10000;
     background: var(--background_dark);
     padding: 10px 20px;
+   
 }
 
 .title{
     font-size: 1.1rem;
-    margin: 5px 10px;
+    margin: 5px;
+    margin-bottom: 20px;
     padding: 5px;
     font-size: 1.5rem;
+    border-bottom: 2px solid grey;
 }
 
 .form_div{
-    /*height: 40%;*/
     position: relative;
     display: flex;
     flex-direction: column;
+    padding: 10px 0px;
+    margin-bottom: 30px;
+}
+
+.form_title{
+    border-bottom: 1px solid black;
+    margin: 30px 10px;
+    padding: 10px;
+    cursor: pointer;
+}
 
 
+
+ .form_title:focus{
+    outline: none;
 }
 
 .file_input{
@@ -42,25 +55,20 @@
     height: 20%;
     z-index: 100;
     cursor: pointer;
-
-
-
-
-
-    border: 2px solid green;
 }
 
 
 .description{
-    border: 2px solid lightgrey;
-    height: 60%;
-    padding: 5px;
+    width: 80%;
     margin: 5px 10px;
-    cursor: pointer;
-    border: none;
     background: transparent;
     border: 1px solid silver;
-
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 10px;
+    height: 400px;
+    cursor: pointer;
+    
 }
 
 
@@ -69,40 +77,11 @@
 }
 
 
-.isLoadingInfo_div{
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 
-    border: 2px solid yellow;
-  
-}
-
-.isLoadingInfo_div h1{
-    font-size: 2rem;
-    font-weight: bolder;
-}
-
-
-.buttons_div{
-    display: flex;
-    position: absolute;
-    bottom: 2px;
-    right: 2px;
-}
-
-.close_btn, .submit_btn{
-    margin: 5px;
+ .submit_btn{
+    margin: 10px;
     width: 100px;
     padding: 4px;
-}
-
-.close_btn{
-    background: var(--background_dark_opaque);
-    color: var(--hover-font-dark);
-    border-radius: 2px;
-    border: 1px solid silver;
 }
 
 
@@ -116,6 +95,8 @@
 
 
 
+
+
 .alternative_div{
     display: flex;
     justify-content: center;
@@ -123,7 +104,7 @@
     flex-wrap: wrap;
 
 
-    border: 2px solid blue;
+   
 
    
 }
@@ -135,12 +116,55 @@
 .alternativeImage_input{
     border: 2px solid red;
     position: absolute;
-    left: 0;
-    top: 5px;
-    width: 50px;
-    height: 40px;
+    left: 10px;
+    top: 10px;
+    width: 30px;
+    height: 30px;
 
 }
+
+
+.alternativeImage_input {
+    /* hiding browser el */
+    appearance: none;
+    /* Safari support */
+    -webkit-appearance: none;
+    border: 0.2rem solid rgba(255,255,255, 0.5);
+    background-color:rgba(255,255,255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.alternativeImage_input:focus-visible {
+    outline-offset: 0;
+}
+
+
+.alternativeImage_input:checked {
+    outline-color: white;
+    border: 0.2rem solid var(--pink_opaque);
+    background-color: var(--pink);
+
+    animation: box-shadow-animation 0.4s linear 2 alternate;
+}
+
+.alternativeImage_input:checked::after {
+  content: "🫶🏼"; /* Hier das gewünschte Emoji einfügen */
+  display: inline-block;
+  margin-left: 5px; /* Abstand zum Input */
+}
+
+
+@keyframes box-shadow-animation {
+    0% {
+    box-shadow: 0 0 0 white;
+  }
+  100% {
+    box-shadow: 0 0 10px var(--pink);
+  }
+}
+
+
 
 
 .alternativeImg{
@@ -151,24 +175,7 @@
 }
 
 
-.alternativeTitle{
-    border-bottom: 1px solid black;
-    margin: 30px 10px;
-    padding: 10px;
-    cursor: pointer;
-}
 
-.alternativeDescription{
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    padding: 10px;
-    height: 400px;
-    cursor: pointer;
-}
-
-.alternativeDescription:focus, .alternativeTitle:focus{
-    outline: none;
-}
 
 .submitAlternativePost{
     border: 2px solid red;
@@ -179,6 +186,18 @@
 }
 
 
+
+.successMessage, .successMessage_suc, .goBack_link{
+    color: var(--pink_opaque);
+    height: 5vh;
+    display: flex;
+    align-items:center;
+    padding-left: 10px;
+}
+
+.successMessage_suc{
+    color: darkgreen;
+}
 
 
 

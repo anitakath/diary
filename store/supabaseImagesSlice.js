@@ -10,8 +10,6 @@ const imagesSlice = createSlice({
   reducers: {
     setSupebaseImages(state, action) {
       state.images = action.payload;
-      console.log(state)
-      console.log(action)
     },
   },
 });

@@ -5,9 +5,6 @@ import Image from 'next/image';
 import { useContext, useState } from 'react';
 
 
-//COMPONENTS
-import PhotoUploadModal from './Modals/PhotoUploadModal';
-
 //CONTEXT
 import { RedditContext } from "@/context/RedditContext";
 
@@ -38,10 +35,10 @@ const CreatePost = () => {
 
 
 
-
  const openModal = () => {
    setIsModalOpen(true);
  };
+
 
   let avatarUrl;
 
@@ -53,7 +50,7 @@ const CreatePost = () => {
    
   }
 
-  console.log(isModalOpen)
+
 
 
   return (
@@ -78,13 +75,13 @@ const CreatePost = () => {
 
       <div className={styles.form_container}>
         <div className={styles.createPost_linkDiv}>
-          {currentFilter === "beste" && (
+          {currentFilter === "deine_posts" && (
             <Link href={`/new-post`} className={styles.createPost_link}>
               erstelle einen neuen Beitrag
             </Link>
           )}
 
-          {currentFilter === "neu" && (
+          {currentFilter === "deine_images" && (
             <Link href={`/new-image`} className={styles.photo_btn}>
               <FontAwesomeIcon
                 icon={faImage}
@@ -95,27 +92,20 @@ const CreatePost = () => {
             </Link>
           )}
 
-          {currentFilter === "heiß" && (
-            <button className={styles.photo_btn}>
+          {currentFilter === "annes_images" && (
+            <Link href={`/profil`} className={styles.photo_btn}>
               <FontAwesomeIcon
                 icon={faImage}
                 onClick={openModal}
                 className={styles.icon}
               />
-            </button>
+              <span> Profil von Anne einsehen </span>
+            </Link>
           )}
         </div>
       </div>
 
-      {isModalOpen && (
-        <div className={styles.modal_div}>
-          <PhotoUploadModal
-            nightMode={nightMode}
-            currentGoogleUser={currentGoogleUser}
-            closeModal={() => setIsModalOpen(false)}
-          />
-        </div>
-      )}
+     
     </div>
   );
 };

@@ -30,7 +30,7 @@ const YourImgDiary = () =>{
         setStyle(nightMode);
     }, [nightMode]);
 
-    console.log(nightMode);
+
 
 
     const [images, setImages] = useState([]);
@@ -44,7 +44,6 @@ const YourImgDiary = () =>{
         }
     }, [])
 
-    console.log(userId)
    
 
     useEffect(() =>{
@@ -57,7 +56,7 @@ const YourImgDiary = () =>{
                 .order("id", { ascending: false });
 
             if(data){
-                console.log(data)
+    
                 setImages(data)
                 setImagesLoaded(true)
             } else{
@@ -74,26 +73,59 @@ const YourImgDiary = () =>{
        }, [userId])
 
 
-       console.log(images)
+ 
+
+       const deletePostHandler = async(postId) =>{
+         try {
+           const { data, error } = await supabase
+             .from("users_images")
+             .delete()
+             .eq("id", postId);
+
+           if (error) {
+             console.error(error);
+           } else {
+             console.log("Post deleted successfully");
+             // Hier können Sie die Liste der Bilder aktualisieren, um das gelöschte Bild zu entfernen
+             setImages(images.filter((image) => image.id !== postId));
+           }
+         } catch (error) {
+           console.error(error);
+         }
+       }
 
 
 
     return (
       <div className={styles.container}>
-        <h1 className={style ? styles.title_darkmode : styles.title}>
-          DEIN BILDERTAGEBUCH
-        </h1>
+        <Link
+          href="/dein-bildertagebuch"
+          className={style ? styles.link_darkmode_first : styles.link_first}
+        >
+          Tagebuch-Übersicht
+        </Link>
         {imagesLoaded &&
           images.map((image) => (
-            <div className={styles.diarypost_div}>
+            <div className={styles.diarypost_div} key={image.id}>
+              <div className={styles.options_div}>
+                <Link
+                  className={style ? styles.link_darkmode : styles.link}
+                  href={`/dein-bildertagebuch/${image.name.replace(
+                    /\s+/g,
+                    "-"
+                  )}`}
+                >
+                  Eintrag einsehen
+                </Link>
+
+                <button
+                  className={styles.delete_btn}
+                  onClick={() => deletePostHandler(image.id)}
+                >
+                  Eintrag löschen
+                </button>
+              </div>
               <img src={image.url} key={image.id} className={styles.img}></img>
-              <Link
-                className={style ? styles.link_darkmode : styles.link}
-                href={`/dein-bildertagebuch/${image.name.replace(/\s+/g, "-")}`}
-              >
-                {" "}
-                Eintrag einsehen{" "}
-              </Link>
             </div>
           ))}
       </div>

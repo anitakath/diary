@@ -27,23 +27,7 @@ const CreateComment = (props) => {
   //const currentGoogleUser = props.postDetails.id
   const { selectedPost, setSelectedPost, currentGoogleUser } =
     useContext(RedditContext);
-/*
-  console.log(currentGoogleUser);
 
-  //annowagno@gmail.com
-  console.log(currentGoogleUser.user.email);
-  
-  //Anne Wagner
-  console.log(currentGoogleUser.user.identities[0].identity_data.full_name);
-
-  //https://lh3.googleusercontent.com/a/ACg8ocLD4HBMU99lmy7Z9pLEtGbnC4ucHOEXY9NPoMLZur-1mPU=s96-c
-  console.log(currentGoogleUser.user.user_metadata.avatar_url);
-
-  console.log(props);
-
-  */
-
-  console.log(props.postDetails);
 
   const postDetails = props.postDetails
 

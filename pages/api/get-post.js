@@ -10,9 +10,9 @@ export default async (req, res) => {
 
   let tableName;
 
-  if (filter === "deine") {
+  if (filter === "annes_posts") {
     tableName = "feed_dummy";
-  } else if (filter === "beste") {
+  } else if (filter === "deine_posts") {
     tableName = "users_feed";
   } /*else if (filter === "neu"){
     tableName = "users_images"

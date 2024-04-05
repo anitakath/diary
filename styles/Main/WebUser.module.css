@@ -31,6 +31,7 @@
     height: 50px; 
     width: 100%;
     object-fit: cover;
+    opacity: 0.8;
 }
 
 .home_container{
@@ -39,18 +40,19 @@
    top: -27px;
 }
 
-.icon{
-    height: 60px;
-    padding: 4px;
-    margin-right: 4px;
-    color: #F7567C;
-    
+
+
+.users_image_mini{
+    box-shadow: 0px 0px 4px grey;
+    margin: 15px;
+    margin-bottom: 0px;
 }
 
-.home_container p{
+
+.users_name{
     position: absolute;
-    top: 20px;
-    left: 75px;
+    top: 30px;
+    left: 100px;
     font-size: 1.2rem;
 }
 
@@ -75,10 +77,10 @@
 .link{
     margin: 10px 0px;
     height: 40px;
-    border-radius: 5px;
+
     border: none;
     border-top: 1px solid silver;
-    border-bottom: 2px solid silver;
+    border-bottom: 1px solid silver;
     background-color: rgba(255,255,255, 0.5);
     cursor: pointer;
     display: flex;
@@ -90,6 +92,8 @@
 .link:active{
     transform: scale(0.99);
 }
+
+
 
 
 

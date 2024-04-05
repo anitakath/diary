@@ -51,7 +51,6 @@ const Comments = (props) =>{
   ).reverse();
 
 
-  console.log(comments)
 
  const timeAgoFormat = (date) => {
    const currentDate = new Date();

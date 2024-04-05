@@ -92,8 +92,9 @@
     height: 100%;
     width: 30%;
     color: silver;
-
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .light_p{

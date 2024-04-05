@@ -24,35 +24,35 @@ const Filter = () => {
   const nightMode = useSelector((state) => state.toggle.nightMode);
 
   //console.log(currentFilter)
-  const [bestIsActive, setBestIsActive] = useState(false);
-  const [hotIsActive, setHotIsActive] = useState(false);
-  const [newIsActive, setNewIsActive] = useState(false);
-  const [topIsActive, setTopIsActive] = useState(false);
-  const [deineIsActive, setDeineIsActive] = useState(false);
+  const [deinePostsIsActive, setDeinePostsIsActive] = useState(false);
+  const [annesImagesIsActive, setAnnesImagesIsActive] = useState(false);
+  const [deineImagesIsActive, setDeineImagesActive] = useState(false);
+  
+  const [annesPostsIsActive, setAnnesPostsIsActive] = useState(false);
   const [activeButton, setActiveButton] = useState(null);
 
     const storedFilter =
       typeof window !== "undefined"
-        ? localStorage.getItem("selectedFilter") || "beste"
-        : "beste";
+        ? localStorage.getItem("selectedFilter") || "deine_posts"
+        : "deine_posts";
 
+
+      
   useEffect(() =>{
    
 
     if (currentFilter.bestIsActive) {
-      setBestIsActive(true);
+      setDeinePostsIsActive(true);
+      setActiveButton("deine_posts");
     } else if (currentFilter.hotIsActive) {
-      setHotIsActive(true);
-      setActiveButton("heiß");
+      setAnnesImagesIsActive(true);
+      setActiveButton("annes_images");
     } else if (currentFilter.newIsActive) {
-      setNewIsActive(true);
-      setActiveButton("neu");
-    } else if (currentFilter.topIsActive) {
-      setTopIsActive(true);
-      setActiveButton("top");
+      setDeineImagesActive(true);
+      setActiveButton("deine_images");
     } else if (currentFilter.deineIsActive) {
-      setDeineIsActive(true);
-      setActiveButton("deine");
+      setAnnesPostsIsActive(true);
+      setActiveButton("annes_posts");
     }
   }, [currentFilter])
 
@@ -61,19 +61,15 @@ const Filter = () => {
 
 
   useEffect(()=>{
-
-    if (storedFilter === "beste") {
-      setActiveButton("beste");
-    } else if (storedFilter === "heiß") {
-      setActiveButton("heiß");
-    } else if (storedFilter === "neu") {
-      setActiveButton("neu");
-    } else if (storedFilter === "top") {
-      setActiveButton("top");
-    } else if (storedFilter === "deine") {
-      setActiveButton("deine");
+    if (storedFilter === "deine_posts") {
+      setActiveButton("deine_posts");
+    } else if (storedFilter === "annes_images") {
+      setActiveButton("annes_images");
+    } else if (storedFilter === "deine_images") {
+      setActiveButton("deine_images");
+    }  else if (storedFilter === "annes_posts") {
+      setActiveButton("annes_posts");
     }
-  
 
   }, [])
 
@@ -83,36 +79,31 @@ const Filter = () => {
 
 
   const filterHandler = (title) => {
-    if (title === "beste") {
-      dispatch(filter("beste"));
-      dispatch(setActButton('beste' ));
-   
+    if (title === "deine_posts") {
+      dispatch(filter("deine_posts"));
+      dispatch(setActButton('deine_posts' ));
       setActiveButton(title)
-     
 
-    } else if (title === "heiß") {
-      dispatch(filter("heiß"));
-      dispatch(setActButton('heiß' ));
+    } else if (title === "annes_images") {
+      dispatch(filter("annes_images"));
+      dispatch(setActButton('annes_images' ));
       //dispatch(setActiveButton(title));
       setActiveButton(title);
 
-
-    } else if (title === "neu") {
-      dispatch(filter("neu"));
+    } else if (title === "deine_images") {
+      dispatch(filter("deine_images"));
       //dispatch(setActiveButton(title));
       setActiveButton(title);
-    } else if (title === "top") {
-      dispatch(filter("top"));
-      //dispatch(setActiveButton(title));
-      setActiveButton(title);
-
-    } else if (title === "deine") {
-      dispatch(filter("deine"));
+    }  else if (title === "annes_posts") {
+      dispatch(filter("annes_posts"));
       //dispatch(setActiveButton(title));
       setActiveButton(title);
 
     }
   };
+
+
+
 
   return (
     <div className={styles.container_wrapper}>
@@ -124,8 +115,8 @@ const Filter = () => {
         <div>
           <button
             className={styles.filter_btn}
-            onClick={() => filterHandler("beste")}
-            style={activeButton === "beste" ? { ...activeLinkStyle } : null}
+            onClick={() => filterHandler("deine_posts")}
+            style={activeButton === "deine_posts" ? { ...activeLinkStyle } : null}
           >
             DEINE POSTS
           </button>
@@ -133,8 +124,8 @@ const Filter = () => {
         <div>
           <button
             className={styles.filter_btn}
-            onClick={() => filterHandler("neu")}
-            style={activeButton === "neu" ? { ...activeLinkStyle } : null}
+            onClick={() => filterHandler("deine_images")}
+            style={activeButton === "deine_images" ? { ...activeLinkStyle } : null}
           >
             DEIN BILDERTAGEBUCH
           </button>
@@ -142,29 +133,18 @@ const Filter = () => {
         <div>
           <button
             className={styles.filter_btn}
-            onClick={() => filterHandler("heiß")}
-            style={activeButton === "heiß" ? { ...activeLinkStyle } : null}
+            onClick={() => filterHandler("annes_images")}
+            style={activeButton === "annes_images" ? { ...activeLinkStyle } : null}
           >
             ANNES BILDERTAGEBUCH
           </button>
         </div>
 
-        {/*
-        <div>
-        <button
-            className={styles.filter_btn}
-            onClick={() => filterHandler("top")}
-            style={activeButton === "top" ? { ...activeLinkStyle } : null}
-          >
-            {" "}
-            top{" "}
-          </button>
-        </div> */}
         <div>
           <button
             className={styles.filter_btn}
-            onClick={() => filterHandler("deine")}
-            style={activeButton === "deine" ? { ...activeLinkStyle } : null}
+            onClick={() => filterHandler("annes_posts")}
+            style={activeButton === "annes_posts" ? { ...activeLinkStyle } : null}
           >
             ANNE
           </button>

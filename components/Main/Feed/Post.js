@@ -17,7 +17,6 @@ import { RedditContext } from "@/context/RedditContext";
 
 const Post = ({post}) => {
 
- 
 
   const {
      pathId,
@@ -31,7 +30,7 @@ const Post = ({post}) => {
      table,
    } = post;
 
-  //console.log(post)
+
 
   const nightMode = useSelector((state) => state.toggle.nightMode);
   let totalvote = upvotes - downvotes;
@@ -57,9 +56,6 @@ const Post = ({post}) => {
   };
 
   const formattedDateTime = formatDate(created_at);
-
-
-  
     
 
   return (

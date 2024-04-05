@@ -36,19 +36,14 @@ const Feed = (props) => {
   const [loadedImages, setLoadedImages] = useState(false);
   const [selectedDateFormat, setSelectedDateFormat] = useState("format1"); // Zustand für ausgewähltes Datumsformat
 
-  const supabaseImages = useSelector((state) => state.images.images);
 
-  //console.log(supabaseImages)
-
-
-  console.log(currentFilter);
- 
+  
 
 
   const storedFilter =
     typeof window !== "undefined"
-      ? localStorage.getItem("selectedFilter") || "beste"
-      : "beste";
+      ? localStorage.getItem("selectedFilter") || "deine_posts"
+      : "deine_posts";
 
   useEffect(() => {
     if (loadedPosts) {
@@ -82,9 +77,14 @@ const Feed = (props) => {
       });
 
     if (data !== null) {
-      const filteredImages = data.filter(
+
+
+      const cutAlternativeObject = data.filter(obj => obj.name !== "alternatives")
+      const filteredImages = cutAlternativeObject.filter(
         (image) => !image.name.startsWith(".")
       ); // Filtert Dateien, die nicht mit "." beginnen
+
+
 
       const sortedImages = filteredImages
         .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
@@ -157,24 +157,13 @@ const Feed = (props) => {
    };
 
 
+
+
   return (
     <div className={styles.container}>
       <Filter />
 
       <CreatePost />
-
-      {currentFilter.selectedFilter === "beste" && (
-        <p> beste</p>
-      
-      
-      )}
-
-      {currentFilter.selectedFilter === "deine" && (
-      <p> deine </p>
-      
-      )}
-
-
 
 
 
@@ -209,9 +198,9 @@ const Feed = (props) => {
           </div>
         )}
 
-        {currentFilter.selectedFilter === "neu"  && <YourImgDiary />}
+        {currentFilter.selectedFilter === "deine_images"  && <YourImgDiary />}
 
-        {images.length > 0 && currentFilter.selectedFilter === "heiß" && (
+        {images.length > 0 && currentFilter.selectedFilter === "annes_images" && (
           <div className={styles.imageGallery}>
             {images.map((image) => (
               <div className={styles.image_div} key={image.id}>

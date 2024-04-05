@@ -1,5 +1,13 @@
 
+
+
 .container{
+    display: flex;
+    flex-direction: column;
+}
+
+.container_dark{
+    background: var(--background_dark);
     display: flex;
     flex-direction: column;
 }
@@ -7,12 +15,16 @@
 .diarypost_div{
     display: flex;
     flex-direction: column;
+   
+    
 }
 
 .info_div{
     display: flex;
     width: 100vw;
     justify-content: center;
+
+    
 }
 
 .img{
@@ -20,20 +32,48 @@
     height: 800px;
     object-fit: cover;
     margin-right:  5px;
+  
 }
 
 .text_div{
     width: 50%;
     margin-left: 5px;
-    padding: 20px;
+    padding: 20px 0px;
+    position: relative;
   
 }
 
-.title{
-    font-size: 1.3rem;
-    border-bottom: 1px solid silver;
-    padding: 3px;
+.title_div{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 30px;
+    border-bottom: 0.5px solid silver;
+    margin-right: 10px;
+    
+}
 
+.backToOverview{
+    color: var(--pink);
+    position: absolute;
+    top: -3px;
+    right: 35px;
+    display: flex;
+    justify-content:center;
+    transition: 0.2s ease;
+}
+
+.backToOverview:hover{
+    transform: scale(1.02)
+}
+
+
+.title, .data{
+    font-size: 1.3rem;
+    padding: 3px;
+}
+
+.title_dark{
+    border-bottom: 1px solid silver;
 }
 
 .description{
@@ -41,10 +81,12 @@
     padding: 3px;
 }
 
+.description_dark, .title_dark{
+    color: silver;
+}
 
 
 .fourOfour_div{
-
     height: 50vh;
     display: flex;
     flex-direction: column;
@@ -61,4 +103,20 @@
 
 .goBack_link:hover{
     color: var(--pink);
+}
+
+
+
+@media screen and (max-width: 1000px){
+    .info_div{
+        flex-direction: column-reverse;
+    }
+
+    .img{
+        width: 100%;
+    }
+
+    .text_div{
+        width: 100%;
+    }
 }
