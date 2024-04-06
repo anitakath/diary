@@ -8,14 +8,18 @@
     padding: 20px 10px;
     width: 25%;
     display: flex;
-    flex-direction: column;position: fixed;
+    flex-direction: column;
+    position: fixed;
     color: beige;
-    height: 100vh;
+    min-height: 50vh;
     overflow: scroll;
     top: 0;
     left:0px;
     background: var(--background_dark);
+    box-shadow: 0px 2px 30px grey;
 }
+
+
 
 .container_light{
     background: var(--background_light);
@@ -78,32 +82,30 @@
 
 
 
-@media screen and (max-width: 1370px){
+
+
+
+@media screen and (max-width: 1300px){
 
 
     .container{
-        width: 37%;
+        width: 40%;
+        height: 100vh;
     }
 
 }
 
-@media screen and (max-width: 1000px){
+
+
+@media screen and (max-width: 1200px){
 
 
     .container{
-        width: 45%;
+        width: 60%;
     }
 
 }
 
-@media screen and (max-width: 800px){
-
-
-    .container{
-        width: 55%;
-    }
-
-}
 
 
 @media screen and (max-width: 600px){
@@ -111,6 +113,22 @@
 
     .container{
         width: 100%;
+    } 
+}
+
+
+@media screen and (max-width: 400px){
+
+
+    .container{
+        width: 100%;
+        min-height: 105vh;
     }
     
+}
+
+@media screen and (max-width: 300px){
+    .container{
+        min-height: 103vh;
+    }
 }

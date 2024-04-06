@@ -1,19 +1,35 @@
+
 import { useEffect, useState } from "react";
 
-
 //REDUX
-import { filter, setActButton} from "@/store/filterSlice";
+import { filter, setActButton } from "@/store/filterSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 
-//STYLES
-import styles from "../../../styles/Main/Feed/Filter.module.css";
+import styles from './FilterMobile.module.css'
+
+const FilterMobile = () =>{
 
 
+    const dispatch = useDispatch();
 
-const Filter = () => {
 
-  const dispatch = useDispatch();
+    const currentFilter = useSelector((state) => state.filter);
+    const nightMode = useSelector((state) => state.toggle.nightMode);
+
+    //console.log(currentFilter)
+    const [deinePostsIsActive, setDeinePostsIsActive] = useState(false);
+    const [annesImagesIsActive, setAnnesImagesIsActive] = useState(false);
+    const [deineImagesIsActive, setDeineImagesActive] = useState(false);
+
+    const [annesPostsIsActive, setAnnesPostsIsActive] = useState(false);
+    const [activeButton, setActiveButton] = useState(null);
+
+    const storedFilter =
+        typeof window !== "undefined"
+        ? localStorage.getItem("selectedFilter") || "deine_posts"
+        : "deine_posts";
+
 
 
   const activeLinkStyle = {
@@ -21,28 +37,8 @@ const Filter = () => {
     color: " #F7567C", // Zum Beispiel die Schriftfarbe ändern
   };
 
-
-  const currentFilter = useSelector((state) => state.filter);
-  const nightMode = useSelector((state) => state.toggle.nightMode);
-
-  //console.log(currentFilter)
-  const [deinePostsIsActive, setDeinePostsIsActive] = useState(false);
-  const [annesImagesIsActive, setAnnesImagesIsActive] = useState(false);
-  const [deineImagesIsActive, setDeineImagesActive] = useState(false);
-  
-  const [annesPostsIsActive, setAnnesPostsIsActive] = useState(false);
-  const [activeButton, setActiveButton] = useState(null);
-
-    const storedFilter =
-      typeof window !== "undefined"
-        ? localStorage.getItem("selectedFilter") || "deine_posts"
-        : "deine_posts";
-
-
-      
-  useEffect(() =>{
-   
-
+           
+  useEffect(() => {
     if (currentFilter.bestIsActive) {
       setDeinePostsIsActive(true);
       setActiveButton("deine_posts");
@@ -56,66 +52,52 @@ const Filter = () => {
       setAnnesPostsIsActive(true);
       setActiveButton("annes_posts");
     }
-  }, [currentFilter])
+  }, [currentFilter]);
 
-
- 
-
-
-  useEffect(()=>{
+  useEffect(() => {
     if (storedFilter === "deine_posts") {
       setActiveButton("deine_posts");
     } else if (storedFilter === "annes_images") {
       setActiveButton("annes_images");
     } else if (storedFilter === "deine_images") {
       setActiveButton("deine_images");
-    }  else if (storedFilter === "annes_posts") {
+    } else if (storedFilter === "annes_posts") {
       setActiveButton("annes_posts");
     }
-
-  }, [])
-
-
-
-  
-
-
-  const filterHandler = (title) => {
-    if (title === "deine_posts") {
-      dispatch(filter("deine_posts"));
-      dispatch(setActButton('deine_posts' ));
-      setActiveButton(title)
-
-    } else if (title === "annes_images") {
-      dispatch(filter("annes_images"));
-      dispatch(setActButton('annes_images' ));
-      //dispatch(setActiveButton(title));
-      setActiveButton(title);
-
-    } else if (title === "deine_images") {
-      dispatch(filter("deine_images"));
-      //dispatch(setActiveButton(title));
-      setActiveButton(title);
-    }  else if (title === "annes_posts") {
-      dispatch(filter("annes_posts"));
-      //dispatch(setActiveButton(title));
-      setActiveButton(title);
-
-    }
-  };
+  }, []);
 
 
 
 
-  return (
-    <div className={styles.container_wrapper}>
-   
+    const filterHandler = (title) => {
+        if (title === "deine_posts") {
+          dispatch(filter("deine_posts"));
+          dispatch(setActButton("deine_posts"));
+          setActiveButton(title);
+        } else if (title === "annes_images") {
+          dispatch(filter("annes_images"));
+          dispatch(setActButton("annes_images"));
+          //dispatch(setActiveButton(title));
+          setActiveButton(title);
+        } else if (title === "deine_images") {
+          dispatch(filter("deine_images"));
+          //dispatch(setActiveButton(title));
+          setActiveButton(title);
+        } else if (title === "annes_posts") {
+          dispatch(filter("annes_posts"));
+          //dispatch(setActiveButton(title));
+          setActiveButton(title);
+        }
+    };
 
-      <div
-        className={` ${styles.container} ${
-          nightMode ? styles.container_dark : styles.container_light
-        }`}
-      >
+        
+
+
+
+    return (
+      <div className={styles.mobileFilter_div}>
+
+          <h1 className={styles.filter_title}> Filtere Posts und Tagebuch-Einträge</h1>
         <div>
           <button
             className={styles.filter_btn}
@@ -162,8 +144,7 @@ const Filter = () => {
           </button>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+}
 
-export default Filter;
+export default FilterMobile

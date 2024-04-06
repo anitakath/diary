@@ -5,16 +5,12 @@ import styles from './YourImgDiary.module.css'
 import { supabase } from '@/services/supabaseClient';
 
 import { RedditContext } from '@/context/RedditContext';
-import { setUser } from '@/store/userSlice';
+
 
 //REDUX
 import { useDispatch, useSelector } from "react-redux";
 
 import Link from 'next/link';
-
-
-
-
 
 
 

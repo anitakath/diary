@@ -1,12 +1,10 @@
 
 
 .container_wrapper{
-    height: 60px;
+    height: 100px;
     position: relative;
     width: 100%;
     margin: 5px 0px;
-
-
 }
 
 .container{
@@ -16,10 +14,11 @@
     display: flex;
     justify-content: center;
     flex-grow: 1;
-    background-color: rgba(255,255,255, 0.3);
     position: absolute;
-   
+    top: 20px;
+
 }
+
 
 .container_light{
     border-bottom: 2px solid silver;
@@ -42,6 +41,7 @@
     background-color: transparent;
     cursor: pointer;
     font-size: 0.9rem;
+    color: darkgrey;
 }
 
 .filter_btn:hover{
@@ -49,26 +49,44 @@
 }
 
 
-@media screen and (max-width: 400px){
 
-    .container_wrapper{
 
-        height: 140px;
-        top: -20px;
+
+@media screen and (max-width: 800px){
+    .filter_btn{
+        font-size: 0.8rem;
+    }
+}
+
+
+@media screen and (max-width: 500px){
+    .filter_btn{
+        font-size: 0.7rem;
+    }
+}
+
+
+@media screen and (max-width: 430px){
+
+    .container_dark, .container_light{
+        display: none;
+    }
+
+     .container_wrapper{
+        height: 0px;
+
     }
 
     .container{
         margin: 0;
         flex-direction: column;
         height: 140px;
+ 
     }
 
     .container div{
         margin: 0;
         margin: 8px 0px;
     }
-    
-    .filter_btn{
-        font-size: 0.8rem;
-    }
+
 }

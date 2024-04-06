@@ -16,6 +16,10 @@ import styles from '../../styles/Header/Menu.module.css'
 //UI
 import Slider from "../UI/Slider";
 
+
+//COMPONENTS
+import FilterMobile from "../Main/Feed/MOBILE_FILTER/FilterMobile";
+
 const Menu = (props) => {
 
   const router = useRouter();
@@ -99,6 +103,8 @@ const Menu = (props) => {
       <button className={styles.logout_btn} onClick={logoutHandler}>
         abmelden
       </button>
+
+      <FilterMobile/>
     </div>
   );
 };

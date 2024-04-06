@@ -272,7 +272,7 @@ const NewImage = () =>{
         <h1 className={styles.title}>oder wähle ein von mir gestelltes Foto</h1>
         <div className={styles.alternative_div}>
           {alternativeImages.map((image) => (
-            <div className={styles.alternative_wrapper}>
+            <div className={styles.alternative_wrapper} key={image.id}>
               <input
                 type="radio"
                 id={image.name}

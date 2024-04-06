@@ -1,0 +1,55 @@
+
+
+
+
+.filter_title{
+    border-top: 1px solid black;
+    padding: 15px 0px 10px 0px;
+    font-size: 1rem;
+    font-weight: bolder;
+
+}
+
+.filter_btn{
+    margin: 2px 0px;
+    font-size: 0.9rem;
+}
+
+@media screen and (max-width: 400px){
+    .mobileFilter_div{
+        display: inline-block;
+    }
+
+
+    .filter_title{
+        border-top: 1px solid black;
+        padding: 15px 0px 10px 0px;
+        font-size: 1.2rem;
+        font-weight: bolder;
+
+    }
+
+    .filter_btn{
+        margin: 2px 0px;
+    }
+}
+
+
+@media screen and (max-width: 300px){
+    .mobileFilter_div{
+        display: inline-block;
+    }
+
+
+    .filter_title{
+        border-top: 1px solid black;
+        padding: 15px 0px 10px 0px;
+        font-size: 0.9rem;
+        font-weight: bolder;
+    }
+
+    .filter_btn{
+        margin: 2px 0px;
+        font-size: 0.9rem;
+    }
+}

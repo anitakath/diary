@@ -2,14 +2,13 @@
 
 import React from 'react';
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from 'next/link';
 
 //COMPONENTS
 import CreatePost from "./CreatePost";
 import Post from "./Post";
 import Filter from './Filter'
-import WebUser from "../WebUser";
+
 import YourImgDiary from './YOUR_IMG_DIARY/YourImgDiary';
 
 //STYLES
@@ -19,7 +18,10 @@ import styles from '../../../styles/Main/Feed/Feed.module.css'
 import { useSelector, useDispatch } from "react-redux";
 import { supabase } from '@/services/supabaseClient';
 import { setSupebaseImages } from '@/store/supabaseImagesSlice';
-import { current } from '@reduxjs/toolkit';
+
+
+//CUSTOM HOOKS
+import useFormatDate from '@/components/custom_hooks/useFormatDate';
 
 const Feed = (props) => {
   const currentFilter = useSelector((state) => state.filter);
@@ -34,11 +36,22 @@ const Feed = (props) => {
   const [filteredPosts, setFilteredPosts] = useState([]);
   const [images, setImages] = useState([]);
   const [loadedImages, setLoadedImages] = useState(false);
-  const [selectedDateFormat, setSelectedDateFormat] = useState("format1"); // Zustand für ausgewähltes Datumsformat
 
+
+  const { formatDate1, formatDate2, formatDate3 } = useFormatDate("German");
+  const [selectedDateFormat, setSelectedDateFormat] = useState("format1");
 
   
 
+   const handleDateClick = () => {
+     if (selectedDateFormat === "format1") {
+       setSelectedDateFormat("format2");
+     } else if (selectedDateFormat === "format2") {
+       setSelectedDateFormat("format3");
+     } else {
+       setSelectedDateFormat("format1");
+     }
+   };
 
   const storedFilter =
     typeof window !== "undefined"
@@ -112,7 +125,7 @@ const Feed = (props) => {
 
 
 
-
+/*
   const formatDate1 = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate();
@@ -156,6 +169,7 @@ const Feed = (props) => {
      }
    };
 
+   */
 
 
 

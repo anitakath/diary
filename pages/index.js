@@ -27,24 +27,26 @@ import { useRouter } from "next/router";
 import styles from '../styles/Index.module.css'
 
 export default function Home() {
-
- 
-
-  const {currentGoogleUser, fetcher} = useContext(RedditContext)
+  const { currentGoogleUser, fetcher } = useContext(RedditContext);
   const selectedFilter = useSelector((state) => state.filter.selectedFilter);
-
-
 
   const currUser = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [myPosts, setMyPosts] = useState(null);
+  const nightMode = useSelector((state) => state.toggle.isNightMode);
+  const [style, setStyle] = useState(false);
+  // ------------------  NIGHT / DAY MODE TOGGLE ----------------------
+
+  useEffect(() => {
+    setStyle(nightMode);
+  }, [nightMode]);
 
 
-  
+
+
   const addNewPost = (newPost) => {
     setMyPosts((prevPosts) => [newPost, ...prevPosts]);
   };
-
 
   const { data, error } = useSWR(
     `/api/get-post?filter=${selectedFilter}`,
@@ -56,44 +58,33 @@ export default function Home() {
     }
   );
 
-
- 
-  useEffect(()=>{
-
+  useEffect(() => {
     if (currentGoogleUser) {
       dispatch(login());
     }
-  }, [currentGoogleUser])
-
-
+  }, [currentGoogleUser]);
 
   useEffect(() => {
-     if (data /*&& data.data && !myPosts*/) {
-       setMyPosts(data.data);
-     }
-   }, [data, myPosts]);
+    if (data /*&& data.data && !myPosts*/) {
+      setMyPosts(data.data);
+    }
+  }, [data, myPosts]);
 
-   useEffect(() => {
+  useEffect(() => {
+    if (data) {
+      setMyPosts(data.data);
+    }
+  }, [selectedFilter]);
 
-     if(data){
-       setMyPosts(data.data)
-     }
-   }, [selectedFilter]);
-
-
-
-
-  const saveAndUpdateUser = async () =>{
-
+  const saveAndUpdateUser = async () => {
     if (Object.keys(currUser).length === 0) {
       console.log("currUser is empty (login/registration)");
       return;
     } else if (Object.keys(currUser).length != 0) {
       console.log("logic to update...and save ...");
-    } else if (!currentGoogleUser){
-      return
-    } else if(currentGoogleUser){
-
+    } else if (!currentGoogleUser) {
+      return;
+    } else if (currentGoogleUser) {
       // Überprüfe, ob der Benutzer bereits in der Datenbank existiert
 
       const { data: existingUserData } = await supabase
@@ -135,24 +126,16 @@ export default function Home() {
         .from("users") // der erstellte table auf supabase.com...
         .select("*");
     }
-  
-  
-  }
-
+  };
 
   let googleUserId;
 
-  if(currentGoogleUser){
-    googleUserId = currentGoogleUser.user.id
+  if (currentGoogleUser) {
+    googleUserId = currentGoogleUser.user.id;
   }
 
-  const nightMode = useSelector((state) => state.toggle.isNightMode);
-
-
-
   return (
-    <div className={styles.main_container}>
-
+    <div className={style ? styles.main_container : styles.main_container_light}>
       <Main
         addNewPost={addNewPost}
         posts={myPosts}
@@ -161,6 +144,4 @@ export default function Home() {
       />
     </div>
   );
-          
-       
 }

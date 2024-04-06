@@ -47,7 +47,7 @@ const YourImgDiary = ({post}) =>{
 
 
   
-  const formatDate = useFormatDate();
+  const {formatDate1} = useFormatDate();
   const router = useRouter();
   const { id } = router.query;
 
@@ -115,7 +115,7 @@ const YourImgDiary = ({post}) =>{
                    {currentPost.name}
                  </h1>
                  <p className={styles.data}>
-                   {formatDate(currentPost.created_at)}
+                   {formatDate1(currentPost.created_at)}
                  </p>
                </div>
 

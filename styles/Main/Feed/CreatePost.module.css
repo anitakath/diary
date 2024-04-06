@@ -46,7 +46,7 @@
     justify-content: center;
 }
 
-.createPost_link, .photo_btn{
+ .photo_btn{
     border-bottom: 2px solid rgba(255,255,255, 0.6);
     padding:  10px;
     background: #F7567C;
@@ -63,8 +63,18 @@
 .createPost_link:hover{
     transition: 0.2s ease;
     color: var(--hover-font-dark);
-
 }
+
+.anne_profile_link{
+    font-size: 1rem;
+    border-bottom: 1px solid var(--pink_opaque);
+    transition: 0.2s ease;
+}
+.anne_profile_link:hover{
+    color: var(--pink);
+    border-bottom: 1px solid transparent;
+}
+
 
 .media_buttons_div{
     display: flex;
@@ -76,6 +86,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 
  .link_btn, .createPost_btn{
@@ -88,6 +99,7 @@
     align-items: center;
     cursor: pointer;
     transition: 0.4s ease;
+    border: 2px solid red;
     
 }
 
@@ -95,8 +107,10 @@
     background: silver;
     border-radius: 50%;
     padding: 3px;
+
   
 }
+
 
 
 .icon{
@@ -213,26 +227,34 @@
         margin: 0;
         padding: 0;
         height: 100%;
+        width: 80%;
      }
 
     .createPost_link{
         width: 100%;
         margin: 0;
         padding: 0;
+
         
     }
 
     .createPost_linkDiv{
         width: 100%;
+        width: 90%;
+        height: 40px;
     }
 
 
 
     .photo_btn{
         font-size: 1rem;
-        height: 60px;
+        height: 40px;
         padding: 5px;
      
+    }
+
+    .anne_profile_link{
+        height: 25px;
     }
 }
 

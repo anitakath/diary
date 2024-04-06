@@ -41,7 +41,7 @@ const YourLibrary = () =>{
 
 
 
-  const formatDate = useFormatDate();
+  const {formatDate1} = useFormatDate();
 
 
  
@@ -62,19 +62,18 @@ const YourLibrary = () =>{
              .select("*");
 
 
-             console.log(image_info)
+   
 
          if (data) {
            setImages(image_info);
-           console.log(data);
-           console.log(images);
+ 
 
            if (images) {
-             console.log("there are images");
+         
              setLoadedImages(true);
            }
 
-           //await uploadDescription();
+         
          } else {
            console.log(error);
          }
@@ -93,7 +92,7 @@ const YourLibrary = () =>{
         }
     }, [currentGoogleUser]);
 
-    console.log(images);
+
 
 
 
@@ -103,7 +102,7 @@ const YourLibrary = () =>{
       {images
         .filter((image) => image.name !== ".emptyFolderPlaceholder")
         .map((image) => (
-          <div className={styles.wrapper}>
+          <div className={styles.wrapper} key={image.id}>
             <Link href={`/dein-bildertagebuch/${image.name.replace(
                     /\s+/g,
                     "-"
@@ -115,7 +114,7 @@ const YourLibrary = () =>{
                 className={styles.img}
               />
             </Link>
-            <p className={styles.description}>{formatDate(image.created_at)}</p>
+            <p className={styles.description}>{formatDate1(image.created_at)}</p>
           </div>
         ))}
     </div>

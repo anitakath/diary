@@ -7,6 +7,7 @@
     background: white;
     margin: 0;
     width: 100vw;
+   
 
 }
 
@@ -17,6 +18,7 @@
     background: var(--background_dark);
     width: 100vw;
     min-height: 100vh;
+
 }
 
 .webUser_div{
@@ -67,17 +69,16 @@
 
 @media screen and (max-width: 400px){
 
-    .container{
+    .container, .container_dark{
         padding: 0;
-        margin: 20px 0px;
+        margin: 20px;
         position: relative;
-        left: 20px;
- 
-        /*border: 2px solid purple;*/
+        left: -20px;
+        padding: 5px;
+
     }
 
     .main_container{
-        /*border: 2px solid red;*/
 
         padding: 0;
     }
@@ -87,7 +88,8 @@
         margin: 0;
         display: flex;
         justify-content: center;
-        width: 110vw;
+        width: 100vw;
+        padding: 0px;
         
     }
 }
