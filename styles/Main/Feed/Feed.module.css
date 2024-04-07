@@ -145,16 +145,17 @@
     }
 
     .imageGallery{
-        width: 110vw;
+        width: 100vw;
         position: relative;
-        left: -20px;
         margin: 40px 0;
         padding: 0;
+
     
     }
 
     .image_div{
         margin: 10px 0;
+        width: 100%;
     }
 
     .img{

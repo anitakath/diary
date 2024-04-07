@@ -95,20 +95,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 
 .light_p{
-    color: silver;
+    color:black;
 }
 
 .dark_p{
-    color: black;
+    color: silver;
 }
 
 .user{
     color: #F7567C;
     cursor: pointer;
     font-size: 1.2rem;
+  
 }
 
 
@@ -197,11 +199,21 @@
 
     .userMenu_btn{
         position: relative;
-        top: 6px;
+        top: 20px;
         right: 30px;
+       
         
     }
-    
+
+
+        
+    .dark_p, .light_p{
+        font-size: 1.5rem;
+        margin: 5px 0px;
+   
+    }
+
+
    
 
     .loggedInMenu_btn p{
@@ -256,15 +268,23 @@
   
     }
 
-   
+
+    .user{
+        position: relative;
+        top: 10px;
+    }
+
+    .light_p, .dark_p{
+        margin: 8px 0px;
+        font-size: 0.9rem;
+    }
 
 
 
 
-
-  .users_button{
-      display: none;
-  }
+    .users_button{
+        display: none;
+    }
 
     .menu_container_dark{
         width: 100vw;
@@ -272,4 +292,14 @@
 
 
   
+}
+
+
+
+@media screen and (max-width: 300px){
+
+    .dark_p, .light_p{
+        margin: 10px;
+       font-size: 0.8rem;
+    }
 }

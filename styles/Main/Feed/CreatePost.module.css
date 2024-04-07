@@ -69,7 +69,10 @@
     font-size: 1rem;
     border-bottom: 1px solid var(--pink_opaque);
     transition: 0.2s ease;
+    color: grey;
 }
+
+
 .anne_profile_link:hover{
     color: var(--pink);
     border-bottom: 1px solid transparent;
@@ -255,6 +258,14 @@
 
     .anne_profile_link{
         height: 25px;
+    }
+}
+
+
+@media screen and (max-width: 300px){
+
+     .anne_profile_link{
+        font-size: 0.9rem;
     }
 }
 

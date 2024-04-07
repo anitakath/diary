@@ -32,10 +32,8 @@
 
 .settings_link_web{
     color: silver;
+    
 }
-
-
-
 
 
 
@@ -210,5 +208,22 @@
 
      .mobileNavigation_div li{
         left: 0;
+    }
+}
+
+
+@media screen and (max-width: 600px){
+    .webNavigation_btn{
+        padding: 0;
+        margin: 0px 15px 0px 5px;
+        width: 90px;
+        height: 40px;
+    }
+
+    .settings_link{
+        font-size: 0.9rem;
+        padding: 0;
+        margin: 0px 5px;
+        width: 100px;
     }
 }

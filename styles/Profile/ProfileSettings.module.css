@@ -5,9 +5,12 @@
 }
 
 
+/*
+
 .profile_wrapper{
     display: flex;
     width: 100%;
+    border: 2px solid blue;
 }
 
 
@@ -23,13 +26,15 @@
     background:var(--background_dark);
     color: var(--primary_font_color_dark);
     min-height: 200vh;
-}
+    border: 2px solid blue;
+}*/
 
 
 .settings_title{
     padding-top: 20px;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
     font-size: 1.4rem;
+    margin-left: 20px;
 }
 
 
@@ -48,7 +53,6 @@
     min-height: 10vh;
     background: var(--background_dark_opaque);
     box-shadow: 2px 2px 2px grey;
-
 }
 
 .setting_title{
@@ -94,5 +98,11 @@
         display: flex;
         align-items: center;
         margin: 5px;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .settings_title{
+        margin-bottom: 0;
     }
 }

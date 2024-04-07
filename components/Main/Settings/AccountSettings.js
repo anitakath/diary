@@ -38,14 +38,11 @@ const AccountSettings = () => {
   const currGender = useSelector((state) => state.auth.gender);
   const darkMode = useSelector((state) => state.toggle)
 
-  console.log(darkMode)
 
 
   const handleGenderChange = (event) => {
     dispatch(gender(event.target.value))
   };
-
-
 
 
 

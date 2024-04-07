@@ -125,54 +125,6 @@ const Feed = (props) => {
 
 
 
-/*
-  const formatDate1 = (dateString) => {
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-
-    return `${day < 10 ? "0" + day : day}.${
-      month < 10 ? "0" + month : month
-    }.${year}`;
-  };
-
-  const formatDate2 = (dateString) => {
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-
-    return `${month < 10 ? "0" + month : month}.${
-      day < 10 ? "0" + day : day
-    }.${year}`;
-  };
-
-  const formatDate3 = (dateString) => {
-  const months = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
-
-  const date = new Date(dateString);
-  const day = date.getDate();
-  const monthIndex = date.getMonth();
-  const year = date.getFullYear();
-
-  return `${day}. ${months[monthIndex]}, ${year}`;
-};
-
-   const handleDateClick = () => {
-     if (selectedDateFormat === "format1") {
-       setSelectedDateFormat("format2");
-     } else if (selectedDateFormat === "format2") {
-       setSelectedDateFormat("format3");
-     } else {
-       setSelectedDateFormat("format1");
-     }
-   };
-
-   */
-
-
-
   return (
     <div className={styles.container}>
       <Filter />

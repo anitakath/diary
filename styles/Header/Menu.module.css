@@ -6,12 +6,12 @@
     z-index: 10000;
     border-radius: 5px;
     padding: 20px 10px;
-    width: 25%;
+    width: 35%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     position: fixed;
     color: beige;
-    min-height: 50vh;
     overflow: scroll;
     top: 0;
     left:0px;

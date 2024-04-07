@@ -39,6 +39,7 @@ const Filter = () => {
         : "deine_posts";
 
 
+
       
   useEffect(() =>{
    
@@ -73,7 +74,7 @@ const Filter = () => {
       setActiveButton("annes_posts");
     }
 
-  }, [])
+  }, [currentFilter])
 
 
 

@@ -2,14 +2,14 @@
 
 .container{
     display: flex;
+    justify-content: center;
+
 }
 
 
-
-
 .settings_wrapper{
-    width: 60%;
-    margin-right: 70px;
+    width: 100%;
+    margin-right: 10px;
 }
 
 
@@ -37,13 +37,11 @@
 
 
 .setting_div{
-    width: 50vw;
+    width: 50%;
     display: flex;
     align-items: center;
     position: relative;
     margin: 30px 0px;
-   
-    
 }
 
 .setting_title{
@@ -116,8 +114,9 @@
 
 
 @media screen and (max-width: 1000px){
-    .accountSettings_div{
-        width: 90vw;
+
+     .settings_wrapper{
+        margin: 0;
     }
 
 
@@ -129,6 +128,9 @@
 
 
 @media screen and (max-width: 800px){
+
+
+   
 
     .change_btn, .select_input{
         right: -240px;
@@ -150,5 +152,34 @@
 @media screen and (max-width: 600px){
      .change_btn, .select_input{
         right: -150px;
+    }
+}
+
+
+@media screen and (max-width: 300px){
+
+    .container{
+        margin: 0;
+        width: 102vw;
+        position: relative;
+        left: -18px;
+    }
+
+    .setting_div{
+        width: 30%;
+        margin: 30px 0px;
+    }
+
+
+    .setting_title{
+        width: 
+    }
+
+    .change_btn{
+        width: 80px;
+    }
+
+    .submit_button{
+        right:20px;
     }
 }

@@ -75,23 +75,20 @@ const Menu = (props) => {
       </button>
       
       <Link href="/" style={router.pathname === "/" ? activeLinkStyle : null}>
-        {" "}
-        Startseite{" "}
+        Startseite
       </Link>
 
       <Link
         href="/profil/einstellungen"
         style={router.pathname === "/profil/einstellungen" ? activeLinkStyle : null}
       >
-        {" "}
-        Profileinstellungen{" "}
+        Profileinstellungen
       </Link>
 
       <Link
         href="/profil"
         style={router.pathname === "/profile" ? activeLinkStyle : null}
       >
-        {" "}
         Profil
       </Link>
 

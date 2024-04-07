@@ -3,9 +3,6 @@
 .container{
     display: flex;
     
-
-
-   /* border: 2px solid gold;*/
 }
 
 .container_dark{
@@ -13,45 +10,24 @@
     color: var(--primary_font_color_dark);
 }
 
-.profile_container{
+
+.title_container{
+    border-bottom: 2px solid grey;
     width: 100vw;
-    min-height:100vh;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-
-
-    /*border: 2px solid orange;*/
 }
 
 .title{
-    border-bottom: 2px solid grey;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: end;
     height: 10vh;
-    color: var(--pink);
+    color: grey;
     font-size: 1.5rem;
     letter-spacing: 1px;
 }
 
-
-.icon{
-    font-size: 1.5rem;
-}
-
-.profileSettings_link{
-    position: absolute;
-    right: 40px;
-    top: 45px;
-}
-
-.profileSettings_link:hover{
-    color: var(--pink);
-
-}
 
 .profile_div{
     margin: 40px 0px;
@@ -59,9 +35,14 @@
     min-height: 80vh;
     position: relative;
     display: flex;
+}
 
 
-    /*border: 2px solid red;*/
+
+.usersData_div{
+    width: 100%;
+    height: 100%;
+    padding: 20px;
 }
 
 
@@ -70,9 +51,7 @@
     position: relative;
     display: flex;
     justify-content: center;
-
 }
-
 
 .image_wrapper_light{
     background: linear-gradient(45deg, #F7567C, white);
@@ -92,9 +71,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+   
 }
-
-
 
 .users_image{
     z-index: 1000;
@@ -103,32 +81,42 @@
     border-radius: 5px;
 }
 
+.profileSettings_link{
+    position: absolute;
+    z-index: 1000;
+    top: -30px;
+    right: -15px;
+    font-size: 3rem;
+    transition: 0.2s ease;
+}
 
-.usersData_div{
+.profileSettings_link:hover{
+    color: var(--pink);
+
+}
+
+.userData_title{
+    height: 10%;
+    color: var(--pink);
+    border-bottom: 2px solid grey;
     width: 100%;
-    height: 100%;
-    padding: 20px;
-
-
-
-    /*border: 2px solid blue;*/
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    font-size: 1.5rem;
 }
 
 
-.usersData_div h2{
+.userData_subtitle{
     margin: 40px;
     border-bottom: 1px solid grey;
 }
 
-.userData_title{
-    border-bottom: 1px solid grey;
-    margin-bottom: 10px;
-    height: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
+.user_data_span{
+    letter-spacing: 1px;
+    word-spacing: 1px;
 }
+
 
 
 @media screen and ( max-width: 1150px){
@@ -147,7 +135,6 @@
 
     .usersData_div{
         position: absolute;
-        top: 255px;
         left: 0;
         width: 100vw;
         padding: 10px 20px;
@@ -160,3 +147,21 @@
         padding: 3px;
     }
 }
+
+
+@media screen and (max-width: 600px){
+ 
+    .profileSettings_link{
+        position: absolute;
+        z-index: 1000;
+        top: -35px;
+        right: -20px;
+        font-size: 3.5rem;
+    }
+
+
+}
+
+
+
+
