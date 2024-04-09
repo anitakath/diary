@@ -29,8 +29,6 @@ export const RedditProvider = ({children}) => {
 
   }, []);
 
-   //console.log(currentGoogleUser);
-  //console.log(currentGoogleUser);
 
 
    useEffect(() => {

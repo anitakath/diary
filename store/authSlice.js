@@ -14,6 +14,8 @@ const authSlice = createSlice({
     },
     logout(state) {
       state.isLoggedIn = false;
+      console.log(state)
+      
     },
     gender(state, action){
       state.gender = action.payload;

@@ -40,19 +40,23 @@ const Menu = (props) => {
   const logoutHandler = async () =>{
     const {error} = await supabase.auth.signOut();
 
+    console.log(error)
+
     if(error){
       console.error('Fehler Beim Abmelden:', error.message)
     } else{
-      dispatch(toggle())
+      //dispatch(toggle())
       dispatch(logout());
 
       localStorage.setItem("isNightMode", false);
+      localStorage.setItem("isLoggedIn", false);
       router.push('/')
       window.location.reload();
     }
-
-
   }
+
+
+
 
   const setMenuIsOpen = props.setMenuIsOpen
 

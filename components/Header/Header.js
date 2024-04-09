@@ -44,6 +44,7 @@ const Header = () => {
   const [loginSuccessMessage, setLoginSuccessmessage] = useState(false)
 
 
+
   useEffect(() => {
 
     if (isRegistered) {
@@ -62,7 +63,7 @@ const Header = () => {
     }
 
 
-    dispatch(login())
+  
   }, [isRegistered, isLoggedIn]);
 
 
@@ -95,6 +96,7 @@ const Header = () => {
           className={nightMode ? styles.container_dark : styles.container_light}
         >
           <SearchBar />
+
           <div className={styles.title}></div>
 
           <div className={styles.login_container}>

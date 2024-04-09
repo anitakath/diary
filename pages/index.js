@@ -58,11 +58,14 @@ export default function Home() {
     }
   );
 
+  
+
   useEffect(() => {
     if (currentGoogleUser) {
       dispatch(login());
     }
   }, [currentGoogleUser]);
+  
 
   useEffect(() => {
     if (data /*&& data.data && !myPosts*/) {

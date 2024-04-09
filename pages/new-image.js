@@ -3,29 +3,21 @@ import Link from "next/link";
 
 import { useEffect, useState, useContext } from "react";
 import { supabase } from "@/services/supabaseClient";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faImage } from "@fortawesome/free-solid-svg-icons";
-import { Dropzone } from "react-dropzone";
-import { useDropzone } from "react-dropzone";
-import { faUpload } from "@fortawesome/free-solid-svg-icons";
+
 import { v4 as uuidv4 } from "uuid";
 
 import { RedditContext } from "@/context/RedditContext";
 
 //REDUX
-import { useDispatch, useSelector } from "react-redux";
-import { setImages } from "@/store/supabaseImagesSlice";
-
+import { useSelector } from "react-redux";
 
 
 //STYLES
 import styles from '../styles/NewImage.module.css'
-import { current } from "@reduxjs/toolkit";
 
 import { useRouter } from "next/router";
 
 const NewImage = () =>{
-  const router = useRouter();
   const { currentGoogleUser } = useContext(RedditContext);
 
   const [selectedFile, setSelectedFile] = useState(null);
