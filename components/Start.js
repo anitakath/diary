@@ -17,7 +17,7 @@ import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 //REDUX 
 import { useSelector, useDispatch } from "react-redux";
-import { login } from '@/store/authSlice';
+
 
 const Start = () =>{
   const [googleLogIn, setGoogleLogIn] = useState(false);
@@ -29,21 +29,17 @@ const Start = () =>{
 
 
 const handleSignInWithGoogle = async()=>{
+  
   try{
     await signInWithGooogle()
-    //dispatch(login())
+
     setGoogleLogIn(true)
   } catch(error){
     console.error('google sign in error', error)
   }
+ 
+  
 }
-
-useEffect(()=>{
-  if(googleLogIn === true){
-   // dispatch(login());
-  }
-
-}, [])
 
 
   
