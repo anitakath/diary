@@ -96,7 +96,6 @@ const postInteraction = (props) =>{
           <button className={styles.comment_btn}>
             <FontAwesomeIcon icon={faComment} className={styles.icon} />
           </button>
-          <p className={styles.comments}> {comments} </p>
         </div>
 
         <div className={styles.interaction_div}>

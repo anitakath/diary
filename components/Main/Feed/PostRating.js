@@ -45,12 +45,12 @@ const PostRating = (props) => {
     if (upvoteWobblingEvent) {
       setTimeout(() => {
         setUpvoteWobblingEvent(false);
-      }, 3000);
+      }, 5000);
     }
     if (downvoteWobblingEvent) {
       setTimeout(() => {
         setDownvoteWobblingEvent(false);
-      }, 3000);
+      }, 5000);
     }
   }, [upvoteWobblingEvent, downvoteWobblingEvent]);
 
@@ -235,41 +235,46 @@ const PostRating = (props) => {
 
   return (
     <div className={styles.postRating}>
-      <button onClick={handleIncrement}>
-        <FontAwesomeIcon
-          icon={faArrowUp}
-          className={`${
-            nightMode ? styles.postArrowUp_dark : styles.postArrowUp
-          } ${isUpvoted ? styles.upvoted : ""} ${
-            upvoteWobblingEvent ? styles.wobble : ""
-          }`}
-        />
-      </button>
-      <p className={styles.votes}> {votes} </p>
-      <button onClick={handleDecrement}>
-        <FontAwesomeIcon
-          icon={faArrowDown}
-          className={`${
-            nightMode ? styles.postArrowUp_dark : styles.postArrowUp
-          } ${isDownvoted ? styles.downvoted : ""} ${
-            downvoteWobblingEvent ? styles.wobble : ""
-          }`}
-        />
-      </button>
-      {/*<div className={styles.info_div}>
-        {upvoteWobblingEvent && (
-          <p className={styles.info_p}>
-            du hast bereits ein downvote abgegeben. klicke nochmals auf dein vote, um diesen zu
-            entfernen
-          </p>
-        )}
-        {downvoteWobblingEvent && (
+      <div className={styles.vote_div}>
+        <button onClick={handleIncrement}>
+          <FontAwesomeIcon
+            icon={faArrowUp}
+            className={`${
+              nightMode ? styles.postArrowUp_dark : styles.postArrowUp
+            } ${isUpvoted ? styles.upvoted : ""} ${
+              upvoteWobblingEvent ? styles.wobble : ""
+            }`}
+          />
+        </button>
+        <p className={styles.votes}> {votes} </p>
+        <button onClick={handleDecrement}>
+          <FontAwesomeIcon
+            icon={faArrowDown}
+            className={`${
+              nightMode ? styles.postArrowUp_dark : styles.postArrowUp
+            } ${isDownvoted ? styles.downvoted : ""} ${
+              downvoteWobblingEvent ? styles.wobble : ""
+            }`}
+          />
+        </button>
+      </div>
+
+      <div className={styles.vote_error_info_div}>
+      
+          {upvoteWobblingEvent && (
             <p className={styles.info_p}>
-              du hast bereits ein upvote abgegeben. klicke nochmals auf dein vote, um diesen
-              zu entfernen
+              du hast bereits ein downvote abgegeben. klicke nochmals auf dein
+              vote, um diesen zu entfernen
             </p>
           )}
-        </div>*/}
+          {downvoteWobblingEvent && (
+            <p className={styles.info_p}>
+              du hast bereits ein upvote abgegeben. klicke nochmals auf dein
+              vote, um diesen zu entfernen
+            </p>
+          )}
+  
+      </div>
     </div>
   );
 };

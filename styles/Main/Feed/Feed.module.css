@@ -1,6 +1,5 @@
 .container{
     position: relative;
-    /*sborder: 5px solid pink;*/
 }
 
 
@@ -127,6 +126,7 @@
 @media screen and (max-width: 1000px){
 
 
+  
 
     .img{
         height: 700px;

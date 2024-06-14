@@ -33,25 +33,5 @@ export default async (req, res) => {
 
   }
 
-    // Übermittle die formData an Supabase
-    /*
-    const { data, error } = await supabase
-        .from("users")
-        .insert([
-            {
-                vorname: vorname,
-                email: email,
-                password: password,
-            },
-         ]);
-
-    if (error) {
-      return res.status(400).json({ error: "Fehler beim Hinzufügen des Benutzers" });
-    }
-
-    return res.status(200).json({ message: "Benutzer erfolgreich hinzugefügt" });
-  } else {
-    res.setHeader("Allow", ["POST"]);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
-  }*/
+   
 };

@@ -33,22 +33,10 @@ export default async function handler(req, res) {
     }
 
 
-
-
-
-
-
-
-
-
     
     console.log(email);
     console.log(password);
     console.log(rep_password);
-
-
-
-
 
 
 
@@ -97,9 +85,6 @@ export default async function handler(req, res) {
         error: "Passwörter stimmen nicht überein",
       });
     }
-
-
-
 
 
 

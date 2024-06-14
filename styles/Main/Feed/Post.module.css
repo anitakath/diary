@@ -12,11 +12,17 @@
 
 .postRating{
     display: flex;
+    flex-direction: column;
     padding: 5px;
     justify-content: end;
+    align-items:end;
     position: absolute;
     right: 10px;
     top: 10px;
+}
+
+.vote_div{
+    display: flex;
 }
 
 .postArrowUp_dark, .postArrowUp{
@@ -48,6 +54,18 @@
     padding: 5px 10px;
 }
 
+.upvoted{
+    color: green;
+}
+
+.downvoted{
+    color: red;
+}
+
+.info_p{
+    color: beige;
+    font-size: 0.9rem;
+}
 
 /* POST INTERACTION */
 
@@ -63,19 +81,24 @@
     width: 100px;
     height: 50px;
     display: flex;
+    position: relative;
     justify-content: center;
     align-items: center;
     padding: 5px;
 }
 
 .icon{
-    font-size: 1.8rem;
+    font-size: 1.3rem;
+    transition: 0.2s ease;
+    cursor: pointer;
 }
 
-.comments{
-    font-size: 0.9rem;
-    padding: 2px;
+.icon:hover{
+    color: var(--pink_opaque);
 }
+
+
+
 
 
 

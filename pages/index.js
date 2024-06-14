@@ -28,6 +28,8 @@ export default function Home() {
   const { currentGoogleUser, fetcher } = useContext(RedditContext);
   const selectedFilter = useSelector((state) => state.filter.selectedFilter);
 
+  console.log(selectedFilter);
+
   const currUser = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [myPosts, setMyPosts] = useState(null);
@@ -86,7 +88,8 @@ export default function Home() {
     } else if (!currentGoogleUser) {
       return;
     } else if (currentGoogleUser) {
-      // Überprüfe, ob der Benutzer bereits in der Datenbank existiert
+
+
 
       const { data: existingUserData } = await supabase
         .from("users")

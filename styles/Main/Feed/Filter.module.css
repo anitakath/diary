@@ -16,17 +16,10 @@
     flex-grow: 1;
     position: absolute;
     top: 20px;
+    border-bottom: 1px solid var(--pink);
 
 }
 
-
-.container_light{
-    border-bottom: 2px solid silver;
-}
-
-.container_dark{
-    border-bottom: 2px solid black;
-}
 
 
 .container div{
