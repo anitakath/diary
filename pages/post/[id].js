@@ -3,8 +3,7 @@ import Link from "next/link";
 
 
 //CONTEXT
-import { RedditContext } from "@/context/RedditContext";
-import { useContext , useEffect, useState} from "react";
+import {  useEffect, useState} from "react";
 import { useRouter } from "next/router";
 
 
@@ -19,17 +18,16 @@ import WebUser from "@/components/Main/WebUser";
 import styles from '../../styles/Main/Feed/PostDetails.module.css'
 
 //REDUX
-import { useSelector, useDispatch } from "react-redux";
-import { login } from "@/store/authSlice";
+import { useSelector } from "react-redux";
+
 
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse } from "@fortawesome/free-solid-svg-icons";
+
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 //SUPABASE
 import { supabase } from "@/services/supabaseClient";
-import { current } from "@reduxjs/toolkit";
 
 
 export async function getServerSideProps(context) {
@@ -37,12 +35,12 @@ export async function getServerSideProps(context) {
 
   // Rufe Daten aus beiden Tabellen ab und filtere nach der Post-ID
   const { data: postFromTable1 } = await supabase
-    .from("feed_dummy")
+    .from("diary_annes_posts")
     .select("*")
     .eq("pathId", postId)
     .single();
   const { data: postFromTable2 } = await supabase
-    .from("users_feed")
+    .from("diary_users_feed")
     .select("*")
     .eq("pathId", postId)
     .single();
@@ -89,7 +87,6 @@ const PostDetails = ({post}) =>{
   };
 
 
- 
 
 
 
@@ -109,7 +106,9 @@ const PostDetails = ({post}) =>{
             )}
           </div>
 
-          <div className={styles.post_div}>
+          <div
+            className={style ? styles.post_div_dark : styles.post_div}
+          >
             {isLoaded && <Post post={post} />}
           </div>
         </div>

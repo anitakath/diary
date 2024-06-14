@@ -17,15 +17,14 @@ const Filter = () => {
 
 
   const activeLinkStyle = {
-    fontWeight: "bold", // Hier kannst du das Styling für den aktiven Link anpassen
-    color: " #F7567C", // Zum Beispiel die Schriftfarbe ändern
+    fontWeight: "bold", 
+    color: " #F7567C", 
   };
 
 
   const currentFilter = useSelector((state) => state.filter);
   const nightMode = useSelector((state) => state.toggle.nightMode);
 
-  //console.log(currentFilter)
   const [deinePostsIsActive, setDeinePostsIsActive] = useState(false);
   const [annesImagesIsActive, setAnnesImagesIsActive] = useState(false);
   const [deineImagesIsActive, setDeineImagesActive] = useState(false);

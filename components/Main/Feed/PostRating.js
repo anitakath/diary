@@ -190,7 +190,6 @@ const PostRating = (props) => {
   }
 
 
-
   useEffect(()=>{
 
    const checkUserAction = async () => {
@@ -246,7 +245,7 @@ const PostRating = (props) => {
           }`}
         />
       </button>
-      <p className={styles.amountOfRatings}> {votes} </p>
+      <p className={styles.votes}> {votes} </p>
       <button onClick={handleDecrement}>
         <FontAwesomeIcon
           icon={faArrowDown}
@@ -257,7 +256,7 @@ const PostRating = (props) => {
           }`}
         />
       </button>
-      <div className={styles.info_div}>
+      {/*<div className={styles.info_div}>
         {upvoteWobblingEvent && (
           <p className={styles.info_p}>
             du hast bereits ein downvote abgegeben. klicke nochmals auf dein vote, um diesen zu
@@ -270,7 +269,7 @@ const PostRating = (props) => {
               zu entfernen
             </p>
           )}
-      </div>
+        </div>*/}
     </div>
   );
 };

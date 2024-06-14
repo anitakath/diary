@@ -1,40 +1,33 @@
 
 
-.container_dark{
-    background: var(--background_dark);
+.container_dark, .container_light{
     margin-top: -20px;
     min-height: 100vh;
-    padding-top: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
+
 }
 
-.container_light{
-    margin-top: -20px;
-    min-height: 100vh;
-    padding-top: 30px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    
+.container_dark{
+    background: var(--background_dark);
 }
+
+
 
 .comment_wrapper{
     display: flex;
     width: 100%;
+    
 }
 
 .post_dark, .post_light{
     padding: 10px;
     width: 71%;
     position: relative;
-
+    
 }
 
 .webUser_div{
@@ -44,8 +37,13 @@
     margin: 20px;
 }
 
-.post_div{
+.post_div, .post_div_dark{
     width: 100%;
+    
+}
+
+.post_div_dark{
+    background: rgba(255,255,255, 0.2);
 }
 
 
@@ -71,7 +69,7 @@
 .go_back_btn{
     color: grey;
     height: 50px;
-    margin: 30px;
+    margin-bottom: 30px;
     font-size: 1.3rem;
     cursor: pointer;
 }
@@ -116,6 +114,10 @@
         width: 95vw;
     }
 
+     .post_dark, .post_light{
+        width: 100vw;
+    }
+
   
 }
 
@@ -132,9 +134,3 @@
 
 
 
-
-@media screen and (max-width: 1000px){
-    .post_dark, .post_light{
-        width: 100vw;
-    }
-}

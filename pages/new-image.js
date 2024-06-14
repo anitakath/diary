@@ -149,10 +149,10 @@ const NewImage = () =>{
                  newError.message
                );
              } else {
-               /*console.log(
+               console.log(
                  "Bild erfolgreich in die Datenbank eingefügt:",
                  newImage
-               );*/
+               );
              }
 
 

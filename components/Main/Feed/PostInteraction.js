@@ -20,8 +20,7 @@ import styles from '../../../styles/Main/Feed/Post.module.css'
 
 
 //REDUX
-import { filter } from "@/store/filterSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 
 
 const postInteraction = (props) =>{
@@ -49,11 +48,6 @@ const postInteraction = (props) =>{
       .from(table)
       .delete()
       .eq('id', props.postId)
-
-      console.log(error)
-
-      console.log(data)
-
      
       setIsLoading(false);
       //router.reload();
@@ -85,54 +79,34 @@ const postInteraction = (props) =>{
   
 
     return (
-      <div className={styles.postInteraction_container}>
-        <div className={styles.postInteraction_div}>
+      <div className={styles.postInteraction}>
+        <div className={styles.interaction_div}>
           <button className={styles.save_btn}>
-            <FontAwesomeIcon
-              icon={faBookmark}
-              className={styles.postInteraction_icon}
-            />
-            <p> speichern </p>
+            <FontAwesomeIcon icon={faBookmark} className={styles.icon} />
           </button>
         </div>
 
-        <div className={styles.postInteraction_div}>
+        <div className={styles.interaction_div}>
           <button className={styles.share_btn}>
-            <FontAwesomeIcon
-              icon={faShare}
-              className={styles.postInteraction_icon}
-            />
-            <p> teilen </p>
+            <FontAwesomeIcon icon={faShare} className={styles.icon} />
           </button>
         </div>
 
-        <div className={styles.postInteraction_div}>
+        <div className={styles.interaction_div}>
           <button className={styles.comment_btn}>
-            <FontAwesomeIcon
-              icon={faComment}
-              className={styles.postInteraction_icon}
-            />
-            <p className={styles.comments_amount}> {comments} </p>
-            <p> kommentieren </p>
+            <FontAwesomeIcon icon={faComment} className={styles.icon} />
           </button>
+          <p className={styles.comments}> {comments} </p>
         </div>
-        
-        <div className={styles.deleteInteraction_div}>
-           
-          <button className={styles.delete_btn}>
-            
-              <FontAwesomeIcon
-                icon={faTrash}
-                className={styles.postInteraction_icon}
-                onClick={deletePostHandler}
-              />
-            
-            <p> löschen </p>
-          </button>
 
-         
-         
-        
+        <div className={styles.interaction_div}>
+          <button className={styles.delete_btn}>
+            <FontAwesomeIcon
+              icon={faTrash}
+              className={styles.icon}
+              onClick={deletePostHandler}
+            />
+          </button>
         </div>
       </div>
     );

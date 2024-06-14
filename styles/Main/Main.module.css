@@ -6,7 +6,8 @@
     position: relative;
     background: white;
     margin: 0;
-    width: 100vw;
+    width: 100%;
+   
    
 
 }
@@ -16,8 +17,9 @@
     justify-content: center;
     position: relative;
     background: var(--background_dark);
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
+
 
 }
 
@@ -30,7 +32,6 @@
     display: flex;
     position: relative;
     padding: 20px 0px;
-
 
 }
 

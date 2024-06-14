@@ -17,14 +17,12 @@ import { login } from "@/store/authSlice";
 import useSWR from 'swr'
 
 import { supabase } from "@/services/supabaseClient";
-import { current } from "@reduxjs/toolkit";
 
-  //fetchet hits the endpoint (api/get-posts) and retrieves its result as json. result is named data
-//const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
-import { useRouter } from "next/router";
-
+//STYLES
 import styles from '../styles/Index.module.css'
+
+
+
 
 export default function Home() {
   const { currentGoogleUser, fetcher } = useContext(RedditContext);

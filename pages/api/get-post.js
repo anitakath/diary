@@ -11,9 +11,9 @@ export default async (req, res) => {
   let tableName;
 
   if (filter === "annes_posts") {
-    tableName = "feed_dummy";
+    tableName = "diary_annes_posts";
   } else if (filter === "deine_posts") {
-    tableName = "users_feed";
+    tableName = "diary_users_feed";
   } /*else if (filter === "neu"){
     tableName = "users_images"
   }*/

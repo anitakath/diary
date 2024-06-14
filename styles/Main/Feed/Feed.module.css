@@ -1,5 +1,6 @@
 .container{
     position: relative;
+    /*sborder: 5px solid pink;*/
 }
 
 
@@ -9,6 +10,7 @@
     font-size: 1.5rem;
     background: rgba(255,255,255, 0.7);
     padding: 10px 0px;
+    
 }
 
 
@@ -36,14 +38,16 @@
 .post_container{
     background: var(--background-secondary);
     margin: 50px 0px;
-    border-bottom: 1px solid grey;
-    border-top: 1px solid grey;
+
     transition: 0.2s ease;
+
+        
+ 
 }
 
 .post_container:hover{
-    background-color: rgba(0,0,0, 0.2);
-    background: silver;
+    background-color: rgba(255,255,255, 0.5);
+    cursor: pointer;
 }
 
 
@@ -54,6 +58,7 @@
     align-items: center;
     color: silver;
     font-size: 1.1rem;
+    
 }
 
 
@@ -72,7 +77,7 @@
 
 
 .image_div{
-    margin: 10px 10px 20px 10px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -86,14 +91,12 @@
     object-fit: cover;
     margin: 10px 0px 40px 0px;
     box-shadow: 0px 0px 5px black;
-    opacity: 0.7;
 }
 
 .img:hover{
     transition: 0.2s ease;
     cursor: pointer;
-    transform: scale(0.97);
-    opacity: 1;
+    transform: scale(0.99);
 }
 
 .loadingImage{
@@ -121,7 +124,14 @@
 
 
 
+@media screen and (max-width: 1000px){
 
+
+
+    .img{
+        height: 700px;
+    }
+}
 
 
 @media screen and (max-width: 400px){
@@ -133,14 +143,12 @@
 
     .post_div{
         margin: 0;
+        
     }
 
     .post_container{
-
         margin: 35px 0px;
         position: relative;
-        background: white;
-        
   
     }
 
@@ -154,11 +162,20 @@
     }
 
     .image_div{
-        margin: 10px 0;
         width: 100%;
+
     }
 
     .img{
         height: 400px;
+        width: 300px;
+    }
+}
+
+
+@media screen and (max-width: 400px){
+    .img{
+        height: 500px;
+        width: 100vw;
     }
 }

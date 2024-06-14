@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect, memo } from "react";
+import { useContext } from "react";
 import { useRouter } from "next/router";
 
 
@@ -39,7 +39,6 @@ const Post = ({post}) => {
 
 
   const navigateToPostDetails = () => {
-    localStorage.setItem("selectedPost", JSON.stringify(post));
     setSelectedPost(post);
     router.push(`/post/${pathId}`);
   };
@@ -60,34 +59,37 @@ const Post = ({post}) => {
 
   return (
     <div className={styles.post_container}>
-      <div className={styles.postRating_container}>
-        <PostRating
-          table={table}
-          votes={totalvote}
-          postId={id}
-          currentGoogleUserId={currentGoogleUser}
-        />
-      </div>
+      
+      <PostRating
+        table={table}
+        votes={totalvote}
+        postId={id}
+        currentGoogleUserId={currentGoogleUser}
+      />
+      
 
       <div className={styles.postField} onClick={navigateToPostDetails}>
-        <div className={styles.postInfo}>
-          <p className={styles.postInfo_p}>
+        <div className={styles.header_div}>
+          <h2 className={styles.header}>
             <span> {author}</span> - {formattedDateTime.date} -{" "}
             {formattedDateTime.time}
-          </p>
+          </h2>
         </div>
-        <div className={styles.postItself}>
+
+        <div className={styles.post}>
           <h1
             className={nightMode ? styles.post_title_dark : styles.post_title}
           >
             {title}
           </h1>
-          <p>{description} </p>
+          <p className={styles.post_text}>{description} </p>
         </div>
-        <div className={styles.postInteraction}>
-          <PostInteraction postId={id} post={post} table={post.table}  />
-        </div>
+      
+        <PostInteraction postId={id} post={post} table={post.table}  />
+ 
       </div>
+
+
     </div>
   );
 }

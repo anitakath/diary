@@ -7,10 +7,7 @@ import Link from "next/link";
 
 
 //REDUX
-import { useDispatch, useSelector } from "react-redux";
-import { setImages } from "@/store/supabaseImagesSlice";
-
-import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 import styles from './Index.module.css'
 
@@ -19,7 +16,6 @@ import useFormatDate from "@/components/custom_hooks/useFormatDate";
 
 
 const YourLibrary = () =>{
-  const router = useRouter();
   const { currentGoogleUser } = useContext(RedditContext);
   const [userId, setUserId] = useState(false);
   const CDN_URL = process.env.CDN_URL;
