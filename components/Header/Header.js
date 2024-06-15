@@ -10,7 +10,6 @@ import { RedditContext } from "@/context/RedditContext";
 
 //REDUX
 import { useSelector, useDispatch } from "react-redux";
-import { login } from "@/store/authSlice";
 
 //COMPONENTS
 import Menu from "./Menu";
@@ -36,8 +35,6 @@ const Header = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const isRegistered = useSelector((state) => state.auth.isRegistered);
   const nightMode = useSelector((state) => state.toggle.isNightMode);
-
-  const { currentUser } = useContext(RedditContext);
 
   // Time-limited info for successful registration
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
@@ -79,14 +76,11 @@ const Header = () => {
   };
 
 
-   const navigateToHome = () => {
-     router.push("/");
-   };
+  const navigateToHome = () => {
+    router.push("/");
+  };
   
-   /*
-  const reloadPage = () => {
-    window.location.reload();
-  };*/
+
   
 
   return (
@@ -96,8 +90,6 @@ const Header = () => {
           className={nightMode ? styles.container_dark : styles.container_light}
         >
           <SearchBar />
-
-          <div className={styles.title}></div>
 
           <div className={styles.login_container}>
             {isLoggedIn && (

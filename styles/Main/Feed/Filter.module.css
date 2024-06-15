@@ -5,6 +5,8 @@
     position: relative;
     width: 100%;
     margin: 5px 0px;
+
+   
 }
 
 .container{
@@ -17,7 +19,6 @@
     position: absolute;
     top: 20px;
     border-bottom: 1px solid var(--pink);
-
 }
 
 
@@ -28,6 +29,7 @@
     align-items: center;
     justify-content: center;
 }
+
 
 .filter_btn{
     border: none;
@@ -65,15 +67,20 @@
         display: none;
     }
 
-     .container_wrapper{
-        height: 0px;
+    .container_wrapper{
+        top: -10px;
+        height: 180px;
+    
+    
 
     }
 
+    
     .container{
         margin: 0;
         flex-direction: column;
         height: 140px;
+        border-top: 1px solid var(--pink);
  
     }
 
@@ -81,5 +88,6 @@
         margin: 0;
         margin: 8px 0px;
     }
+    
 
 }

@@ -1,4 +1,4 @@
-
+import { useState } from 'react';
 
 
 //STYLES
@@ -7,19 +7,30 @@ import styles from '../../styles/UI/SearchBar.module.css'
 
 const SearchBar = () =>{
 
+  const [expanded, setExpanded] = useState(false);
 
-    return (
-      <div className={styles.search_container}>
+  const handleSearchClick = () => {
+    setExpanded(!expanded);
+  };
 
+
+  console.log(expanded)
+
+
+
+  return (
+    <div className={styles.search_container}>
+      <div className={styles.search_div}>
         <input
           type="search"
           placeholder="SEARCH"
           className={styles.searchInput}
         ></input>
 
-        <button className={styles.search_btn}> 🚀 </button>
+        <button  onClick={handleSearchClick} className={styles.search_btn}> 🚀 </button>
       </div>
-    );
+    </div>
+  );
 }
 
 export default SearchBar;

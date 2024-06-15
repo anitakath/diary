@@ -48,21 +48,19 @@ const CreatePost = () => {
   return (
     <div className={styles.createPost_container}>
       <div className={styles.userImage_container}>
-        <div className={styles.circle}>
-          {isLoggedIn ? (
-            <Image
-              alt="foto des Users"
-              src={avatarUrl || "/placeholder.jpg"}
-              width={80}
-              height={200}
-              className={styles.users_image}
-              xw="true"
-              priority
-            ></Image>
-          ) : (
-            <FontAwesomeIcon icon={faQuestion} className={styles.icon} />
-          )}
-        </div>
+        {isLoggedIn ? (
+          <Image
+            alt="foto des Users"
+            src={avatarUrl || "/placeholder.jpg"}
+            width={80}
+            height={200}
+            className={styles.users_image}
+            xw="true"
+            priority
+          ></Image>
+        ) : (
+          <FontAwesomeIcon icon={faQuestion} className={styles.icon} />
+        )}
       </div>
 
       <div className={styles.form_container}>
