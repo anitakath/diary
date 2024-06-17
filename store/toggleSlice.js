@@ -23,9 +23,6 @@ const toggleSlice = createSlice({
   reducers: {
     toggle: (state) => {
       
-
-      //console.log(state.isNightMode)
-      //return !state; // Kürzere und korrekte Art, den Zustand umzuschalten
        return {
          ...state,
          isNightMode: !state.isNightMode,

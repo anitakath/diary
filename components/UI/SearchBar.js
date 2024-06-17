@@ -14,8 +14,6 @@ const SearchBar = () =>{
   };
 
 
-  console.log(expanded)
-
 
 
   return (

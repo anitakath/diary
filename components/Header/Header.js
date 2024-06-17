@@ -43,13 +43,13 @@ const Header = () => {
 
   // ------------------  NIGHT / DAY MODE TOGGLE ----------------------
 
-  console.log(nightMode)
+
   useEffect(() => {
     if(nightMode){
       console.log('header dark mode on')
       setStyle(true);
     } else {
-       console.log("header dark mode off");
+      console.log("header dark mode off");
       setStyle(false)
     }
     
@@ -86,6 +86,7 @@ const Header = () => {
     router.push("/");
   };
 
+  console.log('header night mode:')
   console.log(nightMode);
 
   return (

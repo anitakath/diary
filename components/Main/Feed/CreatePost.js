@@ -7,27 +7,24 @@ import { useContext, useEffect, useState } from 'react';
 
 //CONTEXT
 import { RedditContext } from "@/context/RedditContext";
-
-
 //STYLES
 import styles from '../../../styles/Main/Feed/CreatePost.module.css'
-
 //FONT AWESOME
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-regular-svg-icons";
 import {  faMessage } from "@fortawesome/free-solid-svg-icons";
-
 import { faQuestion } from "@fortawesome/free-solid-svg-icons";
-
-
 //REDUX
 import { useSelector } from 'react-redux';
-
+import { useUser } from "@/hooks/useUser";
 
 const CreatePost = () => {
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const { currentGoogleUser } = useContext(RedditContext);
+  const { currentGoogleUser } = useUser()
+
+  console.log(isLoggedIn)
+
 
 
 
