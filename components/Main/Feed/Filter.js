@@ -35,7 +35,7 @@ const Filter = () => {
 
   const storedFilter = typeof window !== "undefined" ? localStorage.getItem("selectedFilter") || "deine_posts" : "deine_posts";
 
-  console.log(storedFilter)
+
 
   useEffect(() => {
     if (currentFilter.bestIsActive) {

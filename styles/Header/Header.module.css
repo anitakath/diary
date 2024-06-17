@@ -8,6 +8,9 @@
     height:10vh;
     position: relative;
     background: var(background-primary);
+
+
+
 }
 
 .container_dark{
@@ -17,6 +20,8 @@
     height:10vh;
     position: relative;
     background: var(--background_dark);
+
+   
 }
 
 

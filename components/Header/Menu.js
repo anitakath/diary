@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 //REDUX
 import { logout } from "@/store/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { toggle } from "@/store/toggleSlice";
+
 
 //STYLE
 import styles from '../../styles/Header/Menu.module.css'

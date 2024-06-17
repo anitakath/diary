@@ -1,5 +1,4 @@
 
-
 .container{
     display: flex;
     flex-direction: column;
@@ -14,7 +13,6 @@
     top: 20px;
     height: fit-content; 
     z-index: 1000;
-
 }
 
 .dark{
@@ -56,13 +54,22 @@
     font-size: 1.2rem;
 }
 
+.user_name_light{
+    color: beige;
+}
+
 .info_paragraph_container{
     padding: 4px;
 }
 
-.info_paragraph_container p{
+.info_p{
     line-height: 20px;
     font-size: 1rem;
+}
+
+
+.info_p_light{
+    color: beige;
 }
 
 .btn_container{

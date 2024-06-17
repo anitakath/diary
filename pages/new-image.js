@@ -1,30 +1,33 @@
-
+import { useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
-
 import { useEffect, useState, useContext } from "react";
 import { supabase } from "@/services/supabaseClient";
-
 import { v4 as uuidv4 } from "uuid";
-
 import { RedditContext } from "@/context/RedditContext";
-
 //REDUX
 import { useSelector } from "react-redux";
-
-
 //STYLES
 import styles from '../styles/NewImage.module.css'
-
 import { useRouter } from "next/router";
 
 const NewImage = () =>{
   const { currentGoogleUser } = useContext(RedditContext);
 
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState({
+    function_type: null,
+  });
   const [description, setDescription] = useState("");
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [message, setMessage] = useState({
+    error: null,
+    success: null,
+  })
+  
   const [successMessage, showSuccessMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
   const [loadedImages, setLoadedImages] = useState(false);
   const [userId, setUserId] = useState(false);
   const [imageId, setImageId] = useState("");
@@ -34,6 +37,17 @@ const NewImage = () =>{
   const [title, setTitle] = useState("");
   const CDN_URL = process.env.CDN_URL;
   const CDN_URL_USERID = `${CDN_URL}${userId}`;
+  const [pickedImage, setPickedImage] = useState();
+  
+  const imageInput = useRef();
+
+
+  const [data, setData] = useState({
+    userImg: null,
+    alternativeImg: null,
+    title: null,
+    description: null,
+  })
 
   // ------------------  NIGHT / DAY MODE TOGGLE ----------------------
 
@@ -51,7 +65,38 @@ const NewImage = () =>{
 
   // ------------------ INPUT ONCHANGE HANDLER ----------------------
 
-  const handleFileUpload = (e) => {
+
+  function handlePickClick() {
+    imageInput.current.click();
+  }
+
+  function handleImageChange(event) {
+    const file = event.target.files[0];
+
+    file.function_type = "normal";
+    setSelectedFile(file);
+    setImageId(event.target.files[0].name);
+
+    if(!file){
+      setPickedImage(null)
+      return;
+    }
+
+    const fileReader = new FileReader();
+
+    fileReader.onload = () =>{
+      setPickedImage(fileReader.result)
+    }
+
+    fileReader.readAsDataURL(file)
+
+
+  }
+
+
+
+
+  const handleAlternativeImageChange = (e) => {
     if (e.target.type === "file") {
 
       // Handle file input change
@@ -71,7 +116,12 @@ const NewImage = () =>{
     }
   };
 
+
+
+
+
   const fetchImages = async () => {
+    
     try {
       // Fetchen der Bilder aus dem Supabase Storage
       const { data, error } = await supabase.storage
@@ -106,14 +156,17 @@ const NewImage = () =>{
 
   // ------------------  UPLOAD IMAGE POST  ----------------------
 
+ 
   const uploadImageHandler = async (event) => {
     event.preventDefault();
-
-
 
     // 1. check whether the object file comes from the user or is one I have provided
     // 2. check whether there is already a folder in the supabase storage bucket "images" that is ==== userId
 
+    if(!selectedFile.function_type){
+      setErrorMessage('bitte füge ein Bild hinzu ')
+      return;
+    }
     if (selectedFile.function_type === "normal") {
       try {
         if (selectedFile) {
@@ -137,6 +190,16 @@ const NewImage = () =>{
             description: description,
             type: "users",
           };
+
+          console.log(data_obj)
+          if(data_obj.name === ""){
+            setErrorMessage("bitte gib deinem Eintrag einen Titel")
+            return
+          }
+          if(data_obj.description === ""){
+           setErrorMessage("bitte gib deinem Eintrag eine Beschreibung");
+            return;
+          }
 
              // Senden des Objekts an die Supabase-Tabelle "users_images"
              const { data: newImage, error: newError } = await supabase
@@ -251,18 +314,61 @@ const NewImage = () =>{
   }, []);
 
 
+  const [isResized, setIsResized] = useState(false);
+
+  const resizeImgHandler = () => {
+    setIsResized(!isResized);
+  };
+
+
+
 
   return (
     <div className={style ? styles.container_dark : styles.container}>
       <form className={styles.form_div} onSubmit={uploadImageHandler}>
-        <h1 className={styles.title}> lade ein Foto hoch</h1>
-        <input
-          type="file"
-          onChange={handleFileUpload}
-          className={styles.file_input}
-        />
-        <h1 className={styles.title}>oder wähle ein von mir gestelltes Foto</h1>
-        <div className={styles.alternative_div}>
+        <h1 className={style ? styles.title_dark : styles.title_light}>
+          lade ein Foto hoch
+        </h1>
+
+        <div
+          className={`${styles.usersImage_div}  ${
+            isResized ? styles.resized : ""
+          }`}
+        >
+          <input
+            type="file"
+            onChange={handleImageChange}
+            className={styles.file_input}
+            ref={imageInput}
+          />
+          <button
+            type="button"
+            className={styles.file_btn}
+            onClick={handlePickClick}
+          >
+            + Foto
+          </button>
+
+          <div className={styles.preview}>
+            {!pickedImage && <p> kein Foto ausgewählt bisher</p>}
+            {pickedImage && (
+              <Image
+                src={pickedImage}
+                onClick={resizeImgHandler}
+                alt="picked image"
+                width={200}
+                height={200}
+                className={styles.image}
+              ></Image>
+            )}
+           
+          </div>
+        </div>
+
+        <h1 className={style ? styles.title_dark : styles.title_light}>
+          oder wähle ein von mir gestelltes Foto
+        </h1>
+        <div className={styles.alternativeImg_div}>
           {alternativeImages.map((image) => (
             <div className={styles.alternative_wrapper} key={image.id}>
               <input
@@ -270,10 +376,10 @@ const NewImage = () =>{
                 id={image.name}
                 name="alternativeImages"
                 value={image.name}
-                onChange={handleFileUpload}
+                onChange={handleAlternativeImageChange}
                 className={styles.alternativeImage_input}
               />
-            
+
               <img
                 key={image.id}
                 src={CDN_URL_USERID + "/alternatives/" + image.name}
@@ -308,12 +414,17 @@ const NewImage = () =>{
           </p>
         )}
         {successMessage && (
-          <div className={styles.success_div}>
-            <p className={styles.successMessage_suc}>
+          <div>
+            <p className={styles.successMessage}>
               dein Foto-Eintrag wurde erfolgreich gespeichert! Danke 🫶🏼
             </p>
-            <Link href="/" className={styles.goBack_link}> zurück </Link>
+            <Link href="/" className={styles.goBack_link}>
+              zurück
+            </Link>
           </div>
+        )}
+        {errorMessage && !successMessage && (
+          <p className={styles.errorMessage}> {errorMessage} </p>
         )}
       </form>
     </div>

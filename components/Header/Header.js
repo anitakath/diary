@@ -35,15 +35,28 @@ const Header = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const isRegistered = useSelector((state) => state.auth.isRegistered);
   const nightMode = useSelector((state) => state.toggle.isNightMode);
+  const [style, setStyle] = useState(false)
 
   // Time-limited info for successful registration
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [loginSuccessMessage, setLoginSuccessmessage] = useState(false)
+  const [loginSuccessMessage, setLoginSuccessmessage] = useState(false);
 
+  // ------------------  NIGHT / DAY MODE TOGGLE ----------------------
+
+  console.log(nightMode)
+  useEffect(() => {
+    if(nightMode){
+      console.log('header dark mode on')
+      setStyle(true);
+    } else {
+       console.log("header dark mode off");
+      setStyle(false)
+    }
+    
+  }, [nightMode]);
 
 
   useEffect(() => {
-
     if (isRegistered) {
       setShowSuccessMessage(true);
       setTimeout(() => {
@@ -51,19 +64,13 @@ const Header = () => {
       }, 10000); // 10 Sekunden
     }
 
-
-    if(isLoggedIn){
+    if (isLoggedIn) {
       setLoginSuccessmessage(true);
       setTimeout(() => {
         setLoginSuccessmessage(false);
       }, 10000); // 10 Sekunden
     }
-
-
-  
   }, [isRegistered, isLoggedIn]);
-
-
 
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
@@ -75,20 +82,16 @@ const Header = () => {
     }
   };
 
-
   const navigateToHome = () => {
     router.push("/");
   };
-  
 
-  
+  console.log(nightMode);
 
   return (
     <div className={styles.container}>
       {isLoggedIn && (
-        <div
-          className={nightMode ? styles.container_dark : styles.container_light}
-        >
+        <div className={style ? styles.container_dark : styles.container_light}>
           <SearchBar />
 
           <div className={styles.login_container}>
@@ -96,21 +99,19 @@ const Header = () => {
               <div className={styles.login_container}>
                 <button className={styles.userMenu_btn} onClick={menuHandler}>
                   <FontAwesomeIcon icon={faUser} className={styles.user} />
-                  <p className={nightMode ? styles.dark_p : styles.light_p}>
-                    menu
-                  </p>
+                  <p className={style ? styles.dark_p : styles.light_p}>menu</p>
                 </button>
 
                 <button className={styles.userMenu_btn_web}>
                   <FontAwesomeIcon icon={faUsers} className={styles.user} />
-                  <p className={nightMode ? styles.dark_p : styles.light_p}>
+                  <p className={style ? styles.dark_p : styles.light_p}>
                     community
                   </p>
                 </button>
 
                 <Link href="/" className={styles.userMenu_btn_web}>
                   <FontAwesomeIcon icon={faHouse} className={styles.user} />
-                  <p className={nightMode ? styles.dark_p : styles.light_p}>
+                  <p className={style ? styles.dark_p : styles.light_p}>
                     Startseite
                   </p>
                 </Link>
@@ -121,7 +122,7 @@ const Header = () => {
           {menuIsOpen && (
             <div
               className={
-                nightMode ? styles.menu_backdrop_dark : styles.menu_backdrop
+                style ? styles.menu_backdrop_dark : styles.menu_backdrop
               }
               onClick={menuHandler}
             ></div>

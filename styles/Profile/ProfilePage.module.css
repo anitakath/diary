@@ -2,14 +2,20 @@
 
 .container{
     display: flex;
-    
+    justify-content: center;
+   
 }
 
 .container_dark{
+    display: flex;
+    justify-content: center;
     background:var(--background_dark);
     color: var(--primary_font_color_dark);
 }
 
+.profile_container{
+    width: 80%;
+}
 
 .title_container{
     border-bottom: 2px solid grey;
@@ -29,12 +35,14 @@
 }
 
 
+
 .profile_div{
     margin: 40px 0px;
     width: 100%;
     min-height: 80vh;
     position: relative;
     display: flex;
+
 }
 
 

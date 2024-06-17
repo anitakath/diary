@@ -1,38 +1,29 @@
 import Link from 'next/link';
 import { useContext, useState, useEffect } from 'react';
 import Image from 'next/image';
-
 //COMPONENTS
 import Start from '@/components/Start';
-import SettingsComponent from "@/components/Main/Settings/Settings";
-
 //CONTEXT
 import { RedditContext } from "@/context/RedditContext";
-
 //STYLE
 import styles from '../../styles/Profile/ProfilePage.module.css'
-
 //FONT AWESOME
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
-
 //REDUX
 import { useSelector } from 'react-redux';
-import { current } from '@reduxjs/toolkit';
-import { filter } from '@/store/filterSlice';
+
 
 const Profile = () =>{
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
-
   const currUser = useSelector((state) => state.user)
+  const nightMode = useSelector((state) => state.toggle.isNightMode);
+  const [style, setStyle] = useState(false);
 
-   const nightMode = useSelector((state) => state.toggle.isNightMode);
-   const [style, setStyle] = useState(false);
-
-   useEffect(() => {
-     setStyle(nightMode);
-   }, [nightMode]);
+  useEffect(() => {
+    setStyle(nightMode);
+  }, [nightMode]);
 
 
 
@@ -114,37 +105,37 @@ const Profile = () =>{
         <div className={nightMode ? styles.container_dark : styles.container}>
           <div className={styles.profile_container}>
           
-          <h1 className={styles.title}>Profil</h1>
+            <h1 className={styles.title}>Profil</h1>
    
 
-          <div className={styles.profile_div}>
-            <div className={styles.usersData_div}>
-              <div className={styles.image_div}>
-                <div
-                  className={`${styles.image_wrapper} ${
-                    style
-                      ? styles.image_wrapper_dark
-                      : styles.image_wrapper_light
-                  }`}
-                >
-                  <Image
-                    alt="Foto des Users"
-                    src={avatarUrl || "/placeholder.jpg"}
-                    width={80}
-                    height={200}
-                    className={styles.users_image}
-                    xw="true"
-                    priority
-                  ></Image>
-                  <Link
-                     href="/profil/einstellungen"
-                    className={styles.profileSettings_link}
+            <div className={styles.profile_div}>
+              <div className={styles.usersData_div}>
+                <div className={styles.image_div}>
+                  <div
+                    className={`${styles.image_wrapper} ${
+                      style
+                        ? styles.image_wrapper_dark
+                        : styles.image_wrapper_light
+                    }`}
                   >
-                    <FontAwesomeIcon icon={faGear} className={styles.icon} />
-                  </Link>
+                    <Image
+                      alt="Foto des Users"
+                      src={avatarUrl || "/placeholder.jpg"}
+                      width={80}
+                      height={200}
+                      className={styles.users_image}
+                      xw="true"
+                      priority
+                    ></Image>
+                    <Link
+                      href="/profil/einstellungen"
+                      className={styles.profileSettings_link}
+                    >
+                      <FontAwesomeIcon icon={faGear} className={styles.icon} />
+                    </Link>
+                  </div>
                 </div>
-              </div>
-              <h1 className={styles.userData_title}> Hey {fName_google} </h1>
+                <h1 className={styles.userData_title}> Hey {fName_google} </h1>
 
                 <h2 className={styles.userData_subtitle}>
                   Name:

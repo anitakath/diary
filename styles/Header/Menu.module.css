@@ -89,22 +89,12 @@
 
 
     .container{
-        width: 40%;
+        width: 60%;
         height: 100vh;
     }
 
 }
 
-
-
-@media screen and (max-width: 1200px){
-
-
-    .container{
-        width: 60%;
-    }
-
-}
 
 
 

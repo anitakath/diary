@@ -1,23 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect, useContext } from 'react';
-
 //STYLES
 import styles from '../../styles/Main/WebUser.module.css'
-
-
 //FONT AWESOME
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faQuestion } from '@fortawesome/free-solid-svg-icons';
-import { faRedditAlien } from "@fortawesome/free-brands-svg-icons";
-
-
 //CONTEXT
 import { RedditContext } from "@/context/RedditContext";
-
-
 //REDUX
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 
 const WebUser = () => {
@@ -36,9 +28,15 @@ const { currentGoogleUser } = useContext(RedditContext);
   let avatarUrl;
 
   if (currentGoogleUser) {
-    //avatarUrl = '"' + (currentUser.user?.user_metadata?.avatar_url || '') + '"';
     avatarUrl = currentGoogleUser.user?.user_metadata?.avatar_url; // Zugriff auf das Profilfoto
   }
+
+
+  const buttonLinks = [
+    { href: "/new-post", text: "POST ERSTELLEN" },
+    { href: "/new-image", text: "BILDERTAGEBUCH-EINTRAG ERSTELLEN" },
+    { href: "/", text: "community erstellen" },
+  ];
 
 
   return (
@@ -69,24 +67,22 @@ const { currentGoogleUser } = useContext(RedditContext);
           ) : (
             <FontAwesomeIcon icon={faQuestion} className={styles.icon} />
           )}
-          <p className={styles.users_name}> Home </p>
+          <p className={`${styles.users_name} ${ style ? styles.user_name_light : "" }`}>Home</p>
         </div>
+
         <div className={styles.info_paragraph_container}>
-          <p>
-            Deine ganz persönliche Reddit Startseite. <br />
-            Hier kannst du dir deine Lieblingscommunities ansehen
+          <p className={`${styles.info_p} ${style ? styles.info_p_light : ""}`}>
+            {" "}
+            Deine ganz persönliche Reddit Startseite. <br /> Hier kannst du dir
+            deine Lieblingscommunities ansehen{" "}
           </p>
         </div>
         <div className={styles.btn_container}>
-          <Link href="/new-post" className={styles.link}>
-            POST ERSTELLEN
-          </Link>
-          <Link href="/new-image" className={styles.link}>
-            BILDERTAGEBUCH-EINTRAG ERSTELLEN
-          </Link>
-          <Link href="/" className={styles.link}>
-            community erstellen
-          </Link>
+          {buttonLinks.map((link, index) => (
+            <Link key={index} href={link.href} className={styles.link}>
+              {link.text} 
+            </Link>
+          ))}
         </div>
       </div>
     </div>
