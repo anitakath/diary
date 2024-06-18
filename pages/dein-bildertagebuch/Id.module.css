@@ -1,15 +1,14 @@
 
 
 
-.container{
+.container, .container_dark{
     display: flex;
     flex-direction: column;
+    padding: 10px;
 }
 
 .container_dark{
     background: var(--background_dark);
-    display: flex;
-    flex-direction: column;
 }
 
 .diarypost_div{
@@ -21,7 +20,7 @@
 
 .info_div{
     display: flex;
-    width: 100vw;
+    width: 100%;
     justify-content: center;
 
     
@@ -46,7 +45,7 @@
 .title_div{
     display: flex;
     justify-content: space-between;
-    padding: 5px 30px;
+    padding: 5px 0px;
     border-bottom: 0.5px solid silver;
     margin-right: 10px;
     
@@ -67,14 +66,22 @@
 }
 
 
-.title, .data{
-    font-size: 1.3rem;
+.title,  .title_dark{
+    font-size: 1.5rem;
     padding: 3px;
 }
 
-.title_dark{
-    border-bottom: 1px solid silver;
+.date, .date_dark{
+    font-size: 1.1rem;
+    padding: 3px;
+    display: flex;
+    align-items: center;
 }
+
+.date_dark{
+    color: rgba(255,255,255, 0.4);
+}
+
 
 .description{
     margin-top: 10px;
@@ -118,5 +125,25 @@
 
     .text_div{
         width: 100%;
+    }
+}
+
+
+@media screen and (max-width: 600px){
+    
+    .title_div{
+        margin-bottom: 15px;
+        flex-direction: column-reverse;
+        padding: 5px 0px;
+    }
+
+    .title, .title_dark{
+        font-size: 1.4rem;
+        margin: 4px 0px;
+        border: none;
+    }
+
+    .date, .date_dark{
+        font-size: 1rem;
     }
 }

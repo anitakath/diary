@@ -3,8 +3,6 @@ import { useRouter } from "next/router"
 
 import { supabase } from "@/services/supabaseClient";
 
-import { current } from "@reduxjs/toolkit";
-
 import Link from "next/link";
 
 import styles from './Id.module.css'
@@ -114,7 +112,7 @@ const YourImgDiary = ({post}) =>{
                  <h1 className={style ? styles.title_dark : styles.title}>
                    {currentPost.name}
                  </h1>
-                 <p className={styles.data}>
+                 <p className={style ? styles.date_dark : styles.date}>
                    {formatDate1(currentPost.created_at)}
                  </p>
                </div>

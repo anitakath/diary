@@ -9,6 +9,8 @@ const SearchBar = () =>{
 
   const [expanded, setExpanded] = useState(false);
 
+  const [searchValue, setSearchValue] = useState('')
+
   const handleSearchClick = () => {
     setExpanded(!expanded);
   };

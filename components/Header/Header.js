@@ -86,8 +86,6 @@ const Header = () => {
     router.push("/");
   };
 
-  console.log('header night mode:')
-  console.log(nightMode);
 
   return (
     <div className={styles.container}>

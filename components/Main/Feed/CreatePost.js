@@ -23,11 +23,6 @@ const CreatePost = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const { currentGoogleUser } = useUser()
 
-  console.log(isLoggedIn)
-
-
-
-
   const currentFilter = useSelector((state) => state.filter.selectedFilter);
   const [avatarUrl, setAvatarUrl] = useState('')
 

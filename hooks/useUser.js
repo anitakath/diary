@@ -19,10 +19,6 @@ export const useUser = () => {
     dispatch(fetchCurrentGoogleUser());
   }, []);
 
-  console.log("moincito");
-  console.log(currentGoogleUser);
-  console.log(currUser);
-
 
   useEffect(() => {
     if (currentGoogleUser) {
