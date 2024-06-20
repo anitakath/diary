@@ -34,7 +34,7 @@ const { currentGoogleUser } = useContext(RedditContext);
 
   const buttonLinks = [
     { href: "/new-post", text: "POST ERSTELLEN" },
-    { href: "/new-image", text: "BILDERTAGEBUCH-EINTRAG ERSTELLEN" },
+    { href: "/neuer-bildeintrag", text: "BILDERTAGEBUCH-EINTRAG ERSTELLEN" },
     { href: "/", text: "community erstellen" },
   ];
 

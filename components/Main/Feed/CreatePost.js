@@ -66,7 +66,7 @@ const CreatePost = () => {
           )}
 
           {currentFilter === "deine_images" && (
-            <Link href={`/new-image`} className={styles.photo_btn}>
+            <Link href={`/neuer-bildeintrag`} className={styles.photo_btn}>
               <FontAwesomeIcon
                 icon={faImage}
                 className={styles.icon}

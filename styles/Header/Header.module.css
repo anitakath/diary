@@ -5,7 +5,6 @@
     height:10vh;
     position: relative;
     background: var(background-primary);
-    border: 2px solid red;
 }
 
 .container_dark{
@@ -15,7 +14,6 @@
     height:10vh;
     position: relative;
     background: var(--background_dark);
-    border: 2px solid green;
 }
 
 

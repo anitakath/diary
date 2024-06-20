@@ -34,20 +34,3 @@ export const persistor = persistStore(store);
 
 export default store;
 
-
-/*
-const store = configureStore({
-  reducer: {
-    auth: authReducer,
-    filter: filterReducer,
-    counter: counterSlice,
-    toggle: toggleReducer,
-    user: userReducer,
-    post: postReducer,
-    images: imagesReducer
-
-  },
-});
-
-export default store;
-*/
