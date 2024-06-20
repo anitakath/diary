@@ -1,18 +1,13 @@
-
-
 import React from 'react';
 import { useState, useEffect } from "react";
 import Link from 'next/link';
-
 //COMPONENTS
 import CreatePost from "./CreatePost";
 import Post from "./Post";
 import Filter from './Filter';
 import YourImgDiary from './YOUR_IMG_DIARY/YourImgDiary';
-
 //STYLES
 import styles from '../../../styles/Main/Feed/Feed.module.css';
-
 //REDUX 
 import { useSelector, useDispatch } from "react-redux";
 import { supabase } from '@/services/supabaseClient';
@@ -28,56 +23,35 @@ const Feed = (props) => {
   const userId = props.currentGoogleUserId;
   const CDN_URL = process.env.CDN_URL;
   const CDN_URL_USERID = `${CDN_URL}${userId}`;
-
-  const [loadingPosts, setLoadingPosts] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [posts, setPosts] = useState([]);
-  const [filteredPosts, setFilteredPosts] = useState([]);
   const [images, setImages] = useState([]);
   const [loadedImages, setLoadedImages] = useState(false);
-
-
   const { formatDate1, formatDate2, formatDate3 } = useFormatDate("German");
   const [selectedDateFormat, setSelectedDateFormat] = useState("format1");
 
   
-
-   const handleDateClick = () => {
-     if (selectedDateFormat === "format1") {
-       setSelectedDateFormat("format2");
-     } else if (selectedDateFormat === "format2") {
-       setSelectedDateFormat("format3");
-     } else {
-       setSelectedDateFormat("format1");
-     }
-   };
-
-  const storedFilter =
-    typeof window !== "undefined"
-      ? localStorage.getItem("selectedFilter") || "deine_posts"
-      : "deine_posts";
+  const handleDateClick = () => {
+    if (selectedDateFormat === "format1") {
+      setSelectedDateFormat("format2");
+    } else if (selectedDateFormat === "format2") {
+     setSelectedDateFormat("format3");
+    } else {
+     setSelectedDateFormat("format1");
+    }
+  };
 
   useEffect(() => {
     if (loadedPosts) {
-      setIsLoaded(true);
-      setPosts(loadedPosts);
-      setFilteredPosts(loadedPosts);
-      setLoadingPosts(false);
+     setLoadedImages(true);
     }
   }, [loadedPosts]);
 
-  useEffect(() => {
-    if (isLoaded && loadedPosts) {
-      // Filter the posts based on the selected filter
-      const newFilteredPosts = loadedPosts.filter((post) => {
-        // Implement your filter logic here based on currentFilter
-        return true; // Placeholder logic for now
-      });
-      setFilteredPosts(newFilteredPosts);
-    }
-  }, [currentFilter]);
-
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (userId) {
+      fetchImages();
+    }
+  }, [userId]);
 
   const fetchImages = async () => {
     const { data, error } = await supabase.storage
@@ -112,17 +86,6 @@ const Feed = (props) => {
     }
   };
 
-  useEffect(() => {
-    if (userId) {
-      fetchImages();
-    }
-  }, [userId]);
-
-
-
-
-
-
 
   return (
     <div className={styles.container}>
@@ -130,11 +93,11 @@ const Feed = (props) => {
 
       <CreatePost />
 
-      {loadingPosts && (
+      {!loadedImages && (
         <p className={styles.loadingPostsParagraph}> loading posts ...</p>
       )}
       <div className={styles.post_div}>
-        {isLoaded &&
+        {loadedImages &&
           loadedPosts &&
           loadedPosts.length > 0 &&
           loadedPosts.map((post, index) => (

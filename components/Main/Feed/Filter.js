@@ -14,7 +14,8 @@ import styles from "../../../styles/Main/Feed/Filter.module.css";
 const Filter = () => {
 
   const dispatch = useDispatch();
-
+  const selectedFilter = useSelector((state) => state.filter.selectedFilter);
+  
   const activeLinkStyle = {
     fontWeight: "bold", 
     color: " #F7567C", 
@@ -33,7 +34,6 @@ const Filter = () => {
     activeButton: null,
   });
 
-  const storedFilter = typeof window !== "undefined" ? localStorage.getItem("selectedFilter") || "deine_posts" : "deine_posts";
 
 
 
@@ -66,7 +66,7 @@ const Filter = () => {
   }, [currentFilter]);
 
   useEffect(() => {
-    setActiveButton(storedFilter);
+    setActiveButton(selectedFilter);
   }, []);
 
 
