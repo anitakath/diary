@@ -21,7 +21,6 @@ export default function Home() {
     googleUserId = currentGoogleUser.user.id;
   }
 
-  console.log(googleUserId)
 
   return (
     <div className={style ? styles.main_container : styles.main_container_light}>

@@ -74,7 +74,7 @@ const Post = ({post}) => {
             <span> {author}</span> - {formattedDateTime.date} -{" "}
             {formattedDateTime.time}
           </h2>
-        </div>
+        </div>  
 
         <div className={styles.post}>
           <h1

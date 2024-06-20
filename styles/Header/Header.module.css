@@ -1,6 +1,3 @@
-
-
-
 .container, .container_light{
     width: 100vw;
     display: flex;
@@ -8,9 +5,7 @@
     height:10vh;
     position: relative;
     background: var(background-primary);
-
-
-
+    border: 2px solid red;
 }
 
 .container_dark{
@@ -20,10 +15,8 @@
     height:10vh;
     position: relative;
     background: var(--background_dark);
-
-   
+    border: 2px solid green;
 }
-
 
 
 .title{
@@ -40,8 +33,6 @@
 
 
 
-
-
 .icon{
     color: #F7567C;
     width: 50px;
@@ -55,9 +46,6 @@
     transition: 0.4s ease;
     color: #333333;
 }
-
-
-
 
 
 .login_container{

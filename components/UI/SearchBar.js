@@ -12,11 +12,13 @@ const SearchBar = () =>{
   const [searchValue, setSearchValue] = useState('')
 
   const handleSearchClick = () => {
-    setExpanded(!expanded);
+    if (expanded && searchValue.trim() !== "") {
+      // Führe hier die Suchaktion aus
+      console.log("Suche nach: ", searchValue);
+    } else {
+      setExpanded(!expanded);
+    }
   };
-
-
-
 
   return (
     <div className={styles.search_container}>
@@ -25,9 +27,14 @@ const SearchBar = () =>{
           type="search"
           placeholder="SEARCH"
           className={styles.searchInput}
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
         ></input>
 
-        <button  onClick={handleSearchClick} className={styles.search_btn}> 🚀 </button>
+        <button onClick={handleSearchClick} className={styles.search_btn}>
+          {" "}
+          🚀{" "}
+        </button>
       </div>
     </div>
   );

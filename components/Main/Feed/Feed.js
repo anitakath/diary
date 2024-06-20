@@ -7,12 +7,11 @@ import Link from 'next/link';
 //COMPONENTS
 import CreatePost from "./CreatePost";
 import Post from "./Post";
-import Filter from './Filter'
-
+import Filter from './Filter';
 import YourImgDiary from './YOUR_IMG_DIARY/YourImgDiary';
 
 //STYLES
-import styles from '../../../styles/Main/Feed/Feed.module.css'
+import styles from '../../../styles/Main/Feed/Feed.module.css';
 
 //REDUX 
 import { useSelector, useDispatch } from "react-redux";
@@ -131,8 +130,6 @@ const Feed = (props) => {
 
       <CreatePost />
 
-
-
       {loadingPosts && (
         <p className={styles.loadingPostsParagraph}> loading posts ...</p>
       )}
@@ -164,44 +161,45 @@ const Feed = (props) => {
           </div>
         )}
 
-        {currentFilter.selectedFilter === "deine_images"  && <YourImgDiary />}
+        {currentFilter.selectedFilter === "deine_images" && <YourImgDiary />}
 
 
 
         {/*IMPLEMENT ANNESIMGDIARY! */}
-        {images.length > 0 && currentFilter.selectedFilter === "annes_images" && (
-          <div className={styles.imageGallery}>
-            {images.map((image) => (
-              <div className={styles.image_div} key={image.id}>
-                <button className={styles.date} onClick={handleDateClick}>
-                  {selectedDateFormat === "format1" &&
-                    formatDate1(image.created_at)}
-                  {selectedDateFormat === "format2" &&
-                    formatDate2(image.created_at)}
-                  {selectedDateFormat === "format3" &&
-                    formatDate3(image.created_at)}
-                </button>
+        {images.length > 0 &&
+          currentFilter.selectedFilter === "annes_images" && (
+            <div className={styles.imageGallery}>
+              {images.map((image) => (
+                <div className={styles.image_div} key={image.id}>
+                  <button className={styles.date} onClick={handleDateClick}>
+                    {selectedDateFormat === "format1" &&
+                      formatDate1(image.created_at)}
+                    {selectedDateFormat === "format2" &&
+                      formatDate2(image.created_at)}
+                    {selectedDateFormat === "format3" &&
+                      formatDate3(image.created_at)}
+                  </button>
 
-                {!loadedImages && (
-                  <div className={styles.loadingImage}>
-                    <div className={styles.spinner}></div>{" "}
-                    {/* Hier wird der Spinner eingefügt */}
-                    <p> Lädt... </p>
-                  </div>
-                )}
+                  {!loadedImages && (
+                    <div className={styles.loadingImage}>
+                      <div className={styles.spinner}></div>{" "}
+                      {/* Hier wird der Spinner eingefügt */}
+                      <p> Lädt... </p>
+                    </div>
+                  )}
 
-                <Link href={`/image/${image.name}`}>
-                  <img
-                    key={image.id}
-                    src={CDN_URL_USERID + "/" + image.name}
-                    alt="gallery-image"
-                    className={styles.img}
-                  />
-                </Link>
-              </div>
-            ))}
-          </div>
-        )}
+                  <Link href={`/image/${image.name}`}>
+                    <img
+                      key={image.id}
+                      src={CDN_URL_USERID + "/" + image.name}
+                      alt="gallery-image"
+                      className={styles.img}
+                    />
+                  </Link>
+                </div>
+              ))}
+            </div>
+          )}
       </div>
     </div>
   );

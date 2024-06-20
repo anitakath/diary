@@ -48,7 +48,6 @@ const Main = (props) => {
        
           <div className={styles.output_field}>
             <Feed
-  
               addNewPost={addNewPost}
               posts={props.posts}
               currentGoogleUserId={props.currentGoogleUserId}

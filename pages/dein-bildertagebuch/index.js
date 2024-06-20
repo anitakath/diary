@@ -14,6 +14,8 @@ import { useUser } from "@/hooks/useUser";
 
 const YourLibrary = () =>{
 
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
   const { currentGoogleUser } = useUser()
   const { formatDate1 } = useFormatDate();
 
@@ -34,9 +36,13 @@ const YourLibrary = () =>{
 
   // ------------------  NIGHT / DAY MODE TOGGLE ----------------------
 
+  console.log(isLoggedIn)
+
+
   useEffect(() => {
     setStyle(nightMode);
   }, [nightMode]);
+
  
 
   //supabase storage:
@@ -94,10 +100,10 @@ const YourLibrary = () =>{
      const sortedOldestImages = [...images].sort((a, b) => {
        const dateA = new Date(a.created_at);
        const dateB = new Date(b.created_at);
-       setLoading(false)
        return dateA - dateB; // Sortiere aufsteigend nach Datum
      });
      setImages(sortedOldestImages);
+      setLoading(false);
    } else if (active === "neueste") {
      setLoading(true)
      console.log("neueste aktivvv");

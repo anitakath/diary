@@ -55,6 +55,9 @@ const Header = () => {
     
   }, [nightMode]);
 
+  console.log(style)
+  console.log(nightMode)
+
 
   useEffect(() => {
     if (isRegistered) {
@@ -86,10 +89,13 @@ const Header = () => {
     router.push("/");
   };
 
+  console.log('IS LOGGED IN?')
+  console.log(isLoggedIn)
+
 
   return (
     <div className={styles.container}>
-      {isLoggedIn && (
+     {isLoggedIn && (
         <div className={style ? styles.container_dark : styles.container_light}>
           <SearchBar />
 
@@ -132,7 +138,9 @@ const Header = () => {
       )}
 
       {!isLoggedIn && <h1 className={styles.login_callToAction}> </h1>}
-    </div>
+           
+    
+      </div>
   );
 };
 

@@ -2,7 +2,6 @@
     position: relative;
 }
 
-
 .loadingPostsParagraph{
     display: flex;
     justify-content: center;
@@ -143,27 +142,23 @@
 
     .post_div{
         margin: 0;
-        
     }
 
     .post_container{
         margin: 35px 0px;
         position: relative;
-  
     }
+    
 
     .imageGallery{
         width: 100vw;
         position: relative;
         margin: 40px 0;
         padding: 0;
-
-    
     }
 
     .image_div{
         width: 100%;
-
     }
 
     .img{
