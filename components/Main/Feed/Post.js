@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { useRouter } from "next/router";
-
+import { useEffect, useState } from "react";
 
 //STYLES
 import styles from "../../../styles/Main/Feed/Post.module.css";
@@ -17,6 +17,7 @@ import { RedditContext } from "@/context/RedditContext";
 
 const Post = ({post}) => {
 
+  const [style, setStyle] = useState(false);
 
   const {
      pathId,
@@ -28,14 +29,19 @@ const Post = ({post}) => {
      upvotes,
      author,
      table,
-   } = post;
+  } = post;
 
 
 
-  const nightMode = useSelector((state) => state.toggle.nightMode);
+  const nightMode = useSelector((state) => state.toggle.isNightMode);
   let totalvote = upvotes - downvotes;
   const router = useRouter();
   const { setSelectedPost, currentGoogleUser } = useContext(RedditContext);
+
+
+  useEffect(() => {
+    setStyle(nightMode);
+  }, [nightMode]);
 
 
   const navigateToPostDetails = () => {
@@ -56,9 +62,8 @@ const Post = ({post}) => {
 
   const formattedDateTime = formatDate(created_at);
     
-
   return (
-    <div className={styles.post_container}>
+    <div className={style ? styles.post_container_dark : styles.post_container }>
       
       <PostRating
         table={table}

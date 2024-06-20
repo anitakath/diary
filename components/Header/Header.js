@@ -25,6 +25,8 @@ const Header = () => {
   //
   const [loginSuccessMessage, setLoginSuccessmessage] = useState(false);
 
+
+
   // Toggle night/day mode
   useEffect(() => {
     setStyle(nightMode);
@@ -51,10 +53,8 @@ const Header = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={isLoggedIn ? styles.container : ''}>
         {loginSuccessMessage && <p className={styles.login_success_p}> LOGGED IN ✔️ </p>}
-
-      
       {isLoggedIn && (
         <div className={style ? styles.container_dark : styles.container_light}>
           <SearchBar />

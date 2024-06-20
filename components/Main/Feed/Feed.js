@@ -96,6 +96,7 @@ const Feed = (props) => {
       {!loadedImages && (
         <p className={styles.loadingPostsParagraph}> loading posts ...</p>
       )}
+
       <div className={styles.post_div}>
         {loadedImages &&
           loadedPosts &&
@@ -145,8 +146,7 @@ const Feed = (props) => {
 
                   {!loadedImages && (
                     <div className={styles.loadingImage}>
-                      <div className={styles.spinner}></div>{" "}
-                      {/* Hier wird der Spinner eingefügt */}
+                      <div className={styles.spinner}></div>
                       <p> Lädt... </p>
                     </div>
                   )}

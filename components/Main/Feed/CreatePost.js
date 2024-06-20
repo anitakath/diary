@@ -2,11 +2,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 
-import { useContext, useEffect, useState } from 'react';
+import {useEffect, useState } from 'react';
 
-
-//CONTEXT
-import { RedditContext } from "@/context/RedditContext";
 //STYLES
 import styles from '../../../styles/Main/Feed/CreatePost.module.css'
 //FONT AWESOME

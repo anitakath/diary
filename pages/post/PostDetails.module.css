@@ -8,7 +8,6 @@
     align-items: center;
     justify-content: center;
     position: relative;
-
 }
 
 .container_dark{
@@ -20,26 +19,24 @@
 .comment_wrapper{
     display: flex;
     width: 100%;
-    
 }
 
 .post_dark, .post_light{
     padding: 10px;
     width: 71%;
     position: relative;
-    
 }
 
 .webUser_div{
     position: absolute;
+    top: 20px;
     right: 20px;
-    height: 110vh;
+    height: 100%;
     margin: 20px;
 }
 
 .post_div, .post_div_dark{
     width: 100%;
-    
 }
 
 .post_div_dark{
@@ -85,7 +82,7 @@
 
     
    .post_dark, .post_light{
-       width: 64vw;
+       width: 64%;
    }
 }
 
@@ -105,17 +102,17 @@
     }
 
      .post_dark, .post_light{
-       width: 100vw;
+       width: 100%;
    }
 }
 
 @media screen and (max-width: 1000px){
     .createComment_div textarea, .createComment_div button{
-        width: 95vw;
+        width: 95%;
     }
 
      .post_dark, .post_light{
-        width: 100vw;
+        width: 100%;
     }
 
   
@@ -123,6 +120,16 @@
 
 @media screen and (max-width: 600px){
 
+
+    .post_dark, .post_light{
+        padding: 0;
+    }
+
+    .post_div, .post_div_dark{
+        width: 100%;
+        margin: 0;
+
+    }
     .go_back_dark, .go_back{
         top: 5px;
        

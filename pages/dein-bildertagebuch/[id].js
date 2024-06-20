@@ -1,10 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router"
-
 import { supabase } from "@/services/supabaseClient";
-
 import Link from "next/link";
-
 import styles from './Id.module.css'
 import { useSelector } from "react-redux";
 
@@ -30,7 +27,7 @@ export async function getServerSideProps(context) {
      }
 
     const post = data;
-  // Überprüfe, ob der Post in einer der Tabellen gefunden wurde
+  // Überprüfe, ob der Post in einer der supabase Tabellen gefunden wurde
 
   return {
     props: {
@@ -117,11 +114,7 @@ const YourImgDiary = ({post}) =>{
                  </p>
                </div>
 
-               <p
-                 className={
-                   style ? styles.description_dark : styles.description
-                 }
-               >
+               <p className={style ? styles.description_dark : styles.description}>
                  {currentPost.description}
                </p>
              </div>

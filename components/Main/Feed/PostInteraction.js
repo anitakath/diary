@@ -19,28 +19,17 @@ import { supabase } from "@/services/supabaseClient";
 import styles from '../../../styles/Main/Feed/Post.module.css'
 
 
-//REDUX
-import { useDispatch} from "react-redux";
-
-
 const postInteraction = (props) =>{
 
   const [isLoading, setIsLoading] = useState(false)
-  const dispatch = useDispatch();
   const router = useRouter();
- 
 
 
   const table= props.table
-
-
   
 
   const deletePostHandler = async (event) =>{
     event.preventDefault();
-
- 
-    
     try{
       setIsLoading(true);
 
@@ -51,12 +40,7 @@ const postInteraction = (props) =>{
      
       setIsLoading(false);
       //router.reload();
- 
-
-
       router.push("/");
-      
-       
 
     } catch(error){
       console.error(error)

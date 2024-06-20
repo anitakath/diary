@@ -1,6 +1,6 @@
 
 
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "@/services/supabaseClient";
 import Link from "next/link";
 //REDUX
@@ -36,13 +36,9 @@ const YourLibrary = () =>{
 
   // ------------------  NIGHT / DAY MODE TOGGLE ----------------------
 
-  console.log(isLoggedIn)
-
-
   useEffect(() => {
     setStyle(nightMode);
   }, [nightMode]);
-
  
 
   //supabase storage:

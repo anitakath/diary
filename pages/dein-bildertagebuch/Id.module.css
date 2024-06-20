@@ -36,10 +36,11 @@
 
 .text_div{
     width: 50%;
+    height: 100vh;
     margin-left: 5px;
     padding: 20px 0px;
     position: relative;
-  
+    overflow: scroll;
 }
 
 .title_div{
@@ -48,7 +49,6 @@
     padding: 5px 0px;
     border-bottom: 0.5px solid silver;
     margin-right: 10px;
-    
 }
 
 .backToOverview{
@@ -83,9 +83,10 @@
 }
 
 
-.description{
+.description, .description_dark{
     margin-top: 10px;
-    padding: 3px;
+    padding: 10px;
+    text-align: justify;
 }
 
 .description_dark, .title_dark{

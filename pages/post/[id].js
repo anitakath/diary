@@ -15,7 +15,7 @@ import CreateComment from "@/components/Main/comments/createComment";
 import WebUser from "@/components/Main/WebUser";
 
 //STYLES
-import styles from '../../styles/Main/Feed/PostDetails.module.css'
+import styles from './PostDetails.module.css'
 
 //REDUX
 import { useSelector } from "react-redux";
@@ -106,9 +106,7 @@ const PostDetails = ({post}) =>{
             )}
           </div>
 
-          <div
-            className={style ? styles.post_div_dark : styles.post_div}
-          >
+          <div className={style ? styles.post_div_dark : styles.post_div}>
             {isLoaded && <Post post={post} />}
           </div>
         </div>

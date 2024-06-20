@@ -1,18 +1,9 @@
-
-
-import { useContext, useEffect, useState } from "react";
-
-
+import { useContext, useState } from "react";
 import { supabase } from "@/services/supabaseClient";
-
 //CONTEXT
 import { RedditContext } from "@/context/RedditContext";
-import { useRouter } from "next/router";
-
 //STYLES
 import styles from "./Comments.module.css";
-
-
 //REDUX
 import { useSelector } from "react-redux";
 
@@ -79,12 +70,14 @@ const CreateComment = (props) => {
       console.error("Fehler beim Speichern des Kommentars:", error.message);
     }
   };
-
+  
   return (
     <div className={styles.createComment_div}>
-      <h2 className={nightMode ? styles.title_light : styles.title_dark}>
+
+      <h2 className={nightMode ? styles.title_dark : styles.title_light}>
         KOMMENTAR ERSTELLEN
       </h2>
+
       <div className={nightMode ? styles.textarea_div_dark : styles.textarea_div}>
         <textarea
           className={nightMode ? styles.textarea_dark : styles.textarea_light}

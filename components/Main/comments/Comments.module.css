@@ -10,51 +10,34 @@
     display: flex;
     min-height: 30vh;
     flex-direction: column;
-
-
-
-    /*border: 2px solid gold;*/
-    
-
-    
 }
 
-.textarea_div{
+.textarea_div_dark, .textarea_div{
+    margin: 20px;   
+}
+
+.title_dark, .title_light{
     display: flex;
-    flex-direction: column;
-    margin: 20px;
-    background: white;
-}
-
-.textarea_div_dark{
-    margin: 20px;
-    
-}
-
-.createComment_div h2{
-    display: flex;
-    width: 97%;
     align-items: center;
-    margin: 0px 20px;
+    margin: 10px 0px;
     font-size: 1.5rem;
     border-bottom: 0.2px solid grey;
-    color: silver;
-    
-}
-
-
-.title_dark{
-    color: var(--hover-font-dark);
-    
+    color: beige;
+    padding-bottom: 5px;
+    position: relative;
+    left: 0px;
+    padding: 0px 20px;
+    top: 10px;
+    width: 100%;
 }
 
 .title_light{
-    color: var(--hover-font-light);
+    color: rgba(0,0,0,0.7);
 }
 
 
 
-.createComment_div textarea{
+.textarea_dark, .textarea_light{
     width: 70%;
     margin: 5px 0px;
     border: none;
@@ -62,7 +45,6 @@
     height: 30vh;
     color: var(--hover-font-dark);
     font-size: 1.2rem;
-   
 }
 
 .textarea_light{
@@ -75,7 +57,6 @@
 
 .createComment_div textarea:focus{
     outline: none;
-    
 }
 
 .createComment_div button{
@@ -288,12 +269,14 @@
 @media screen and (max-width: 600px){
 
 
-  
+    .textarea_div_dark, .textarea_div{
+        margin: 20px 0px;
+    }
+
     .reaction_div{
         position: absolute;
         left: 40px;
         bottom: 40px;
-
     }
 
     .like_reaction_icon, .reply_reaction_icon, .report_reaction_icon{
@@ -307,16 +290,17 @@
         transition: 0.4s ease;
         cursor: pointer;
     }
-
    
 
-    .createComment_div h2{
+    .title_light, .title_dark{
         display: flex;
         align-items: center;
-        margin-left: 10px;
         font-size: 1.3rem;
+        left: 0;
+        width: 100%;
+        padding: 0px 10px;
         border-bottom: 0.2px solid grey;
-        color: silver; 
+
     }
 
 
@@ -324,6 +308,10 @@
         width: 100%;
     }   
 
+
+    .textarea_div_dark{
+        margin: 10px 0px;
+    }
 
     .comments_container, .comments_container_dark{
         padding: 0px;

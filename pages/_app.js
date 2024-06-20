@@ -9,7 +9,9 @@ import { persistor } from '@/store'; // Importiere den persistor aus deinem Stor
 import Header from '@/components/Header/Header';
 
 
+
 export default function App({ Component, pageProps }) {
+ 
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
