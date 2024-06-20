@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "@/services/supabaseClient";
 
 //STYLES
-import styles from "../../../styles/Main/CreatePost.module.css";
+import styles from "./NewPostForm.module.css";
 
 //REDUX
 import { filter } from "@/store/filterSlice";
@@ -48,9 +48,6 @@ const NewPostForm = () => {
 
   const dispatch = useDispatch();
 
-  const currFilter = useSelector((state) => state.filter)
-
-
 
   const createPost = async (event) => {
     event.preventDefault();
@@ -66,7 +63,7 @@ const NewPostForm = () => {
       const formattedAuthor = author.replace(/\s+/g, "-"); // Ersetze Leerzeichen durch Bindestriche
       const formattedTitle = title.replace(/\s+/g, "-"); // Ersetze Leerzeichen durch Bindestriche
 
-      await supabase.from("users_feed").insert([
+      await supabase.from("diary_users_feed").insert([
         {
           author: author,
           title: title,
@@ -74,14 +71,14 @@ const NewPostForm = () => {
           creator: author,
           upvotes: 0,
           downvotes: 0,
-          table: "users_feed",
+          table: "diary_users_feed",
           total_votes: 0,
           pathId: `${formattedAuthor}-${formattedTitle}`,
         },
       ]);
 
       setLoading(false);
-      dispatch(filter("beste"))
+      dispatch(filter("deine_posts"))
       router.push("/");
     } catch (error) {
       setLoading(false);
@@ -99,7 +96,10 @@ const NewPostForm = () => {
               ERSTELLE ENEN NEUEN POST
             </h1>
             <Link href={`/`} className={styles.goBack_link}>
-              <FontAwesomeIcon icon={faHouse} className={styles.house_icon}></FontAwesomeIcon>
+              <FontAwesomeIcon
+                icon={faHouse}
+                className={styles.house_icon}
+              ></FontAwesomeIcon>
             </Link>
           </div>
           <div className={styles.createPost_div}>
@@ -108,7 +108,7 @@ const NewPostForm = () => {
               <input
                 type="text"
                 placeholder="autor"
-                className={styles.createPost_input}
+                className={style ? styles.createPost_input_dark : styles.createPost_input}
                 value={author}
                 onChange={(event) => setAuthor(event.currentTarget.value)}
               ></input>
@@ -117,14 +117,14 @@ const NewPostForm = () => {
               <input
                 type="text"
                 placeholder="titel"
-                className={styles.createPost_input}
+                className={style ? styles.createPost_input_dark : styles.createPost_input}
                 value={title}
                 onChange={(event) => setTitle(event.currentTarget.value)}
               ></input>
 
               <label className={styles.createPost_label}> Text </label>
               <textarea
-                className={styles.createPost_textarea}
+                className={style ? styles.createPost_textarea_dark : styles.createPost_textarea}
                 name="content"
                 id="content"
                 cols="30"
@@ -139,17 +139,13 @@ const NewPostForm = () => {
             </form>
 
             <div className={styles.webUser_container}>
-        
               <WebUser />
- 
             </div>
           </div>
         </div>
       )}
 
-      {!isLoggedIn && (
-       <Start/>
-      )}
+      {!isLoggedIn && <Start />}
     </div>
   );
 };

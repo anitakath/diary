@@ -1,18 +1,11 @@
-
-
-
-
 import { createSlice } from "@reduxjs/toolkit";
-
-
-const initialFilterState = typeof window !== 'undefined' ? localStorage.getItem("selectedFilter") || "deine_posts" : "deine_posts";
 
 
 
 const filterSlice = createSlice({
   name: "filter",
   initialState: {
-    selectedFilter: initialFilterState,
+    selectedFilter: "deine_posts",
     deinePostsIsActive: true,
     annesImagesIsActive: false,
     deineImagesIsActive: false,
@@ -22,7 +15,6 @@ const filterSlice = createSlice({
     filter: (state, action) => {
      
       state.selectedFilter  = action.payload;
-      localStorage.setItem("selectedFilter", action.payload)
       return state;
     },
     setActButton: (state, action) => {

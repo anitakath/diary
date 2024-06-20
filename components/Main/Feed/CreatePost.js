@@ -58,7 +58,7 @@ const CreatePost = () => {
       <div className={styles.form_container}>
         <div className={styles.createPost_linkDiv}>
           {currentFilter === "deine_posts" && (
-            <Link href={`/new-post`} className={styles.photo_btn}>
+            <Link href={`/neuer-post`} className={styles.photo_btn}>
               <FontAwesomeIcon icon={faMessage} className={styles.icon} />
 
               <span>neuen Beitrag</span>
