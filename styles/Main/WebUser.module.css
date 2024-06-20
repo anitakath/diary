@@ -54,6 +54,18 @@
     font-size: 1.2rem;
 }
 
+.users_profile_link{
+    color: var(--pink_opaque);
+    position: absolute;
+    left: 100px;
+    top: 58px;
+}
+
+.users_profile_link:hover{
+    color: var(--pink);
+    cursor: pointer;
+}
+
 .user_name_light{
     color: beige;
 }

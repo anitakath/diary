@@ -1,129 +1,83 @@
 
 import Link from "next/link";
-
-
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-
-//CONTEXT
-import { RedditContext } from "@/context/RedditContext";
-
 //REDUX
-import { useSelector, useDispatch } from "react-redux";
-
+import { useSelector} from "react-redux";
 //COMPONENTS
 import Menu from "./Menu";
-
 import SearchBar from "../UI/SearchBar";
-
 //STYLES
 import styles from '../../styles/Header/Header.module.css'
-
 //FONT AWESOME
-import { faRedditAlien } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faUsers, faHouse } from "@fortawesome/free-solid-svg-icons";
 
-
-
-
 const Header = () => {
-  const dispatch = useDispatch();
   const router = useRouter();
-
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const isRegistered = useSelector((state) => state.auth.isRegistered);
+  //const isRegistered = useSelector((state) => state.auth.isRegistered);
   const nightMode = useSelector((state) => state.toggle.isNightMode);
-  const [style, setStyle] = useState(false)
+  const [style, setStyle] = useState(false);
 
-  // Time-limited info for successful registration
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  // Time-limited info for successful login - so far not in use
+  //
   const [loginSuccessMessage, setLoginSuccessmessage] = useState(false);
 
-  // ------------------  NIGHT / DAY MODE TOGGLE ----------------------
-
-
+  // Toggle night/day mode
   useEffect(() => {
-    if(nightMode){
-      console.log('header dark mode on')
-      setStyle(true);
-    } else {
-      console.log("header dark mode off");
-      setStyle(false)
-    }
-    
+    setStyle(nightMode);
   }, [nightMode]);
 
-  console.log(style)
-  console.log(nightMode)
-
-
+  // Show success message for login - so far not in use 
   useEffect(() => {
-    if (isRegistered) {
-      setShowSuccessMessage(true);
-      setTimeout(() => {
-        setShowSuccessMessage(false);
-      }, 10000); // 10 Sekunden
-    }
-
     if (isLoggedIn) {
       setLoginSuccessmessage(true);
       setTimeout(() => {
         setLoginSuccessmessage(false);
       }, 10000); // 10 Sekunden
     }
-  }, [isRegistered, isLoggedIn]);
+  }, [isLoggedIn]);
 
   const [menuIsOpen, setMenuIsOpen] = useState(false);
 
   const menuHandler = () => {
-    if (menuIsOpen === true) {
-      setMenuIsOpen(false);
-    } else if (menuIsOpen === false) {
-      setMenuIsOpen(true);
-    }
+    setMenuIsOpen(!menuIsOpen);
   };
 
   const navigateToHome = () => {
     router.push("/");
   };
 
-  console.log('IS LOGGED IN?')
-  console.log(isLoggedIn)
-
-
   return (
     <div className={styles.container}>
-     {isLoggedIn && (
+        {loginSuccessMessage && <p className={styles.login_success_p}> LOGGED IN ✔️ </p>}
+
+      
+      {isLoggedIn && (
         <div className={style ? styles.container_dark : styles.container_light}>
           <SearchBar />
-
           <div className={styles.login_container}>
-            {isLoggedIn && (
-              <div className={styles.login_container}>
-                <button className={styles.userMenu_btn} onClick={menuHandler}>
-                  <FontAwesomeIcon icon={faUser} className={styles.user} />
-                  <p className={style ? styles.dark_p : styles.light_p}>menu</p>
-                </button>
-
-                <button className={styles.userMenu_btn_web}>
-                  <FontAwesomeIcon icon={faUsers} className={styles.user} />
-                  <p className={style ? styles.dark_p : styles.light_p}>
-                    community
-                  </p>
-                </button>
-
-                <Link href="/" className={styles.userMenu_btn_web}>
-                  <FontAwesomeIcon icon={faHouse} className={styles.user} />
-                  <p className={style ? styles.dark_p : styles.light_p}>
-                    Startseite
-                  </p>
-                </Link>
-              </div>
-            )}
+            <button className={styles.userMenu_btn} onClick={menuHandler}>
+              <FontAwesomeIcon icon={faUser} className={styles.user} />
+              <p className={style ? styles.dark_p : styles.light_p}>menu</p>
+            </button>
+            <button className={styles.userMenu_btn_web}>
+              <FontAwesomeIcon icon={faUsers} className={styles.user} />
+              <p className={style ? styles.dark_p : styles.light_p}>
+                {" "}
+                community{" "}
+              </p>
+            </button>
+            <Link href="/" className={styles.userMenu_btn_web}>
+              <FontAwesomeIcon icon={faHouse} className={styles.user} />
+              <p className={style ? styles.dark_p : styles.light_p}>
+                {" "}
+                Startseite{" "}
+              </p>
+            </Link>
           </div>
-
           {menuIsOpen && (
             <div
               className={
@@ -132,15 +86,11 @@ const Header = () => {
               onClick={menuHandler}
             ></div>
           )}
-
           {menuIsOpen && <Menu setMenuIsOpen={setMenuIsOpen} />}
         </div>
       )}
-
       {!isLoggedIn && <h1 className={styles.login_callToAction}> </h1>}
-           
-    
-      </div>
+    </div>
   );
 };
 

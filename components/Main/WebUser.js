@@ -67,12 +67,12 @@ const { currentGoogleUser } = useContext(RedditContext);
           ) : (
             <FontAwesomeIcon icon={faQuestion} className={styles.icon} />
           )}
-          <p className={`${styles.users_name} ${ style ? styles.user_name_light : "" }`}>Home</p>
+          <p className={`${styles.users_name} ${style ? styles.user_name_light : "" }`}>Home</p>
+          <Link href="/" className={styles.users_profile_link}> dein Profil </Link>
         </div>
-
+  
         <div className={styles.info_paragraph_container}>
           <p className={`${styles.info_p} ${style ? styles.info_p_light : ""}`}>
-            {" "}
             Deine ganz persönliche Reddit Startseite. <br /> Hier kannst du dir
             deine Lieblingscommunities ansehen{" "}
           </p>
@@ -80,7 +80,7 @@ const { currentGoogleUser } = useContext(RedditContext);
         <div className={styles.btn_container}>
           {buttonLinks.map((link, index) => (
             <Link key={index} href={link.href} className={styles.link}>
-              {link.text} 
+              {link.text}
             </Link>
           ))}
         </div>

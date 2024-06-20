@@ -16,6 +16,20 @@
     background: var(--background_dark);
 }
 
+.login_success_p{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 20px;
+    bottom: -30px;
+    border-radius: 5px;
+    height: 40px;
+    background: var(--pink);
+    z-index: 100000;
+    font-size: 1rem;
+    padding: 0px 10px;
+    color: beige;
+}
 
 .title{
     margin: 5px;
@@ -190,6 +204,10 @@
         right: -20px;
         width: 70px;
     
+    }
+
+    .login_success_p{
+        font-size: 0.7rem;
     }
 
   
