@@ -1,10 +1,8 @@
-
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { useRouter } from "next/router";
 import { useContext } from "react";
-//HOOKS
-import useSWR from 'swr'
+
 //REDUX
 import { useDispatch } from "react-redux";
 import { login } from "@/store/authSlice";
@@ -12,78 +10,71 @@ import { login } from "@/store/authSlice";
 import styles from "./Login.module.css";
 //CONTEXT
 import { RedditContext } from "@/context/RedditContext";
-import { setUser } from "@/store/userSlice";
-import { setCurrentGoogleUser, setCurrentUser } from "@/store/userSlice";
-
-
-
+import { setCurrentUser } from "@/store/userSlice";
 
 const LoginComponent = () =>{
-  
+
+  // COMPONENT THAT MANAGES LOGIN VIA EMAIL
   const { fetcher } = useContext(RedditContext);
-  const { data } = useSWR("/api/get-users", fetcher, {
-    refreshInterval: 200,
-  });
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [users, setUsers] = useState(null);
-  const [notRegistered, setNotRegistered] = useState("");
-
-  useEffect(() => {
-    if (data) {
-      setUsers(data.data);
-    }
-  }, [data]);
-
+  const [error, setError] = useState("");
   const router = useRouter();
 
 
-  const emailChangeHandler = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const passwordChangeHandler = (e) => {
-    setPassword(e.target.value);
-  };
-
   const loginHandler = async (e) => {
     e.preventDefault();
-    const formData = { email, password };
+
+    if (!email || !password) {
+      setError("Bitte füllen Sie alle Felder aus.");
+      return;
+    }
 
     try {
-      // Senden des Vornamens an die Backend-API, um die Eingaben zu validieren
       const response = await fetch("/api/login-validation", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ email, password }),
       });
+      if (!response.ok) {
+        throw new Error(
+          "Fehler bei der Anmeldung. Bitte versuchen Sie es erneut."
+        );
+      }
 
       const data = await response.json();
 
-      // Nach erfolgreicher Validierung soll überprüft werden, ob E-Mail und Password in der Datenbank vorhanden sind,
-      // der User also bereits existiert
-      if (users) {
-        let isUserInArray = users.find(
-          (user) =>
-            user.email === formData.email && user.password === formData.password
-        );
+      if (data) {
+        const usersResponse = await fetch("/api/get-users");
+        const usersData = await usersResponse.json();
 
-        // users = array mit allen supabase table Objekten
-        // isUserInArray = genau das objekt der eingegebenen email && password
-         // data = Daten erfolgreich validiert!
-        if (isUserInArray) {
-          dispatch(setCurrentUser(isUserInArray));
-          dispatch(login());
-          router.push("/");
-        } else {
-          setNotRegistered(
-            "du scheinst nicht registriert zu sein oder ungültige Eingaben gemacht zu haben... Bitte überprüfe deine E-Mail-, und Passworteingabe, oder registriere dich"
+        
+
+        if (usersData) {
+          let isUserInArray = usersData.data.find(
+            (user) => user.email === email && user.password === password
           );
+
+          if (isUserInArray) {
+            dispatch(setCurrentUser(isUserInArray));
+            dispatch(login());
+            router.push("/");
+          } else {
+            setError(
+              "E-Mail oder Passwort ungültig. Bitte überprüfen Sie Ihre Eingaben."
+            );
+          }
         }
+      } else {
+        setError(
+          "E-Mail oder Passwort entsprechen nicht den Anforderungen."
+        );
       }
     } catch (error) {
-      console.error(error); // Fehlermeldung bei einem Fehler in der API
+      setError(
+        "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut."
+      );
     }
   };
 
@@ -96,7 +87,7 @@ const LoginComponent = () =>{
           type="email"
           className={styles.login_input}
           placeholder="E-Mail"
-          onChange={emailChangeHandler}
+          onChange={(e) => setEmail(e.target.value)}
           value={email}
         ></input>
         <label className={styles.login_label}> passwort </label>
@@ -104,7 +95,7 @@ const LoginComponent = () =>{
           type="password"
           className={styles.login_input}
           placeholder="Passwort"
-          onChange={passwordChangeHandler}
+          onChange={(e) => setPassword(e.target.value)}
           value={password}
         ></input>
         <button type="submit" className={styles.login_button}>
@@ -112,7 +103,7 @@ const LoginComponent = () =>{
         </button>
       </form>
 
-      <p className={styles.notRegisteredMessage}>{notRegistered}</p>
+      <p className={styles.errorMessage}>{error}</p>
 
       <div className={styles.register_container}>
         <p> noch kein Konto? </p>

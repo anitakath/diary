@@ -20,6 +20,10 @@ import Slider from "../UI/Slider";
 //COMPONENTS
 import FilterMobile from "../Main/Feed/MOBILE_FILTER/FilterMobile";
 
+import { setCurrentGoogleUser, setCurrentUser } from "@/store/userSlice";
+
+
+
 const Menu = (props) => {
 
   const router = useRouter();
@@ -46,6 +50,12 @@ const Menu = (props) => {
       console.error('Fehler Beim Abmelden:', error.message)
     } else{
       //dispatch(toggle())
+
+      if (setCurrentUser){
+        console.log('logging out the current email user')
+        dispatch(setCurrentUser(null));
+      } 
+      
       dispatch(logout());
 
       localStorage.setItem("isNightMode", false);

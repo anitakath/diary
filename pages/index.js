@@ -21,17 +21,9 @@ export default function Home() {
   
   if (currentGoogleUser) {
     googleUserId = currentGoogleUser.user.id;
-    console.log('google user')
   } else if (currentUser){
-    console.log('email user')
     googleUserId = currentUser.id
-       
   }
-
-
-
- 
-
 
   return (
     <div className={style ? styles.main_container : styles.main_container_light}>

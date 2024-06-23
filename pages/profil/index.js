@@ -1,10 +1,9 @@
 import Link from 'next/link';
-import { useContext, useState, useEffect } from 'react';
+import {  useState, useEffect } from 'react';
 import Image from 'next/image';
 //COMPONENTS
 import Start from '@/components/Start';
-//CONTEXT
-import { RedditContext } from "@/context/RedditContext";
+
 //STYLE
 import styles from '../../styles/Profile/ProfilePage.module.css'
 //FONT AWESOME
@@ -12,13 +11,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGear } from '@fortawesome/free-solid-svg-icons';
 //REDUX
 import { useSelector } from 'react-redux';
-
+import { useUser } from '@/hooks/useUser';
 
 const Profile = () =>{
 
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
-  const currUser = useSelector((state) => state.user)
-  const nightMode = useSelector((state) => state.toggle.isNightMode);
+  const { isLoggedIn, currUser, nightMode } = useSelector((state) => ({
+    isLoggedIn: state.auth.isLoggedIn,
+    currUser: state.user,
+    nightMode: state.toggle.isNightMode,
+  }));
+
+
   const [style, setStyle] = useState(false);
 
   useEffect(() => {
@@ -26,34 +29,40 @@ const Profile = () =>{
   }, [nightMode]);
 
 
+  const { currentGoogleUser, currentUser } = useUser();
 
-  
-
-  const { currentGoogleUser } = useContext(RedditContext);
-
-
+  const [filteredUser, setFilteredUser] = useState({});
 
   const [fName_google, setFName] = useState('')
   const [lName_google, setLName] = useState("");
   const [email_google, setEmail] = useState("")
-
+  const [avatarUrl, setAvatarUrl] = useState("")
 
 
 
   useEffect(() => {
     if(currentGoogleUser){
-
       const fullName = currentGoogleUser.user.identities[0].identity_data.full_name;
-
       const firstName = fullName.substring(0, fullName.indexOf(" "));
       const lastName = fullName.substring(fullName.indexOf(" ") + 1);
-
       setFName(firstName);
       setLName(lastName)
       setEmail(currentGoogleUser.user.identities[0].email);
+      setAvatarUrl(currentGoogleUser.user?.user_metadata?.avatar_url); 
+    }
+    
+
+    if(currentUser){
+      setFName(currentUser.name)
+      setEmail(currentUser.email)
+      setLName(currentUser.lastName)
+      setAvatarUrl(currentUser.profileImage);
+
+    } else{
+      console.log('no pic')
     }
   
-  }, [currentGoogleUser])
+  }, [currentGoogleUser, currentUser])
 
 
 
@@ -61,41 +70,27 @@ const Profile = () =>{
 
     const getUsers = async ()=>{
       const response = await fetch("/api/get-users");
-
-      
       const data = await response.json(); // Wandelt die Response in ein JSON-Objekt um
-      //console.log(data.data); // Gibt das JSON-Objekt mit den Benutzerdaten in der Konsole aus
-
-      const filterUser = data.data.find(user => user.email === currUser.email)
+      let filterUser;
+      if(currentGoogleUser){
+         filterUser = data.data.find((user) => user.email === currentGoogleUser.email);
+      } else if(currentUser){
+        filterUser = data.data.find((user) => user.email === currentUser.email )
+      }
 
       if(filterUser){
- 
         setFilteredUser(filterUser)
       } else{
-        //console.log('kein user gefunden')
+        console.log('kein user gefunden')
       }
     }
-
     getUsers()
-
 
   }, [])
 
 
-  const [filteredUser, setFilteredUser] = useState({})
 
 
-
-
-  let avatarUrl;
-
-  if (currentGoogleUser) {
-    //avatarUrl = '"' + (currentUser.user?.user_metadata?.avatar_url || '') + '"';
-    avatarUrl = currentGoogleUser.user?.user_metadata?.avatar_url; // Zugriff auf das Profilfoto
-  } else {
-    avatarUrl = filteredUser.profileImage;
-  }
- 
 
   return (
     <div>
@@ -104,9 +99,7 @@ const Profile = () =>{
       {isLoggedIn && (
         <div className={nightMode ? styles.container_dark : styles.container}>
           <div className={styles.profile_container}>
-          
             <h1 className={styles.title}>Profil</h1>
-   
 
             <div className={styles.profile_div}>
               <div className={styles.usersData_div}>
@@ -126,6 +119,8 @@ const Profile = () =>{
                       className={styles.users_image}
                       xw="true"
                       priority
+                      unoptimized
+                      crossOrigin="anonymous"
                     ></Image>
                     <Link
                       href="/profil/einstellungen"
@@ -140,14 +135,14 @@ const Profile = () =>{
                 <h2 className={styles.userData_subtitle}>
                   Name:
                   <span className={styles.user_data_span}>
-                    {currUser.name} {filteredUser.name}
+                    
                     {lName_google}
                   </span>
                 </h2>
                 <h2 className={styles.userData_subtitle}>
-                  Vorname:
+                  Vorname: 
                   <span className={styles.user_data_span}>
-                    {currUser.name} {fName_google}
+                     {fName_google}
                   </span>
                 </h2>
                 <h2 className={styles.userData_subtitle}>

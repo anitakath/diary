@@ -16,29 +16,23 @@ import { useSelector } from 'react-redux';
 import { useUser } from "@/hooks/useUser";
 
 const CreatePost = () => {
-
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   //const { currentGoogleUser } = useUser()
-  const { currentGoogleUser, saveAndUpdateUser, currentUser } = useUser();
+  const { currentGoogleUser, currentUser } = useUser();
 
   const currentFilter = useSelector((state) => state.filter.selectedFilter);
-  const [avatarUrl, setAvatarUrl] = useState('')
+  const [avatarUrl, setAvatarUrl] = useState("");
 
-
-
-  useEffect(()=>{
+  useEffect(() => {
     if (currentGoogleUser) {
-      console.log('google user')
       setAvatarUrl(currentGoogleUser.user?.user_metadata?.avatar_url);
     }
-    if(currentUser){
-      //setAvatarUrl(currentUser.profileImage)
-      console.log('email user')
+    if (currentUser) {
+      setAvatarUrl(currentUser.profileImage);
     }
-  }, [currentUser, currentGoogleUser])
-  
+  }, [currentUser, currentGoogleUser]);
 
-  https: return (
+  return (
     <div className={styles.createPost_container}>
       <div className={styles.userImage_container}>
         {isLoggedIn ? (
@@ -50,6 +44,8 @@ const CreatePost = () => {
             className={styles.users_image}
             xw="true"
             priority
+            unoptimized
+            crossOrigin="anonymous"
           ></Image>
         ) : (
           <FontAwesomeIcon icon={faQuestion} className={styles.icon} />

@@ -1,37 +1,27 @@
 
 import { useState } from "react";
-
 import Link from "next/link";
 import { useRouter } from "next/router";
-
 //REDUX
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import { login, registration } from "@/store/authSlice";
 import { setUser } from "@/store/userSlice";
-
 import { supabase } from "@/services/supabaseClient";
-
 //STYLES
 import styles from "./Login.module.css";
 
 
 
-
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
-
 const RegisterComponent = () =>{
 
   const router = useRouter();
-
-
   const [firstName, setFirstName] = useState('')
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repPassword, setRepPassword] = useState("");
   const [error, setError] = useState("");
   const [ isError, setIsError ] = useState(false)
-  
+  const dispatch = useDispatch();
 
     
 
@@ -47,84 +37,66 @@ const RegisterComponent = () =>{
     } else if (name === "rep_password") {
       setRepPassword(value);
     }
-
   }
 
-
-
-  
-
-   const dispatch = useDispatch();
-   const loginHandler = (e) => {
-     e.preventDefault();
-     dispatch(login());
-     router.push("/");
-   };
-
-   const isLoggedIn = useSelector((state) => state.auth);
-   const isRegistered = useSelector((state) => state.auth);
-   const currUser = useSelector((state) => state.user)
-
-  
-
    
+  const submitHandler = async (e) => {
+     e.preventDefault();
+     const formData = { name: firstName, email: email, password: password, rep_password: repPassword };
+
+     console.log(formData)
+
+     try{
+
+      const usersResponse = await fetch("/api/get-users");
 
 
-    const submitHandler = async (e) => {
-       e.preventDefault();
+      const { data: existingUsers, error: fetchError } = await supabase
+        .from("users")
+        .select("*")
+        .eq("email", email);
 
-       const formData = {
-         name: firstName,
-         email: email,
-         password: password,
-         rep_password: repPassword
-      };
-
-       try {
-         // Senden des Vornamens an die Backend-API
-         const response = await fetch("/api/registration-validation", {
-           method: "POST",
-           headers: {
-             "Content-Type": "application/json",
-           },
-           body: JSON.stringify(formData),
-         });
-
-         const data = await response.json();
-         //console.log(data); // Erfolgsnachricht von der API
-
-         if(data.error){
-           setIsError(true)
-           setError(data.error)
-         } else{
-           setIsError(false);
+      console.log(existingUsers)
+      console.log(fetchError)
 
 
-           //übermittle formData an Redux:
-           dispatch(setUser(formData));
+      if (fetchError) {
+        throw new Error(fetchError.message);
+      }
+
+      if (existingUsers.length > 0) {
+        console.log('user already exists')
+        //setError("Diese E-Mail-Adresse ist bereits registriert.");
+        //setIsError(true);
+      } else {
+        // Registrierung des Benutzers
+        console.log('store the users data')
+        await supabase.from("users").insert(formData);
+
+        //await supabase.auth.signUp({ email, password });
 
 
-
-           //Übermittle formData an die supabase-Datenbank...
-
-           await supabase.from("users").insert([formData]);
-
-           dispatch(login());
-           dispatch(registration());
-           router.push("/");
-
-         }
-         
-       } catch (error) {
-         console.error(error); // Fehlermeldung bei einem Fehler in der API
-       }
-     };
-
-
-    
+        dispatch(setUser(formData));
+        dispatch(login());
+        dispatch(registration());
+        router.push("/");
+      }
 
 
 
+     } catch(error){
+       console.error(error);
+       setError(
+         "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut."
+       );
+       setIsError(true);
+
+
+       
+     }
+
+   };
+  
 
     return (
       <div className={styles.container}>

@@ -102,17 +102,11 @@
 
 .container_light{
   background: white;
-
-
-  border: 2px solid red;
 }
 
 .container_dark{
   background: black;
   color: beige;
-
-
-   border: 2px solid green;
 }
 
 
@@ -125,6 +119,9 @@
     margin: 20px 0px 40px 0px;
     padding: 0px 10px;
 }
+
+
+
 
 
 @media screen and (max-width: 1000px){

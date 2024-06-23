@@ -1,26 +1,20 @@
-
-import { useState } from 'react';
 import Link from 'next/link';
 //SUPABASE
 import { signInWithGooogle } from '@/services/supabaseClient';
 //STYLES
 import styles from '../components/Main/Login/Login.module.css'
+
 //FONT AWESOME
 import { faRedditAlien } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 //REDUX 
-import { useSelector, useDispatch } from "react-redux";
-
+import { useSelector} from "react-redux";
+import { useUser } from '@/hooks/useUser';
 
 const Start = () =>{
 
   const nightMode = useSelector((state) => state.toggle);
-
-  const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-
-
 
   const handleSignInWithGoogle = async()=>{
     
@@ -34,12 +28,12 @@ const Start = () =>{
     
   }
 
+  const { currentGoogleUser, currentUser } = useUser();
+  console.log(currentGoogleUser)
+  console.log(currentUser)
+
   return (
-    <div
-      className={`${styles.container} ${
-        nightMode.isNightMode ? styles.container_dark : styles.container_light
-      }`}
-    >
+    <div className={`${styles.container} ${nightMode.isNightMode ? styles.container_dark : styles.container_light}`}>
       <div className={styles.reddit_container}>
         <FontAwesomeIcon icon={faRedditAlien} className={styles.icon} />
         <Link href="/login" className={styles.reddit_title}>
