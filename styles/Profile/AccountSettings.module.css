@@ -2,14 +2,13 @@
 
 .container{
     display: flex;
-    justify-content: center;
-
 }
 
 
 .settings_wrapper{
-    width: 100%;
-    margin-right: 10px;
+    width: 60%;
+    margin-right: 70px;
+    margin-left:10px;
 }
 
 
@@ -37,11 +36,13 @@
 
 
 .setting_div{
-    width: 50%;
+    width: 80%;
+    height: 50px;
     display: flex;
     align-items: center;
     position: relative;
     margin: 30px 0px;
+   
 }
 
 .setting_title{
@@ -111,13 +112,63 @@
     transform: scale(0.98)
 }
 
+@media screen and (max-width: 1200px){
+    .settings_wrapper{
+        width: 70%;
+        margin: 0px 20px;
 
+    }
+}
 
 @media screen and (max-width: 1000px){
+    .settings_wrapper{
+        width: 100%;
+    }
+}
 
+
+@media screen and (max-width: 600px){
      .settings_wrapper{
         margin: 0;
     }
+
+
+    .subTitle{
+        padding: 0px 10px;
+        border-bottom: 1px solid grey;
+    }
+  
+    .setting_div{
+        width: 100%;
+        height: 50px;
+    }
+
+    .setting_title{
+        width: 100px;
+    }
+
+    .submit_button{
+        right: 20px;
+    }
+
+    .submit_button_dark{
+        border: 1px solid var(--beige);
+    }
+
+
+    .submit_button_light{
+        border: 2px solid var(--pink_opaque);
+    }
+
+}
+
+
+
+
+/*
+@media screen and (max-width: 1000px){
+
+ 
 
 
     .change_btn, .select_input{
@@ -154,16 +205,11 @@
         right: -150px;
     }
 }
+*/
 
-
+/*
 @media screen and (max-width: 300px){
 
-    .container{
-        margin: 0;
-        width: 102vw;
-        position: relative;
-        left: -18px;
-    }
 
     .setting_div{
         width: 30%;
@@ -183,3 +229,4 @@
         right:20px;
     }
 }
+*/

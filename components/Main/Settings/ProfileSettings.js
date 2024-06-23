@@ -11,7 +11,6 @@ import WebUser from "../WebUser";
 const ProfileSettings = () => {
 
   return (
-    <div className={styles.container}>
       <div className={styles.profile_wrapper}>
         <div className={styles.settings_wrapper}>
           <h1 className={styles.title}> Profileinstellungen </h1>
@@ -46,7 +45,6 @@ const ProfileSettings = () => {
 
         <WebUser />
       </div>
-    </div>
   );
 };
 

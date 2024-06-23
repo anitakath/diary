@@ -13,7 +13,7 @@ import styles from '../../styles/Main/Main.module.css'
 //REDUX
 import { useSelector} from 'react-redux'
 
-
+import { useUser } from "@/hooks/useUser";
 
 
 const Main = (props) => {
@@ -28,9 +28,9 @@ const Main = (props) => {
       setStyle(nightMode);
     }, [nightMode]);
 
+  const { currentGoogleUser, saveAndUpdateUser, currentUser } = useUser();
 
-
-    let loggedIn;
+  let loggedIn;
     if (typeof localStorage !== "undefined") {
       loggedIn = localStorage.getItem("isLoggedIn");
       // Use loggedIn variable here
@@ -51,6 +51,8 @@ const Main = (props) => {
               addNewPost={addNewPost}
               posts={props.posts}
               currentGoogleUserId={props.currentGoogleUserId}
+              currentGoogleUser={currentGoogleUser}
+              currentUser={currentUser}
             />
           </div>
 

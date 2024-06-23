@@ -34,6 +34,8 @@ const SettingPage = () =>{
       setStyle(nightMode);
     }, [nightMode]);
 
+    console.log(nightMode)
+    console.log(style)
 
 
     const renderSelectedComponent = () => {
@@ -59,9 +61,8 @@ const SettingPage = () =>{
           <h1 className={styles.settings_title}> Nutzereinstellungen </h1>
           <SettingsNavigation />
   
-          <div className={styles.settings_output_container}>
-            {renderSelectedComponent()}
-          </div>
+          {renderSelectedComponent()}
+        
    
         </div>
       </div>

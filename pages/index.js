@@ -7,19 +7,30 @@ import styles from '../styles/Index.module.css'
 import { usePosts } from "@/hooks/usePosts";
 import { useUser } from "@/hooks/useUser";
 import { useNightMode } from "@/hooks/usenightMode";
+import { useEffect } from 'react';
+
+import { useSelector } from 'react-redux';
 
 export default function Home() {
  
  const { myPosts, addNewPost } = usePosts();
- const { currentGoogleUser, saveAndUpdateUser} = useUser();
+ const { currentGoogleUser, saveAndUpdateUser, currentUser} = useUser();
  const { style } = useNightMode();
 
-
   let googleUserId;
-
+  
   if (currentGoogleUser) {
     googleUserId = currentGoogleUser.user.id;
+    console.log('google user')
+  } else if (currentUser){
+    console.log('email user')
+    googleUserId = currentUser.id
+       
   }
+
+
+
+ 
 
 
   return (

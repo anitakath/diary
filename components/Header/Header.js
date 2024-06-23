@@ -66,15 +66,13 @@ const Header = () => {
             <button className={styles.userMenu_btn_web}>
               <FontAwesomeIcon icon={faUsers} className={styles.user} />
               <p className={style ? styles.dark_p : styles.light_p}>
-                {" "}
-                community{" "}
+                community
               </p>
             </button>
             <Link href="/" className={styles.userMenu_btn_web}>
               <FontAwesomeIcon icon={faHouse} className={styles.user} />
               <p className={style ? styles.dark_p : styles.light_p}>
-                {" "}
-                Startseite{" "}
+                Startseite
               </p>
             </Link>
           </div>

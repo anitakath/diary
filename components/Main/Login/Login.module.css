@@ -7,7 +7,6 @@
     flex-direction:column;
     align-items: center;
     width: 50vw;
-    min-height: 50vh;
 }
 
 .title{
@@ -17,6 +16,7 @@
     border-bottom: 1px solid grey;
     padding: 3px;
     margin-bottom: 80px;
+
 }
 
 .login_label{
@@ -76,6 +76,7 @@
     color:rgba(247,86,124, 1);
     padding-left: 5px;
     font-weight: bolder;
+   
 
 }
 
@@ -85,26 +86,33 @@
 }
 
 
+
 /* ------------------------------------------ LOGIN / REGISTER PAGE -------------------------------------------- */
 
 .container{
     width: 100vw;
-    height: 100vh;
     overflow: hidden;
     color: black;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 60px;
+
 }
 
 .container_light{
   background: white;
+
+
+  border: 2px solid red;
 }
 
 .container_dark{
   background: black;
   color: beige;
+
+
+   border: 2px solid green;
 }
 
 
@@ -113,13 +121,47 @@
     font-size: 1rem;
     letter-spacing: 1px;
     word-spacing: 1px;
-    height: 40px;
     margin-bottom: 10px;
-    position: relative;
-    top: -100px;
+    margin: 20px 0px 40px 0px;
+    padding: 0px 10px;
 }
 
 
+@media screen and (max-width: 1000px){
+
+    .title{
+        margin-bottom: 40px;
+    }
+
+    .login_form{
+        height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .login_input{
+        font-size: 1.5rem;
+    }
+
+
+}
+
+@media screen and (max-width: 600px){
+
+  
+
+
+    .login_form,  .notRegisteredMessage{
+        width: 100%;
+        padding: 0px 10px;
+    }
+
+    .login_input{
+        font-size: 1.1rem;
+    }
+
+}
 
 
 

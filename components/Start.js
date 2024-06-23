@@ -1,26 +1,20 @@
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-
 //SUPABASE
-import { supabase } from '@/services/supabaseClient';
-import { signInWithGoogle } from '@/services/supabaseClient';
 import { signInWithGooogle } from '@/services/supabaseClient';
-
 //STYLES
-import styles from '../styles/Login.module.css'
-
+import styles from '../components/Main/Login/Login.module.css'
 //FONT AWESOME
 import { faRedditAlien } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
-
 //REDUX 
 import { useSelector, useDispatch } from "react-redux";
 
 
 const Start = () =>{
-  const [googleLogIn, setGoogleLogIn] = useState(false);
+
   const nightMode = useSelector((state) => state.toggle);
 
   const dispatch = useDispatch();
@@ -28,21 +22,17 @@ const Start = () =>{
 
 
 
-const handleSignInWithGoogle = async()=>{
-  
-  try{
-    await signInWithGooogle()
+  const handleSignInWithGoogle = async()=>{
+    
+    try{
+      await signInWithGooogle()
 
-    setGoogleLogIn(true)
-  } catch(error){
-    console.error('google sign in error', error)
+    } catch(error){
+      console.error('google sign in error', error)
+    }
+  
+    
   }
- 
-  
-}
-
-
-  
 
   return (
     <div

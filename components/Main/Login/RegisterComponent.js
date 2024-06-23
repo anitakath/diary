@@ -12,7 +12,7 @@ import { setUser } from "@/store/userSlice";
 import { supabase } from "@/services/supabaseClient";
 
 //STYLES
-import styles from "../../../styles/Login.module.css";
+import styles from "./Login.module.css";
 
 
 

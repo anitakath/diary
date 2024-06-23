@@ -1,18 +1,8 @@
-
-
-
-
-import { useContext, useState } from "react";
-
+import { useContext, useState, useEffect} from "react";
 //CONTEXT
 import { RedditContext } from "@/context/RedditContext";
-
-
-
 //COMPONENTS
 import WebUser from '../WebUser';
-
-
 //STYLES
 import styles from '../../../styles/Profile/AccountSettings.module.css'
 
@@ -22,28 +12,44 @@ import { gender } from "@/store/authSlice";
 
 const AccountSettings = () => {
 
+  const [style, setStyle] = useState(null)
   const { currentUser } = useContext(RedditContext);
+  const dispatch = useDispatch();
+  const currGender = useSelector((state) => state.auth.gender);
+  const darkMode = useSelector((state) => state.toggle);
 
-  //console.log(currentUser.user);
+
+
+  useEffect(() => {
+    setStyle(darkMode.isNightMode);
+  }, [darkMode]);
+
+  const [user, setUser] = useState({
+    userEmail: null,
+    userPassword: null,
+    userName: null,
+    userGender: null
+  })
+
 
   let userEmail;
   let userName;
 
-  if (currentUser) {
-    userEmail = currentUser.user?.email;
-    userName = currentUser.user?.identities[0]?.identity_data?.full_name;
-  }
+ useEffect(() => {
+   if (currentUser) {
+     const newUser = {
+       userEmail: currentUser.user?.email,
+       userName: currentUser.user?.identities[0]?.identity_data?.full_name,
+     };
+     setUser((prevUser) => ({ ...prevUser, ...newUser }));
+   }
+ }, []);
 
-  const dispatch = useDispatch(); 
-  const currGender = useSelector((state) => state.auth.gender);
-  const darkMode = useSelector((state) => state.toggle)
-
-
+ console.log(user)
 
   const handleGenderChange = (event) => {
     dispatch(gender(event.target.value))
   };
-
 
 
 
@@ -61,12 +67,11 @@ const AccountSettings = () => {
               {currentUser && (
                 <p
                   className={`${
-                    darkMode
+                    style
                       ? styles.settings_paragraph_dark
                       : styles.settings_paragraph
                   } `}
                 >
-                  {" "}
                   {userEmail}
                 </p>
               )}
@@ -75,17 +80,16 @@ const AccountSettings = () => {
           </div>
 
           <div className={styles.setting_div}>
-            <div>
+            <div className={styles.flex}>
               <h2 className={styles.setting_title}> Passwort </h2>
               <p
                 className={` ${
-                  darkMode
+                  style
                     ? styles.settings_paragraph_dark
                     : styles.settings_paragraph
                 } `}
               >
-                {" "}
-                ***********{" "}
+                ***********
               </p>
             </div>
 
@@ -93,11 +97,11 @@ const AccountSettings = () => {
           </div>
 
           <div className={styles.setting_div}>
-            <div>
+            <div className={styles.flex}>
               <h2 className={styles.setting_title}> Geschlecht </h2>
               <p
                 className={` ${
-                  darkMode
+                  style
                     ? styles.settings_paragraph_dark
                     : styles.settings_paragraph
                 } `}
@@ -121,7 +125,7 @@ const AccountSettings = () => {
           <button
             type="submit"
             className={`${styles.submit_button} ${
-              darkMode ? styles.submit_button_dark : styles.submit_button_light
+              style ? styles.submit_button_dark : styles.submit_button_light
             }`}
           >
             speichern
@@ -136,12 +140,11 @@ const AccountSettings = () => {
               {currentUser && (
                 <p
                   className={`${
-                    darkMode
+                    style
                       ? styles.settings_paragraph_dark
                       : styles.settings_paragraph
                   } `}
                 >
-                  {" "}
                   {userEmail}
                 </p>
               )}
@@ -154,13 +157,12 @@ const AccountSettings = () => {
               <h2 className={styles.setting_title}> Passwort </h2>
               <p
                 className={` ${
-                  darkMode
+                  style
                     ? styles.settings_paragraph_dark
                     : styles.settings_paragraph
                 } `}
               >
-                {" "}
-                ***********{" "}
+                ***********
               </p>
             </div>
 
@@ -172,7 +174,7 @@ const AccountSettings = () => {
               <h2 className={styles.setting_title}> Geschlecht </h2>
               <p
                 className={` ${
-                  darkMode
+                  style
                     ? styles.settings_paragraph_dark
                     : styles.settings_paragraph
                 } `}
@@ -196,11 +198,10 @@ const AccountSettings = () => {
           <button
             type="submit"
             className={`${styles.submit_button} ${
-              darkMode ? styles.submit_button_dark : styles.submit_button_light
+              style ? styles.submit_button_dark : styles.submit_button_light
             }`}
           >
-            {" "}
-            speichern{" "}
+            speichern
           </button>
         </div>
 
@@ -213,12 +214,11 @@ const AccountSettings = () => {
               {currentUser && (
                 <p
                   className={`${
-                    darkMode
+                    style
                       ? styles.settings_paragraph_dark
                       : styles.settings_paragraph
                   } `}
                 >
-                  {" "}
                   {userEmail}
                 </p>
               )}
@@ -231,13 +231,12 @@ const AccountSettings = () => {
               <h2 className={styles.setting_title}> Passwort </h2>
               <p
                 className={` ${
-                  darkMode
+                  style
                     ? styles.settings_paragraph_dark
                     : styles.settings_paragraph
                 } `}
               >
-                {" "}
-                ***********{" "}
+                ***********
               </p>
             </div>
 
@@ -249,7 +248,7 @@ const AccountSettings = () => {
               <h2 className={styles.setting_title}> Geschlecht </h2>
               <p
                 className={` ${
-                  darkMode
+                  style
                     ? styles.settings_paragraph_dark
                     : styles.settings_paragraph
                 } `}
@@ -273,16 +272,14 @@ const AccountSettings = () => {
           <button
             type="submit"
             className={`${styles.submit_button} ${
-              darkMode ? styles.submit_button_dark : styles.submit_button_light
+              style ? styles.submit_button_dark : styles.submit_button_light
             }`}
           >
-            {" "}
-            speichern{" "}
+            speichern
           </button>
         </div>
       </div>
 
-      
       <WebUser />
     </div>
   );

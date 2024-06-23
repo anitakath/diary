@@ -6,7 +6,7 @@ import LoginComponent from "@/components/Main/Login/LoginComponent";
 
 
 //STYLES
-import styles from '../../styles/Login.module.css'
+import styles from '../../components/Main/Login/Login.module.css'
 
 //REDUX
 import {useSelector, useDispatch } from 'react-redux'

@@ -9,9 +9,9 @@ export const useUser = () => {
   const currUser = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  const currentGoogleUser = useSelector(
-    (state) => state.user.currentGoogleUser
-  );
+  const currentGoogleUser = useSelector((state) => state.user.currentGoogleUser);
+
+  const currentUser = useSelector((state) => state.user.currentUser)
 
   // Rufe die Funktion fetchCurrentGoogleUser auf, um den aktuellen Google-Benutzer zu setzen
 
@@ -72,5 +72,5 @@ export const useUser = () => {
     }
   };
 
-  return { currentGoogleUser, saveAndUpdateUser };
+  return { currentGoogleUser, saveAndUpdateUser, currentUser };
 };

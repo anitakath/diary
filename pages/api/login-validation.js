@@ -13,9 +13,7 @@ export default function handler(req, res) {
     return res.status(405).json({ message: "Method Not Allowed" });
   }
 
-
-
-   if (req.method === "POST") {
+  if (req.method === "POST") {
 
     const {email, password} = req.body;
 

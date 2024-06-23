@@ -18,23 +18,27 @@ import { useUser } from "@/hooks/useUser";
 const CreatePost = () => {
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const { currentGoogleUser } = useUser()
+  //const { currentGoogleUser } = useUser()
+  const { currentGoogleUser, saveAndUpdateUser, currentUser } = useUser();
 
   const currentFilter = useSelector((state) => state.filter.selectedFilter);
   const [avatarUrl, setAvatarUrl] = useState('')
 
 
+
   useEffect(()=>{
     if (currentGoogleUser) {
+      console.log('google user')
       setAvatarUrl(currentGoogleUser.user?.user_metadata?.avatar_url);
     }
-  }, [])
+    if(currentUser){
+      //setAvatarUrl(currentUser.profileImage)
+      console.log('email user')
+    }
+  }, [currentUser, currentGoogleUser])
   
 
-
-
-
-  return (
+  https: return (
     <div className={styles.createPost_container}>
       <div className={styles.userImage_container}>
         {isLoggedIn ? (
@@ -64,10 +68,7 @@ const CreatePost = () => {
 
           {currentFilter === "deine_images" && (
             <Link href={`/neuer-bildeintrag`} className={styles.photo_btn}>
-              <FontAwesomeIcon
-                icon={faImage}
-                className={styles.icon}
-              />
+              <FontAwesomeIcon icon={faImage} className={styles.icon} />
               <span> neuen Tagebucheintrag </span>
             </Link>
           )}
