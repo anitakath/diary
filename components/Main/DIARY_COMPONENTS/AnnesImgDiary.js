@@ -10,8 +10,7 @@ import { supabase } from "@/services/supabaseClient";
 import { setSupebaseImages } from "@/store/supabaseImagesSlice";
 
 const AnnesImgDiary = (props) => {
-  const { currentGoogleUser, saveAndUpdateUser, currentUser, userId } =
-    useUser();
+  const { currentGoogleUser, saveAndUpdateUser, currentUser, userId } = useUser();
   const { formatDate1, formatDate2, formatDate3 } = useFormatDate("German");
   const [selectedDateFormat, setSelectedDateFormat] = useState("format1");
   const [images, setImages] = useState([]);
@@ -63,9 +62,7 @@ const AnnesImgDiary = (props) => {
     fetchAnnesImages();
   }, []);
 
-  console.log(images)
 
-  console.log(CDN_URL_USERID);
 
   return (
     <div className={styles.imageGallery}>

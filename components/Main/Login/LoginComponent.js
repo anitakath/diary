@@ -48,9 +48,7 @@ const LoginComponent = () =>{
       if (data) {
         const usersResponse = await fetch("/api/get-users");
         const usersData = await usersResponse.json();
-
         
-
         if (usersData) {
           let isUserInArray = usersData.data.find(
             (user) => user.email === email && user.password === password

@@ -21,10 +21,9 @@ const Feed = (props) => {
   const { posts } = usePosts();
   const { userId } = useUser();
 
-  //const userId = props.currentGoogleUserId;
+
   const CDN_URL = process.env.CDN_URL;
   const CDN_URL_USERID = `${CDN_URL}${userId}`;
-  console.log(userId);
 
   const [loadedImages, setLoadedImages] = useState(false);
 

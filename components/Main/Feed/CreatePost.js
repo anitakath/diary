@@ -1,9 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-
-
 import {useEffect, useState } from 'react';
-
 //STYLES
 import styles from '../../../styles/Main/Feed/CreatePost.module.css'
 //FONT AWESOME
@@ -17,7 +14,7 @@ import { useUser } from "@/hooks/useUser";
 
 const CreatePost = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  //const { currentGoogleUser } = useUser()
+
   const { currentGoogleUser, currentUser } = useUser();
 
   const currentFilter = useSelector((state) => state.filter.selectedFilter);
