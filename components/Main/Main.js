@@ -1,61 +1,30 @@
 import { useState, useEffect } from "react";
 
-
 //COMPONENTS
 import Feed from "./Feed/Feed";
 import WebUser from "./WebUser";
 import Login from "../Start";
 
-
 //STYLES
-import styles from '../../styles/Main/Main.module.css'
-
+import styles from "../../styles/Main/Main.module.css";
 //REDUX
-import { useSelector} from 'react-redux'
+import { useSelector } from "react-redux";
+//HOOKS
+import { useNightMode } from "@/hooks/usenightMode";
 
-import { useUser } from "@/hooks/useUser";
-
-
-const Main = (props) => {
-
+const Main = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const nightMode = useSelector((state) => state.toggle.isNightMode);
-  const [style, setStyle] = useState(false)
+  const { style } = useNightMode();
 
-  const  addNewPost = props.addNewPost
-
-    useEffect(() => {
-      setStyle(nightMode);
-    }, [nightMode]);
-
-  const { currentGoogleUser, saveAndUpdateUser, currentUser } = useUser();
-
-  let loggedIn;
-    if (typeof localStorage !== "undefined") {
-      loggedIn = localStorage.getItem("isLoggedIn");
-      // Use loggedIn variable here
-    } else {
-      // Handle the case where localStorage is not available
-    }
-
-    
   return (
     <div className={style ? styles.container_dark : styles.container}>
       {!isLoggedIn && <Login />}
 
       {isLoggedIn && (
         <div className={styles.main_container}>
-       
           <div className={styles.output_field}>
-            <Feed
-              addNewPost={addNewPost}
-              posts={props.posts}
-              currentGoogleUserId={props.currentGoogleUserId}
-              currentGoogleUser={currentGoogleUser}
-              currentUser={currentUser}
-            />
+            <Feed />
           </div>
-
           <div className={styles.webUser_div}>
             <WebUser />
           </div>
@@ -65,4 +34,4 @@ const Main = (props) => {
   );
 };
 
-export default Main;  
+export default Main;

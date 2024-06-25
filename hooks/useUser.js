@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RedditContext } from "@/context/RedditContext";
 import { login } from "@/store/authSlice";
@@ -9,9 +9,13 @@ export const useUser = () => {
   const currUser = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  const currentGoogleUser = useSelector((state) => state.user.currentGoogleUser);
+  const currentGoogleUser = useSelector(
+    (state) => state.user.currentGoogleUser
+  );
 
-  const currentUser = useSelector((state) => state.user.currentUser)
+  const currentUser = useSelector((state) => state.user.currentUser);
+
+  const [userId, setUserId] = useState(null);
 
   // Rufe die Funktion fetchCurrentGoogleUser auf, um den aktuellen Google-Benutzer zu setzen
 
@@ -19,12 +23,19 @@ export const useUser = () => {
     dispatch(fetchCurrentGoogleUser());
   }, []);
 
-
   useEffect(() => {
     if (currentGoogleUser) {
       dispatch(login());
     }
   }, [currentGoogleUser]);
+
+  useEffect(() => {
+    if (currentGoogleUser) {
+      setUserId(currentGoogleUser.user.id);
+    } else if (currentUser) {
+      setUserId(currentUser.id);
+    }
+  }, [currentGoogleUser, currentUser]);
 
   const saveAndUpdateUser = async () => {
     if (Object.keys(currUser).length === 0) {
@@ -72,5 +83,5 @@ export const useUser = () => {
     }
   };
 
-  return { currentGoogleUser, saveAndUpdateUser, currentUser };
+  return { currentGoogleUser, saveAndUpdateUser, currentUser, userId };
 };
