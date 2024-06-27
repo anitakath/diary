@@ -17,20 +17,13 @@ const Start = () =>{
   const nightMode = useSelector((state) => state.toggle);
 
   const handleSignInWithGoogle = async()=>{
-    
     try{
       await signInWithGooogle()
 
     } catch(error){
       console.error('google sign in error', error)
-    }
-  
-    
+    }    
   }
-
-  const { currentGoogleUser, currentUser } = useUser();
-  console.log(currentGoogleUser)
-  console.log(currentUser)
 
   return (
     <div className={`${styles.container} ${nightMode.isNightMode ? styles.container_dark : styles.container_light}`}>

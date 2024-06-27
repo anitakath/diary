@@ -19,11 +19,11 @@ import { useUser } from "@/hooks/useUser";
 const Feed = (props) => {
   const currentFilter = useSelector((state) => state.filter);
   const { posts } = usePosts();
-  const { userId } = useUser();
-
+  const {  currentGoogleUser, userId } = useUser();
 
   const CDN_URL = process.env.CDN_URL;
   const CDN_URL_USERID = `${CDN_URL}${userId}`;
+ 
 
   const [loadedImages, setLoadedImages] = useState(false);
 
@@ -32,6 +32,7 @@ const Feed = (props) => {
       setLoadedImages(true);
     }
   }, [posts]);
+
 
   return (
     <div className={styles.container}>
@@ -61,7 +62,9 @@ const Feed = (props) => {
             </div>
           ))}
 
-        {currentFilter.selectedFilter === "deine_images" && <YourImgDiary />}
+        {currentFilter.selectedFilter === "deine_images" && (
+          <YourImgDiary CDN_URL_USERID={CDN_URL_USERID} />
+        )}
 
         {currentFilter.selectedFilter === "annes_images" && (
           <AnnesImgDiary CDN_URL_USERID={CDN_URL_USERID} />

@@ -9,7 +9,7 @@ const fetcher = async (url) => {
 };
 
 export const usePosts = () => {
-  const [myPosts, setMyPosts] = useState(null);
+  const [posts, setPosts] = useState(null);
   const selectedFilter = useSelector((state) => state.filter.selectedFilter);
   const dispatch = useDispatch();
 
@@ -26,13 +26,13 @@ export const usePosts = () => {
 
   useEffect(() => {
     if (data) {
-      setMyPosts(data.data);
+      setPosts(data.data);
     }
   }, [data]);
 
   const addNewPost = (newPost) => {
-    setMyPosts((prevPosts) => [newPost, ...prevPosts]);
+    setPosts((prevPosts) => [newPost, ...prevPosts]);
   };
 
-  return { myPosts, addNewPost };
+  return { posts, addNewPost };
 };

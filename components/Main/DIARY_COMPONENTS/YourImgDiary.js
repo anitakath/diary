@@ -2,148 +2,166 @@
 import { useState, useEffect, useContext } from 'react';
 import styles from './YourImgDiary.module.css'
 import { supabase } from '@/services/supabaseClient';
-import { RedditContext } from '@/context/RedditContext';
+//COMPONENTS
+import DeleteModal from './DeleteModal';
 //REDUX
 import { useSelector } from "react-redux";
 import Link from 'next/link';
 
 import { useUser } from '@/hooks/useUser';
+import { useDispatch } from 'react-redux';
+import { setSupebaseImages } from '@/store/supabaseImagesSlice';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const YourImgDiary = () =>{
+
+const YourImgDiary = (props) =>{
   const nightMode = useSelector((state) => state.toggle.isNightMode);
   const [style, setStyle] = useState(false);
   const [images, setImages] = useState([]);
+
+  const [loading, setLoading] = useState(true)
   const [imagesLoaded, setImagesLoaded] = useState(false);
+
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [postIdToDelete, setPostIdToDelete] = useState(null);
   const { currentUser, currentGoogleUser, userId } = useUser();
   const [filteredImages, setFilteredImages] = useState([]);
-
-  //console.log(userId)
-  //console.log(currentUser)
-  //console.log(currentGoogleUser)
-  //console.log(images)
+  const [loadedImages, setLoadedImages] = useState(false);
+  const dispatch = useDispatch();
+  const CDN_URL_USERID = props.CDN_URL_USERID;
 
 
 
-  
+
+    
   useEffect(() => {
     setStyle(nightMode);
   }, [nightMode]);
 
 
-  //filter only the objects from users_images 
-  // whose imageId is the same as the name of the currentUsers/currentGooleUsers
-  useEffect(() => {
-    if (currentUser) {
-      const filteredImages = images.filter((image) => image.imageId === currentUser.name);
-      setFilteredImages(filteredImages);
-    } else if (currentGoogleUser) {
-      const filteredImages = images.filter((image) => image.imageId === currentGoogleUser.user.user_metadata.full_name);
-      setFilteredImages(filteredImages);
-    }
-  }, [images]);
 
 
 
-  /*
-  useEffect(()=>{
-    if(currentGoogleUser){
-      setUserId(currentGoogleUser.user.id)
-    }
-  }, []) */
 
   useEffect(() => {
-    const fetchImages = async () => {
-      const { data, error } = await supabase
-        .from("users_images")
-        .select("*")
-        .order("id", { ascending: false });
-      if (data) {
-        setImages(data);
-        setImagesLoaded(true);
-      } else {
-        console.log(error);
+    const fetchAnnesImages = async () => {
+
+      try{
+        const { data, error } = await supabase.storage
+          .from("images")
+          .list(userId + "/", {
+            limit: 100,
+            offset: 0,
+            sortBy: { column: "name", order: "asc" },
+          });
+
+         if (error) {
+           console.error(error.message);
+           setLoading(false);
+           return;
+         }
+
+         if (data && data.length > 0) {
+           // Verarbeite die Daten hier
+           const cutAlternativeObject = data.filter(
+             (obj) => obj.name !== "alternatives"
+           );
+           const filteredImages = cutAlternativeObject.filter(
+             (image) => !image.name.startsWith(".")
+           );
+
+           const sortedImages = filteredImages
+             .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+             .map((image) => ({ ...image, loaded: false }));
+
+           setImages(filteredImages);
+           setLoading(false);
+           setImagesLoaded(true);
+         } else {
+           setLoading(false);
+         }
+      } catch(error){
+        console.error("Fehler beim Abrufen der Bilder:", error.message);
+        setLoading(false);
       }
+     
     };
-    fetchImages();
+    fetchAnnesImages();
   }, [userId]);
+  
+
+
+
+
+
+  const [postId, setPostId] = useState(null)
 
   const handleDeleteConfirmation = (postId) => {
     setPostIdToDelete(postId);
     setShowDeleteModal(true);
+    setPostId(postId)
   };
 
-  const deletePostHandler = async () => {
-    try {
-      const { data, error } = await supabase
-        .from("users_images")
-        .delete()
-        .eq("id", postIdToDelete);
 
-      if (error) {
-        console.error(error);
-      } else {
-        setImages(images.filter((image) => image.id !== postIdToDelete));
-      }
-      setShowDeleteModal(false);
-    } catch (error) {
-      console.error(error);
-    }
+
+  const deletePostHandler = async (postId) => {
+
+    console.log('delete image from supabase storage')
   };
 
   const deleteCancelHandler = () => {
     setShowDeleteModal(false);
   };
 
+
+
+
   return (
     <div className={styles.container}>
-      {filteredImages.length === 0 && <h1> KEIN BILDEREINTRAG BISHER </h1>}
-      <Link
-        href="/dein-bildertagebuch"
-        className={style ? styles.link_darkmode_first : styles.link_first}
-      >
-        Tagebuch-Übersicht
-      </Link>
+      {!imagesLoaded && loading && (
+        <p className={styles.loading_entries_p}>
+          deine Einträge werden geladen ...
+        </p>
+      )}
+
       {imagesLoaded &&
-        filteredImages.map((image) => (
-          <div className={styles.diarypost_div} key={image.id}>
-            <div className={styles.options_div}>
+        !loading &&
+        images.map((image) => (
+          <div key={image.id} className={styles.image_div}>
+            <div className={styles.image_options_div}>
               <Link
-                className={style ? styles.link_darkmode : styles.link}
                 href={`/dein-bildertagebuch/${image.name.replace(/\s+/g, "-")}`}
+                className={style ? styles.img_link_dark : styles.img_link}
               >
                 Eintrag einsehen
               </Link>
-
               <button
-                className={styles.delete_btn}
+                className={style ? styles.delete_btn_dark : styles.delete_btn}
                 onClick={() => handleDeleteConfirmation(image.id)}
               >
-                Eintrag löschen
+                <FontAwesomeIcon icon={faTrash} />
               </button>
             </div>
-            <img src={image.url} key={image.id} className={styles.img}></img>
+            <img
+              key={image.id}
+              src={CDN_URL_USERID + "/" + image.name}
+              alt="gallery-image"
+              className={styles.img}
+            />
           </div>
         ))}
 
+      {!imagesLoaded && !loading && (
+        <p className={styles.loading_entries_p}> keine Einträge vorhanden </p>
+      )}
+
       {showDeleteModal && (
-        <div className={styles.modal_container}>
-          <p className={styles.modal_p}>
-            Möchtest du diesen Eintrag wirklich löschen?
-          </p>
-          <div className={styles.modal_div}>
-            <button
-              className={styles.delete_yes}
-              onClick={() => deletePostHandler(postIdToDelete)}
-            >
-              Ja
-            </button>
-            <button className={styles.delete_no} onClick={deleteCancelHandler}>
-              Nein
-            </button>
-          </div>
-        </div>
+        <DeleteModal
+          postId={postId}
+          deletePostHandler={deletePostHandler}
+          deleteCancelHandler={deleteCancelHandler}
+        />
       )}
     </div>
   );

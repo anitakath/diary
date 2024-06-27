@@ -15,7 +15,7 @@ import { useUser } from "@/hooks/useUser";
 const CreatePost = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
-  const { currentGoogleUser, currentUser } = useUser();
+  const { currentGoogleUser } = useUser();
 
   const currentFilter = useSelector((state) => state.filter.selectedFilter);
   const [avatarUrl, setAvatarUrl] = useState("");
@@ -24,10 +24,8 @@ const CreatePost = () => {
     if (currentGoogleUser) {
       setAvatarUrl(currentGoogleUser.user?.user_metadata?.avatar_url);
     }
-    if (currentUser) {
-      setAvatarUrl(currentUser.profileImage);
-    }
-  }, [currentUser, currentGoogleUser]);
+   
+  }, [currentGoogleUser]);
 
   return (
     <div className={styles.createPost_container}>

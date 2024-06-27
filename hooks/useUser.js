@@ -5,7 +5,7 @@ import { login } from "@/store/authSlice";
 import { fetchCurrentGoogleUser } from "@/store/userSlice";
 
 export const useUser = () => {
-  //const { currentGoogleUser, fetcher } = useContext(RedditContext);
+  
   const currUser = useSelector((state) => state.user);
   const dispatch = useDispatch();
 

@@ -3,10 +3,21 @@
     position: relative;
 }
 
+.loading_entries_p{
+    display: flex;
+    justify-content: center;
+    font-size: 1.5rem;
+    background: rgba(255,255,255, 0.5);
+    padding: 5px;
+
+}
+
+/*
 .title{
     font-size: 1.3rem;
     margin: 20px 5px;
     color: var(--hover-font-dark);
+    border: 2px solid red;
 }
 
 .title_darkmode{
@@ -27,6 +38,16 @@
     height: 5vh;
     display: flex;
     position: relative;
+}*/
+
+
+.image_div{
+    margin: 10px 0px;
+}
+
+.image_options_div{
+    position: relative;
+    margin: 5px 0px;
 }
 
 .img{
@@ -39,6 +60,8 @@
     z-index: 1;
 }
 
+
+/*
 .link, .link_first{
     display: flex;
     align-items: center;
@@ -69,21 +92,36 @@
     display: flex;
     justify-content: center;
 }
+*/
 
+.img_link, .img_link_dark{
+    padding: 5px 0px;
+    transition: 0.2s ease;
+    font-size: 1.2rem;
+}
 
-.delete_btn{
-    font-size: 1.3rem;
+.img_link_dark{
+    color: beige;
+}
+
+.delete_btn, .delete_btn_dark{
+    font-size: 1.2rem;
     cursor: pointer;
     position: absolute;
-    height: 5vh;
-    right: 0px;
-    top: 0;
-    padding: 3px;
-    font-family: "Be Vietnam Pro", sans-serif;
-    font-weight: 100;
-    font-style: normal;
-
+    right: 5px;
+    top: 0px;
+    transition: 0.2s ease;
 }
+
+.delete_btn_dark{
+    color: beige;
+}
+
+.img_link:hover, .img_link_dark:hover, .delete_btn:hover, .delete_btn_dark:hover{
+    color: var(--pink_opaque);
+}
+
+
 
 .link:hover, .delete_btn:hover, .link_darkmode:hover, .link_darkmode_first:hover, .link_first:hover{
     color: var(--pink_opaque);

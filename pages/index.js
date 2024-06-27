@@ -13,26 +13,12 @@ import { useSelector } from 'react-redux';
 
 export default function Home() {
  
- const { myPosts, addNewPost } = usePosts();
- const { currentGoogleUser, saveAndUpdateUser, currentUser} = useUser();
  const { style } = useNightMode();
 
-  let googleUserId;
-  
-  if (currentGoogleUser) {
-    googleUserId = currentGoogleUser.user.id;
-  } else if (currentUser){
-    googleUserId = currentUser.id
-  }
 
   return (
     <div className={style ? styles.main_container : styles.main_container_light}>
-      <Main
-        addNewPost={addNewPost}
-        posts={myPosts}
-        currentGoogleUserId={googleUserId}
-        nightMode={style}
-      />
+      <Main/>
     </div>
   );
 }

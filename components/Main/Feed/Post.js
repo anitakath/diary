@@ -19,6 +19,7 @@ const Post = ({post}) => {
 
   const [style, setStyle] = useState(false);
 
+
   const {
      pathId,
      id,

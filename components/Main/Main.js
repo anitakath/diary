@@ -16,6 +16,8 @@ const Main = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const { style } = useNightMode();
 
+
+
   return (
     <div className={style ? styles.container_dark : styles.container}>
       {!isLoggedIn && <Login />}
