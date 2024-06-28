@@ -19,7 +19,7 @@ import { useUser } from "@/hooks/useUser";
 const Feed = (props) => {
   const currentFilter = useSelector((state) => state.filter);
   const { posts } = usePosts();
-  const {  currentGoogleUser, userId } = useUser();
+  const { userId } = useUser();
 
   const CDN_URL = process.env.CDN_URL;
   const CDN_URL_USERID = `${CDN_URL}${userId}`;

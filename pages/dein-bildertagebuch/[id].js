@@ -14,7 +14,7 @@ export async function getServerSideProps(context) {
 
 
      const { data, error } = await supabase
-       .from("users_images")
+       .from("diary_usersImages")
        .select("*")
        //.eq("name", id)
        .order("id", { ascending: false });
@@ -39,52 +39,43 @@ export async function getServerSideProps(context) {
 
 
 const YourImgDiary = ({post}) =>{
-
-
-  
   const {formatDate1} = useFormatDate();
   const router = useRouter();
   const { id } = router.query;
-
-    const [currentPost, setCurrentPost] = useState([])
-    const [postLoaded, setPostLoaded] = useState(false)
-    const [notFound, setNotFound] = useState(false);
-
-    const nightMode = useSelector((state) => state.toggle.isNightMode);
-    const [style, setStyle] = useState(false);
+  const [currentPost, setCurrentPost] = useState([])
+  const [postLoaded, setPostLoaded] = useState(false)
+  const [notFound, setNotFound] = useState(false);
+  const nightMode = useSelector((state) => state.toggle.isNightMode);
+  const [style, setStyle] = useState(false);
 
     
 
-     useEffect(() => {
-       setStyle(nightMode);
-     }, [nightMode]);
+  useEffect(() => {
+    setStyle(nightMode);
+  }, [nightMode]);
 
 
-    useEffect(()=>{
-      const filteredObject = post.find((p) => p.name === id)
+  useEffect(()=>{
+    const filteredObject = post.find((p) => p.imageId === id)
+    const formattedId = id.replace(/-/g, " "); // Ersetze Bindestriche durch Leerzeichen
+    const secondFilteredObject = post.find((p) => p.name === formattedId);
 
-       const formattedId = id.replace(/-/g, " "); // Ersetze Bindestriche durch Leerzeichen
-       const secondFilteredObject = post.find((p) => p.name === formattedId);
+    if (filteredObject === undefined && secondFilteredObject === undefined) {
+      setNotFound(true);
+    } else if (filteredObject === undefined) {
+      setCurrentPost(secondFilteredObject);
+    } else if (secondFilteredObject === undefined) {
+      setCurrentPost(filteredObject);
+    } else {
+      setCurrentPost(filteredObject);
+    }
+    setPostLoaded(true);
 
-       if (filteredObject === undefined && secondFilteredObject === undefined) {
-          setNotFound(true);
-       } else if (filteredObject === undefined) {
-         setCurrentPost(secondFilteredObject);
-       } else if (secondFilteredObject === undefined) {
-         setCurrentPost(filteredObject);
-       } else {
-         setCurrentPost(filteredObject);
-       }
-
-
-        //setCurrentPost(filteredObject)
-        setPostLoaded(true);
-
-    }, [post])
+  }, [post])
 
   
 
-   return (
+  return (
      <div className={style ? styles.container_dark : styles.container}>
        {notFound && (
          <div className={styles.fourOfour_div}>
@@ -107,7 +98,7 @@ const YourImgDiary = ({post}) =>{
                <Link href="/dein-bildertagebuch" className={styles.backToOverview}> zurück zur Übersicht </Link>
                <div className={styles.title_div}>
                  <h1 className={style ? styles.title_dark : styles.title}>
-                   {currentPost.name}
+                   {currentPost.title}
                  </h1>
                  <p className={style ? styles.date_dark : styles.date}>
                    {formatDate1(currentPost.created_at)}

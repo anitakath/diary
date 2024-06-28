@@ -19,20 +19,11 @@ const YourImgDiary = (props) =>{
   const nightMode = useSelector((state) => state.toggle.isNightMode);
   const [style, setStyle] = useState(false);
   const [images, setImages] = useState([]);
-
   const [loading, setLoading] = useState(true)
   const [imagesLoaded, setImagesLoaded] = useState(false);
-
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const [postIdToDelete, setPostIdToDelete] = useState(null);
-  const { currentUser, currentGoogleUser, userId } = useUser();
-  const [filteredImages, setFilteredImages] = useState([]);
-  const [loadedImages, setLoadedImages] = useState(false);
-  const dispatch = useDispatch();
+  const { userId } = useUser();
   const CDN_URL_USERID = props.CDN_URL_USERID;
-
-
-
 
     
   useEffect(() => {
@@ -42,11 +33,8 @@ const YourImgDiary = (props) =>{
 
 
 
-
-
   useEffect(() => {
     const fetchAnnesImages = async () => {
-
       try{
         const { data, error } = await supabase.storage
           .from("images")
@@ -89,16 +77,11 @@ const YourImgDiary = (props) =>{
     };
     fetchAnnesImages();
   }, [userId]);
-  
-
-
-
 
 
   const [postId, setPostId] = useState(null)
 
   const handleDeleteConfirmation = (postId) => {
-    setPostIdToDelete(postId);
     setShowDeleteModal(true);
     setPostId(postId)
   };

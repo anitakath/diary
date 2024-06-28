@@ -1,10 +1,9 @@
 import { useRef } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState, useContext } from "react";
 import { supabase } from "@/services/supabaseClient";
 import { v4 as uuidv4 } from "uuid";
-import { RedditContext } from "@/context/RedditContext";
+
 //REDUX
 import { useSelector } from "react-redux";
 //STYLES
@@ -13,17 +12,16 @@ import styles from '../../styles/NewImage.module.css'
 //COMPONENTS
 import UserImageField from "@/components/new-image/UserImage";
 import AlternativeImages from "@/components/new-image/AlternativeImages";
+import {  useUser } from "@/hooks/useUser";
 
 const NewImage = () => {
-  const { currentGoogleUser } = useContext(RedditContext);
-  const [selectedFile, setSelectedFile] = useState({
-    function_type: null,
-  });
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const { userId } = useUser();
   const [description, setDescription] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, showSuccessMessage] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [userId, setUserId] = useState(false);
+
   const nightMode = useSelector((state) => state.toggle.isNightMode);
   const [style, setStyle] = useState(false);
   const [alternativeImages, setAlternativeImages] = useState([]);
@@ -33,19 +31,38 @@ const NewImage = () => {
   const [pickedImage, setPickedImage] = useState();
   const imageInput = useRef();
 
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
+
+
+  const handleImageToStorageUpload = async (id) => {
+    if (!selectedFile) {
+      alert("Bitte wählen Sie eine Datei aus.");
+      return;
+    }
+    
+    try {
+      const { data, error } = await supabase.storage
+        .from("images")
+        .upload(`${userId}/${id}${selectedFile.name}`, selectedFile);
+
+      if (error) {
+        console.error(error.message);
+      } else {
+        console.log("Bild erfolgreich hochgeladen");
+      }
+    } catch (error) {
+      console.error("Fehler beim Hochladen des Bildes:", error.message);
+    }
+    setUploading(false);
+  };
+
+
   // ------------------  NIGHT / DAY MODE TOGGLE ----------------------
 
   useEffect(() => {
     setStyle(nightMode);
   }, [nightMode]);
-
-  // ------------------  CREATE USER ID ----------------------
-
-  useEffect(() => {
-    if (currentGoogleUser) {
-      setUserId(currentGoogleUser.user.id);
-    }
-  }, [currentGoogleUser]);
 
   // ------------------ INPUT ONCHANGE HANDLER ----------------------
 
@@ -90,31 +107,54 @@ const NewImage = () => {
     }
   };
 
-  const fetchImages = async () => {
-    try {
-      // Fetchen der Bilder aus dem Supabase Storage
-      const { data, error } = await supabase.storage
-        .from("images")
-        .list(userId + "/", {
-          limit: 100,
-          offset: 0,
-          sortBy: { column: "name", order: "asc" },
-        });
 
-      if (data) {
-        //await uploadDescription();
-      } else {
-        console.log(error);
-      }
-    } catch (error) {
-      console.error(error);
+ 
+  const handleTableUpload = async (id) => {
+
+    setIsLoading(true);
+    const url = CDN_URL_USERID + "/" + id + selectedFile.name;
+
+    const data_obj = {
+      url: url,
+      title: title,
+      description: description,
+      type: "users",
+      userId: userId,
+      imageId: id + selectedFile.name,
+    };
+
+    if (data_obj.name === "") {
+      setErrorMessage("bitte gib deinem Eintrag einen Titel");
+      return;
     }
+    if (data_obj.description === "") {
+      setErrorMessage("bitte gib deinem Eintrag eine Beschreibung");
+      return;
+    }
+
+  
+    const { data: newImage, error: newError } = await supabase
+      .from("diary_usersImages")
+      .insert([data_obj]);
+
+      if (newError) {
+        console.error(
+          "Fehler beim Einfügen des Bildes in die Datenbank:",
+          newError.message
+        );
+      } else {
+        console.log("Bild erfolgreich in die Datenbank eingefügt:", newImage);
+        showSuccessMessage(true);
+        setIsLoading(false);
+        //props.closeModal();
+      }
   };
 
   // ------------------  UPLOAD IMAGE POST  ----------------------
 
   const uploadImageHandler = async (event) => {
     event.preventDefault();
+    setUploading(true);
 
     // 1. check whether the object file comes from the user or is one I have provided
     // 2. check whether there is already a folder in the supabase storage bucket "images" that is ==== userId
@@ -123,85 +163,15 @@ const NewImage = () => {
       setErrorMessage("bitte füge ein Bild hinzu ");
       return;
     }
+
     if (selectedFile.function_type === "normal") {
-      try {
-        if (selectedFile) {
-          setIsLoading(true);
 
-          const id = uuidv4();
+      const id = uuidv4();
+      
+      await handleImageToStorageUpload(id);
+      handleTableUpload(id)
 
-          const { data, error } = await supabase.storage
-            .from("images")
-            .upload(userId + "/users/" + id, selectedFile); //uuidv4() => string with bunch of chars
-
-          const url = CDN_URL_USERID + "/users" + "/" + id;
-
-          const data_obj = {
-            //created_at: selectedFile.created_at,
-            url: url,
-            name: title,
-            description: description,
-            type: "users",
-          };
-
-          console.log(data_obj);
-          if (data_obj.name === "") {
-            setErrorMessage("bitte gib deinem Eintrag einen Titel");
-            return;
-          }
-          if (data_obj.description === "") {
-            setErrorMessage("bitte gib deinem Eintrag eine Beschreibung");
-            return;
-          }
-
-          // Senden des Objekts an die Supabase-Tabelle "users_images"
-          const { data: newImage, error: newError } = await supabase
-            .from("users_images")
-            .insert([data_obj]);
-
-          if (newError) {
-            console.error(
-              "Fehler beim Einfügen des Bildes in die Datenbank:",
-              newError.message
-            );
-          } else {
-            console.log(
-              "Bild erfolgreich in die Datenbank eingefügt:",
-              newImage
-            );
-          }
-
-          if (newImage) {
-            console.log(newImage);
-          } else if (newError) {
-            console.log(newError);
-          }
-
-          if (data) {
-            console.log(data);
-            setIsLoading(false);
-            showSuccessMessage(true);
-            //props.closeModal();
-            //getImages();
-            fetchImages();
-
-            const path = data.path;
-            const parts = path.split("/"); //teilt den String an dem "/"
-            const lastPart = parts[parts.length - 1];
-
-            console.log(lastPart);
-
-            // Upload der Beschreibung zusammen mit dem Bild in die Tabelle "image_informations"
-          } else {
-            console.log(error);
-            showSuccessMessage(false);
-            setIsLoading(false);
-          }
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    } else if (selectedFile.function_type === "alternative") {
+    } /*else if (selectedFile.function_type === "alternative") {
       if (selectedFile) {
         setIsLoading(true);
         const url = CDN_URL_USERID + "/alternatives" + "/" + selectedFile.name;
@@ -231,9 +201,9 @@ const NewImage = () => {
           showSuccessMessage(true);
         }
       }
-    }
+    }*/
   };
-
+  /*
   useEffect(() => {
     const uploadAlternativeImages = async (event) => {
       try {
@@ -254,16 +224,13 @@ const NewImage = () => {
 
     uploadAlternativeImages();
   }, []);
+  */
 
   const [isResized, setIsResized] = useState(false);
 
   const resizeImgHandler = () => {
     setIsResized(!isResized);
   };
-
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-
-  console.log(isLoggedIn);
 
   return (
     <div className={style ? styles.container_dark : styles.container}>
