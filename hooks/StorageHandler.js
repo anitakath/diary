@@ -2,6 +2,10 @@
 import { supabase } from "@/services/supabaseClient";
 
 
+export const insertImageToSorage = async() =>{
+  
+}
+
 export const deleteImageFromStorage = async (images, postId, userId) => {
   const imageToDelete = images.find((image) => image.name === postId);
 
@@ -22,7 +26,7 @@ export const deleteImageFromStorage = async (images, postId, userId) => {
     return;
   }
 
-  console.log("Bild erfolgreich aus dem Storage gelöscht");
+  //console.log("Bild erfolgreich aus dem Storage gelöscht");
 };
 
 

@@ -1,5 +1,34 @@
-
 import { supabase } from "@/services/supabaseClient";
+
+
+
+export const insertEntryToTable = async (id, url, data_obj) =>{
+
+  if (data_obj.name === "") {
+    setErrorMessage("bitte gib deinem Eintrag einen Titel");
+    return;
+  }
+  if (data_obj.description === "") {
+    setErrorMessage("bitte gib deinem Eintrag eine Beschreibung");
+    return;
+  }
+
+  const { data: newImage, error: newError } = await supabase
+    .from("diary_usersImages")
+    .insert([data_obj]);
+
+  if (newError) {
+    console.error(
+      "Fehler beim Einfügen des Bildes in die Datenbank:",
+      newError.message
+    );
+  } else {
+   // console.log("Bild erfolgreich in die Datenbank eingefügt!" );
+    
+   
+  }
+  
+}
 
 
 export const deleteEntryFromTable = async (postId) => {
@@ -34,5 +63,5 @@ export const deleteEntryFromTable = async (postId) => {
     return;
   }
 
-  console.log("Objekt erfolgreich aus der Table gelöscht");
+  //console.log("Objekt erfolgreich aus der Table gelöscht");
 };

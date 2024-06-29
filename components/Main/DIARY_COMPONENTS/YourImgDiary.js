@@ -35,8 +35,11 @@ const YourImgDiary = (props) =>{
 
 
   useEffect(() => {
-    const fetchAnnesImages = async () => {
+    
+    const fetchUsersImages = async () => {
       try{
+        setLoading(true);
+        setImagesLoaded(false)
         const { data, error } = await supabase.storage
           .from("images")
           .list(userId + "/", {
@@ -52,7 +55,6 @@ const YourImgDiary = (props) =>{
          }
 
          if (data && data.length > 0) {
-           // Verarbeite die Daten hier
            const cutAlternativeObject = data.filter(
              (obj) => obj.name !== "alternatives"
            );
@@ -64,11 +66,12 @@ const YourImgDiary = (props) =>{
              .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
              .map((image) => ({ ...image, loaded: false }));
 
-           setImages(filteredImages);
+           setImages(sortedImages);
            setLoading(false);
            setImagesLoaded(true);
          } else {
            setLoading(false);
+           
          }
       } catch(error){
         console.error("Fehler beim Abrufen der Bilder:", error.message);
@@ -76,8 +79,9 @@ const YourImgDiary = (props) =>{
       }
      
     };
-    fetchAnnesImages();
+    fetchUsersImages();
   }, [userId]);
+
 
 
   const [postId, setPostId] = useState(null)
@@ -88,22 +92,17 @@ const YourImgDiary = (props) =>{
     setPostId(postId)
   };
 
-
-
-
   const deletePostHandler = async (postId) => {
-    console.log(postId)
-
-    console.log('delete image from supabase storage')
     try{
-    
-      deleteImageFromStorage(images, postId, userId)
+      //custom hook component
+      await deleteImageFromStorage(images, postId, userId)
+      // custom hook component
+      await deleteEntryFromTable(postId);
 
-      deleteEntryFromTable(postId);
+      window.location.reload();
 
     } catch(error){
-      console.error("Fehler beim Löschen des BIldes:", error.message)
-
+      console.error("Fehler beim Löschen des Bildes..", )
     }
 
     console.log('delete entry from table')

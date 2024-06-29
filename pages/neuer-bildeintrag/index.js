@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useEffect, useState, useContext } from "react";
 import { supabase } from "@/services/supabaseClient";
 import { v4 as uuidv4 } from "uuid";
-
+import { useRouter } from "next/router";
 //REDUX
 import { useSelector } from "react-redux";
 //STYLES
@@ -13,6 +13,9 @@ import styles from '../../styles/NewImage.module.css'
 import UserImageField from "@/components/new-image/UserImage";
 import AlternativeImages from "@/components/new-image/AlternativeImages";
 import {  useUser } from "@/hooks/useUser";
+
+//CUSTON HOOKS
+import {insertEntryToTable} from '../../hooks/TableHandler'
 
 const NewImage = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -30,9 +33,10 @@ const NewImage = () => {
   const CDN_URL_USERID = `${CDN_URL}${userId}`;
   const [pickedImage, setPickedImage] = useState();
   const imageInput = useRef();
+  const router = useRouter();
 
   const [selectedFile, setSelectedFile] = useState(null);
-  const [uploading, setUploading] = useState(false);
+ 
 
 
   const handleImageToStorageUpload = async (id) => {
@@ -49,12 +53,12 @@ const NewImage = () => {
       if (error) {
         console.error(error.message);
       } else {
-        console.log("Bild erfolgreich hochgeladen");
+        //console.log("Bild erfolgreich hochgeladen");
       }
     } catch (error) {
       console.error("Fehler beim Hochladen des Bildes:", error.message);
     }
-    setUploading(false);
+    
   };
 
 
@@ -107,54 +111,13 @@ const NewImage = () => {
     }
   };
 
-
- 
-  const handleTableUpload = async (id) => {
-
-    setIsLoading(true);
-    const url = CDN_URL_USERID + "/" + id + selectedFile.name;
-
-    const data_obj = {
-      url: url,
-      title: title,
-      description: description,
-      type: "users",
-      userId: userId,
-      imageId: id + selectedFile.name,
-    };
-
-    if (data_obj.name === "") {
-      setErrorMessage("bitte gib deinem Eintrag einen Titel");
-      return;
-    }
-    if (data_obj.description === "") {
-      setErrorMessage("bitte gib deinem Eintrag eine Beschreibung");
-      return;
-    }
-
   
-    const { data: newImage, error: newError } = await supabase
-      .from("diary_usersImages")
-      .insert([data_obj]);
-
-      if (newError) {
-        console.error(
-          "Fehler beim Einfügen des Bildes in die Datenbank:",
-          newError.message
-        );
-      } else {
-        console.log("Bild erfolgreich in die Datenbank eingefügt:", newImage);
-        showSuccessMessage(true);
-        setIsLoading(false);
-        //props.closeModal();
-      }
-  };
 
   // ------------------  UPLOAD IMAGE POST  ----------------------
 
   const uploadImageHandler = async (event) => {
     event.preventDefault();
-    setUploading(true);
+    setIsLoading(true)
 
     // 1. check whether the object file comes from the user or is one I have provided
     // 2. check whether there is already a folder in the supabase storage bucket "images" that is ==== userId
@@ -167,10 +130,26 @@ const NewImage = () => {
     if (selectedFile.function_type === "normal") {
 
       const id = uuidv4();
-      console.log(id)
-      
+  
+      const url = CDN_URL_USERID + "/" + id + selectedFile.name;
+
+      const data_obj = {
+      url: url,
+      title: title,
+      description: description,
+      type: "users",
+      userId: userId,
+      imageId: id + selectedFile.name,
+    };
+    
+      //CUSTOM HOOK
       await handleImageToStorageUpload(id);
-      handleTableUpload(id)
+      //CUSTOM HOOK
+      await insertEntryToTable(id, url, data_obj);
+
+      showSuccessMessage(true);
+      router.push("/")
+      
 
     } /*else if (selectedFile.function_type === "alternative") {
       if (selectedFile) {
