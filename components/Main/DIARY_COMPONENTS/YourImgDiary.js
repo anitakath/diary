@@ -14,6 +14,9 @@ import { setSupebaseImages } from '@/store/supabaseImagesSlice';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+//HOOKS
+import {deleteImageFromStorage} from '../../../hooks/StorageHandler'
+import {deleteEntryFromTable} from '../../../hooks/TableHandler'
 
 const YourImgDiary = (props) =>{
   const nightMode = useSelector((state) => state.toggle.isNightMode);
@@ -29,8 +32,6 @@ const YourImgDiary = (props) =>{
   useEffect(() => {
     setStyle(nightMode);
   }, [nightMode]);
-
-
 
 
   useEffect(() => {
@@ -81,6 +82,7 @@ const YourImgDiary = (props) =>{
 
   const [postId, setPostId] = useState(null)
 
+
   const handleDeleteConfirmation = (postId) => {
     setShowDeleteModal(true);
     setPostId(postId)
@@ -88,15 +90,31 @@ const YourImgDiary = (props) =>{
 
 
 
+
   const deletePostHandler = async (postId) => {
+    console.log(postId)
 
     console.log('delete image from supabase storage')
+    try{
+    
+      deleteImageFromStorage(images, postId, userId)
+
+      deleteEntryFromTable(postId);
+
+    } catch(error){
+      console.error("Fehler beim Löschen des BIldes:", error.message)
+
+    }
+
+    console.log('delete entry from table')
+
+
+
   };
 
   const deleteCancelHandler = () => {
     setShowDeleteModal(false);
   };
-
 
 
 
@@ -121,7 +139,7 @@ const YourImgDiary = (props) =>{
               </Link>
               <button
                 className={style ? styles.delete_btn_dark : styles.delete_btn}
-                onClick={() => handleDeleteConfirmation(image.id)}
+                onClick={() => handleDeleteConfirmation(image.name)}
               >
                 <FontAwesomeIcon icon={faTrash} />
               </button>

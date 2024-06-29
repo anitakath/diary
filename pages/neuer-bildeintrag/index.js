@@ -167,6 +167,7 @@ const NewImage = () => {
     if (selectedFile.function_type === "normal") {
 
       const id = uuidv4();
+      console.log(id)
       
       await handleImageToStorageUpload(id);
       handleTableUpload(id)

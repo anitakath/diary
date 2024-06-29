@@ -20,14 +20,13 @@ export async function getServerSideProps(context) {
        .order("id", { ascending: false });
 
      if (data) {
-       console.log(data);
+       console.log('daten sind da')
 
      } else {
        console.log(error);
      }
 
     const post = data;
-  // Überprüfe, ob der Post in einer der supabase Tabellen gefunden wurde
 
   return {
     props: {
