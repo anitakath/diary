@@ -1,8 +1,9 @@
 // hooks/usePosts.js
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import useSWR from "swr";
 import { useUser } from "@/hooks/useUser";
+
 
 const fetcher = async (url) => {
   const res = await fetch(url);
@@ -10,14 +11,13 @@ const fetcher = async (url) => {
 };
 
 export const usePosts = () => {
-
+  const currentFilter = useSelector((state) => state.filter.selectedFilter);
   const { userId } = useUser();
   const [posts, setPosts] = useState(null);
   const selectedFilter = useSelector((state) => state.filter.selectedFilter);
-  const dispatch = useDispatch();
 
 
-
+  // Fetch data using SWR
   const { data, error } = useSWR(
     `/api/get-post?filter=${selectedFilter}`,
     fetcher,
@@ -30,8 +30,15 @@ export const usePosts = () => {
 
   useEffect(() => {
     if (data) {
-      const filteredData = data.data.filter((data) => data.userId === userId)
-      setPosts(filteredData);
+      console.log(data.data);
+      const filteredData = data.data.filter((data) => data.userId === userId);
+    
+      if(currentFilter === "annes_posts"){
+        setPosts(data.data)
+      } else if(currentFilter === "deine_posts"){
+        setPosts(filteredData)
+      }
+     
     }
   }, [data]);
 
