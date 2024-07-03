@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 
 //COMPONENTS
 import Feed from "./Feed/Feed";

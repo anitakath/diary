@@ -30,14 +30,15 @@ export const usePosts = () => {
 
   useEffect(() => {
     if (data) {
-      console.log(data.data);
-      const filteredData = data.data.filter((data) => data.userId === userId);
     
-      if(currentFilter === "annes_posts"){
-        setPosts(data.data)
-      } else if(currentFilter === "deine_posts"){
+      if(currentFilter === "deine_posts"){
+          const filteredData = data.data.filter(
+            (data) => data.userId === userId
+          );
+    
         setPosts(filteredData)
       }
+       setPosts(data.data);
      
     }
   }, [data]);

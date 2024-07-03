@@ -7,9 +7,6 @@
     background: white;
     margin: 0;
     width: 100%;
-   
-   
-
 }
 
 .container_dark{
@@ -19,47 +16,57 @@
     background: var(--background_dark);
     width: 100%;
     min-height: 100vh;
-
-
 }
+
+
 
 .webUser_div{
     position: relative;
-    left: 20px;
 }
 
 .main_container{
     display: flex;
     position: relative;
     padding: 20px 0px;
-
+    width:100%;
 }
 
 
 .output_field{
     border-radius: 5px;
-    width: 50vw;
+    width: 65%;
     margin: 5px;
+    padding: 10px 10px 10px 20px;
 }
 
 
 
 
 @media screen and (max-width: 1200px){
-    .output_field{
-        width: 80vw;
-        
-    }
+ 
 
     .webUser_container{
         display: none;
     }
 
-    .webUser_div{
-        left: 0;
+    .main_container{
+        justify-content: center;
     }
+
+    .output_field{
+        width: 53%;
+    }
+  
+
+   
 }
 
+
+@media screen and (max-width: 1000px){
+      .output_field{
+          width: 90%;
+      }
+}
 
 
 @media screen and (max-width: 600px){

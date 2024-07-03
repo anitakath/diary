@@ -6,14 +6,18 @@ const filterSlice = createSlice({
   name: "filter",
   initialState: {
     selectedFilter: "deine_posts",
+    selectedGroup:"private",
     deinePostsIsActive: true,
     annesImagesIsActive: false,
     deineImagesIsActive: false,
     annesPostsIsActive: false
   },
   reducers: {
+    setGroup: (state, action) =>{
+      state.selectedGroup = action.payload;
+      return state;
+    },
     filter: (state, action) => {
-     
       state.selectedFilter  = action.payload;
       return state;
     },
@@ -71,4 +75,4 @@ const filterSlice = createSlice({
 });
 
 export default filterSlice.reducer;
-export const { filter, setActButton } = filterSlice.actions;
+export const { filter, setActButton, setGroup } = filterSlice.actions;
