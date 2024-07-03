@@ -5,8 +5,12 @@ import Link from "next/link";
 import CreatePost from "./CreatePost";
 import Post from "./Post";
 import Filter from "./Filter";
-import YourImgDiary from "../DIARY_COMPONENTS/YourImgDiary";
-import AnnesImgDiary from "../DIARY_COMPONENTS/AnnesImgDiary";
+import YourImgDiary from "../DIARY_COMPONENTS/ImagePosts/YourImgDiary";
+import AnnesImgDiary from "../DIARY_COMPONENTS/ImagePosts/AnnesImgDiary";
+import UsersPosts from "../DIARY_COMPONENTS/Posts/UsersPosts";
+import AnnesPosts from "../DIARY_COMPONENTS/Posts/AnnesPosts";
+
+
 //STYLES
 import styles from "../../../styles/Main/Feed/Feed.module.css";
 //REDUX
@@ -15,6 +19,7 @@ import { useSelector } from "react-redux";
 //CUSTOM HOOKS
 import { usePosts } from "@/hooks/usePosts";
 import { useUser } from "@/hooks/useUser";
+
 
 const Feed = (props) => {
   const currentFilter = useSelector((state) => state.filter);
@@ -34,11 +39,18 @@ const Feed = (props) => {
   }, [posts]);
 
 
+
   return (
     <div className={styles.container}>
       <Filter />
 
       <CreatePost />
+      {currentFilter.selectedFilter === "deine_posts" && (
+        <UsersPosts posts={posts} />
+      )}
+      {currentFilter.selectedFilter === "annes_posts" && (
+        <AnnesPosts posts={posts} />
+      )}
 
       <div className={styles.post_div}>
         {loadedImages &&

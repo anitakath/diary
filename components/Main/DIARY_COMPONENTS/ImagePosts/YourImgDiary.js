@@ -15,8 +15,8 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 //HOOKS
-import {deleteImageFromStorage} from '../../../hooks/StorageHandler'
-import {deleteEntryFromTable} from '../../../hooks/TableHandler'
+import {deleteImageFromStorage} from '../../../../hooks/StorageHandler'
+import {deleteEntryFromTable} from '../../../../hooks/TableHandler'
 
 const YourImgDiary = (props) =>{
   const nightMode = useSelector((state) => state.toggle.isNightMode);

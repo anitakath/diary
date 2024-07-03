@@ -21,7 +21,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //COMPONENTS
 import WebUser from "../WebUser";
 import Start from "@/components/Start";
-
+import { useUser } from "@/hooks/useUser";
 
 const NewPostForm = () => {
 
@@ -33,6 +33,8 @@ const NewPostForm = () => {
   useEffect(() => {
     setStyle(nightMode);
   }, [nightMode]);
+
+  const { userId } = useUser();
 
 
 
@@ -74,6 +76,7 @@ const NewPostForm = () => {
           table: "diary_users_feed",
           total_votes: 0,
           pathId: `${formattedAuthor}-${formattedTitle}`,
+          userId: userId
         },
       ]);
 

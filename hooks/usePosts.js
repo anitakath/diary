@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import useSWR from "swr";
+import { useUser } from "@/hooks/useUser";
 
 const fetcher = async (url) => {
   const res = await fetch(url);
@@ -9,11 +10,14 @@ const fetcher = async (url) => {
 };
 
 export const usePosts = () => {
+
+  const { userId } = useUser();
   const [posts, setPosts] = useState(null);
   const selectedFilter = useSelector((state) => state.filter.selectedFilter);
   const dispatch = useDispatch();
 
-  // Fetch data using SWR
+
+
   const { data, error } = useSWR(
     `/api/get-post?filter=${selectedFilter}`,
     fetcher,
@@ -26,7 +30,8 @@ export const usePosts = () => {
 
   useEffect(() => {
     if (data) {
-      setPosts(data.data);
+      const filteredData = data.data.filter((data) => data.userId === userId)
+      setPosts(filteredData);
     }
   }, [data]);
 
