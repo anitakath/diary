@@ -32,6 +32,7 @@ const AnnesImgDiary = (props) => {
   };
 
   useEffect(() => {
+    /*
     const fetchAnnesImages = async () => {
       const { data, error } = await supabase.storage
         .from("images")
@@ -62,14 +63,32 @@ const AnnesImgDiary = (props) => {
       }
     };
     fetchAnnesImages();
+    */
+
+
+    const getAnnesImages = async () => {
+      const { data, error } = await supabase
+        .from("diary_annes_images")
+        .select("*");
+
+      if (data) {
+        setImages(data)
+      }
+
+      if(error){
+        console.error(error.message)
+      }
+    };
+    getAnnesImages();
   }, []);
+
+  
 
 
   
 
   return (
     <div className={styles.imageGallery}>
-      <img src="https://rqroknrdyivtmzueqykq.supabase.co/storage/v1/object/public/images/24a00206-cda8-4e30-a43e-c5d8efed3266/pexels-poleplace-online-poledance-studio-610999695-17286900.jpg" />
       {images.map((image) => (
         <div className={styles.image_div} key={image.id}>
           <button className={styles.date} onClick={handleDateClick}>
@@ -89,7 +108,7 @@ const AnnesImgDiary = (props) => {
           <Link href={`/image/${image.name}`}>
             <img
               key={image.id}
-              src={CDN_URL_USERID + "/" + image.name}
+              src={image.url}
               alt="gallery-image"
               className={styles.img}
             />

@@ -11,15 +11,24 @@ import { supabase } from "@/services/supabaseClient";
 import styles from "./Login.module.css";
 
 
+const validateEmail = (email) => {
+  const re = /\S+@\S+\.\S+/;
+  return re.test(email);
+};
+
+const validatePassword = (password) => {
+  const re = /^(?=.*[A-Z])(?=.*\d).{4,}$/;
+  return re.test(password);
+};
 
 const RegisterComponent = () =>{
 
-  const router = useRouter();
   const [firstName, setFirstName] = useState('')
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repPassword, setRepPassword] = useState("");
   const [error, setError] = useState("");
+
   const [ isError, setIsError ] = useState(false)
   const dispatch = useDispatch();
 
@@ -27,7 +36,6 @@ const RegisterComponent = () =>{
 
   const inputChangeHandler = (e) =>{
     const { name, value } = e.target;
-
     if ( name === "firstName") {
       setFirstName(value);
     } else if (name === "email") {
@@ -42,58 +50,48 @@ const RegisterComponent = () =>{
    
   const submitHandler = async (e) => {
      e.preventDefault();
-     const formData = { name: firstName, email: email, password: password, rep_password: repPassword };
+     //const formData = { name: firstName, email: email, password: password, rep_password: repPassword };
 
-     console.log(formData)
-
-     try{
-
-      const usersResponse = await fetch("/api/get-users");
-
-
-      const { data: existingUsers, error: fetchError } = await supabase
-        .from("users")
-        .select("*")
-        .eq("email", email);
-
-      console.log(existingUsers)
-      console.log(fetchError)
-
-
-      if (fetchError) {
-        throw new Error(fetchError.message);
+      if (!email || !validateEmail(email)) {
+        setError("Bitte geben Sie eine gültige E-Mail-Adresse ein.");
+        return;
       }
-
-      if (existingUsers.length > 0) {
-        console.log('user already exists')
-        //setError("Diese E-Mail-Adresse ist bereits registriert.");
-        //setIsError(true);
-      } else {
-        // Registrierung des Benutzers
-        console.log('store the users data')
-        await supabase.from("users").insert(formData);
-
-        //await supabase.auth.signUp({ email, password });
-
-
-        dispatch(setUser(formData));
-        dispatch(login());
-        dispatch(registration());
-        router.push("/");
+      if (!firstName) {
+        setError("Bitte geben Sie Ihren Vornamen ein.");
+        return;
+      }
+       if (!password || !validatePassword(password)) {
+         setError(
+           "Das Passwort muss mindestens 4 Zeichen lang sein und mindestens einen Großbuchstaben sowie eine Zahl enthalten."
+         );
+         return;
+       }
+      if (password !== repPassword) {
+        setError("Die Passwörter stimmen nicht überein.");
+        return;
       }
 
 
 
-     } catch(error){
-       console.error(error);
-       setError(
-         "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut."
-       );
-       setIsError(true);
+       try {
+         const { user, error } = await supabase.auth.signUp({
+           email: email,
+           password: password,
+         });
 
+         if (error) {
+           throw new Error(error.message);
+         }
 
-       
-     }
+         await supabase.from("users").insert([{ email, firstName }]);
+
+         //router.push("/login");
+       } catch (error) {
+         console.error(error);
+         setError(
+           "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut."
+         );
+       }
 
    };
   
