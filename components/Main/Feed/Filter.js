@@ -4,6 +4,7 @@ import { filter, setActButton} from "@/store/filterSlice";
 import { useDispatch, useSelector } from "react-redux";
 //STYLES
 import styles from "../../../styles/Main/Feed/Filter.module.css";
+import { useUser } from "@/hooks/useUser";
 
 const Filter = () => {
 
@@ -14,6 +15,8 @@ const Filter = () => {
     color: " #F7567C", 
   };
   const [group, setGroup] = useState("private")
+
+  const {userId} = useUser();
   
 
   const filterHandler = (title) => {
@@ -77,6 +80,7 @@ const Filter = () => {
                 DEIN TAGEBUCH
               </button>
             </div>
+            {!userId === "4d47a2af-f29f-4530-bec6-0f08c7dd347c" && <p> moin</p>}
             <div>
               <button
                 className={styles.filter_btn}
@@ -100,7 +104,7 @@ const Filter = () => {
                     : null
                 }
               >
-                ANNES BILDERTAGEBUCH
+                BEISPIEL BILDERTAGEBUCH
               </button>
             </div>
 
@@ -120,21 +124,19 @@ const Filter = () => {
           </div>
         )}
 
-
-
         {group === "community" && (
           <div className={styles.container_div}>
             <div>
               <button
                 className={styles.filter_btn}
-                onClick={() => filterHandler("community ")}
+                onClick={() => filterHandler("community")}
                 style={
-                  selectedFilter === "deine_posts"
+                  selectedFilter === "community"
                     ? { ...activeLinkStyle }
                     : null
                 }
               >
-               COMMUNITY
+                COMMUNITY
               </button>
             </div>
             {/*

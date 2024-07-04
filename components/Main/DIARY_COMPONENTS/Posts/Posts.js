@@ -9,9 +9,13 @@ const AnnesPosts = (props) =>{
     const posts = props.posts
     const isLoaded = props.isLoaded;
 
-
     return (
         <div>
+            {isLoaded && posts.length === 0 &&(
+                <div className={styles.nopost_p_div}>
+                    <p className={styles.nopost_p}> bisher scheinst du noch keinen Tagebucheintrag getätigt zu haben </p>
+                </div>
+            )}
             {isLoaded &&
             posts &&
             posts.length > 0 &&

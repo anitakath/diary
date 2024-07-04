@@ -1,27 +1,19 @@
 import useSWR  from "swr";
 import {useState, useEffect} from 'react'
 import Image from "next/image";
-
 //CONTEXT
 import { useContext } from "react";
 import { RedditContext } from "@/context/RedditContext";
-
-
-
 //import TimeAgo from "timeago.js";
 //import TimeAgo from "timeago.js/es";
 import { format as timeAgoFormat } from "timeago.js";
-
-
 //REDUX
 import { useSelector } from "react-redux";
-
 //STYLES
 import styles from './Comments.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faFlag,  faCommentDots } from "@fortawesome/free-solid-svg-icons";
 import { faEllipsis, faSpinner } from "@fortawesome/free-solid-svg-icons";
-
 
 const Comments = (props) =>{
   const postId = props.postDetails.id;
@@ -40,7 +32,6 @@ const Comments = (props) =>{
     }
   );
 
-
   useEffect(() => {
     if (!data) return;
     setComments(data.data);
@@ -49,8 +40,6 @@ const Comments = (props) =>{
   const filteredComments = comments.filter(
     (comment) => comment.postId === postId
   ).reverse();
-
-
 
  const timeAgoFormat = (date) => {
    const currentDate = new Date();
@@ -79,10 +68,7 @@ const Comments = (props) =>{
   const formattedPostDate = postDateObject.toISOString().split("T")[0];
   const formattedTime = timeAgoFormat(new Date(formattedPostDate));
 
-  console.log(filteredComments)
 
-
-  
   return (
     <div
       className={

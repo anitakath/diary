@@ -8,15 +8,3 @@
     background-color: rgba(255,255,255, 0.5);
     cursor: pointer;
 }
-
-.nopost_p_div{
-    background: rgba(255,255,255, 0.3);
-    display: flex;
-    padding: 5px;
-    
-}
-
-.nopost_p{
-    color: black;
-    text-align: center;
-}

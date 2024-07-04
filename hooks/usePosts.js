@@ -11,11 +11,12 @@ const fetcher = async (url) => {
 };
 
 export const usePosts = () => {
+
   const currentFilter = useSelector((state) => state.filter.selectedFilter);
   const { userId } = useUser();
   const [posts, setPosts] = useState(null);
   const selectedFilter = useSelector((state) => state.filter.selectedFilter);
-
+  
 
   // Fetch data using SWR
   const { data, error } = useSWR(
@@ -28,18 +29,17 @@ export const usePosts = () => {
     }
   );
 
+
   useEffect(() => {
     if (data) {
-    
       if(currentFilter === "deine_posts"){
           const filteredData = data.data.filter(
             (data) => data.userId === userId
           );
-    
         setPosts(filteredData)
+      } else{
+        setPosts(data.data);
       }
-       setPosts(data.data);
-     
     }
   }, [data]);
 

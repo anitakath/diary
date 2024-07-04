@@ -9,17 +9,23 @@ import { faRedditAlien } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 //REDUX 
-import { useSelector} from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { useUser } from '@/hooks/useUser';
-
+import { useRouter } from 'next/router';
+import { login } from '@/store/authSlice';
 const Start = () =>{
-
   const nightMode = useSelector((state) => state.toggle);
+  const dispatch = useDispatch();
 
   const handleSignInWithGoogle = async()=>{
     try{
-      await signInWithGooogle()
-
+      const data = await signInWithGooogle();
+      console.log(data)
+      if(data){
+       dispatch(login()); 
+      } else{
+       console.error("no user data returned")
+      }
     } catch(error){
       console.error('google sign in error', error)
     }    

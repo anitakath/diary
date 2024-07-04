@@ -62,9 +62,14 @@ const YourImgDiary = (props) =>{
              (image) => !image.name.startsWith(".")
            );
 
-           const sortedImages = filteredImages
+           const filteredSortedImages = filteredImages.filter(
+             (image) => image.name !== "users"
+           );
+
+           const sortedImages = filteredSortedImages
              .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
              .map((image) => ({ ...image, loaded: false }));
+
 
            setImages(sortedImages);
            setLoading(false);
@@ -114,6 +119,7 @@ const YourImgDiary = (props) =>{
   const deleteCancelHandler = () => {
     setShowDeleteModal(false);
   };
+
 
 
 

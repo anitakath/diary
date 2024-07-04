@@ -5,6 +5,7 @@ import CreatePost from "./CreatePost";
 import Filter from "./Filter";
 import YourImgDiary from "../DIARY_COMPONENTS/ImagePosts/YourImgDiary";
 import AnnesImgDiary from "../DIARY_COMPONENTS/ImagePosts/AnnesImgDiary";
+import Community from "../DIARY_COMPONENTS/Community/Community";
 import Posts from "../DIARY_COMPONENTS/Posts/Posts";
 //STYLES
 import styles from "../../../styles/Main/Feed/Feed.module.css";
@@ -13,9 +14,10 @@ import { useSelector } from "react-redux";
 //CUSTOM HOOKS
 import { usePosts } from "@/hooks/usePosts";
 import { useUser } from "@/hooks/useUser";
+import { current } from "@reduxjs/toolkit";
 
 const Feed = (props) => {
-  const currentFilter = useSelector((state) => state.filter);
+  const currentFilter = useSelector((state) => state.filter.selectedFilter);
   const { posts } = usePosts();
   const { userId } = useUser();
   const CDN_URL = process.env.CDN_URL;
@@ -28,6 +30,8 @@ const Feed = (props) => {
     }
   }, [posts]);
 
+
+
   return (
     <div className={styles.container}>
       <Filter />
@@ -35,16 +39,21 @@ const Feed = (props) => {
       <CreatePost />
 
       <div className={styles.post_div}>
-        {(currentFilter.selectedFilter === "deine_posts" ||
-          currentFilter.selectedFilter === "annes_posts") && (
+        {currentFilter === "community" && (
+        <Community posts={posts}/>
+        )}
+
+
+        {(currentFilter === "deine_posts" ||
+          currentFilter === "annes_posts") && (
           <Posts posts={posts} isLoaded={isLoaded} />
         )}
 
-        {currentFilter.selectedFilter === "deine_images" && (
+        {currentFilter === "deine_images" && (
           <YourImgDiary CDN_URL_USERID={CDN_URL_USERID} />
         )}
 
-        {currentFilter.selectedFilter === "annes_images" && (
+        {currentFilter === "annes_images" && (
           <AnnesImgDiary CDN_URL_USERID={CDN_URL_USERID} />
         )}
       </div>
